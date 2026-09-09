@@ -1295,7 +1295,23 @@
           <input type="number" id="preset-c" step="0.1" required placeholder="Carb/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
           <input type="number" id="preset-f" step="0.1" required placeholder="Gras/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
         </div>
-        <button type="submit" class="w-full py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs">Aggiungi a Libreria</button>
+        <div class="grid grid-cols-3 gap-2">
+          <input type="number" id="preset-sugars" step="0.1" placeholder="Zucch/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+          <input type="number" id="preset-fiber" step="0.1" placeholder="Fibre/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+          <input type="number" id="preset-potassium" step="1" placeholder="Potassio mg" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <input type="number" id="preset-calcium" step="1" placeholder="Calcio mg" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+          <input type="number" id="preset-magnesium" step="1" placeholder="Magnesio mg" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+          <input type="number" id="preset-sodium" step="1" placeholder="Sodio mg" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+        </div>
+        <div class="grid grid-cols-1 gap-2">
+          <input type="number" id="preset-iron" step="0.1" placeholder="Ferro mg" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" id="preset-submit-btn" class="flex-1 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs">Aggiungi a Libreria</button>
+          <button type="button" id="preset-cancel-btn" onclick="cancelPresetEdit()" class="flex-1 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs">Annulla</button>
+        </div>
       </form>
 
       <!-- Preset List -->
@@ -1872,7 +1888,14 @@
         name: String(item.name || '').trim(),
         p: Number(item.p) || 0,
         c: Number(item.c) || 0,
-        f: Number(item.f) || 0
+        f: Number(item.f) || 0,
+        sugars: Number(item.sugars) || 0,
+        fiber: Number(item.fiber) || 0,
+        potassium: Number(item.potassium) || 0,
+        calcium: Number(item.calcium) || 0,
+        magnesium: Number(item.magnesium) || 0,
+        sodium: Number(item.sodium) || 0,
+        iron: Number(item.iron) || 0
       })).filter(item => item.name);
 
       appState.presets = normalized;
@@ -2875,12 +2898,60 @@
       const p = parseFloat(document.getElementById('preset-p').value) || 0;
       const c = parseFloat(document.getElementById('preset-c').value) || 0;
       const f = parseFloat(document.getElementById('preset-f').value) || 0;
+      const sugars = parseFloat(document.getElementById('preset-sugars')?.value) || 0;
+      const fiber = parseFloat(document.getElementById('preset-fiber')?.value) || 0;
+      const potassium = parseFloat(document.getElementById('preset-potassium')?.value) || 0;
+      const calcium = parseFloat(document.getElementById('preset-calcium')?.value) || 0;
+      const magnesium = parseFloat(document.getElementById('preset-magnesium')?.value) || 0;
+      const sodium = parseFloat(document.getElementById('preset-sodium')?.value) || 0;
+      const iron = parseFloat(document.getElementById('preset-iron')?.value) || 0;
 
-      appState.presets.push({ name, p, c, f });
+      const form = document.querySelector('#food-preset-modal form');
+      const editIndex = form?.dataset?.editIndex;
+      const entry = { name, p, c, f, sugars, fiber, potassium, calcium, magnesium, sodium, iron };
+      if (typeof editIndex !== 'undefined' && editIndex !== null && editIndex !== '') {
+        const idx = Number(editIndex);
+        appState.presets[idx] = entry;
+        delete form.dataset.editIndex;
+        const submitBtn = document.getElementById('preset-submit-btn'); if (submitBtn) submitBtn.textContent = 'Aggiungi a Libreria';
+        showToast('Preset aggiornato', 'fa-pen');
+      } else {
+        appState.presets.push(entry);
+        showToast('Preset salvato nella libreria!', 'fa-bookmark');
+      }
       persistFoodDatabase();
       renderPresets();
-      document.getElementById('preset-name').value = '';
-      showToast('Preset salvato nella libreria!', 'fa-bookmark');
+      // reset form
+      ['preset-name','preset-p','preset-c','preset-f','preset-sugars','preset-fiber','preset-potassium','preset-calcium','preset-magnesium','preset-sodium','preset-iron'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value = id==='preset-name' ? '' : '0'; });
+    }
+
+    function editPreset(index) {
+      const p = appState.presets[index];
+      if (!p) return;
+      const form = document.querySelector('#food-preset-modal form');
+      if (!form) return;
+      form.dataset.editIndex = index;
+      document.getElementById('preset-name').value = p.name || '';
+      document.getElementById('preset-p').value = p.p || 0;
+      document.getElementById('preset-c').value = p.c || 0;
+      document.getElementById('preset-f').value = p.f || 0;
+      document.getElementById('preset-sugars').value = p.sugars || 0;
+      document.getElementById('preset-fiber').value = p.fiber || 0;
+      document.getElementById('preset-potassium').value = p.potassium || 0;
+      document.getElementById('preset-calcium').value = p.calcium || 0;
+      document.getElementById('preset-magnesium').value = p.magnesium || 0;
+      document.getElementById('preset-sodium').value = p.sodium || 0;
+      document.getElementById('preset-iron').value = p.iron || 0;
+      const submitBtn = document.getElementById('preset-submit-btn'); if (submitBtn) submitBtn.textContent = 'Aggiorna Preset';
+      openModal('food-preset-modal');
+    }
+
+    function cancelPresetEdit() {
+      const form = document.querySelector('#food-preset-modal form');
+      if (form && form.dataset) delete form.dataset.editIndex;
+      ['preset-name','preset-p','preset-c','preset-f','preset-sugars','preset-fiber','preset-potassium','preset-calcium','preset-magnesium','preset-sodium','preset-iron'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value = id==='preset-name' ? '' : '0'; });
+      const submitBtn = document.getElementById('preset-submit-btn'); if (submitBtn) submitBtn.textContent = 'Aggiungi a Libreria';
+      closeModal('food-preset-modal');
     }
 
     function deletePreset(index) {
@@ -2913,11 +2984,17 @@
         item.innerHTML = `
           <div>
             <div class="font-bold text-slate-200">${p.name}</div>
-            <div class="text-[10px] text-slate-400">Per 100g: P: ${p.p}g | C: ${p.c}g | G: ${p.f}g</div>
+            <div class="text-[10px] text-slate-400">Per 100g: P: ${p.p}g | C: ${p.c}g | G: ${p.f}g | Zucch: ${p.sugars||0}g | Fibre: ${p.fiber||0}g</div>
+            <div class="text-[10px] text-slate-400">Calcio: ${p.calcium||0}mg · Magnesio: ${p.magnesium||0}mg</div>
           </div>
-          <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
-            <i class="fa-solid fa-trash"></i>
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="editPreset(${idx})" class="text-slate-300 hover:text-white text-xs p-1" title="Modifica preset">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1" title="Elimina preset">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
         `;
         list.appendChild(item);
 
@@ -3630,12 +3707,21 @@ function handleAuthClick() {
     try {
       await syncAllDatabasesFromDrive();
       showToast('Sincronizzazione Drive completata', 'fa-cloud-check');
+      // Ensure required DB files exist; prompt user to create if missing
+      try { await ensureRequiredDatabasesExist(); } catch(e){ console.warn('ensure DBs failed',e); }
     } catch(e) { 
       console.warn('Sincronizzazione parziale:', e); 
     }
     
     // Keep the app in the main view; the user can open cloud actions intentionally from the cloud button.
-    try { await caricaDaDrive(); } catch(e) { console.warn('Auto-load backups failed', e); }
+    try { 
+      await caricaDaDrive(); 
+      // After loading DBs from Drive, render views for current day/month
+      const today = new Date().toISOString().split('T')[0];
+      const nd = document.getElementById('nutrition-date'); if (nd) nd.value = today;
+      const wd = document.getElementById('workout-date'); if (wd) wd.value = today;
+      renderAllViews();
+    } catch(e) { console.warn('Auto-load backups failed', e); }
   };
 
     if (gapi.client.getToken() === null) {
@@ -4035,6 +4121,38 @@ async function syncAllDatabasesFromDrive() {
     console.log('Sincronizzazione database completata');
   } catch (err) {
     console.error('Errore durante sincronizzazione database:', err);
+    throw err;
+  }
+}
+
+// Ensure required DB files exist on Drive; prompt user to create defaults when missing
+async function ensureRequiredDatabasesExist() {
+  try {
+    const requiredDatabases = ['alim_database.json', 'wellness_data.json'];
+    const { savesFolderId } = await getGymBroSaveFolders();
+    const response = await gapi.client.drive.files.list({ q: `'${savesFolderId}' in parents and trashed=false and mimeType != 'application/vnd.google-apps.folder'`, fields: 'files(id, name)', pageSize: 100 });
+    const files = response.result.files || [];
+    const existing = files.map(f => f.name);
+    const missing = requiredDatabases.filter(n => !existing.includes(n));
+    if (missing.length === 0) return;
+    const create = confirm(`Non sono stati trovati i seguenti database su Drive: ${missing.join(', ')}. Vuoi crearli ora con contenuto iniziale?
+ (Sì = creerò file vuoti basati sui dati locali)`);
+    if (!create) return;
+    for (const name of missing) {
+      if (name === 'alim_database.json') {
+        const blob = new Blob([JSON.stringify(appState.presets || [], null, 2)], { type: 'application/json' });
+        await uploadOrUpdateFile(name, blob, 'application/json', savesFolderId);
+      } else if (name === 'wellness_data.json') {
+        const blob = new Blob([JSON.stringify(appState.wellness || [], null, 2)], { type: 'application/json' });
+        await uploadOrUpdateFile(name, blob, 'application/json', savesFolderId);
+      } else {
+        const blob = new Blob([JSON.stringify({})], { type: 'application/json' });
+        await uploadOrUpdateFile(name, blob, 'application/json', savesFolderId);
+      }
+    }
+    showToast('Database creati su Drive', 'fa-cloud-arrow-up');
+  } catch (err) {
+    console.warn('ensureRequiredDatabasesExist error', err);
     throw err;
   }
 }
