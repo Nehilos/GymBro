@@ -1517,8 +1517,13 @@
     // Save State locally and sync to cloud if available
     window.saveStateToLocal = function() {
       localStorage.setItem('gymbro_data', JSON.stringify(appState));
+      // Legacy Firebase sync (if present)
       if (window.syncStateToCloud) {
-        window.syncStateToCloud();
+        try { window.syncStateToCloud(); } catch(e){ console.warn('syncStateToCloud failed',e); }
+      }
+      // New Drive-based cloud commit (if available)
+      if (typeof commitCloudState === 'function') {
+        try { commitCloudState(); } catch(e){ console.warn('commitCloudState failed',e); }
       }
     };
 
@@ -3418,10 +3423,26 @@
   let barcodeStream = null;
   let barcodeDetector = null;
   let barcodeScanTimer = null;
+  let barcodeCameraReader = null;
+  let barcodeCameraControls = null;
+  let barcodeFlashEnabled = false;
 
   function scanFoodByBarcode() {
     openModal('scan-product-modal');
     setTimeout(() => startBarcodeCamera(), 120);
+  }
+
+  function handleBarcodeScanResult(text) {
+    const code = (String(text || '').replace(/\D/g, '') || '').trim();
+    if (!code) return;
+    const input = document.getElementById('barcode-input');
+    if (input) input.value = code;
+    const st = document.getElementById('barcode-scan-status');
+    if (st) { st.textContent = 'Codice letto: ' + code; st.classList.remove('hidden'); }
+    showToast('Codice rilevato: ' + code, 'fa-barcode');
+    // stop camera and lookup
+    try { stopBarcodeCamera(); } catch(e){}
+    setTimeout(() => submitBarcodeLookup(), 250);
   }
 
   async function startBarcodeCamera() {
@@ -3436,26 +3457,45 @@
       document.getElementById('barcode-camera-empty')?.classList.add('hidden');
       document.getElementById('start-camera-btn')?.classList.add('hidden');
       document.getElementById('stop-camera-btn')?.classList.remove('hidden');
+
+      // Preferred: native BarcodeDetector
       if ('BarcodeDetector' in window) {
         try { barcodeDetector = new BarcodeDetector({ formats: ['ean_13','ean_8','upc_a','upc_e','code_128'] }); }
         catch (_) { try { barcodeDetector = new BarcodeDetector({ formats: ['ean_13','ean_8','code_128'] }); } catch (__) { barcodeDetector = null; } }
-        barcodeScanTimer = setInterval(async () => {
-          if (!video.videoWidth) return;
-          try {
-            const codes = await barcodeDetector.detect(video);
-            if (codes?.[0]?.rawValue) {
-              const value = codes[0].rawValue;
-              if (document.getElementById('barcode-scan-status')) { const st=document.getElementById('barcode-scan-status'); st.textContent='Codice letto: '+value; st.classList.remove('hidden'); }
-              document.getElementById('barcode-input').value = value;
-              showToast('Codice rilevato: '+value,'fa-barcode');
-              if (barcodeScanTimer) { clearInterval(barcodeScanTimer); barcodeScanTimer=null; }
-              await submitBarcodeLookup();
-            }
-          } catch(e) {}
-        }, 350);
-      } else {
-        showToast('Scanner automatico non disponibile su questo browser. Puoi comunque inserire il codice manualmente.','fa-circle-info');
+        if (barcodeDetector) {
+          barcodeScanTimer = setInterval(async () => {
+            if (!video.videoWidth) return;
+            try {
+              const codes = await barcodeDetector.detect(video);
+              if (codes?.[0]?.rawValue) {
+                handleBarcodeScanResult(codes[0].rawValue);
+                if (barcodeScanTimer) { clearInterval(barcodeScanTimer); barcodeScanTimer = null; }
+              }
+            } catch(e) { /* ignore detection errors */ }
+          }, 350);
+          return;
+        }
       }
+
+      // Fallback: ZXing library (if included)
+      if (window.ZXing && typeof ZXing.BrowserMultiFormatReader === 'function') {
+        try {
+          barcodeCameraReader = new ZXing.BrowserMultiFormatReader();
+          // continuous decode from video element
+          barcodeCameraReader.decodeFromVideoElement(video, (result, err) => {
+            if (result) {
+              const text = result.text || (result.getText && result.getText && result.getText());
+              handleBarcodeScanResult(text);
+            }
+          });
+          return;
+        } catch (e) {
+          console.warn('ZXing decodeFromVideoElement failed', e);
+        }
+      }
+
+      // No automatic scanner available
+      showToast('Scanner automatico non disponibile su questo browser. Puoi comunque inserire il codice manualmente.','fa-circle-info');
     } catch (err) {
       console.error(err);
       showToast('Impossibile usare la fotocamera. Controlla il permesso del browser.', 'fa-camera');
@@ -3464,6 +3504,12 @@
 
   function stopBarcodeCamera() {
     if (barcodeScanTimer) { clearInterval(barcodeScanTimer); barcodeScanTimer = null; }
+    try {
+      if (barcodeCameraReader && typeof barcodeCameraReader.reset === 'function') {
+        barcodeCameraReader.reset();
+      }
+    } catch(e){ console.warn('Error resetting barcode reader',e); }
+    barcodeCameraReader = null;
     if (barcodeStream) { barcodeStream.getTracks().forEach(t=>t.stop()); barcodeStream=null; }
     const video=document.getElementById('barcode-video'); if(video){video.srcObject=null;video.classList.add('hidden');}
     document.getElementById('barcode-camera-empty')?.classList.remove('hidden');
