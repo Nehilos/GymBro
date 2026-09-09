@@ -3219,6 +3219,9 @@
   let gisInited = false;
   let driveAccessToken = null;
   let cloudUser = null;
+  function getCloudUserDisplay() {
+    try { return (cloudUser && (cloudUser.name || cloudUser.email)) || ''; } catch(e) { return ''; }
+  }
   let cloudSyncTimer = null;
   let cloudSaveInFlight = false;
   let cloudSaveQueued = false;
@@ -3384,8 +3387,8 @@
         closeModal('cloud-modal');
         showToast(
           syncOk
-            ? `Benvenuto ${cloudUser?.name || cloudUser?.email || ''}`
-            : `Benvenuto ${cloudUser?.name || cloudUser?.email || ''} — dati locali mantenuti`,
+            ? `Benvenuto ${getCloudUserDisplay()}`
+            : `Benvenuto ${getCloudUserDisplay()} — dati locali mantenuti`,
           syncOk ? 'fa-user-check' : 'fa-cloud-exclamation'
         );
       } catch (err) {
@@ -3633,7 +3636,7 @@
     appState._meta = appState._meta || {};
     appState._meta.schemaVersion = 2;
     appState._meta.updatedAt = new Date().toISOString();
-    appState._meta.userEmail = cloudUser?.email || appState._meta.userEmail || '';
+    appState._meta.userEmail = (cloudUser && cloudUser.email) || appState._meta.userEmail || '';
   }
 
   function normalizeLoadedState(value) {
@@ -3703,7 +3706,7 @@
         const created=await driveWriteJson(GYMBRO_MASTER_FILE,{schemaVersion:3,databases:GYMBRO_DATABASES},savesFolderId); masterFileId=created.id;
       }
       localStorage.setItem('gymbro_data',JSON.stringify(appState)); localStorage.setItem('db_foods',JSON.stringify(appState.presets||[]));
-      if(cloudUser?.email) localStorage.setItem('gymbro_cloud_owner',cloudUser.email);
+      if(cloudUser && cloudUser.email) localStorage.setItem('gymbro_cloud_owner',cloudUser.email);
       loadProfileUI(); loadTargetsUI(); renderAllViews(); showSyncBanner('Sincronizzato','ok'); updateSyncStatus(true); await refreshBackupList(files);
     } finally { cloudInitializing=false; }
   }
@@ -3920,6 +3923,32 @@
   </script>
   <script src="https://accounts.google.com/gsi/client" async defer onload="window.gisLoaded && window.gisLoaded()"></script>
   <script src="https://apis.google.com/js/api.js" onload="window.gapiLoaded && window.gapiLoaded()"></script>
+</script>
+  <script>
+    // Runtime error collector to help debugging in production
+    (function(){
+      const MAX_ERR = 50;
+      function pushErr(obj){
+        try{
+          const list = JSON.parse(localStorage.getItem('gymbro_last_errors')||'[]');
+          list.push(Object.assign({ts:new Date().toISOString()}, obj));
+          while(list.length>MAX_ERR) list.shift();
+          localStorage.setItem('gymbro_last_errors', JSON.stringify(list));
+        }catch(e){}
+      }
+
+      window.addEventListener('error', function(ev){
+        pushErr({type:'error', message: ev.message, filename: ev.filename, lineno: ev.lineno, colno: ev.colno, stack: ev.error && ev.error.stack});
+      });
+      window.addEventListener('unhandledrejection', function(ev){
+        pushErr({type:'unhandledrejection', reason: (ev.reason && (ev.reason.stack||ev.reason.message)) || String(ev.reason)});
+      });
+
+      window.getGymBroErrors = function(){ try { return JSON.parse(localStorage.getItem('gymbro_last_errors')||'[]'); } catch(e){ return []; } };
+      window.clearGymBroErrors = function(){ localStorage.removeItem('gymbro_last_errors'); };
+      window.showGymBroErrors = function(){ const a=window.getGymBroErrors(); alert(a.length ? a.map(x=>`${x.ts} ${x.type} ${x.message||x.reason||''} ${x.filename||''}:${x.lineno||''}`).join('\n\n') : 'No errors recorded'); };
+    })();
+  </script>
 
 </body>
 </html>
