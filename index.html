@@ -135,6 +135,17 @@
     .hero-glow {
       box-shadow: 0 0 40px rgba(34, 211, 238, 0.28), 0 0 80px rgba(16, 185, 129, 0.18);
     }
+
+    /* Sync icon larger for small screens (iPhone) */
+    #sync-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
     
     /* Custom scrollbar styling */
     ::-webkit-scrollbar {
@@ -2561,18 +2572,19 @@
       } else {
         selectContainer.classList.add('hidden');
       }
-
-      appState.presets.forEach((p, idx) => {
-        // Render List item in modal
-        const item = document.createElement('div');
-        item.className = "flex justify-between items-center bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-xs";
         item.innerHTML = `
           <div>
             <div class="font-bold text-slate-200">${p.name}</div>
-            <div class="text-[10px] text-slate-400">Per 100g: P ${p.p}g · C ${p.c}g · G ${p.f}g · Zuc ${Number(p.sugars||0)}g · Fibre ${Number(p.fiber||0)}g · K ${Number(p.potassium||0)}mg · Ca ${Number(p.calcium||0)}mg · Mg ${Number(p.magnesium||0)}mg · Na ${Number(p.sodium||0)}mg · Fe ${Number(p.iron||0)}mg</div>
+            <div class="text-[10px] text-slate-400">Per 100g: P: ${p.p}g | C: ${p.c}g | G: ${p.f}g | Zucch: ${p.sugars||0}g | Fibre: ${p.fiber||0}g</div>
+            <div class="text-[10px] text-slate-400">Calcio: ${p.calcium||0}mg · Magnesio: ${p.magnesium||0}mg</div>
           </div>
           <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
             <i class="fa-solid fa-trash"></i>
+          </button>
+        `;
+          </div>
+          <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
+        opt.textContent = `${p.name} (P:${p.p} C:${p.c} G:${p.f} Z:${p.sugars||0})`;
           </button>
         `;
         list.appendChild(item);
@@ -3595,6 +3607,12 @@
     return res.result.files?.[0] || null;
   }
 
+  async function findDriveFileGlobally(name) {
+    const q = `name='${name.replace(/'/g,"\\'")}' and trashed=false`;
+    const res = await gapi.client.drive.files.list({ q, fields: 'files(id,name,modifiedTime,parents)', pageSize: 20 });
+    return res.result.files?.[0] || null;
+  }
+
   async function driveWriteJson(name, data, folderId, existingId = null) {
     const token = getDriveToken();
     if (!token) throw new Error('Not authorized');
@@ -3638,7 +3656,16 @@
     const name = GYMBRO_DATABASES[key];
     const file = files.find(f => f.name === name);
     if (!file) {
-      const ok = confirm(`Database “${name}” non trovato. Vuoi ricrearlo?\n\nSe scegli Sì verrà creato e sarà disponibile ai prossimi avvii.`);
+      // Try to find the database globally (maybe it exists in a different folder/account)
+      try {
+        const global = await findDriveFileGlobally(name);
+        if (global) {
+          files.push(global);
+          return normalizeDatabaseValue(key, await readDriveJson(global.id), defaultValue);
+        }
+      } catch(e) { console.warn('Global search failed', e); }
+
+      const ok = confirm(`Database “${name}” non trovato nella cartella prevista. Vuoi ricrearlo?\n\nSe scegli Sì verrà creato e sarà disponibile ai prossimi avvii.`);
       if (ok) {
         const { savesFolderId } = await getGymBroSaveFolders();
         const created = await driveWriteJson(name, defaultValue, savesFolderId);
