@@ -1575,13 +1575,11 @@
         const section = document.getElementById(`tab-${t}`);
         const navBtn = document.getElementById(`nav-${t}`);
         if (t === tabName) {
-          section.classList.remove('hidden');
-          navBtn.classList.remove('text-slate-400');
-          navBtn.classList.add('text-cyan-400');
+          if (section && section.classList) section.classList.remove('hidden');
+          if (navBtn && navBtn.classList) { navBtn.classList.remove('text-slate-400'); navBtn.classList.add('text-cyan-400'); }
         } else {
-          section.classList.add('hidden');
-          navBtn.classList.remove('text-cyan-400');
-          navBtn.classList.add('text-slate-400');
+          if (section && section.classList) section.classList.add('hidden');
+          if (navBtn && navBtn.classList) { navBtn.classList.remove('text-cyan-400'); navBtn.classList.add('text-slate-400'); }
         }
       });
       if (tabName === 'analytics') {
@@ -2566,35 +2564,31 @@
       const select = document.getElementById('preset-select');
       list.innerHTML = '';
       select.innerHTML = '<option value="">-- Seleziona un Preset --</option>';
-
-      if (appState.presets.length > 0) {
+      if (Array.isArray(appState.presets) && appState.presets.length > 0) {
         selectContainer.classList.remove('hidden');
+        appState.presets.forEach((p, idx) => {
+          const item = document.createElement('div');
+          item.className = 'bg-darkcard border border-darkborder rounded-2xl p-3 flex items-center justify-between';
+          item.innerHTML = `
+            <div>
+              <div class="font-bold text-slate-200">${p.name}</div>
+              <div class="text-[10px] text-slate-400">Per 100g: P: ${p.p}g | C: ${p.c}g | G: ${p.f}g | Zucch: ${p.sugars||0}g | Fibre: ${p.fiber||0}g</div>
+              <div class="text-[10px] text-slate-400">Calcio: ${p.calcium||0}mg · Magnesio: ${p.magnesium||0}mg</div>
+            </div>
+            <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          `;
+          list.appendChild(item);
+
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = `${p.name} (P:${p.p} C:${p.c} G:${p.f}${p.sugars ? ' Z:'+p.sugars : ''})`;
+          select.appendChild(opt);
+        });
       } else {
         selectContainer.classList.add('hidden');
       }
-        item.innerHTML = `
-          <div>
-            <div class="font-bold text-slate-200">${p.name}</div>
-            <div class="text-[10px] text-slate-400">Per 100g: P: ${p.p}g | C: ${p.c}g | G: ${p.f}g | Zucch: ${p.sugars||0}g | Fibre: ${p.fiber||0}g</div>
-            <div class="text-[10px] text-slate-400">Calcio: ${p.calcium||0}mg · Magnesio: ${p.magnesium||0}mg</div>
-          </div>
-          <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        `;
-          </div>
-          <button onclick="deletePreset(${idx})" class="text-slate-600 hover:text-red-400 text-xs p-1">
-        opt.textContent = `${p.name} (P:${p.p} C:${p.c} G:${p.f} Z:${p.sugars||0})`;
-          </button>
-        `;
-        list.appendChild(item);
-
-        // Populate dropdown options
-        const opt = document.createElement('option');
-        opt.value = idx;
-        opt.textContent = `${p.name} (P:${p.p} C:${p.c} G:${p.f})`;
-        select.appendChild(opt);
-      });
     }
 
     function applyPresetToForm() {
