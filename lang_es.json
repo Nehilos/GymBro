@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -640,7 +640,25 @@
     "Da": "Desde",
     "A": "Hasta",
     "Giorno specifico · facoltativo": "Día específico · opcional",
-    "Forza / Volume per esercizio": "Fuerza / Volumen por ejercicio"
+    "Forza / Volume per esercizio": "Fuerza / Volumen por ejercicio",
+    "Tricipite": "Tríceps",
+    "Quadricipiti": "Cuádriceps",
+    "Femorali": "Isquiotibiales",
+    "Glutei": "Glúteos",
+    "Lun": "Lun",
+    "Mar": "Mar",
+    "Mer": "Mié",
+    "Gio": "Jue",
+    "Ven": "Vie",
+    "Sab": "Sáb",
+    "Dom": "Dom",
+    "Avatar aggiornato e forzato": "Avatar actualizado de forma forzada",
+    "Rimuovi esercizio": "Eliminar ejercicio",
+    "Completata": "Completada",
+    "Peso massimo": "Peso máximo",
+    "Peso sollevato": "Peso levantado",
+    "Creazione PDF…": "Creando PDF…",
+    "Progressione peso per esercizio": "Progresión de peso por ejercicio"
   },
   "words": [
     [
@@ -781,7 +799,7 @@
     "help.home.coach.body": "El coach usa solo los datos ya presentes en Thalys para dar una sugerencia breve. El insight semanal resume entrenamientos, hidratación y mente sin notificaciones push.",
     "help.workout.title": "Gimnasio",
     "help.workout.plans": "Rutinas por día",
-    "help.workout.plans.body": "Las rutinas se organizan de lunes a domingo. Toca el nombre para ver los días a la izquierda y los ejercicios a la derecha; los días de Descanso muestran solo recuperación. Cada ejercicio incluye series, repeticiones, peso, RPE y descanso.",
+    "help.workout.plans.body": "La creación de rutinas muestra los días en horizontal bajo el nombre. Elige un día y añade ejercicios con categoría, series, repeticiones, peso, RPE y descanso. Puedes eliminar cualquier ejercicio añadido por error. La rueda del ratón funciona dentro del editor en escritorio.",
     "help.workout.active": "Rutina activa y descanso",
     "help.workout.active.body": "La rutina activa permanece seleccionada hasta que la cambies. Si un día no tiene ejercicios asignados, es Descanso programado y no reduce la racha inteligente.",
     "help.workout.import": "Importar y exportar",
@@ -812,7 +830,7 @@
     "help.body.measure": "Nueva medida",
     "help.body.measure.body": "Guarda peso y perímetros con una fecha. Para comparar tendencias importa más medir siempre en el mismo punto y condiciones similares que perseguir precisión milimétrica.",
     "help.body.avatar": "Avatar corporal",
-    "help.body.avatar.body": "Hombre y Mujer usan los SVG originales sin deformaciones. Para evitar problemas de caché SVG en Safari/iPhone, Thalys reconstruye los trazados reales del avatar cuando cambia el sexo, de modo que la selección del perfil actualiza inmediatamente Cuerpo y Home.",
+    "help.body.avatar.body": "Thalys carga male.svg o female.svg directamente desde el repositorio. Actualizar datos fuerza una recarga sin caché, guarda de nuevo el sexo elegido y redibuja Cuerpo y Home.",
     "help.body.photos": "Fotos de progreso",
     "help.body.photos.body": "Las fotos se guardan separadas de los datos numéricos y se pueden filtrar por fecha o año. Mantén pose y luz similares para comparaciones visuales más coherentes.",
     "help.analytics.title": "Gráficos",
@@ -971,7 +989,7 @@
     "help.nutrition.charts": "Gráficos macro y micro",
     "help.nutrition.charts.body": "Los dos gráficos de dona separan macro y micronutrientes. Diario, 7 días y Mensual multiplican los objetivos por el número de días. Toca un sector o la leyenda para ver nutriente, valor y objetivo.",
     "help.analytics.strength": "Fuerza contextualizada",
-    "help.analytics.strength.body": "Fuerza/Volumen usa entrenamientos completados. Selecciona la rutina activa en el periodo y el mismo ejercicio para comparar peso máximo y volumen con el tiempo.",
+    "help.analytics.strength.body": "El gráfico muestra solo la progresión del peso levantado para un ejercicio específico. Los nombres se comparan sin distinguir mayúsculas y minúsculas.",
     "help.settings.drive_creation": "Creación en Drive",
     "help.settings.drive_creation.body": "En el primer acceso Thalys pregunta una sola vez para crear la estructura y todas las bases. Después comprueba automáticamente los archivos ausentes, los recrea y muestra un único aviso."
   }

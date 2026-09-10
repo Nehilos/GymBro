@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -458,7 +458,27 @@
     "Struttura Thalys creata nel Drive ✓": "Struttura Thalys creata nel Drive ✓",
     "Database ricreati": "Database ricreati",
     "Ho ricreato i database mancanti": "Ho ricreato i database mancanti",
-    "Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?": "Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?"
+    "Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?": "Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?",
+    "Polpaccio": "Polpaccio",
+    "Bicipite": "Bicipite",
+    "Tricipite": "Tricipite",
+    "Quadricipiti": "Quadricipiti",
+    "Femorali": "Femorali",
+    "Glutei": "Glutei",
+    "Lun": "Lun",
+    "Mar": "Mar",
+    "Mer": "Mer",
+    "Gio": "Gio",
+    "Ven": "Ven",
+    "Sab": "Sab",
+    "Dom": "Dom",
+    "Avatar aggiornato e forzato": "Avatar aggiornato e forzato",
+    "Rimuovi esercizio": "Rimuovi esercizio",
+    "Completata": "Completata",
+    "Peso massimo": "Peso massimo",
+    "Peso sollevato": "Peso sollevato",
+    "Creazione PDF…": "Creazione PDF…",
+    "Progressione peso per esercizio": "Progressione peso per esercizio"
   },
   "words": [],
   "keys": {
@@ -482,7 +502,7 @@
     "help.home.coach.body": "Il coach usa solo i dati già presenti in Thalys per dare un suggerimento breve. L'insight settimanale riassume allenamenti, idratazione e mente senza inviare notifiche push.",
     "help.workout.title": "Palestra",
     "help.workout.plans": "Schede per giorno",
-    "help.workout.plans.body": "Le schede sono organizzate da lunedì a domenica. Toccando il nome di una scheda si apre l’anteprima con i giorni a sinistra e gli esercizi a destra; i giorni marcati Riposo mostrano solo il recupero. Ogni esercizio include serie, ripetizioni, peso, RPE e recupero.",
+    "help.workout.plans.body": "La creazione delle schede usa i giorni in orizzontale sotto al nome. Seleziona un giorno e aggiungi gli esercizi con categoria, serie, ripetizioni, peso, RPE e recupero. Puoi eliminare ogni esercizio inserito per errore. Il mouse e la rotella scorrono direttamente l’elenco anche da desktop.",
     "help.workout.active": "Scheda attiva e riposo",
     "help.workout.active.body": "La scheda attiva resta selezionata finché non la cambi. Se in un giorno non esistono esercizi assegnati, quel giorno è Riposo programmato e non abbassa la streak intelligente.",
     "help.workout.import": "Importa ed esporta",
@@ -513,7 +533,7 @@
     "help.body.measure": "Nuova misura",
     "help.body.measure.body": "Salva peso e circonferenze con una data. Per confrontare i trend è più importante misurare sempre nello stesso punto e in condizioni simili che inseguire la precisione del singolo millimetro.",
     "help.body.avatar": "Avatar corporeo",
-    "help.body.avatar.body": "Uomo e Donna usano gli SVG originali senza deformazioni. Per evitare problemi di cache SVG su Safari/iPhone, Thalys ricostruisce direttamente i tracciati dell’avatar quando cambia il sesso: la scelta nei dati anagrafici aggiorna immediatamente Corpo e Home.",
+    "help.body.avatar.body": "Thalys carica male.svg o female.svg direttamente dal repository. Aggiorna dati esegue un refresh forzato con cache-busting, risalva il sesso selezionato e ridisegna Corpo e Home; è utile se il browser non aggiorna subito l’SVG.",
     "help.body.photos": "Foto progressi",
     "help.body.photos.body": "Le foto sono archiviate separatamente dai dati numerici e possono essere filtrate per data o anno. Mantieni pose e luce simili se vuoi confronti visivi più coerenti.",
     "help.analytics.title": "Grafici",
@@ -672,7 +692,7 @@
     "help.nutrition.charts": "Torte macro e micro",
     "help.nutrition.charts.body": "Le due torte separano macro e micronutrienti. Giornaliero, 7 giorni e Mensile moltiplicano i target per il numero di giorni. Tocca un settore o la legenda per vedere nome, valore e target.",
     "help.analytics.strength": "Forza contestualizzata",
-    "help.analytics.strength.body": "Forza/Volume usa gli allenamenti completati. Seleziona la scheda attiva nel periodo e lo stesso esercizio per confrontare peso massimo e volume nel tempo.",
+    "help.analytics.strength.body": "Il grafico mostra solo la progressione del peso sollevato per uno specifico esercizio. I nomi vengono confrontati senza distinguere maiuscole/minuscole: “leg press” e “Leg press” sono lo stesso esercizio.",
     "help.settings.drive_creation": "Creazione Drive",
     "help.settings.drive_creation.body": "Al primo accesso Thalys chiede una sola autorizzazione per creare struttura e database. In seguito controlla automaticamente i file mancanti, li ricrea e mostra un solo avviso."
   }

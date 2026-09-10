@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -638,7 +638,25 @@
     "Da": "De",
     "A": "Até",
     "Giorno specifico · facoltativo": "Dia específico · opcional",
-    "Forza / Volume per esercizio": "Força / Volume por exercício"
+    "Forza / Volume per esercizio": "Força / Volume por exercício",
+    "Tricipite": "Tríceps",
+    "Quadricipiti": "Quadríceps",
+    "Femorali": "Posteriores da coxa",
+    "Glutei": "Glúteos",
+    "Lun": "Seg",
+    "Mar": "Ter",
+    "Mer": "Qua",
+    "Gio": "Qui",
+    "Ven": "Sex",
+    "Sab": "Sáb",
+    "Dom": "Dom",
+    "Avatar aggiornato e forzato": "Avatar atualizado à força",
+    "Rimuovi esercizio": "Remover exercício",
+    "Completata": "Concluída",
+    "Peso massimo": "Peso máximo",
+    "Peso sollevato": "Peso levantado",
+    "Creazione PDF…": "A criar PDF…",
+    "Progressione peso per esercizio": "Progressão de peso por exercício"
   },
   "words": [
     [
@@ -779,7 +797,7 @@
     "help.home.coach.body": "O coach usa apenas os dados já existentes no Thalys para dar uma sugestão curta. O insight semanal resume treinos, hidratação e mente sem notificações push.",
     "help.workout.title": "Academia",
     "help.workout.plans": "Fichas por dia",
-    "help.workout.plans.body": "As fichas são organizadas de segunda a domingo. Toca no nome para ver os dias à esquerda e os exercícios à direita; os dias de Descanso mostram apenas recuperação. Cada exercício inclui séries, repetições, peso, RPE e descanso.",
+    "help.workout.plans.body": "A criação das fichas mostra os dias horizontalmente abaixo do nome. Escolhe um dia e adiciona exercícios com categoria, séries, repetições, peso, RPE e descanso. Podes remover exercícios adicionados por engano. A roda do rato funciona no editor no desktop.",
     "help.workout.active": "Ficha ativa e descanso",
     "help.workout.active.body": "A ficha ativa permanece selecionada até você mudar. Se um dia não tiver exercícios atribuídos, é Descanso programado e não reduz a sequência inteligente.",
     "help.workout.import": "Importar e exportar",
@@ -810,7 +828,7 @@
     "help.body.measure": "Nova medida",
     "help.body.measure.body": "Salva peso e circunferências com uma data. Para comparar tendências, medir sempre no mesmo ponto e em condições semelhantes é mais importante que perseguir precisão milimétrica.",
     "help.body.avatar": "Avatar corporal",
-    "help.body.avatar.body": "Homem e Mulher usam os SVG originais sem deformações. Para evitar problemas de cache SVG no Safari/iPhone, o Thalys reconstrói diretamente os traçados do avatar quando o sexo muda, por isso a seleção do perfil atualiza imediatamente Corpo e Home.",
+    "help.body.avatar.body": "O Thalys carrega male.svg ou female.svg diretamente do repositório. Atualizar dados força uma recarga sem cache, volta a guardar o sexo e redesenha Corpo e Home.",
     "help.body.photos": "Fotos de progresso",
     "help.body.photos.body": "As fotos são armazenadas separadamente dos dados numéricos e podem ser filtradas por data ou ano. Mantenha pose e luz semelhantes para comparações mais consistentes.",
     "help.analytics.title": "Gráficos",
@@ -969,7 +987,7 @@
     "help.nutrition.charts": "Gráficos macro e micro",
     "help.nutrition.charts.body": "Os dois gráficos em anel separam macro e micronutrientes. Diário, 7 dias e Mensal multiplicam as metas pelo número de dias. Toca num setor ou legenda para ver nutriente, valor e meta.",
     "help.analytics.strength": "Força contextualizada",
-    "help.analytics.strength.body": "Força/Volume usa treinos concluídos. Seleciona a ficha ativa no período e o mesmo exercício para comparar peso máximo e volume ao longo do tempo.",
+    "help.analytics.strength.body": "O gráfico mostra apenas a progressão do peso levantado por exercício. Os nomes são comparados sem distinguir maiúsculas de minúsculas.",
     "help.settings.drive_creation": "Criação no Drive",
     "help.settings.drive_creation.body": "No primeiro acesso o Thalys pergunta uma só vez para criar a estrutura e todas as bases. Depois verifica automaticamente ficheiros em falta, recria-os e mostra apenas um aviso."
   }

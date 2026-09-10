@@ -1767,6 +1767,26 @@
     #meditation-date{font-size:12px!important;font-weight:800!important}
     .v7-apple-donut canvas{filter:drop-shadow(0 12px 24px rgba(2,6,23,.4))}
 
+    /* ===== Thalys V8 desktop + workout builder ===== */
+    #workout-plans-modal > div{overscroll-behavior:contain}
+    #plan-builder-panel{overflow-y:auto!important;overscroll-behavior:contain;scrollbar-gutter:stable}
+    #workout-plan-form{min-height:0}
+    #plan-builder-exercises{overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin;max-height:calc(90dvh - 320px)}
+    #plan-builder-days{overflow:visible!important}
+    #plan-builder-days .v7-day-btn{
+      min-height:48px!important;padding:.45rem .15rem!important;text-align:center!important;
+      font-size:10px!important;line-height:1.05!important;border-radius:11px!important
+    }
+    #plan-builder-days .v7-day-btn .v8-day-count{font-size:8px!important;margin-top:.25rem;opacity:.62}
+    #plan-builder-exercises .v7-ex-card{padding:.8rem!important}
+    #plan-builder-exercises input,#plan-builder-exercises select{font-size:12px!important;min-height:38px!important}
+    #plan-builder-exercises label{font-size:10px!important;line-height:1.2!important}
+    #plan-builder-exercises .v8-ex-name{font-size:13px!important;font-weight:750!important;min-height:42px!important}
+    @media(min-width:768px){
+      #workout-plans-modal > div{height:min(88vh,760px)!important}
+      #plan-builder-exercises{max-height:430px!important}
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2652,7 +2672,7 @@
             </div>
             <p class="mt-1 text-[10px] leading-relaxed text-slate-400">Illustrazione vettoriale professionale uomo/donna. L'avatar resta sempre integro: le tue misure vengono mostrate con frecce e valori senza deformare la figura.</p>
           </div>
-          <span id="avatar-goal-badge" class="rounded-full bg-slate-900 px-2.5 py-1 text-[9px] font-bold text-slate-400">Attività —</span>
+
         </div>
 
         <div class="grid grid-cols-2 gap-2">
@@ -2662,7 +2682,7 @@
 
         <div class="grid grid-cols-2 gap-2">
           <button id="avatar-measure-toggle" type="button" onclick="toggleAvatarMeasures()" class="avatar-art-control text-[10px] font-bold"><i class="fa-solid fa-ruler-combined mr-1"></i> Mostra misure</button>
-          <button type="button" onclick="aggiornaAvatarDaUltimaMisura()" class="avatar-art-control text-[10px] font-bold"><i class="fa-solid fa-rotate mr-1"></i> Aggiorna dati</button>
+          <button type="button" onclick="forceAvatarRefreshV8()" class="avatar-art-control text-[10px] font-bold"><i class="fa-solid fa-rotate mr-1"></i> Aggiorna dati</button>
         </div>
 
         <div class="avatar-art-stage">
@@ -2802,7 +2822,7 @@
         <div class="flex justify-between items-center">
           <h3 class="text-xs font-bold text-slate-100 flex items-center space-x-1.5">
             <i class="fa-solid fa-dumbbell text-cyan-400"></i>
-            <span>Forza / Volume per esercizio</span>
+            <span>Progressione peso per esercizio</span>
           </h3>
           <div class="flex gap-1.5">
             <select id="chart-plan-history-select" class="max-w-[118px] bg-slate-900/80 border border-slate-700 text-slate-200 text-[9px] rounded-xl px-2 py-1.5" onchange="updateExerciseChartV7()"><option value="all">Tutte le schede</option></select>
@@ -3310,15 +3330,15 @@
           <label class="text-[9px] text-slate-400">Nome scheda
             <input id="plan-name" required type="text" placeholder="Es. Upper / Lower" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white">
           </label>
-          <div class="mt-3 grid grid-cols-[88px_1fr] gap-3 flex-1 min-h-0">
-            <div id="plan-builder-days" class="space-y-1.5 overflow-y-auto"></div>
-            <div class="min-w-0 flex flex-col min-h-0">
-              <div class="flex items-center justify-between gap-2">
-                <div><div class="text-[9px] uppercase tracking-[.14em] text-slate-500">Giorno</div><div id="plan-builder-day-title" class="text-sm font-black text-white">Lunedì</div></div>
-                <label class="flex items-center gap-2 rounded-xl bg-slate-900 px-2.5 py-2 text-[9px] font-bold text-violet-300"><input id="plan-day-rest" type="checkbox" onchange="togglePlanBuilderRest(this.checked)" class="accent-violet-500"> Riposo</label>
+          <div class="mt-3 flex flex-col flex-1 min-h-0">
+            <div id="plan-builder-days" class="grid grid-cols-7 gap-1.5 shrink-0"></div>
+            <div class="mt-3 min-w-0 flex flex-col min-h-0">
+              <div class="flex items-center justify-between gap-3">
+                <div><div class="text-[10px] uppercase tracking-[.14em] text-slate-500">Giorno selezionato</div><div id="plan-builder-day-title" class="text-base font-black text-white">Lunedì</div></div>
+                <label class="flex items-center gap-2 rounded-xl bg-slate-900 px-3 py-2.5 text-[11px] font-bold text-violet-300"><input id="plan-day-rest" type="checkbox" onchange="togglePlanBuilderRest(this.checked)" class="h-4 w-4 accent-violet-500"> Riposo</label>
               </div>
-              <div id="plan-builder-exercises" class="mt-2 flex-1 overflow-y-auto space-y-2 pr-1"></div>
-              <button id="plan-builder-add-btn" type="button" onclick="addPlanExerciseV7()" class="mt-2 min-h-10 rounded-xl border border-cyan-500/25 bg-cyan-500/10 text-[10px] font-black text-cyan-300"><i class="fa-solid fa-plus mr-1"></i>Aggiungi esercizio</button>
+              <div id="plan-builder-exercises" class="v8-plan-scroll mt-3 flex-1 min-h-0 overflow-y-auto space-y-3 pr-2"></div>
+              <button id="plan-builder-add-btn" type="button" onclick="addPlanExerciseV7()" class="mt-3 min-h-11 rounded-xl border border-cyan-500/25 bg-cyan-500/10 text-[11px] font-black text-cyan-300"><i class="fa-solid fa-plus mr-1"></i>Aggiungi esercizio</button>
             </div>
           </div>
           <div class="mt-3 grid grid-cols-2 gap-2">
@@ -3355,9 +3375,19 @@
   <div id="workout-history-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
     <div class="w-full max-w-md h-[78dvh] sm:h-[600px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-cyan-500/20 p-4 flex flex-col overflow-hidden">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3"><div><div class="text-[9px] uppercase tracking-[.16em] text-cyan-300">Storico</div><h3 class="text-base font-black text-white">Database allenamenti</h3></div><button type="button" onclick="closeModal('workout-history-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button></div>
-      <label class="mt-3 text-[9px] text-slate-500">Giorno<input id="workout-history-date" type="date" onchange="renderWorkoutHistory()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"></label>
+      <div class="mt-3 flex justify-center"><label class="text-center text-[9px] text-slate-500">Giorno<input id="workout-history-date" type="date" onchange="renderWorkoutHistory()" class="mt-1 block w-[172px] rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-center text-[11px] font-bold text-white"></label></div>
       <div class="mt-3 flex gap-2"><button type="button" onclick="setWorkoutHistoryDate('')" class="rounded-xl bg-slate-800 px-3 py-2 text-[9px] font-bold text-slate-300">Tutti</button><button type="button" onclick="setWorkoutHistoryDate(currentLocalDateStr())" class="rounded-xl bg-cyan-500/10 px-3 py-2 text-[9px] font-bold text-cyan-300">Oggi</button></div>
       <div id="workout-history-list" class="mt-3 flex-1 overflow-y-auto space-y-2"></div>
+    </div>
+  </div>
+
+  <div id="workout-history-detail-modal" class="fixed inset-0 z-[60] bg-slate-950/92 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-md h-[72dvh] sm:h-[560px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-cyan-500/20 p-4 flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-cyan-300">Dettaglio allenamento</div><h3 id="workout-history-detail-title" class="text-base font-black text-white">—</h3><div id="workout-history-detail-date" class="mt-1 text-[9px] text-slate-500">—</div></div>
+        <button type="button" onclick="closeModal('workout-history-detail-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="workout-history-detail-list" class="mt-3 flex-1 overflow-y-auto space-y-2"></div>
     </div>
   </div>
 
@@ -4797,7 +4827,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:7,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:8,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4819,7 +4849,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=7`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=8`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4830,7 +4860,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v7`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v8`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4839,7 +4869,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v7`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v8`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4850,7 +4880,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v7`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v8`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -7581,12 +7611,6 @@ if(c)c.innerHTML='';
       if(l2)l2.textContent=feeling;
       if(l3)l3.textContent=note;
 
-      const badge=document.getElementById('avatar-goal-badge');
-      if(badge){
-        badge.textContent=`Attività ${Math.round(p)}%`;
-        badge.className=`rounded-full px-2.5 py-1 text-[9px] font-bold ${p>=100?'bg-emerald-500/15 text-emerald-300':p>=70?'bg-cyan-500/15 text-cyan-300':p>=40?'bg-violet-500/15 text-violet-300':p>0?'bg-amber-500/15 text-amber-300':'bg-rose-500/15 text-rose-300'}`;
-      }
-
       const copy=document.getElementById('avatar-mood-copy');
       if(copy)copy.innerHTML=`Oggi hai raggiunto <b class="text-white">${Math.round(p)}%</b> degli obiettivi giornalieri. La nuvoletta cambia automaticamente con i progressi della giornata selezionata.`;
     }
@@ -8757,7 +8781,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=7`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=8`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -8774,6 +8798,183 @@ getAnalyticsFilter=function(){
   const d=new Date(specific+'T12:00:00');
   return {value,days:'1',start:d,end:d,allowedDates,periodDates};
 };
+
+
+/* ==========================================================
+   THALYS V8 PATCH
+   ========================================================== */
+const THALYS_EXERCISE_CATEGORIES_V8=['Petto','Dorso','Gambe','Spalle','Braccia','Bicipite','Tricipite','Quadricipiti','Femorali','Glutei','Polpaccio','Core','Cardio','Altro'];
+const THALYS_DAY_SHORT_V8={Lunedì:'Lun',Martedì:'Mar',Mercoledì:'Mer',Giovedì:'Gio',Venerdì:'Ven',Sabato:'Sab',Domenica:'Dom'};
+
+/* More reliable external avatar method: render male.svg/female.svg directly
+   as an SVG <image>, and cache-bust when the user explicitly refreshes. */
+let thalysAvatarRefreshSeqV8=0;
+function avatarSetArtworkV8(gender,{force=false}={}){
+  const female=gender==='femmina'||gender==='female';
+  const group=document.getElementById('avatar-artwork-whole');
+  if(!group)return false;
+  const file=female?'female.svg':'male.svg';
+  const ns='http://www.w3.org/2000/svg';
+  const href=`./${file}${force?`?thalys_avatar=${Date.now()}_${++thalysAvatarRefreshSeqV8}`:''}`;
+  const image=document.createElementNS(ns,'image');
+  image.setAttribute('x','0');image.setAttribute('y','0');image.setAttribute('width','768');image.setAttribute('height','1536');
+  image.setAttribute('preserveAspectRatio','xMidYMid meet');image.setAttribute('href',href);
+  image.setAttributeNS('http://www.w3.org/1999/xlink','href',href);
+  image.dataset.externalAvatar='1';
+  const fallbackId=female?'avatar-female-art':'avatar-male-art';
+  image.addEventListener('error',()=>{
+    const symbol=document.getElementById(fallbackId);if(!symbol)return;
+    group.replaceChildren(...Array.from(symbol.children).map(n=>n.cloneNode(true)));
+    group.removeAttribute('transform');group.dataset.gender=female?'female':'male';
+  },{once:true});
+  group.replaceChildren(image);
+  group.removeAttribute('transform');group.style.display='inline';group.dataset.gender=female?'female':'male';
+  document.getElementById('avatar-gender-male')?.classList.toggle('active',!female);
+  document.getElementById('avatar-gender-female')?.classList.toggle('active',female);
+  const svg=document.getElementById('avatar-art-svg');if(svg)svg.dataset.gender=female?'female':'male';
+  return true;
+}
+function forceAvatarRefreshV8(){
+  const select=document.getElementById('prof-input-gender');
+  const g=normalizeProfileGenderValue(select?.value||appState.profile?.gender);
+  appState.profile={...(appState.profile||{}),gender:g,updatedAt:new Date().toISOString()};
+  localStorage.setItem('thalys_data',JSON.stringify(appState));
+  avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});
+  requestAnimationFrame(()=>{aggiornaAvatarDaUltimaMisura();renderHomeAvatar();avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});});
+  setTimeout(()=>{avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});aggiornaAvatarDaUltimaMisura();renderHomeAvatar();},120);
+  saveStateToLocal();
+  showToast(tr('Avatar aggiornato e forzato'),'fa-rotate');
+}
+const _saveProfileV8Base=saveProfile;
+saveProfile=function(e){
+  _saveProfileV8Base(e);
+  setTimeout(forceAvatarRefreshV8,40);
+};
+
+/* Desktop wheel handling inside the plan editor. */
+function installWorkoutBuilderWheelV8(){
+  const modal=document.getElementById('workout-plans-modal');if(!modal||modal.dataset.wheelV8)return;modal.dataset.wheelV8='1';
+  modal.addEventListener('wheel',e=>{
+    const panel=document.getElementById('plan-builder-panel'),scroller=document.getElementById('plan-builder-exercises');
+    if(panel?.classList.contains('hidden')||!scroller||!panel.contains(e.target))return;
+    if(scroller.scrollHeight>scroller.clientHeight){
+      scroller.scrollTop+=e.deltaY;
+      e.preventDefault();
+    }else if(panel.scrollHeight>panel.clientHeight){
+      panel.scrollTop+=e.deltaY;e.preventDefault();
+    }
+  },{passive:false});
+}
+
+/* Horizontal day selector and larger plan fields. */
+function renderPlanBuilderV7(){
+  const days=document.getElementById('plan-builder-days'),box=document.getElementById('plan-builder-exercises');if(!days||!box)return;
+  days.innerHTML=THALYS_WEEKDAYS.map(d=>`<button type="button" title="${tr(d)}" onclick="selectPlanBuilderDay('${d}')" class="v7-day-btn ${d===planBuilderDay?'active':''}"><div>${tr(THALYS_DAY_SHORT_V8[d]||d)}</div><div class="v8-day-count">${planBuilderRest.has(d)?'🌙':(planBuilderDraft[d]?.length||0)}</div></button>`).join('');
+  const title=document.getElementById('plan-builder-day-title'),rest=document.getElementById('plan-day-rest'),add=document.getElementById('plan-builder-add-btn');
+  if(title)title.textContent=tr(planBuilderDay);if(rest)rest.checked=planBuilderRest.has(planBuilderDay);if(add)add.classList.toggle('hidden',planBuilderRest.has(planBuilderDay));
+  if(planBuilderRest.has(planBuilderDay)){box.innerHTML=`<div class="min-h-52 flex items-center justify-center rounded-2xl bg-violet-500/5 text-center"><div><div class="text-4xl">🌙</div><div class="mt-3 text-base font-black text-violet-200">${tr('Giorno di riposo')}</div><div class="mt-1 text-[11px] text-slate-500">${tr('Nessun esercizio previsto')}</div></div></div>`;return;}
+  const arr=planBuilderDraft[planBuilderDay]||[];
+  box.innerHTML=arr.length?arr.map((x,i)=>`<div class="v7-ex-card">
+    <div class="flex gap-2"><input value="${escapeHTML(x.name)}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'name',this.value)" placeholder="${tr('Nome esercizio')}" class="v8-ex-name min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-white"><button type="button" onclick="removePlanExerciseV7('${planBuilderDay}',${i})" class="w-10 shrink-0 rounded-xl bg-rose-500/10 text-rose-300" title="${tr('Rimuovi esercizio')}"><i class="fa-solid fa-trash"></i></button></div>
+    <div class="mt-3 grid grid-cols-2 gap-3">
+      <label class="text-slate-500">${tr('Categoria')}<select onchange="updatePlanDraftFieldV7('${planBuilderDay}',${i},'category',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white">${THALYS_EXERCISE_CATEGORIES_V8.map(c=>`<option value="${c}" ${c===x.category?'selected':''}>${tr(c)}</option>`).join('')}</select></label>
+      <label class="text-slate-500">${tr('Serie')}<input type="number" min="1" value="${x.series}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'series',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white"></label>
+      <label class="text-slate-500">${tr('Ripetizioni')}<input type="number" min="1" value="${x.reps}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'reps',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white"></label>
+      <label class="text-slate-500">${tr('Peso kg')}<input type="number" min="0" step=".5" value="${x.weight}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'weight',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white"></label>
+      <label class="text-slate-500">RPE<input type="number" min="1" max="10" value="${x.rpe}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'rpe',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white"></label>
+      <label class="text-slate-500">${tr('Recupero sec')}<input type="number" min="0" value="${x.recovery}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'recovery',this.value)" class="mt-1 w-full rounded-xl bg-slate-900 border border-slate-700 px-2 py-2 text-white"></label>
+    </div>
+  </div>`).join(''):`<div class="rounded-2xl border border-dashed border-slate-800 p-6 text-center text-[12px] text-slate-500">${tr('Nessun esercizio. Aggiungine uno oppure imposta Riposo.')}</div>`;
+}
+
+/* AI/food numeric fields: normalize every numeric proposal to 1 decimal. */
+function fillFoodPresetFromAI(d){
+  const map={kcal:'preset-kcal',p:'preset-p',c:'preset-c',f:'preset-f',satFat:'preset-sat-fat',sugars:'preset-sugars',calcium:'preset-calcium',magnesium:'preset-magnesium',zinc:'preset-zinc',fiber:'preset-fiber',salt:'preset-salt',iron:'preset-iron',potassium:'preset-potassium',vitaminsId:'preset-vitamins-id',vitaminsLip:'preset-vitamins-lip'};
+  Object.entries(map).forEach(([k,id])=>{
+    const el=document.getElementById(id),v=d[k];if(!el||v===null||v===undefined||v==='')return;
+    if(k==='vitaminsId'||k==='vitaminsLip')el.value=Array.isArray(v)?v.join(' '):v;
+    else {const n=Number(v);el.value=Number.isFinite(n)?(Math.round(n*10)/10).toFixed(1):v;}
+  });
+}
+
+/* Compact Workout DB: summary only; details open separately. */
+function renderWorkoutHistory(){
+  const box=document.getElementById('workout-history-list');if(!box)return;
+  const d=document.getElementById('workout-history-date')?.value||'';
+  const rows=[...(appState.workoutHistory||[])].filter(x=>!d||x.date===d).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  box.innerHTML=rows.length?rows.map(r=>`<button type="button" onclick="openWorkoutHistoryDetailV8('${escapeHTML(r.id)}')" class="w-full rounded-2xl border border-slate-800 bg-slate-900/65 p-3 text-left hover:border-cyan-500/30">
+    <div class="flex items-center justify-between gap-3"><div class="min-w-0"><div class="truncate text-[12px] font-black text-white">${escapeHTML(r.planName||tr('Scheda'))}</div><div class="mt-1 text-[9px] text-slate-500">${weekdayLabel(r.date)}</div></div><div class="shrink-0 text-right"><div class="rounded-lg bg-emerald-500/10 px-2 py-1 text-[9px] font-black text-emerald-300">✓ ${tr('Completata')}</div><div class="mt-1 text-[9px] text-slate-500">${r.date}</div></div></div>
+  </button>`).join(''):`<div class="p-5 text-center text-[10px] text-slate-500">${tr('Nessun allenamento completato per il filtro scelto.')}</div>`;
+}
+function openWorkoutHistoryDetailV8(id){
+  const r=(appState.workoutHistory||[]).find(x=>x.id===id);if(!r)return;
+  const title=document.getElementById('workout-history-detail-title'),date=document.getElementById('workout-history-detail-date'),list=document.getElementById('workout-history-detail-list');
+  if(title)title.textContent=r.planName||tr('Allenamento');if(date)date.textContent=`${weekdayLabel(r.date)} · ${r.date}`;
+  if(list)list.innerHTML=(r.exercises||[]).map(x=>`<div class="rounded-2xl border border-slate-800 bg-slate-900/65 p-3"><div class="flex justify-between gap-2"><b class="text-[12px] text-white">${escapeHTML(x.name)}</b><span class="text-[9px] text-cyan-300">${tr(x.category||'')}</span></div><div class="mt-2 text-[10px] text-slate-400"><b class="text-slate-200">${x.series||x.sets?.length||0} ${tr('serie')}</b> × ${x.reps||'—'} reps · ${x.weight||0} kg · RPE ${x.rpe||'—'} · ${x.recovery||0}s</div></div>`).join('');
+  openModal('workout-history-detail-modal');
+}
+
+/* Same exercise is the same key regardless of upper/lowercase and extra spaces. */
+function normalizeExerciseNameV8(name){return String(name||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('it-IT');}
+function updateExerciseChartV7(){
+  const planSel=document.getElementById('chart-plan-history-select'),exSel=document.getElementById('chart-exercise-select'),ctx=document.getElementById('exerciseProgressChart')?.getContext('2d');if(!ctx)return;
+  populatePlanHistoryAnalyticsV7();
+  const planId=planSel?.value||'all',specific=document.getElementById('chart-specific-date')?.value||'';
+  let rows=[...(appState.workouts||[])].filter(x=>x.source==='plan'||x.planId);
+  if(planId!=='all')rows=rows.filter(x=>x.planId===planId);if(specific)rows=rows.filter(x=>x.date===specific);
+  const names=new Map();rows.forEach(x=>{const k=normalizeExerciseNameV8(x.name);if(k&&!names.has(k))names.set(k,String(x.name||'').trim())});
+  const keys=[...names.keys()].sort((a,b)=>names.get(a).localeCompare(names.get(b),currentLocale()));
+  const previous=normalizeExerciseNameV8(exSel?.value);
+  if(exSel){exSel.innerHTML=keys.length?keys.map(k=>`<option value="${escapeHTML(k)}">${escapeHTML(names.get(k))}</option>`).join(''):`<option value="">${tr('Nessun esercizio')}</option>`;if(keys.includes(previous))exSel.value=previous;}
+  const key=exSel?.value||keys[0]||'',data=rows.filter(x=>normalizeExerciseNameV8(x.name)===key).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  const maxWeight=data.map(x=>Math.max(0,...(x.sets||[]).map(s=>Number(s.weight||0))));
+  if(chartEx)chartEx.destroy();
+  chartEx=new Chart(ctx,{type:'line',data:{labels:data.map(x=>x.date),datasets:[{label:tr('Peso massimo kg'),data:maxWeight,borderColor:'#22d3ee',backgroundColor:'rgba(34,211,238,.12)',fill:true,tension:.3,pointRadius:4,pointHoverRadius:6}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{title:items=>items?.[0]?.label||'',label:c=>`${tr('Peso massimo')}: ${c.raw} kg`}}},scales:{x:{ticks:{color:'#64748b',font:{size:9}}},y:{beginAtZero:false,ticks:{color:'#64748b',callback:v=>v+' kg'},title:{display:true,text:tr('Peso sollevato'),color:'#94a3b8'}}}}});
+}
+
+/* Reliable AI PDF export: keep export DOM inside the renderable viewport and cover it
+   during capture instead of placing it at z-index:-1 (which can produce blank PDFs). */
+async function exportAIConsultPDF(id){
+  const record=(appState.aiConsults||[]).find(x=>x.id===id);if(!record)return;
+  if(!window.html2pdf){showToast(tr('Modulo PDF in caricamento. Riprova tra un secondo.'),'fa-clock');return;}
+  const cover=document.createElement('div');
+  cover.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#090d16;display:flex;align-items:center;justify-content:center;color:#67e8f9;font:700 14px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif';
+  cover.innerHTML=`<div style="text-align:center"><div style="font-size:24px;margin-bottom:10px">THALYS</div><div>${escapeHTML(tr('Creazione PDF…'))}</div></div>`;
+  const root=document.createElement('div');
+  root.style.cssText='position:fixed;left:0;top:0;z-index:2147483646;width:794px;min-height:1120px;padding:42px;box-sizing:border-box;background:#090d16;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif';
+  const response=record.response||{};
+  const responseHTML=Object.entries(response).map(([k,v])=>consultPdfSection(tr(k),v)).join('')||consultPdfSection(tr('Risposta IA'),response);
+  root.innerHTML=`<div style="border-bottom:2px solid #164e63;padding-bottom:18px">${thalysPdfLogoMarkup()}</div>
+    <div style="margin-top:22px"><div style="font-size:9px;letter-spacing:.16em;color:#94a3b8;text-transform:uppercase">${escapeHTML(tr('Risposta IA'))}</div>
+    <div style="margin-top:5px;font-size:22px;font-weight:900;color:#fff">${escapeHTML(tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[record.type]||record.type))}</div>
+    <div style="margin-top:8px;font-size:11px;color:#94a3b8">${escapeHTML(formatConsultDate(record.date))}</div>
+    <div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:#083344;color:#cffafe;font-size:11px"><b>${escapeHTML(tr('Obiettivo'))}:</b> ${escapeHTML(record.goal||'—')}</div></div>
+    ${responseHTML}${record.generatedWorkoutPlan?consultPdfSection(tr('Scheda generata'),record.generatedWorkoutPlan):''}
+    <div style="margin-top:20px;border-top:1px solid #1e293b;padding-top:12px;font-size:8px;color:#64748b">Thalys · ${escapeHTML(tr('Dati esportati dal consulto IA salvato'))}</div>`;
+  document.body.append(root,cover);
+  try{
+    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+    await html2pdf().set({margin:[8,8,10,8],filename:`Thalys_AI_${record.type||'consulto'}_${record.date||currentLocalDateStr()}.pdf`,image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#090d16',scrollX:0,scrollY:0,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}}).from(root).save();
+    showToast(tr('Risposta IA esportata in PDF'),'fa-file-pdf');
+  }catch(e){console.error('AI consult PDF V8',e);showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');}
+  finally{cover.remove();root.remove();}
+}
+
+/* Make sure AI plans imported/generated always contain series and accepted categories. */
+const _normalizeAIWorkoutPlanV8Base=normalizeAIWorkoutPlan;
+normalizeAIWorkoutPlan=function(p){
+  const out=_normalizeAIWorkoutPlanV8Base(p);if(!out)return out;
+  out.exercises=out.exercises.map(x=>({...x,series:Math.max(1,Math.round(Number(x.series)||3)),category:THALYS_EXERCISE_CATEGORIES_V8.includes(x.category)?x.category:'Altro'}));
+  out.schemaVersion=3;return out;
+};
+
+/* Route every legacy analytics refresh to the V8 weight-only chart. */
+updateExerciseChart=updateExerciseChartV7;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  installWorkoutBuilderWheelV8();
+  setTimeout(()=>avatarSetArtworkV8(normalizeProfileGenderValue(appState.profile?.gender)==='female'?'femmina':'maschio'),180);
+});
 
 </script>
 <style>

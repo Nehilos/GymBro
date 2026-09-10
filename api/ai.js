@@ -185,7 +185,7 @@ Return exactly:
       {
         "name": "exercise name",
         "dayOfWeek": "Lunedì|Martedì|Mercoledì|Giovedì|Venerdì|Sabato|Domenica",
-        "category": "Petto|Dorso|Gambe|Braccia|Core|Cardio|Altro",
+        "category": "Petto|Dorso|Gambe|Spalle|Braccia|Bicipite|Tricipite|Quadricipiti|Femorali|Glutei|Polpaccio|Core|Cardio|Altro",
         "rpe": 8,
         "weight": 0,
         "series": 3,
@@ -202,8 +202,8 @@ IMPORTANT:
 - Use restDays for explicitly programmed rest days.
 - Preserve exercises or structure that already fit the goal.
 - Use weight 0 when the supplied data does not justify a specific load.
-- Every exercise MUST include "series" as an integer >= 1.
-- The plan must be importable by Thalys and must not contain extra fields inside each exercise.`;
+- Every exercise MUST include "series" as an integer >= 1. Never omit it, even when adapting an older plan.
+- The plan must be importable by Thalys V8. Exercise schema is exactly: name, dayOfWeek, category, series, reps, weight, rpe, recovery.`;
   }
 
   if (body.action === "food_lookup") {

@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -638,7 +638,25 @@
     "Da": "De la",
     "A": "Până la",
     "Giorno specifico · facoltativo": "Zi specifică · opțional",
-    "Forza / Volume per esercizio": "Forță / Volum pe exercițiu"
+    "Forza / Volume per esercizio": "Forță / Volum pe exercițiu",
+    "Tricipite": "Triceps",
+    "Quadricipiti": "Cvadricepși",
+    "Femorali": "Biceps femural",
+    "Glutei": "Fesieri",
+    "Lun": "Lun",
+    "Mar": "Mar",
+    "Mer": "Mie",
+    "Gio": "Joi",
+    "Ven": "Vin",
+    "Sab": "Sâm",
+    "Dom": "Dum",
+    "Avatar aggiornato e forzato": "Avatar actualizat forțat",
+    "Rimuovi esercizio": "Elimină exercițiul",
+    "Completata": "Finalizat",
+    "Peso massimo": "Greutate maximă",
+    "Peso sollevato": "Greutate ridicată",
+    "Creazione PDF…": "Se creează PDF…",
+    "Progressione peso per esercizio": "Progresia greutății pe exercițiu"
   },
   "words": [
     [
@@ -779,7 +797,7 @@
     "help.home.coach.body": "Coach-ul folosește doar datele deja existente în Thalys pentru o sugestie scurtă. Insight-ul săptămânal rezumă antrenamentele, hidratarea și sesiunile mentale fără notificări push.",
     "help.workout.title": "Sală",
     "help.workout.plans": "Planuri pe zile",
-    "help.workout.plans.body": "Planurile sunt organizate de luni până duminică. Atinge numele pentru a vedea zilele în stânga și exercițiile în dreapta; zilele de Odihnă afișează doar recuperarea. Fiecare exercițiu include serii, repetări, greutate, RPE și pauză.",
+    "help.workout.plans.body": "Crearea planurilor afișează zilele orizontal sub nume. Alege o zi și adaugă exerciții cu categorie, serii, repetări, greutate, RPE și pauză. Poți elimina exercițiile adăugate din greșeală. Rotița mouse-ului derulează editorul pe desktop.",
     "help.workout.active": "Plan activ și odihnă",
     "help.workout.active.body": "Planul activ rămâne selectat până când îl schimbi. Dacă într-o zi nu există exerciții alocate, este Odihnă programată și nu reduce seria inteligentă.",
     "help.workout.import": "Importă și exportă",
@@ -810,7 +828,7 @@
     "help.body.measure": "Măsurătoare nouă",
     "help.body.measure.body": "Salvează greutatea și circumferințele cu o dată. Pentru trenduri contează mai mult să măsori consecvent în același punct și condiții similare decât precizia la milimetru.",
     "help.body.avatar": "Avatar corporal",
-    "help.body.avatar.body": "Bărbat și Femeie folosesc grafica SVG originală fără deformări. Pentru a evita problemele de cache SVG în Safari/iPhone, Thalys reconstruiește direct traseele avatarului când se schimbă sexul, astfel încât alegerea din profil actualizează imediat Corp și Home.",
+    "help.body.avatar.body": "Thalys încarcă male.svg sau female.svg direct din repository. Actualizare date forțează reîncărcarea fără cache, salvează din nou sexul și redesenează Corp și Home.",
     "help.body.photos": "Fotografii progres",
     "help.body.photos.body": "Fotografiile sunt stocate separat de datele numerice și pot fi filtrate după dată sau an. Păstrează poziția și lumina similare pentru comparații vizuale mai coerente.",
     "help.analytics.title": "Grafice",
@@ -969,7 +987,7 @@
     "help.nutrition.charts": "Grafice macro și micro",
     "help.nutrition.charts.body": "Cele două diagrame inel separă macro și micronutrienții. Zilnic, 7 zile și Lunar înmulțesc țintele cu numărul de zile. Atinge un sector sau legenda pentru nutrient, valoare și țintă.",
     "help.analytics.strength": "Forță contextualizată",
-    "help.analytics.strength.body": "Forță/Volum folosește antrenamente finalizate. Selectează planul activ în perioadă și același exercițiu pentru a compara greutatea maximă și volumul în timp.",
+    "help.analytics.strength.body": "Graficul afișează doar progresia greutății ridicate pentru un exercițiu. Numele sunt comparate fără diferențiere între litere mari și mici.",
     "help.settings.drive_creation": "Crearea în Drive",
     "help.settings.drive_creation.body": "La primul acces Thalys întreabă o singură dată pentru a crea structura și toate bazele. Apoi verifică automat fișierele lipsă, le recreează și afișează o singură notificare."
   }
