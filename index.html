@@ -1743,6 +1743,16 @@
       #help-tree-content{height:21rem;max-height:21rem}
     }
 
+    .consult-choice{min-height:44px;border:1px solid rgba(71,85,105,.8);background:rgba(15,23,42,.72);border-radius:14px;padding:.65rem .7rem;display:flex;align-items:center;justify-content:flex-start;gap:.55rem;color:#cbd5e1;font-size:10px;font-weight:800;position:relative;z-index:2;touch-action:manipulation}
+    .consult-choice.active{border-color:rgba(103,232,249,.5);background:rgba(6,182,212,.12);color:#cffafe;box-shadow:inset 0 0 0 1px rgba(103,232,249,.08)}
+    .consult-filter-chip{min-height:34px;border:1px solid rgba(71,85,105,.75);background:rgba(15,23,42,.72);border-radius:999px;padding:.35rem .65rem;color:#94a3b8;font-size:9px;font-weight:800;touch-action:manipulation}
+    .consult-filter-chip.active{border-color:rgba(103,232,249,.45);background:rgba(6,182,212,.13);color:#a5f3fc}
+    #tab-consult select,#tab-consult input,#tab-consult textarea{position:relative;z-index:2}
+    .food-db-shell{height:min(92dvh,860px)}
+    .food-ai-form:not(.hidden){flex:0 0 auto;min-height:min(48dvh,450px);max-height:min(56dvh,520px)}
+    .food-db-list{min-height:120px;max-height:190px}
+    @media(max-height:740px){.food-ai-form:not(.hidden){min-height:43dvh;max-height:50dvh}.food-db-list{min-height:100px;max-height:145px}}
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2478,6 +2488,7 @@
           <div class="grid grid-cols-2 gap-3">
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-cyan-300">Calcio</span><span class="text-slate-400"><span id="summary-calcium">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-calcium" class="h-full bg-cyan-500" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-calcium">1000</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-emerald-300">Magnesio</span><span class="text-slate-400"><span id="summary-magnesium">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-magnesium" class="h-full bg-emerald-500" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-magnesium">350</span>mg</div></div>
+            <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-teal-300">Zinco</span><span class="text-slate-400"><span id="summary-zinc">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-zinc" class="h-full bg-teal-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-zinc">11</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-orange-300">Ferro</span><span class="text-slate-400"><span id="summary-iron">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-iron" class="h-full bg-orange-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-iron">11</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-lime-300">Potassio</span><span class="text-slate-400"><span id="summary-potassium">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-potassium" class="h-full bg-lime-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-potassium">3500</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-fuchsia-300">Sale</span><span class="text-slate-400"><span id="summary-salt">0</span>g</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-salt" class="h-full bg-fuchsia-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Max: <span id="target-salt">5</span>g</div></div>
@@ -2498,23 +2509,26 @@
       </div>
 
       <!-- Water Tracker Card -->
-      <div class="bg-darkcard border border-darkborder rounded-2xl p-4 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
-            <i class="fa-solid fa-glass-water"></i>
+      <div class="bg-darkcard border border-darkborder rounded-2xl p-4">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+              <i class="fa-solid fa-glass-water"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Acqua Bevuta</div>
+              <div class="text-[9px] text-slate-500">Target giornaliero <span id="water-target-display">2500</span> ml</div>
+            </div>
           </div>
-          <div>
-            <div class="text-xs text-slate-400">Acqua Bevuta</div>
-            <div class="text-lg font-bold text-white flex items-baseline gap-1"><span id="water-amount">0</span><span class="text-xs text-slate-400">ml</span><span class="text-xs text-slate-500">/ <span id="water-target-display">2500</span> ml</span></div>
-          </div>
+          <button type="button" onclick="openWaterTargetModal()" class="h-9 px-3 rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-300 text-[10px] font-bold">Target</button>
         </div>
-        <div class="flex items-center space-x-2">
-          <button type="button" onclick="openWaterTargetModal()" class="h-9 px-3 rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-300 text-[10px] font-bold flex items-center justify-center">Target</button>
-          <button onclick="addWater(-250)" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm">-</button>
-          <button onclick="addWater(250)" class="h-9 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center space-x-1 shadow-md">
-            <i class="fa-solid fa-plus text-xs"></i>
-            <span>250 ml</span>
-          </button>
+        <div class="mt-4 text-center">
+          <div class="text-3xl font-black text-blue-200"><span id="water-amount">0</span><span class="ml-1 text-sm font-bold text-slate-400">ml</span></div>
+          <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-900"><div id="water-progress-bar" class="h-full rounded-full bg-blue-500 transition-all" style="width:0%"></div></div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2">
+          <button type="button" onclick="addWater(-250)" class="min-h-11 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs"><i class="fa-solid fa-minus mr-1"></i>250 ml</button>
+          <button type="button" onclick="addWater(250)" class="min-h-11 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-md"><i class="fa-solid fa-plus mr-1"></i>250 ml</button>
         </div>
       </div>
 
@@ -2629,7 +2643,8 @@
             <g id="avatar-height-group">
               <!-- Artwork intero: nessun taglio o deformazione tra parti del corpo. -->
               <g id="avatar-artwork-whole">
-                <use id="avatar-source-whole" class="avatar-source-use" href="#avatar-male-art"/>
+                <use id="avatar-source-male" class="avatar-source-use" href="#avatar-male-art" xlink:href="#avatar-male-art"/>
+                <use id="avatar-source-female" class="avatar-source-use" href="#avatar-female-art" xlink:href="#avatar-female-art" style="display:none"/>
               </g>
               <g id="avatar-measures-overlay" class="avatar-art-measures"></g>
             </g>
@@ -2868,24 +2883,24 @@
           <i class="fa-solid fa-camera-retro text-cyan-300"></i>
         </div>
 
-        <div class="mt-4 grid grid-cols-2 gap-2">
-          <label class="text-[9px] text-slate-400">Tipo di quadro
-            <select id="consult-snapshot-type" onchange="updateConsultUI()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2.5 py-2 text-xs text-white">
-              <option value="physical">Fisico</option>
-              <option value="nutrition">Alimentazione</option>
-              <option value="workout">Allenamenti</option>
-              <option value="full">Completo</option>
-            </select>
-          </label>
-          <label class="text-[9px] text-slate-400">Periodo
-            <select id="consult-period" onchange="updateConsultPeriodUI()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2.5 py-2 text-xs text-white">
-              <option value="7">Ultimi 7 giorni</option>
-              <option value="30" selected>Ultimi 30 giorni</option>
-              <option value="90">Ultimi 90 giorni</option>
-              <option value="custom">Personalizzato</option>
-            </select>
-          </label>
+        <div class="mt-4">
+          <div class="text-[9px] text-slate-400">Tipo di quadro</div>
+          <input id="consult-snapshot-type" type="hidden" value="physical">
+          <div id="consult-snapshot-type-buttons" class="mt-1 grid grid-cols-2 gap-2">
+            <button type="button" data-consult-snapshot="physical" onclick="setConsultSnapshotType('physical')" class="consult-choice active"><i class="fa-solid fa-person"></i><span>Fisico</span></button>
+            <button type="button" data-consult-snapshot="nutrition" onclick="setConsultSnapshotType('nutrition')" class="consult-choice"><i class="fa-solid fa-utensils"></i><span>Alimentazione</span></button>
+            <button type="button" data-consult-snapshot="workout" onclick="setConsultSnapshotType('workout')" class="consult-choice"><i class="fa-solid fa-dumbbell"></i><span>Allenamenti</span></button>
+            <button type="button" data-consult-snapshot="full" onclick="setConsultSnapshotType('full')" class="consult-choice"><i class="fa-solid fa-layer-group"></i><span>Completo</span></button>
+          </div>
         </div>
+        <label class="mt-3 block text-[9px] text-slate-400">Periodo
+          <select id="consult-period" onchange="updateConsultPeriodUI()" class="relative z-10 mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2.5 py-2 text-xs text-white">
+            <option value="7">Ultimi 7 giorni</option>
+            <option value="30" selected>Ultimi 30 giorni</option>
+            <option value="90">Ultimi 90 giorni</option>
+            <option value="custom">Personalizzato</option>
+          </select>
+        </label>
 
         <div id="consult-custom-period" class="mt-2 hidden grid grid-cols-2 gap-2">
           <label class="text-[9px] text-slate-400">Da
@@ -2909,7 +2924,7 @@
         </label>
         <input id="consult-goal-custom" type="text" class="mt-2 hidden w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white" placeholder="Scrivi il tuo obiettivo">
 
-        <button onclick="createConsultSnapshot()" class="mt-4 w-full min-h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 text-xs font-black text-slate-950 shadow-lg">
+        <button type="button" onclick="createConsultSnapshot(event)" class="mt-4 w-full min-h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 text-xs font-black text-slate-950 shadow-lg">
           <i class="fa-solid fa-floppy-disk mr-1"></i> Salva quadro
         </button>
       </div>
@@ -2920,12 +2935,17 @@
           <div><div class="text-[9px] uppercase tracking-[.18em] text-slate-500">02 · Archivio</div><h3 class="mt-1 text-sm font-black text-white">Quadri salvati</h3></div>
           <button onclick="toggleConsultSnapshotSelection()" id="consult-snapshot-select-btn" class="min-h-9 rounded-xl bg-slate-800 px-3 text-[9px] font-bold text-cyan-300">Seleziona</button>
         </div>
-        <div class="mt-3 grid grid-cols-2 gap-2">
-          <select id="consult-filter-type" onchange="renderConsultations()" class="rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
-            <option value="all">Tutti i tipi</option><option value="physical">Fisico</option><option value="nutrition">Alimentazione</option><option value="workout">Allenamenti</option><option value="full">Completo</option>
-          </select>
-          <input id="consult-filter-month" type="month" onchange="renderConsultations()" class="rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
+        <input id="consult-filter-type" type="hidden" value="all">
+        <div id="consult-filter-type-buttons" class="mt-3 flex flex-wrap gap-1.5">
+          <button type="button" data-consult-filter="all" onclick="setConsultFilterType('all')" class="consult-filter-chip active">Tutti</button>
+          <button type="button" data-consult-filter="physical" onclick="setConsultFilterType('physical')" class="consult-filter-chip">Fisico</button>
+          <button type="button" data-consult-filter="nutrition" onclick="setConsultFilterType('nutrition')" class="consult-filter-chip">Alimentazione</button>
+          <button type="button" data-consult-filter="workout" onclick="setConsultFilterType('workout')" class="consult-filter-chip">Allenamenti</button>
+          <button type="button" data-consult-filter="full" onclick="setConsultFilterType('full')" class="consult-filter-chip">Completo</button>
         </div>
+        <label class="mt-2 block text-[9px] text-slate-500">Mese
+          <input id="consult-filter-month" type="month" onchange="renderConsultationsStable()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
+        </label>
         <div class="mt-2 flex gap-2">
           <button onclick="clearConsultFilters()" class="min-h-8 rounded-lg bg-slate-900 px-2.5 text-[9px] font-bold text-slate-400">Azzera filtri</button>
           <button onclick="deleteSelectedConsultSnapshots()" id="consult-snapshot-delete-btn" class="hidden min-h-8 rounded-lg bg-rose-600/80 px-2.5 text-[9px] font-bold text-white">Elimina selezionati</button>
@@ -2944,14 +2964,16 @@
           <i class="fa-solid fa-wand-magic-sparkles text-violet-300"></i>
         </div>
 
-        <label class="mt-3 block text-[9px] text-slate-400">Tipo di richiesta
-          <select id="consult-ai-type" onchange="updateConsultAIUI()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white">
-            <option value="nutrition">Alimentazione</option>
-            <option value="workout">Allenamenti</option>
-            <option value="full">Quadro completo</option>
-            <option value="food">Dati alimento</option>
-          </select>
-        </label>
+        <div class="mt-3">
+          <div class="text-[9px] text-slate-400">Tipo di richiesta</div>
+          <input id="consult-ai-type" type="hidden" value="nutrition">
+          <div id="consult-ai-type-buttons" class="mt-1 grid grid-cols-2 gap-2">
+            <button type="button" data-consult-ai="nutrition" onclick="setConsultAIType('nutrition')" class="consult-choice active"><i class="fa-solid fa-utensils"></i><span>Alimentazione</span></button>
+            <button type="button" data-consult-ai="workout" onclick="setConsultAIType('workout')" class="consult-choice"><i class="fa-solid fa-dumbbell"></i><span>Allenamenti</span></button>
+            <button type="button" data-consult-ai="full" onclick="setConsultAIType('full')" class="consult-choice"><i class="fa-solid fa-layer-group"></i><span>Quadro completo</span></button>
+            <button type="button" data-consult-ai="food" onclick="setConsultAIType('food')" class="consult-choice"><i class="fa-solid fa-apple-whole"></i><span>Dati alimento</span></button>
+          </div>
+        </div>
 
         <div id="consult-ai-snapshot-wrap" class="mt-2">
           <label class="block text-[9px] text-slate-400">Quadro da analizzare
@@ -3387,6 +3409,10 @@
               <input type="number" id="food-magnesium" oninput="updateFoodDosePreview()" step="1" value="0" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
             </div>
             <div>
+              <label class="text-[10px] text-teal-300 block mb-1">Zinco (mg)</label>
+              <input type="number" id="food-zinc" oninput="updateFoodDosePreview()" step="0.01" value="0" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
+            </div>
+            <div>
               <label class="text-[10px] text-amber-300 block mb-1">Fibre (g)</label>
               <input type="number" id="food-fiber" step="0.1" value="0" oninput="updateFoodDosePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
             </div>
@@ -3479,7 +3505,7 @@
 
   <!-- MODAL: FOOD PRESET DATABASE -->
   <div id="food-preset-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
-    <div class="bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-md space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="food-db-shell bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-md space-y-3 shadow-2xl max-h-[92dvh] flex flex-col">
       <div class="flex justify-between items-center pb-2 border-b border-slate-800">
         <h3 class="text-base font-bold text-white flex items-center space-x-2">
           <i class="fa-solid fa-book-bookmark text-amber-400"></i>
@@ -3498,7 +3524,7 @@
       </div>
 
       <!-- Add New Preset Form -->
-      <form id="food-preset-form" onsubmit="saveFoodPreset(event)" class="hidden bg-slate-900/60 p-3 rounded-xl border border-slate-800 space-y-2 max-h-[52dvh] overflow-y-auto">
+      <form id="food-preset-form" onsubmit="saveFoodPreset(event)" class="food-ai-form hidden bg-slate-900/60 p-3 rounded-xl border border-violet-500/15 space-y-2 overflow-y-auto">
         <span class="text-xs font-bold text-amber-400 block">Crea Nuovo Preset Alimento</span>
         <div class="flex items-center gap-2">
           <input type="text" id="preset-name" required placeholder="Nome Alimento (es. Fiocchi d'Avena)" class="min-w-0 flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
@@ -3514,6 +3540,7 @@
           <input type="number" id="preset-sugars" step="0.1" placeholder="Zuccheri/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
           <input type="number" id="preset-calcium" step="1" placeholder="Calcio mg/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
           <input type="number" id="preset-magnesium" step="1" placeholder="Magnesio mg/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
+          <input type="number" id="preset-zinc" step="0.01" placeholder="Zinco mg/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
           <input type="number" id="preset-fiber" step="0.1" placeholder="Fibre/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
           <input type="number" id="preset-salt" step="0.01" placeholder="Sale g/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
           <input type="number" id="preset-iron" step="0.01" placeholder="Ferro mg/100g" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-white">
@@ -3525,7 +3552,7 @@
       </form>
 
       <!-- Preset List -->
-      <div id="presets-list" class="flex-1 overflow-y-auto space-y-2 pr-1">
+      <div id="presets-list" class="food-db-list flex-1 overflow-y-auto space-y-2 pr-1">
         <!-- Rendered dynamically -->
       </div>
     </div>
@@ -3586,6 +3613,10 @@
             <div>
               <label class="text-[10px] text-emerald-400 block mb-1">Magnesio</label>
               <input id="prop-magnesium" type="number" step="1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="text-[10px] text-teal-300 block mb-1">Zinco</label>
+              <input id="prop-zinc" type="number" step="0.01" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
             </div>
             <div>
               <label class="text-[10px] text-amber-300 block mb-1">Fibre</label>
@@ -3664,6 +3695,10 @@
             <input type="number" id="target-input-magnesium" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
           </div>
           <div>
+            <label class="text-[10px] text-teal-300 block mb-1">Zinco (mg)</label>
+            <input type="number" id="target-input-zinc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
+          </div>
+          <div>
             <label class="text-[10px] text-amber-300 block mb-1">Fibre (g)</label>
             <input type="number" id="target-input-fiber" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
           </div>
@@ -3707,6 +3742,7 @@
           <div class="space-y-2">
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-cyan-300">Calcio</b><p class="mt-1">Ossa e denti, contrazione muscolare e segnalazione cellulare.</p><p class="mt-2 text-[10px] text-slate-500"><b>Indicazione:</b> EFSA circa 950–1000 mg/die per molti adulti, a seconda dell'età. Il limite superiore può dipendere da età e fonte; evitare supplementazioni elevate senza indicazione professionale.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-emerald-300">Magnesio</b><p class="mt-1">Cofattore in centinaia di reazioni, funzione neuromuscolare ed energetica.</p><p class="mt-2 text-[10px] text-slate-500"><b>AI EFSA:</b> 350 mg/die uomini, 300 mg/die donne. I limiti per integratori non vanno confusi con il magnesio naturalmente presente negli alimenti.</p></div>
+            <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-teal-300">Zinco</b><p class="mt-1">Minerale coinvolto in numerosi processi cellulari, sintesi proteica e normale funzione immunitaria.</p><p class="mt-2 text-[10px] text-slate-500"><b>In Thalys:</b> target predefinito 11 mg/die, completamente modificabile. Il dato serve come riferimento alimentare e non identifica da solo una carenza.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-fuchsia-300">Sale</b><p class="mt-1">Fonte principale di sodio; un eccesso favorisce l'aumento della pressione arteriosa.</p><p class="mt-2 text-[10px] text-slate-500"><b>Massimo OMS:</b> &lt;5 g sale/die, equivalenti a &lt;2 g sodio/die. Non è un target da raggiungere.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-orange-300">Ferro</b><p class="mt-1">Emoglobina, trasporto dell'ossigeno e metabolismo energetico.</p><p class="mt-2 text-[10px] text-slate-500"><b>PRI EFSA:</b> ~11 mg/die per uomini adulti e donne post-menopausa; ~16 mg/die per donne pre-menopausa. <b>Livello sicuro EFSA:</b> 40 mg/die negli adulti; terapie per carenza vanno gestite medicalmente.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-lime-300">Potassio</b><p class="mt-1">Equilibrio dei fluidi, impulso nervoso e contrazione muscolare; aiuta a contrastare gli effetti di un eccesso di sodio sulla pressione.</p><p class="mt-2 text-[10px] text-slate-500"><b>Fabbisogno:</b> OMS ≥3510 mg/die; EFSA AI 3500 mg/die negli adulti. In patologie renali il target può dover essere individualizzato.</p></div>
@@ -4507,7 +4543,7 @@
       deletedMessageIds: [],
       consultations: [],
       aiConsults: [],
-      targets: { calories: 2200, p: 150, c: 250, f: 70, satFat: 20, sugars: 50, calcium: 1000, magnesium: 350, fiber: 30, salt: 5, iron: 11, potassium: 3500 },
+      targets: { calories: 2200, p: 150, c: 250, f: 70, satFat: 20, sugars: 50, calcium: 1000, magnesium: 350, zinc: 11, fiber: 30, salt: 5, iron: 11, potassium: 3500 },
       workouts: [], // [{ id, date, name, category, rpe, recovery, sets: [{weight, reps}] }]
       nutrition: [], // consumed-dose values; vitamins are code strings (e.g. B1 B12 C / A D E K)
       water: {}, // { "YYYY-MM-DD": 1500 }
@@ -4720,7 +4756,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:4,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:5,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4742,7 +4778,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=4`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=5`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4753,7 +4789,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v4`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v5`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4762,7 +4798,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v4`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v5`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4773,7 +4809,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v4`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v5`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -4956,6 +4992,27 @@
       if(v==='custom')return document.getElementById('consult-goal-custom')?.value.trim()||tr('Obiettivo personalizzato');
       return select?.options?.[select.selectedIndex]?.textContent||v;
     }
+    function setConsultSnapshotType(value){
+      const input=document.getElementById('consult-snapshot-type');if(input)input.value=value;
+      document.querySelectorAll('[data-consult-snapshot]').forEach(b=>b.classList.toggle('active',b.dataset.consultSnapshot===value));
+      updateConsultUI();
+    }
+    function setConsultAIType(value){
+      const input=document.getElementById('consult-ai-type');if(input)input.value=value;
+      document.querySelectorAll('[data-consult-ai]').forEach(b=>b.classList.toggle('active',b.dataset.consultAi===value));
+      updateConsultAIUI();
+    }
+    function setConsultFilterType(value){
+      const input=document.getElementById('consult-filter-type');if(input)input.value=value;
+      document.querySelectorAll('[data-consult-filter]').forEach(b=>b.classList.toggle('active',b.dataset.consultFilter===value));
+      renderConsultationsStable();
+    }
+    function renderConsultationsStable(){
+      const main=document.querySelector('main');
+      const top=main?.scrollTop||0;
+      renderConsultations();
+      requestAnimationFrame(()=>{if(main)main.scrollTop=top;});
+    }
     function updateConsultPeriodUI(){
       const custom=document.getElementById('consult-period')?.value==='custom';
       document.getElementById('consult-custom-period')?.classList.toggle('hidden',!custom);
@@ -4976,11 +5033,11 @@
       const tracked=Object.keys(byDay);
       const dayTotals=tracked.map(date=>{
         const xs=byDay[date];
-        return {date,kcal:xs.reduce((s,x)=>s+Number(x.kcal||0),0),p:xs.reduce((s,x)=>s+Number(x.p||0),0),c:xs.reduce((s,x)=>s+Number(x.c||0),0),f:xs.reduce((s,x)=>s+Number(x.f||0),0),satFat:xs.reduce((s,x)=>s+Number(x.satFat||0),0),sugars:xs.reduce((s,x)=>s+Number(x.sugars||0),0),fiber:xs.reduce((s,x)=>s+Number(x.fiber||0),0),calcium:xs.reduce((s,x)=>s+Number(x.calcium||0),0),magnesium:xs.reduce((s,x)=>s+Number(x.magnesium||0),0),iron:xs.reduce((s,x)=>s+Number(x.iron||0),0),potassium:xs.reduce((s,x)=>s+Number(x.potassium||0),0),salt:xs.reduce((s,x)=>s+Number(x.salt||0),0)};
+        return {date,kcal:xs.reduce((s,x)=>s+Number(x.kcal||0),0),p:xs.reduce((s,x)=>s+Number(x.p||0),0),c:xs.reduce((s,x)=>s+Number(x.c||0),0),f:xs.reduce((s,x)=>s+Number(x.f||0),0),satFat:xs.reduce((s,x)=>s+Number(x.satFat||0),0),sugars:xs.reduce((s,x)=>s+Number(x.sugars||0),0),fiber:xs.reduce((s,x)=>s+Number(x.fiber||0),0),calcium:xs.reduce((s,x)=>s+Number(x.calcium||0),0),magnesium:xs.reduce((s,x)=>s+Number(x.magnesium||0),0),zinc:xs.reduce((s,x)=>s+Number(x.zinc||0),0),iron:xs.reduce((s,x)=>s+Number(x.iron||0),0),potassium:xs.reduce((s,x)=>s+Number(x.potassium||0),0),salt:xs.reduce((s,x)=>s+Number(x.salt||0),0)};
       });
       return {
         trackedDays:tracked.length,
-        averages:{kcal:avg(dayTotals,'kcal'),protein:avg(dayTotals,'p'),carbs:avg(dayTotals,'c'),fat:avg(dayTotals,'f'),satFat:avg(dayTotals,'satFat'),sugars:avg(dayTotals,'sugars'),fiber:avg(dayTotals,'fiber'),calcium:avg(dayTotals,'calcium'),magnesium:avg(dayTotals,'magnesium'),iron:avg(dayTotals,'iron'),potassium:avg(dayTotals,'potassium'),salt:avg(dayTotals,'salt')},
+        averages:{kcal:avg(dayTotals,'kcal'),protein:avg(dayTotals,'p'),carbs:avg(dayTotals,'c'),fat:avg(dayTotals,'f'),satFat:avg(dayTotals,'satFat'),sugars:avg(dayTotals,'sugars'),fiber:avg(dayTotals,'fiber'),calcium:avg(dayTotals,'calcium'),magnesium:avg(dayTotals,'magnesium'),zinc:avg(dayTotals,'zinc'),iron:avg(dayTotals,'iron'),potassium:avg(dayTotals,'potassium'),salt:avg(dayTotals,'salt')},
         averageWaterMl:dates.length?Math.round(dates.reduce((s,d)=>s+Number(water[d]||0),0)/dates.length):0,
         dayTotals
       };
@@ -5025,7 +5082,8 @@
       if(type==='full')snapshot.mind={sessions:meditation,totalMinutes:meditation.reduce((s,x)=>s+Number(x.minutes||0),0)};
       return snapshot;
     }
-    function createConsultSnapshot(){
+    function createConsultSnapshot(ev){
+      ev?.preventDefault?.();ev?.stopPropagation?.();
       const type=document.getElementById('consult-snapshot-type')?.value||'full',range=dateRangeForConsult(),goal=consultGoal();
       if(!goal){showToast(tr('Inserisci un obiettivo'),'fa-circle-exclamation');return;}
       const record={id:'consult_'+Date.now(),date:currentLocalDateStr(),createdAt:new Date().toISOString(),type,goal,period:range,snapshot:buildConsultSnapshot(type,range.from,range.to)};
@@ -5064,7 +5122,7 @@
     function toggleConsultSnapshotSelection(){consultSnapshotSelectionMode=!consultSnapshotSelectionMode;selectedConsultSnapshotIds.clear();document.getElementById('consult-snapshot-delete-btn')?.classList.toggle('hidden',!consultSnapshotSelectionMode);renderConsultations();}
     function toggleConsultSnapshot(id,on){on?selectedConsultSnapshotIds.add(id):selectedConsultSnapshotIds.delete(id)}
     function deleteSelectedConsultSnapshots(){appState.consultations=(appState.consultations||[]).filter(x=>!selectedConsultSnapshotIds.has(x.id));selectedConsultSnapshotIds.clear();consultSnapshotSelectionMode=false;saveStateToLocal();document.getElementById('consult-snapshot-delete-btn')?.classList.add('hidden');renderConsultations();refreshConsultSelectors();}
-    function clearConsultFilters(){const t=document.getElementById('consult-filter-type'),m=document.getElementById('consult-filter-month');if(t)t.value='all';if(m)m.value='';renderConsultations();}
+    function clearConsultFilters(){const t=document.getElementById('consult-filter-type'),m=document.getElementById('consult-filter-month');if(t)t.value='all';if(m)m.value='';document.querySelectorAll('[data-consult-filter]').forEach(b=>b.classList.toggle('active',b.dataset.consultFilter==='all'));renderConsultationsStable();}
 
     function refreshConsultSelectors(){
       const snap=document.getElementById('consult-ai-snapshot'),plan=document.getElementById('consult-ai-plan');if(snap){
@@ -5206,7 +5264,7 @@
       finally{if(btn)btn.disabled=false}
     }
     function fillFoodPresetFromAI(d){
-      const map={kcal:'preset-kcal',p:'preset-p',c:'preset-c',f:'preset-f',satFat:'preset-sat-fat',sugars:'preset-sugars',calcium:'preset-calcium',magnesium:'preset-magnesium',fiber:'preset-fiber',salt:'preset-salt',iron:'preset-iron',potassium:'preset-potassium',vitaminsId:'preset-vitamins-id',vitaminsLip:'preset-vitamins-lip'};
+      const map={kcal:'preset-kcal',p:'preset-p',c:'preset-c',f:'preset-f',satFat:'preset-sat-fat',sugars:'preset-sugars',calcium:'preset-calcium',magnesium:'preset-magnesium',zinc:'preset-zinc',fiber:'preset-fiber',salt:'preset-salt',iron:'preset-iron',potassium:'preset-potassium',vitaminsId:'preset-vitamins-id',vitaminsLip:'preset-vitamins-lip'};
       Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id),v=d[k];if(el&&v!==null&&v!==undefined&&v!=='')el.value=Array.isArray(v)?v.join(' '):v;});
     }
 
@@ -5883,13 +5941,13 @@ if(c)c.innerHTML='';
       const base = id => parseFloat(document.getElementById(id)?.value) || 0;
       const p = base('food-p') * ratio, c = base('food-c') * ratio, f = base('food-f') * ratio;
       const satFat = base('food-sat-fat') * ratio, sugars = base('food-sugars') * ratio;
-      const calcium = base('food-calcium') * ratio, magnesium = base('food-magnesium') * ratio;
+      const calcium = base('food-calcium') * ratio, magnesium = base('food-magnesium') * ratio, zinc = base('food-zinc') * ratio;
       const fiber = base('food-fiber') * ratio, salt = base('food-salt') * ratio;
       const iron = base('food-iron') * ratio, potassium = base('food-potassium') * ratio;
       const vitaminsId = normalizeVitaminCodes(document.getElementById('food-vitamins-id')?.value,'id');
       const vitaminsLip = normalizeVitaminCodes(document.getElementById('food-vitamins-lip')?.value,'lip');
       const baseKcal=base('food-kcal'); const kcal=baseKcal>0?Math.round(baseKcal*ratio):Math.round((p*4)+(c*4)+(f*9));
-      const newLog={id:'food_'+Date.now(),date,name,meal,grams,p,c,f,satFat,sugars,calcium,magnesium,fiber,salt,iron,potassium,vitaminsId,vitaminsLip,kcal};
+      const newLog={id:'food_'+Date.now(),date,name,meal,grams,p,c,f,satFat,sugars,calcium,magnesium,zinc,fiber,salt,iron,potassium,vitaminsId,vitaminsLip,kcal};
       appState.nutrition.push(newLog); saveStateToLocal(); closeModal('add-food-modal'); document.getElementById('add-food-form').reset();
       const gramsEl=document.getElementById('food-grams');if(gramsEl)gramsEl.value=100; updateFoodDosePreview(); renderNutrition(); updateAnalyticsCharts(); showToast('Alimento salvato ✓','fa-circle-check');
     }
@@ -5952,6 +6010,7 @@ if(c)c.innerHTML='';
           sugars: items.reduce((sum, item) => sum + (Number(item.sugars) || 0), 0),
           calcium: items.reduce((sum, item) => sum + (Number(item.calcium) || 0), 0),
           magnesium: items.reduce((sum, item) => sum + (Number(item.magnesium) || 0), 0),
+          zinc: items.reduce((sum, item) => sum + (Number(item.zinc) || 0), 0),
           fiber: items.reduce((sum, item) => sum + (Number(item.fiber) || 0), 0),
           salt: items.reduce((sum, item) => sum + (Number(item.salt) || 0), 0),
           iron: items.reduce((sum, item) => sum + (Number(item.iron) || 0), 0),
@@ -5983,8 +6042,11 @@ if(c)c.innerHTML='';
         if (day.calcium < (target.calcium || 1000) * 0.8) missing.push('calcio');
         checks.push(day.calcium >= (target.calcium || 1000) * 0.8 ? 1 : 0);
 
-        if (day.magnesium < (target.magnesium || 400) * 0.8) missing.push('magnesio');
-        checks.push(day.magnesium >= (target.magnesium || 400) * 0.8 ? 1 : 0);
+        if (day.magnesium < (target.magnesium || 350) * 0.8) missing.push('magnesio');
+        checks.push(day.magnesium >= (target.magnesium || 350) * 0.8 ? 1 : 0);
+
+        if (day.zinc < (target.zinc || 11) * 0.8) missing.push('zinco');
+        checks.push(day.zinc >= (target.zinc || 11) * 0.8 ? 1 : 0);
 
         if (day.fiber < (target.fiber || 30) * 0.8) missing.push('fibre');
         checks.push(day.fiber >= (target.fiber || 30) * 0.8 ? 1 : 0);
@@ -6009,6 +6071,7 @@ if(c)c.innerHTML='';
           zuccheri: 'zuccheri',
           calcio: 'calcio',
           magnesio: 'magnesio',
+          zinco: 'zinco',
           fibre: 'fibre'
         }[label] || label))
       };
@@ -6642,17 +6705,17 @@ if(c)c.innerHTML='';
       const dayLogs = appState.nutrition.filter(n => n.date === selectedDate);
       const waterVal = appState.water[selectedDate] || 0;
       document.getElementById('water-amount').textContent = waterVal;
-      const waterTargetEl=document.getElementById('water-target-display'); if(waterTargetEl) waterTargetEl.textContent=getWaterTarget(selectedDate);
+      const waterTarget=getWaterTarget(selectedDate);const waterTargetEl=document.getElementById('water-target-display'); if(waterTargetEl) waterTargetEl.textContent=waterTarget;const waterBar=document.getElementById('water-progress-bar');if(waterBar)waterBar.style.width=`${Math.min(100,waterTarget>0?(waterVal/waterTarget)*100:0)}%`;
       const latestWeight=(appState.bodyMetrics||[]).filter(x=>x.date<=selectedDate&&Number(x.weight)>0).sort((a,b)=>new Date(b.date)-new Date(a.date))[0]?.weight || appState.profile?.weight || 70;
       const smartProtein=Math.round(latestWeight*1.6), smartWater=getWaterTarget(selectedDate);
       const smart=document.getElementById('nutrition-smart-targets'); if(smart) smart.innerHTML=`<div class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i><span class="text-xs font-bold text-white">Target pratici stimati</span><span class="text-[9px] text-slate-500">peso ${latestWeight} kg</span></div><div class="mt-2 grid grid-cols-2 gap-2 text-[10px]"><div class="rounded-xl bg-slate-900/60 p-2"><span class="text-slate-500">Proteine</span><div class="font-black text-emerald-300">~${smartProtein} g/die</div><div class="text-[8px] text-slate-500">1,6 g/kg · allenamento di forza</div></div><div class="rounded-xl bg-slate-900/60 p-2"><span class="text-slate-500">Acqua</span><div class="font-black text-blue-300">~${smartWater} ml/die</div><div class="text-[8px] text-slate-500">target impostato · modificabile</div></div></div>`;
 
-      let totalKcal=0,totalP=0,totalC=0,totalF=0,totalSatFat=0,totalSugars=0,totalCalcium=0,totalMagnesium=0,totalFiber=0,totalSalt=0,totalIron=0,totalPotassium=0;
-      dayLogs.forEach(l=>{totalKcal+=Number(l.kcal||0);totalP+=Number(l.p||0);totalC+=Number(l.c||0);totalF+=Number(l.f||0);totalSatFat+=Number(l.satFat||0);totalSugars+=Number(l.sugars||0);totalCalcium+=Number(l.calcium||0);totalMagnesium+=Number(l.magnesium||0);totalFiber+=Number(l.fiber||0);totalSalt+=Number(l.salt||0);totalIron+=Number(l.iron||0);totalPotassium+=Number(l.potassium||0);});
+      let totalKcal=0,totalP=0,totalC=0,totalF=0,totalSatFat=0,totalSugars=0,totalCalcium=0,totalMagnesium=0,totalZinc=0,totalFiber=0,totalSalt=0,totalIron=0,totalPotassium=0;
+      dayLogs.forEach(l=>{totalKcal+=Number(l.kcal||0);totalP+=Number(l.p||0);totalC+=Number(l.c||0);totalF+=Number(l.f||0);totalSatFat+=Number(l.satFat||0);totalSugars+=Number(l.sugars||0);totalCalcium+=Number(l.calcium||0);totalMagnesium+=Number(l.magnesium||0);totalZinc+=Number(l.zinc||0);totalFiber+=Number(l.fiber||0);totalSalt+=Number(l.salt||0);totalIron+=Number(l.iron||0);totalPotassium+=Number(l.potassium||0);});
       const vitId=mergeVitaminCodes(dayLogs.map(x=>x.vitaminsId),'id'),vitLip=mergeVitaminCodes(dayLogs.map(x=>x.vitaminsLip),'lip');
       const setText=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-      setText('summary-calories',Math.round(totalKcal));setText('summary-p',Math.round(totalP));setText('summary-c',Math.round(totalC));setText('summary-f',Math.round(totalF));setText('summary-sat-fat',Number(totalSatFat.toFixed(1)));setText('summary-sugars',Number(totalSugars.toFixed(1)));setText('summary-calcium',Math.round(totalCalcium));setText('summary-magnesium',Math.round(totalMagnesium));setText('summary-fiber',Number(totalFiber.toFixed(1)));setText('summary-salt',Number(totalSalt.toFixed(2)));setText('summary-iron',Number(totalIron.toFixed(1)));setText('summary-potassium',Math.round(totalPotassium));setText('summary-vitamins-id',vitId||'—');setText('summary-vitamins-lip',vitLip||'—');
-      const target=appState.targets||{};const items=[['bar-p',totalP,target.p||150],['bar-c',totalC,target.c||250],['bar-f',totalF,target.f||70],['bar-sat-fat',totalSatFat,target.satFat||20],['bar-sugars',totalSugars,target.sugars||50],['bar-fiber',totalFiber,target.fiber||30],['bar-calcium',totalCalcium,target.calcium||1000],['bar-magnesium',totalMagnesium,target.magnesium||350],['bar-iron',totalIron,target.iron||11],['bar-potassium',totalPotassium,target.potassium||3500],['bar-salt',totalSalt,target.salt||5]];items.forEach(([id,v,t])=>{const e=document.getElementById(id);if(e)e.style.width=`${Math.min(100,t>0?(v/t)*100:0)}%`;});
+      setText('summary-calories',Math.round(totalKcal));setText('summary-p',Math.round(totalP));setText('summary-c',Math.round(totalC));setText('summary-f',Math.round(totalF));setText('summary-sat-fat',Number(totalSatFat.toFixed(1)));setText('summary-sugars',Number(totalSugars.toFixed(1)));setText('summary-calcium',Math.round(totalCalcium));setText('summary-magnesium',Math.round(totalMagnesium));setText('summary-zinc',Number(totalZinc.toFixed(1)));setText('summary-fiber',Number(totalFiber.toFixed(1)));setText('summary-salt',Number(totalSalt.toFixed(2)));setText('summary-iron',Number(totalIron.toFixed(1)));setText('summary-potassium',Math.round(totalPotassium));setText('summary-vitamins-id',vitId||'—');setText('summary-vitamins-lip',vitLip||'—');
+      const target=appState.targets||{};const items=[['bar-p',totalP,target.p||150],['bar-c',totalC,target.c||250],['bar-f',totalF,target.f||70],['bar-sat-fat',totalSatFat,target.satFat||20],['bar-sugars',totalSugars,target.sugars||50],['bar-fiber',totalFiber,target.fiber||30],['bar-calcium',totalCalcium,target.calcium||1000],['bar-magnesium',totalMagnesium,target.magnesium||350],['bar-zinc',totalZinc,target.zinc||11],['bar-iron',totalIron,target.iron||11],['bar-potassium',totalPotassium,target.potassium||3500],['bar-salt',totalSalt,target.salt||5]];items.forEach(([id,v,t])=>{const e=document.getElementById(id);if(e)e.style.width=`${Math.min(100,t>0?(v/t)*100:0)}%`;});
 
       const weeklySummary = computeWeeklyNutritionSummary();
       const summaryCard = document.getElementById('nutrition-week-summary');
@@ -6733,12 +6796,12 @@ if(c)c.innerHTML='';
     // ----------------------------------------------------
     function normalizeFoodPreset(item){return {
       name:String(item?.name||'').trim(),kcal:Number(item?.kcal)||0,p:Number(item?.p)||0,c:Number(item?.c)||0,f:Number(item?.f)||0,
-      satFat:Number(item?.satFat ?? item?.saturatedFat)||0,sugars:Number(item?.sugars)||0,calcium:Number(item?.calcium)||0,magnesium:Number(item?.magnesium)||0,
+      satFat:Number(item?.satFat ?? item?.saturatedFat)||0,sugars:Number(item?.sugars)||0,calcium:Number(item?.calcium)||0,magnesium:Number(item?.magnesium)||0,zinc:Number(item?.zinc)||0,
       fiber:Number(item?.fiber)||0,salt:Number(item?.salt)||0,iron:Number(item?.iron)||0,potassium:Number(item?.potassium)||0,
       vitaminsId:normalizeVitaminCodes(item?.vitaminsId ?? item?.vitaminsID ?? '', 'id'),vitaminsLip:normalizeVitaminCodes(item?.vitaminsLip ?? '', 'lip')
     };}
     let editingFoodPresetIndex=null;
-    const PRESET_FIELD_MAP=[['preset-name','name'],['preset-kcal','kcal'],['preset-p','p'],['preset-c','c'],['preset-f','f'],['preset-sat-fat','satFat'],['preset-sugars','sugars'],['preset-calcium','calcium'],['preset-magnesium','magnesium'],['preset-fiber','fiber'],['preset-salt','salt'],['preset-iron','iron'],['preset-potassium','potassium'],['preset-vitamins-id','vitaminsId'],['preset-vitamins-lip','vitaminsLip']];
+    const PRESET_FIELD_MAP=[['preset-name','name'],['preset-kcal','kcal'],['preset-p','p'],['preset-c','c'],['preset-f','f'],['preset-sat-fat','satFat'],['preset-sugars','sugars'],['preset-calcium','calcium'],['preset-magnesium','magnesium'],['preset-zinc','zinc'],['preset-fiber','fiber'],['preset-salt','salt'],['preset-iron','iron'],['preset-potassium','potassium'],['preset-vitamins-id','vitaminsId'],['preset-vitamins-lip','vitaminsLip']];
     function toggleFoodPresetForm(force){
       const form=document.getElementById('food-preset-form'); if(!form)return;
       const show=typeof force==='boolean'?force:form.classList.contains('hidden');
@@ -6749,7 +6812,7 @@ if(c)c.innerHTML='';
     function editFoodPreset(index){const p=normalizeFoodPreset(appState.presets[index]);editingFoodPresetIndex=index;toggleFoodPresetForm(true);PRESET_FIELD_MAP.forEach(([id,key])=>{const e=document.getElementById(id);if(e)e.value=p[key]??'';});showToast('Modalità modifica attiva');}
     function applyPresetToForm(){
       const idx=document.getElementById('preset-select')?.value; if(idx===''||idx==null)return; const p=normalizeFoodPreset(appState.presets?.[Number(idx)]); if(!p.name)return;
-      const pairs=[['food-name','name'],['food-kcal','kcal'],['food-p','p'],['food-c','c'],['food-f','f'],['food-sat-fat','satFat'],['food-sugars','sugars'],['food-calcium','calcium'],['food-magnesium','magnesium'],['food-fiber','fiber'],['food-salt','salt'],['food-iron','iron'],['food-potassium','potassium'],['food-vitamins-id','vitaminsId'],['food-vitamins-lip','vitaminsLip']];
+      const pairs=[['food-name','name'],['food-kcal','kcal'],['food-p','p'],['food-c','c'],['food-f','f'],['food-sat-fat','satFat'],['food-sugars','sugars'],['food-calcium','calcium'],['food-magnesium','magnesium'],['food-zinc','zinc'],['food-fiber','fiber'],['food-salt','salt'],['food-iron','iron'],['food-potassium','potassium'],['food-vitamins-id','vitaminsId'],['food-vitamins-lip','vitaminsLip']];
       pairs.forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.value=p[key]??'';}); updateFoodDosePreview();
     }
     function recalcFoodMacros(){ applyPresetToForm(); }
@@ -6760,7 +6823,7 @@ if(c)c.innerHTML='';
     function deletePreset(index){if(!confirm(`Eliminare ${appState.presets[index]?.name||'questo alimento'}?`))return;appState.presets.splice(index,1);saveStateToLocal();renderPresets();}
     function renderPresets(){
       const list=document.getElementById('presets-list'),selectContainer=document.getElementById('preset-select-container'),select=document.getElementById('preset-select');if(!list||!select)return;list.innerHTML='';select.innerHTML='<option value="">-- Seleziona un Preset --</option>';selectContainer?.classList.toggle('hidden',!(appState.presets||[]).length);
-      (appState.presets||[]).forEach((raw,idx)=>{const p=normalizeFoodPreset(raw);appState.presets[idx]=p;const item=document.createElement('div');item.className='bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-xs';item.innerHTML=`<div class="flex justify-between gap-2"><div class="min-w-0"><div class="font-bold text-slate-200">${p.name}</div><div class="text-[10px] text-slate-400">${p.kcal} kcal · P ${p.p}g · C ${p.c}g · G ${p.f}g · Sat ${p.satFat}g · Zuc ${p.sugars}g</div><div class="text-[10px] text-slate-500">Fibre ${p.fiber}g · Sale ${p.salt}g · Ca ${p.calcium}mg · Mg ${p.magnesium}mg · Fe ${p.iron}mg · K ${p.potassium}mg</div><div class="text-[10px] text-slate-500">Vit ID ${p.vitaminsId||'—'} · Vit LIP ${p.vitaminsLip||'—'} / 100g</div></div><div class="flex gap-1"><button onclick="editFoodPreset(${idx})" class="text-cyan-400 p-2"><i class="fa-solid fa-pen"></i></button><button onclick="deletePreset(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash"></i></button></div></div>`;list.appendChild(item);const opt=document.createElement('option');opt.value=idx;opt.textContent=`${p.name} (${p.kcal} kcal/100g)`;select.appendChild(opt);});
+      (appState.presets||[]).forEach((raw,idx)=>{const p=normalizeFoodPreset(raw);appState.presets[idx]=p;const item=document.createElement('div');item.className='bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-xs';item.innerHTML=`<div class="flex justify-between gap-2"><div class="min-w-0"><div class="font-bold text-slate-200">${p.name}</div><div class="text-[10px] text-slate-400">${p.kcal} kcal · P ${p.p}g · C ${p.c}g · G ${p.f}g · Sat ${p.satFat}g · Zuc ${p.sugars}g</div><div class="text-[10px] text-slate-500">Fibre ${p.fiber}g · Sale ${p.salt}g · Ca ${p.calcium}mg · Mg ${p.magnesium}mg · Zn ${p.zinc}mg · Fe ${p.iron}mg · K ${p.potassium}mg</div><div class="text-[10px] text-slate-500">Vit ID ${p.vitaminsId||'—'} · Vit LIP ${p.vitaminsLip||'—'} / 100g</div></div><div class="flex gap-1"><button onclick="editFoodPreset(${idx})" class="text-cyan-400 p-2"><i class="fa-solid fa-pen"></i></button><button onclick="deletePreset(${idx})" class="text-red-400 p-2"><i class="fa-solid fa-trash"></i></button></div></div>`;list.appendChild(item);const opt=document.createElement('option');opt.value=idx;opt.textContent=`${p.name} (${p.kcal} kcal/100g)`;select.appendChild(opt);});
     }
 
     function saveTargets(e) {
@@ -6774,6 +6837,7 @@ if(c)c.innerHTML='';
         sugars: parseInt(document.getElementById('target-input-sugars').value) || 50,
         calcium: parseInt(document.getElementById('target-input-calcium').value) || 1000,
         magnesium: parseInt(document.getElementById('target-input-magnesium').value) || 350,
+        zinc: parseFloat(document.getElementById('target-input-zinc').value) || 11,
         fiber: parseInt(document.getElementById('target-input-fiber').value) || 30,
         salt: parseFloat(document.getElementById('target-input-salt').value) || 5,
         iron: parseFloat(document.getElementById('target-input-iron').value) || 11,
@@ -6797,6 +6861,7 @@ if(c)c.innerHTML='';
       document.getElementById('target-sugars').textContent = t.sugars || 50;
       document.getElementById('target-calcium').textContent = t.calcium || 1000;
       document.getElementById('target-magnesium').textContent = t.magnesium || 350;
+      document.getElementById('target-zinc').textContent = t.zinc || 11;
       document.getElementById('target-fiber').textContent = t.fiber || 30;
       document.getElementById('target-salt').textContent = t.salt || 5;
       document.getElementById('target-iron').textContent = t.iron || 11;
@@ -6810,6 +6875,7 @@ if(c)c.innerHTML='';
       document.getElementById('target-input-sugars').value = t.sugars || 50;
       document.getElementById('target-input-calcium').value = t.calcium || 1000;
       document.getElementById('target-input-magnesium').value = t.magnesium || 350;
+      document.getElementById('target-input-zinc').value = t.zinc || 11;
       document.getElementById('target-input-fiber').value = t.fiber || 30;
       document.getElementById('target-input-salt').value = t.salt || 5;
       document.getElementById('target-input-iron').value = t.iron || 11;
@@ -7025,24 +7091,20 @@ if(c)c.innerHTML='';
       }catch(_){return 0}
     }
     function avatarSetArtwork(genere){
-      const href = genere === 'femmina' ? '#avatar-female-art' : '#avatar-male-art';
-      const artwork = document.getElementById('avatar-source-whole');
-      if(artwork){
-        artwork.setAttribute('href', href);
-        artwork.setAttributeNS('http://www.w3.org/1999/xlink','href', href);
-      }
+      const female=genere==='femmina';
+      const maleUse=document.getElementById('avatar-source-male');
+      const femaleUse=document.getElementById('avatar-source-female');
+      if(maleUse)maleUse.style.display=female?'none':'inline';
+      if(femaleUse)femaleUse.style.display=female?'inline':'none';
 
-      document.getElementById('avatar-gender-male')?.classList.toggle('active', genere === 'maschio');
-      document.getElementById('avatar-gender-female')?.classList.toggle('active', genere === 'femmina');
+      document.getElementById('avatar-gender-male')?.classList.toggle('active', !female);
+      document.getElementById('avatar-gender-female')?.classList.toggle('active', female);
 
-      // Female artwork is intentionally slightly smaller to balance the two supplied illustrations.
       const artGroup=document.getElementById('avatar-artwork-whole');
       if(artGroup){
-        artGroup.setAttribute('transform',
-          genere==='femmina'
-            ? 'translate(349 72) scale(.91) translate(-384 0)'
-            : 'translate(-30 0)'
-        );
+        artGroup.setAttribute('transform',female
+          ? 'translate(349 72) scale(.91) translate(-384 0)'
+          : 'translate(-30 0)');
       }
     }
 
@@ -8071,10 +8133,11 @@ function openNutritionProposalModal(data, dataUrl) {
   const sugarsInput = document.getElementById('prop-sugars');
   const calciumInput = document.getElementById('prop-calcium');
   const magnesiumInput = document.getElementById('prop-magnesium');
+  const zincInput = document.getElementById('prop-zinc');
   const fiberInput = document.getElementById('prop-fiber');
   const saltInput=document.getElementById('prop-salt'),ironInput=document.getElementById('prop-iron'),potassiumInput=document.getElementById('prop-potassium'),vitIdInput=document.getElementById('prop-vitamins-id'),vitLipInput=document.getElementById('prop-vitamins-lip');
 
-  if (!sourceEl || !modal || !nameInput || !kcalInput || !pInput || !cInput || !fInput || !satFatInput || !sugarsInput || !calciumInput || !magnesiumInput || !fiberInput || !saltInput || !ironInput || !potassiumInput || !vitIdInput || !vitLipInput) {
+  if (!sourceEl || !modal || !nameInput || !kcalInput || !pInput || !cInput || !fInput || !satFatInput || !sugarsInput || !calciumInput || !magnesiumInput || !zincInput || !fiberInput || !saltInput || !ironInput || !potassiumInput || !vitIdInput || !vitLipInput) {
     showToast('Modulo proposta nutrizione non disponibile');
     return;
   }
@@ -8108,6 +8171,7 @@ function openNutritionProposalModal(data, dataUrl) {
   const mineralMg=(key)=>{const raw=Number(nutriments[`${key}_100g`] ?? nutriments[key] ?? 0);const unit=String(nutriments[`${key}_unit`] ?? nutriments[`${key}_100g_unit`] ?? 'g').toLowerCase();if(!raw)return 0;if(unit==='mg')return raw;if(unit==='µg'||unit==='ug')return raw/1000;return raw*1000;};
   const calciumValue = mineralMg('calcium');
   const magnesiumValue = mineralMg('magnesium');
+  const zincValue = mineralMg('zinc');
   const fiberValue = Number(nutriments['fiber_100g'] ?? nutriments['fibre_100g'] ?? nutriments['fiber'] ?? nutriments['fibre'] ?? 0);
   const saltValue=Number(nutriments['salt_100g'] ?? nutriments['salt'] ?? 0);
   const ironValue=mineralMg('iron');
@@ -8125,6 +8189,7 @@ function openNutritionProposalModal(data, dataUrl) {
   sugarsInput.value = sugarsValue ? Number(sugarsValue.toFixed(1)) : '';
   calciumInput.value = calciumValue ? Math.round(calciumValue) : '';
   magnesiumInput.value = magnesiumValue ? Math.round(magnesiumValue) : '';
+  zincInput.value = zincValue ? Number(zincValue.toFixed(2)) : '';
   fiberInput.value = fiberValue ? Number(fiberValue.toFixed(1)) : 0;
   saltInput.value=saltValue?Number(saltValue.toFixed(2)):0; ironInput.value=ironValue?Number(ironValue.toFixed(2)):0; potassiumInput.value=potassiumValue?Math.round(potassiumValue):0; vitIdInput.value=vitIdValue; vitLipInput.value=vitLipValue;
 
@@ -8142,6 +8207,7 @@ function saveRecognizedNutrition(e) {
   const sugars = parseFloat(document.getElementById('prop-sugars').value) || 0;
   const calcium = parseFloat(document.getElementById('prop-calcium').value) || 0;
   const magnesium = parseFloat(document.getElementById('prop-magnesium').value) || 0;
+  const zinc = parseFloat(document.getElementById('prop-zinc').value) || 0;
   const fiber = parseFloat(document.getElementById('prop-fiber').value) || 0;
   const salt=parseFloat(document.getElementById('prop-salt').value)||0, iron=parseFloat(document.getElementById('prop-iron').value)||0, potassium=parseFloat(document.getElementById('prop-potassium').value)||0;
   const vitaminsId=normalizeVitaminCodes(document.getElementById('prop-vitamins-id').value,'id'), vitaminsLip=normalizeVitaminCodes(document.getElementById('prop-vitamins-lip').value,'lip');
@@ -8161,9 +8227,10 @@ function saveRecognizedNutrition(e) {
     existing.sugars = sugars;
     existing.calcium = calcium;
     existing.magnesium = magnesium;
+    existing.zinc = zinc;
     existing.fiber = fiber; existing.salt=salt; existing.iron=iron; existing.potassium=potassium; existing.vitaminsId=vitaminsId; existing.vitaminsLip=vitaminsLip;
   } else {
-    appState.presets.push({ name, p, c, f, satFat, sugars, calcium, magnesium, fiber, salt, iron, potassium, vitaminsId, vitaminsLip, kcal, ts: new Date().toISOString() });
+    appState.presets.push({ name, p, c, f, satFat, sugars, calcium, magnesium, zinc, fiber, salt, iron, potassium, vitaminsId, vitaminsLip, kcal, ts: new Date().toISOString() });
   }
 
   persistFoodDatabase();
