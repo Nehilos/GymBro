@@ -9,15 +9,44 @@ function send(res, status, payload) {
 }
 
 async function validateGoogleUser(req) {
-  const token = req.headers["x-google-id-token"];
-  if (!token || typeof token !== "string") throw new Error("AUTH_REQUIRED");
-  const r = await fetch(
-    `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(token)}`
-  );
-  if (!r.ok) throw new Error("AUTH_INVALID");
-  const info = await r.json();
-  if (info.aud !== GOOGLE_CLIENT_ID) throw new Error("AUTH_INVALID_AUDIENCE");
-  return { sub: info.sub, email: info.email || null };
+  const accessToken = req.headers["x-google-access-token"];
+  const idToken = req.headers["x-google-id-token"];
+
+  if (accessToken && typeof accessToken === "string") {
+    const tokenInfoRes = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(accessToken)}`
+    );
+    if (!tokenInfoRes.ok) throw new Error("AUTH_INVALID");
+    const tokenInfo = await tokenInfoRes.json();
+
+    const tokenAudience =
+      tokenInfo.aud || tokenInfo.issued_to || tokenInfo.azp || tokenInfo.client_id || null;
+    if (tokenAudience && tokenAudience !== GOOGLE_CLIENT_ID)
+      throw new Error("AUTH_INVALID_AUDIENCE");
+
+    const profileRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!profileRes.ok) throw new Error("AUTH_INVALID");
+    const profile = await profileRes.json();
+
+    return {
+      sub: profile.sub || tokenInfo.sub || null,
+      email: profile.email || tokenInfo.email || null,
+    };
+  }
+
+  if (idToken && typeof idToken === "string") {
+    const r = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`
+    );
+    if (!r.ok) throw new Error("AUTH_INVALID");
+    const info = await r.json();
+    if (info.aud !== GOOGLE_CLIENT_ID) throw new Error("AUTH_INVALID_AUDIENCE");
+    return { sub: info.sub, email: info.email || null };
+  }
+
+  throw new Error("AUTH_REQUIRED");
 }
 
 async function openFoodFactsSearch(foodName) {
