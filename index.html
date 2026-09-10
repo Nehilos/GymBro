@@ -1760,6 +1760,13 @@
       .food-db-shell.food-form-open .food-db-list{min-height:90px;max-height:24dvh}
     }
 
+    .v7-day-btn{width:100%;min-height:40px;border:1px solid rgba(71,85,105,.75);border-radius:12px;background:rgba(15,23,42,.8);padding:.45rem;color:#94a3b8;font-size:9px;font-weight:800;text-align:left;touch-action:manipulation}
+    .v7-day-btn.active{border-color:rgba(34,211,238,.45);background:rgba(6,182,212,.12);color:#cffafe}
+    .v7-ex-card{border:1px solid rgba(51,65,85,.85);border-radius:14px;background:rgba(15,23,42,.8);padding:.7rem}
+    #consult-snapshot-modal > div{padding-top:max(1rem,env(safe-area-inset-top,0px))}
+    #meditation-date{font-size:12px!important;font-weight:800!important}
+    .v7-apple-donut canvas{filter:drop-shadow(0 12px 24px rgba(2,6,23,.4))}
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2180,8 +2187,8 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3">
-        <button onclick="openModal('add-exercise-modal')" class="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4 text-left hover:bg-cyan-500/15"><i class="fa-solid fa-dumbbell text-cyan-400"></i><div class="mt-2 text-sm font-bold text-white">Registra allenamento</div><div class="mt-1 text-[10px] text-slate-400">Aggiungi esercizi e serie</div></button>
-        <button onclick="openModal('add-food-modal')" class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-left hover:bg-emerald-500/15"><i class="fa-solid fa-utensils text-emerald-400"></i><div class="mt-2 text-sm font-bold text-white">Registra pasto</div><div class="mt-1 text-[10px] text-slate-400">Aggiorna subito i tuoi macro</div></button>
+        <button onclick="switchTab('workout')" class="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4 text-left hover:bg-cyan-500/15"><i class="fa-solid fa-clipboard-list text-cyan-400"></i><div class="mt-2 text-sm font-bold text-white">Visualizza scheda attiva</div><div class="mt-1 text-[10px] text-slate-400">Apri il programma previsto per oggi</div></button>
+        <button onclick="openFoodDatabaseForAdd()" class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-left hover:bg-emerald-500/15"><i class="fa-solid fa-database text-emerald-400"></i><div class="mt-2 text-sm font-bold text-white">Aggiungi alimento a database</div><div class="mt-1 text-[10px] text-slate-400">Crea o cerca un alimento riutilizzabile</div></button>
         <button onclick="addWater(250); switchTab('home')" class="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-4 text-left hover:bg-blue-500/15"><i class="fa-solid fa-glass-water text-blue-400"></i><div class="mt-2 text-sm font-bold text-white">+250 ml acqua</div><div class="mt-1 text-[10px] text-slate-400">Idratazione rapida</div></button>
         <button onclick="switchTab('meditation')" class="rounded-2xl border border-violet-500/20 bg-violet-500/10 p-4 text-left hover:bg-violet-500/15"><i class="fa-solid fa-spa text-violet-400"></i><div class="mt-2 text-sm font-bold text-white">Meditazione</div><div class="mt-1 text-[10px] text-slate-400">Calma, focus e recupero</div></button>
       </div>
@@ -2224,9 +2231,9 @@
             <i class="fa-solid fa-clipboard-list text-cyan-400"></i>
             <span>Schede</span>
           </button>
-          <button onclick="openModal('add-exercise-modal')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-slate-950 font-bold text-xs flex items-center space-x-1.5 shadow-md glow-cyan transition">
-            <i class="fa-solid fa-plus text-sm"></i>
-            <span>Nuovo Esercizio</span>
+          <button onclick="openWorkoutHistory()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-slate-950 font-bold text-xs flex items-center space-x-1.5 shadow-md glow-cyan transition">
+            <i class="fa-solid fa-database text-sm"></i>
+            <span>Database allenamenti</span>
           </button>
         </div>
       </div>
@@ -2252,7 +2259,7 @@
           <h2 class="text-2xl font-black text-white">Meditazione</h2>
           <div class="med-date-mini">
             <button onclick="shiftMeditationDate(-1)" aria-label="Giorno precedente"><i class="fa-solid fa-chevron-left text-[8px]"></i></button>
-            <input id="meditation-date" type="date" onchange="onMeditationDateChange(this.value)">
+            <input id="meditation-date" type="date" onchange="onMeditationDateChange(this.value)" style="font-size:12px;font-weight:800;">
             <button onclick="shiftMeditationDate(1)" aria-label="Giorno successivo"><i class="fa-solid fa-chevron-right text-[8px]"></i></button>
           </div>
         </div>
@@ -2444,6 +2451,9 @@
           <button type="button" onclick="openFoodDatabase()" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 hover:text-white flex items-center justify-center" aria-label="Database alimenti" title="Database alimenti">
             <i class="fa-solid fa-book-bookmark text-sm"></i>
           </button>
+          <button type="button" onclick="openMealHistory()" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-emerald-300 hover:text-white flex items-center justify-center" aria-label="Database pasti" title="Database pasti">
+            <i class="fa-solid fa-calendar-days text-sm"></i>
+          </button>
           <button type="button" onclick="scanFoodByBarcode()" class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 flex items-center justify-center" aria-label="Scansiona barcode" title="Scansiona barcode">
             <i class="fa-solid fa-barcode text-sm"></i>
           </button>
@@ -2515,25 +2525,27 @@
 
         <div class="space-y-3">
           <div id="nutrition-week-summary" class="bg-slate-900/60 rounded-2xl border border-slate-800 p-3 min-h-[96px]"></div>
-          <div class="rounded-2xl border border-slate-800 bg-slate-900/45 p-3">
-            <div class="flex items-center justify-between gap-2">
-              <div><div class="text-[11px] font-black text-white">Riepilogo nutrienti · 7 giorni</div><div class="text-[9px] text-slate-500">Media giornaliera rispetto ai target impostati</div></div>
-              <span id="nutrition-week-score" class="rounded-lg bg-cyan-500/10 px-2 py-1 text-[10px] font-black text-cyan-300">0%</span>
+          <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 shadow-lg">
+            <div class="flex items-center justify-between gap-3">
+              <div><div class="text-[11px] font-black text-white">Equilibrio nutrizionale</div><div id="nutrition-donut-period-label" class="mt-1 text-[9px] text-slate-500">Target del giorno selezionato</div></div>
+              <select id="nutrition-donut-period" onchange="renderNutritionDonutsV7()" class="rounded-xl border border-slate-700 bg-slate-950 px-2.5 py-2 text-[10px] font-bold text-white">
+                <option value="day">Giornaliero</option><option value="7">7 giorni</option><option value="month">Mensile</option>
+              </select>
             </div>
-            <div id="nutrition-week-bars" class="mt-3 space-y-2"></div>
-            <div id="nutrition-week-vitamin-note" class="mt-3 rounded-xl bg-slate-950/45 p-2.5 text-[9px] leading-relaxed text-slate-500"></div>
-          </div>
-          <div class="rounded-2xl border border-slate-800 bg-slate-900/45 p-3">
-            <div class="text-[11px] font-black text-white">Torta equilibrio di oggi</div>
-            <div class="mt-1 text-[9px] leading-relaxed text-slate-500">Ogni settore rappresenta un macro o micronutriente. L'intensità indica quanto sei vicino al target; per sale, zuccheri e saturi il punteggio cala quando superi il limite.</div>
-            <div class="mt-3 flex justify-center">
-              <div id="macro-donut" class="relative h-36 w-36 rounded-full border border-slate-700 shadow-inner">
-                <div class="absolute inset-[28px] flex items-center justify-center rounded-full border border-slate-800 bg-slate-950 text-center">
-                  <div><div id="nutrient-donut-score" class="text-xl font-black text-white">0%</div><div class="text-[8px] uppercase tracking-[.12em] text-slate-500">equilibrio</div></div>
-                </div>
+            <div class="mt-4 space-y-5">
+              <div class="v7-apple-donut rounded-3xl border border-cyan-500/10 bg-slate-950/55 p-4">
+                <div class="flex items-center justify-between"><div class="text-xs font-black text-white">Macronutrienti</div><div id="macro-donut-score-v7" class="text-[10px] font-black text-cyan-300">—</div></div>
+                <div class="mt-3 relative mx-auto h-[230px] w-[230px] max-w-full"><canvas id="macroNutrientDonutV7"></canvas></div>
+                <div id="macro-donut-selection-v7" class="mt-3 min-h-12 rounded-2xl bg-slate-900/80 p-3 text-[10px] leading-relaxed text-slate-300">Tocca un colore della torta o una voce sotto.</div>
+                <div id="macro-donut-legend-v7" class="mt-3 grid grid-cols-2 gap-2"></div>
+              </div>
+              <div class="v7-apple-donut rounded-3xl border border-emerald-500/10 bg-slate-950/55 p-4">
+                <div class="flex items-center justify-between"><div class="text-xs font-black text-white">Micronutrienti</div><div id="micro-donut-score-v7" class="text-[10px] font-black text-emerald-300">—</div></div>
+                <div class="mt-3 relative mx-auto h-[230px] w-[230px] max-w-full"><canvas id="microNutrientDonutV7"></canvas></div>
+                <div id="micro-donut-selection-v7" class="mt-3 min-h-12 rounded-2xl bg-slate-900/80 p-3 text-[10px] leading-relaxed text-slate-300">Tocca un colore della torta o una voce sotto.</div>
+                <div id="micro-donut-legend-v7" class="mt-3 grid grid-cols-2 gap-2"></div>
               </div>
             </div>
-            <div id="nutrient-donut-legend" class="mt-4 grid grid-cols-2 gap-2"></div>
           </div>
         </div>
       </div>
@@ -2759,15 +2771,15 @@
         <div class="relative grid grid-cols-3 gap-2 text-center text-[10px] text-slate-300">
           <div class="bg-slate-900/55 rounded-2xl p-2 border border-slate-700/80 shadow-inner shadow-slate-950/60">
             <div class="text-slate-400">Giornaliero</div>
-            <div id="health-daily-status" class="mt-1 text-sm font-bold text-emerald-400">--</div>
+            <div id="health-daily-status" class="mt-1 text-sm font-bold text-emerald-400">--</div><div id="health-daily-detail" class="mt-1 text-[8px] leading-tight text-slate-500">—</div>
           </div>
           <div class="bg-slate-900/55 rounded-2xl p-2 border border-slate-700/80 shadow-inner shadow-slate-950/60">
             <div class="text-slate-400">Settimanale</div>
-            <div id="health-weekly-status" class="mt-1 text-sm font-bold text-cyan-400">--</div>
+            <div id="health-weekly-status" class="mt-1 text-sm font-bold text-cyan-400">--</div><div id="health-weekly-detail" class="mt-1 text-[8px] leading-tight text-slate-500">—</div>
           </div>
           <div class="bg-slate-900/55 rounded-2xl p-2 border border-slate-700/80 shadow-inner shadow-slate-950/60">
             <div class="text-slate-400">Mensile</div>
-            <div id="health-monthly-status" class="mt-1 text-sm font-bold text-violet-400">--</div>
+            <div id="health-monthly-status" class="mt-1 text-sm font-bold text-violet-400">--</div><div id="health-monthly-detail" class="mt-1 text-[8px] leading-tight text-slate-500">—</div>
           </div>
         </div>
         <div id="health-insights" class="relative text-[11px] text-slate-300 bg-slate-900/45 rounded-2xl border border-slate-700/70 p-3 leading-relaxed shadow-inner shadow-slate-950/40">
@@ -2780,6 +2792,7 @@
         <div class="grid grid-cols-2 gap-2">
           <select id="chart-workout-filter" onchange="updateAnalyticsCharts()" class="bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white"><option value="all">Tutti gli allenamenti</option></select>
           <select id="chart-period-filter" onchange="updateAnalyticsCharts()" class="bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white"><option value="7">Ultimi 7 giorni</option><option value="30">Ultimi 30 giorni</option><option value="90">Ultimi 90 giorni</option><option value="365">Ultimo anno</option><option value="all">Tutto</option></select>
+          <label class="col-span-2 text-[9px] text-slate-500">Giorno specifico · facoltativo<input id="chart-specific-date" type="date" onchange="updateAnalyticsCharts()" class="mt-1 w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white"></label>
         </div>
         <div id="analytics-filter-summary" class="text-[10px] text-slate-400"></div>
       </div>
@@ -2789,11 +2802,12 @@
         <div class="flex justify-between items-center">
           <h3 class="text-xs font-bold text-slate-100 flex items-center space-x-1.5">
             <i class="fa-solid fa-dumbbell text-cyan-400"></i>
-            <span>Progresso Forza / Volume</span>
+            <span>Forza / Volume per esercizio</span>
           </h3>
-          <select id="chart-exercise-select" class="bg-slate-900/80 border border-slate-700 text-slate-200 text-xs rounded-xl px-2 py-1.5 focus:outline-none shadow-inner shadow-slate-950/60" onchange="updateExerciseChart()">
-            <!-- Populated dynamically -->
-          </select>
+          <div class="flex gap-1.5">
+            <select id="chart-plan-history-select" class="max-w-[118px] bg-slate-900/80 border border-slate-700 text-slate-200 text-[9px] rounded-xl px-2 py-1.5" onchange="updateExerciseChartV7()"><option value="all">Tutte le schede</option></select>
+            <select id="chart-exercise-select" class="max-w-[118px] bg-slate-900/80 border border-slate-700 text-slate-200 text-[9px] rounded-xl px-2 py-1.5" onchange="updateExerciseChartV7()"></select>
+          </div>
         </div>
         <div class="relative h-48 w-full rounded-2xl bg-slate-950/40 p-2 border border-slate-800/80">
           <canvas id="exerciseProgressChart"></canvas>
@@ -2845,12 +2859,6 @@
         <div class="relative h-48 w-full rounded-2xl bg-slate-950/40 p-2 border border-slate-800/80">
           <canvas id="nutritionProgressChart"></canvas>
         </div>
-      </div>
-
-      <div class="bg-gradient-to-b from-violet-950/40 to-slate-950 border border-violet-500/20 rounded-3xl p-4 space-y-3 shadow-lg">
-        <div class="flex justify-between items-center"><div><h3 class="text-sm font-bold text-white"><i class="fa-solid fa-spa text-violet-400 mr-1"></i> Meditazione & Mindfulness</h3><p class="text-[10px] text-slate-400">Costruisci una pratica semplice e misurabile.</p></div><button onclick="openMeditationTimer()" class="px-3 py-2 rounded-xl bg-violet-500 text-slate-950 font-bold text-xs">Avvia</button></div>
-        <div class="grid grid-cols-3 gap-2 text-center"><div class="bg-slate-900/60 rounded-xl p-2"><div id="med-today-min" class="text-lg font-black text-violet-300">0</div><div class="text-[9px] text-slate-500">min oggi</div></div><div class="bg-slate-900/60 rounded-xl p-2"><div id="med-week-min" class="text-lg font-black text-cyan-300">0</div><div class="text-[9px] text-slate-500">min 7 giorni</div></div><div class="bg-slate-900/60 rounded-xl p-2"><div id="med-streak" class="text-lg font-black text-emerald-300">0</div><div class="text-[9px] text-slate-500">giorni streak</div></div></div>
-        <div id="med-last-session" class="text-[10px] text-slate-400">Nessuna sessione registrata.</div>
       </div>
 
       <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-4 space-y-3 shadow-[0_18px_35px_rgba(15,23,42,0.38)]">
@@ -3060,8 +3068,8 @@
     </section>
 
     <!-- CONSULTATION SNAPSHOT DETAIL -->
-    <div id="consult-snapshot-modal" class="fixed inset-0 z-50 flex hidden items-end justify-center bg-slate-950/90 p-0 backdrop-blur-md sm:items-center sm:p-4">
-      <div class="w-full max-w-md rounded-t-3xl border-t border-cyan-500/20 bg-darkcard p-4 shadow-2xl sm:rounded-3xl sm:border max-h-[92dvh] overflow-hidden flex flex-col">
+    <div id="consult-snapshot-modal" class="fixed z-50 flex hidden items-end justify-center bg-slate-950/90 p-0 backdrop-blur-md sm:items-center sm:p-4" style="left:0;right:0;top:calc(env(safe-area-inset-top, 0px) + 4.25rem);bottom:calc(env(safe-area-inset-bottom, 0px) + 4.6rem);">
+      <div class="w-full max-w-md rounded-t-3xl border-t border-cyan-500/20 bg-darkcard p-4 shadow-2xl sm:rounded-3xl sm:border h-full max-h-full overflow-hidden flex flex-col">
         <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
           <div class="min-w-0">
             <div class="text-[9px] uppercase tracking-[.2em] text-cyan-300">THALYS · CONSULTO</div>
@@ -3286,105 +3294,86 @@
     </div>
   </div>
 
-  <!-- MODAL: ADD EXERCISE LOG -->
-  <div id="add-exercise-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
-    <div class="bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-md space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
-        <h3 class="text-base font-bold text-white">Aggiungi Esercizio</h3>
-        <button onclick="closeModal('add-exercise-modal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+  <!-- MODAL: WORKOUT PLANS V7 -->
+  <div id="workout-plans-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-4 w-full max-w-2xl shadow-2xl h-[91dvh] sm:h-auto sm:max-h-[90vh] flex flex-col overflow-hidden">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+        <div><h3 class="text-base font-bold text-white"><i class="fa-solid fa-clipboard-list text-cyan-400 mr-2"></i>Schede Allenamento</h3><p class="text-[9px] text-slate-500 mt-1">Crea, controlla e attiva le schede salvate su Drive</p></div>
+        <button type="button" onclick="closeModal('workout-plans-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
-      <form id="add-exercise-form" onsubmit="saveExercise(event)" class="space-y-3">
-        <div>
-          <label class="text-xs text-slate-400 block mb-1">Nome Esercizio</label>
-          <input type="text" id="ex-name" required placeholder="Es. Panca Piana, Squat..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="text-xs text-slate-400 block mb-1">Categoria</label>
-            <select id="ex-category" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
-              <option value="Petto">Petto</option>
-              <option value="Dorso">Dorso</option>
-              <option value="Gambe">Gambe</option>
-              <option value="Spalle">Spalle</option>
-              <option value="Braccia">Braccia</option>
-              <option value="Core">Core</option>
-              <option value="Cardio">Cardio</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-slate-400 block mb-1">RPE (Sforzo 1-10)</label>
-            <input type="number" id="ex-rpe" min="1" max="10" value="8" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
-          </div>
-        </div>
-
-        <div>
-          <label class="text-xs text-slate-400 block mb-1">Recupero (sec)</label>
-          <input type="number" id="ex-recovery" min="0" value="90" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
-        </div>
-
-        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <span class="text-xs font-bold text-slate-300 block">Prima Serie</span>
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="text-[10px] text-slate-400 block mb-1">Peso (kg)</label>
-              <input type="number" id="ex-weight" step="0.5" required placeholder="70" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
-            </div>
-            <div>
-              <label class="text-[10px] text-slate-400 block mb-1">Ripetizioni</label>
-              <input type="number" id="ex-reps" required placeholder="10" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <button type="button" onclick="startNewWorkoutPlan()" class="min-h-10 rounded-xl bg-cyan-500 text-slate-950 text-[10px] font-black"><i class="fa-solid fa-plus mr-1"></i>Nuova scheda</button>
+        <button type="button" onclick="importWorkoutPlanFile()" class="min-h-10 rounded-xl bg-slate-800 border border-slate-700 text-emerald-300 text-[10px] font-bold"><i class="fa-solid fa-file-import mr-1"></i>Importa</button>
+      </div>
+      <div id="plan-builder-panel" class="hidden mt-3 flex-1 min-h-0 overflow-hidden rounded-2xl border border-cyan-500/15 bg-slate-950/45 p-3">
+        <form id="workout-plan-form" onsubmit="saveWorkoutPlanV7(event)" class="h-full flex flex-col min-h-0">
+          <label class="text-[9px] text-slate-400">Nome scheda
+            <input id="plan-name" required type="text" placeholder="Es. Upper / Lower" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white">
+          </label>
+          <div class="mt-3 grid grid-cols-[88px_1fr] gap-3 flex-1 min-h-0">
+            <div id="plan-builder-days" class="space-y-1.5 overflow-y-auto"></div>
+            <div class="min-w-0 flex flex-col min-h-0">
+              <div class="flex items-center justify-between gap-2">
+                <div><div class="text-[9px] uppercase tracking-[.14em] text-slate-500">Giorno</div><div id="plan-builder-day-title" class="text-sm font-black text-white">Lunedì</div></div>
+                <label class="flex items-center gap-2 rounded-xl bg-slate-900 px-2.5 py-2 text-[9px] font-bold text-violet-300"><input id="plan-day-rest" type="checkbox" onchange="togglePlanBuilderRest(this.checked)" class="accent-violet-500"> Riposo</label>
+              </div>
+              <div id="plan-builder-exercises" class="mt-2 flex-1 overflow-y-auto space-y-2 pr-1"></div>
+              <button id="plan-builder-add-btn" type="button" onclick="addPlanExerciseV7()" class="mt-2 min-h-10 rounded-xl border border-cyan-500/25 bg-cyan-500/10 text-[10px] font-black text-cyan-300"><i class="fa-solid fa-plus mr-1"></i>Aggiungi esercizio</button>
             </div>
           </div>
-        </div>
-
-        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-slate-950 font-bold text-sm shadow-lg glow-cyan">
-          Salva Esercizio
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: WORKOUT PLANS -->
-  <div id="workout-plans-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
-    <div class="bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-lg space-y-4 shadow-2xl max-h-[88vh] overflow-y-auto">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
-        <h3 class="text-base font-bold text-white flex items-center space-x-2">
-          <i class="fa-solid fa-clipboard-list text-cyan-400"></i>
-          <span>Schede Allenamento</span>
-        </h3>
-        <button onclick="closeModal('workout-plans-modal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-      </div>
-
-      <form id="workout-plan-form" onsubmit="saveWorkoutPlan(event)" class="space-y-3 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-        <div>
-          <label class="text-xs text-slate-400 block mb-1">Nome Scheda</label>
-          <input type="text" id="plan-name" required placeholder="Es. Push Day, Lower Body" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
-        </div>
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-300">Esercizi</span>
-            <button type="button" onclick="addPlanExerciseRow()" class="text-[11px] text-cyan-400 font-semibold">+ Aggiungi esercizio</button>
+          <div class="mt-3 grid grid-cols-2 gap-2">
+            <button type="button" onclick="cancelPlanBuilder()" class="min-h-11 rounded-xl bg-slate-800 text-xs font-bold text-slate-300">Annulla</button>
+            <button type="submit" class="min-h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-xs font-black text-slate-950">Salva scheda</button>
           </div>
-          <div id="plan-exercises-container" class="space-y-2"></div>
-        </div>
-
-        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-slate-950 font-bold text-sm shadow-lg">
-          Salva scheda
-        </button>
-      </form>
-
-      <div class="space-y-2">
-        <div class="flex items-center justify-between">
-          <h4 class="text-xs font-bold text-slate-300 uppercase tracking-[0.2rem]">Schede salvate</h4>
-          <button type="button" onclick="importWorkoutPlanFile()" class="text-[10px] text-emerald-400 underline">Importa</button>
-        </div>
+        </form>
+      </div>
+      <div id="workout-plan-library" class="mt-3 flex-1 min-h-0 overflow-y-auto">
+        <div class="mb-2 text-[9px] uppercase tracking-[.16em] text-slate-500">Schede salvate</div>
         <div id="workout-plans-list" class="space-y-2"></div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL: ADD FOOD LOG -->
+  <div id="workout-plan-viewer-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-xl h-[82dvh] sm:h-[620px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-cyan-500/20 p-4 flex flex-col overflow-hidden">
+      <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+        <div class="min-w-0"><div class="text-[9px] uppercase tracking-[.16em] text-cyan-300">Anteprima scheda</div><h3 id="plan-view-title" class="truncate text-lg font-black text-white">—</h3></div>
+        <button type="button" onclick="closeModal('workout-plan-viewer-modal')" class="w-10 h-10 shrink-0 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mt-3 grid grid-cols-[88px_1fr] gap-3 flex-1 min-h-0">
+        <div id="plan-view-days" class="space-y-1.5 overflow-y-auto"></div>
+        <div id="plan-view-content" class="min-w-0 overflow-y-auto rounded-2xl bg-slate-950/45 p-3"></div>
+      </div>
+      <div class="mt-3 grid grid-cols-3 gap-2">
+        <button id="plan-view-edit" type="button" class="min-h-10 rounded-xl bg-slate-800 text-[10px] font-bold text-violet-300">Modifica</button>
+        <button id="plan-view-export" type="button" class="min-h-10 rounded-xl bg-slate-800 text-[10px] font-bold text-cyan-300">Esporta</button>
+        <button id="plan-view-activate" type="button" class="min-h-10 rounded-xl bg-emerald-500 text-[10px] font-black text-slate-950">Rendi attiva</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="workout-history-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-md h-[78dvh] sm:h-[600px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-cyan-500/20 p-4 flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3"><div><div class="text-[9px] uppercase tracking-[.16em] text-cyan-300">Storico</div><h3 class="text-base font-black text-white">Database allenamenti</h3></div><button type="button" onclick="closeModal('workout-history-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button></div>
+      <label class="mt-3 text-[9px] text-slate-500">Giorno<input id="workout-history-date" type="date" onchange="renderWorkoutHistory()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white"></label>
+      <div class="mt-3 flex gap-2"><button type="button" onclick="setWorkoutHistoryDate('')" class="rounded-xl bg-slate-800 px-3 py-2 text-[9px] font-bold text-slate-300">Tutti</button><button type="button" onclick="setWorkoutHistoryDate(currentLocalDateStr())" class="rounded-xl bg-cyan-500/10 px-3 py-2 text-[9px] font-bold text-cyan-300">Oggi</button></div>
+      <div id="workout-history-list" class="mt-3 flex-1 overflow-y-auto space-y-2"></div>
+    </div>
+  </div>
+
+  <div id="meal-history-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-md h-[80dvh] sm:h-[620px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-emerald-500/20 p-4 flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3"><div><div class="text-[9px] uppercase tracking-[.16em] text-emerald-300">Dieta</div><h3 class="text-base font-black text-white">Database pasti</h3></div><button type="button" onclick="closeModal('meal-history-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <label class="text-[9px] text-slate-500">Da<input id="meal-history-from" type="date" onchange="renderMealHistory()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"></label>
+        <label class="text-[9px] text-slate-500">A<input id="meal-history-to" type="date" onchange="renderMealHistory()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"></label>
+      </div>
+      <div class="mt-2 flex gap-2"><button type="button" onclick="clearMealHistoryFilter()" class="rounded-xl bg-slate-800 px-3 py-2 text-[9px] font-bold text-slate-300">Tutti i giorni</button><button type="button" onclick="setMealHistoryToday()" class="rounded-xl bg-emerald-500/10 px-3 py-2 text-[9px] font-bold text-emerald-300">Oggi</button></div>
+      <div id="meal-history-list" class="mt-3 flex-1 overflow-y-auto space-y-3"></div>
+    </div>
+  </div>
+
+<!-- MODAL: ADD FOOD LOG -->
   <div id="add-food-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
     <div class="bg-darkcard border-t sm:border border-darkborder rounded-t-3xl sm:rounded-3xl p-5 w-full max-w-md space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-2 border-b border-slate-800">
@@ -4095,7 +4084,7 @@
         </div>
 
         <button type="submit" class="w-full py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold text-sm">
-          Salva Profilo
+          Aggiorna dati
         </button>
       </form>
     </div>
@@ -4179,7 +4168,7 @@
     let driveFolders = null, lastDriveSyncAt = Number(localStorage.getItem('thalys_last_drive_sync') || 0) || null, driveDirty = localStorage.getItem('thalys_drive_dirty')==='1';
     let lastSyncError=null;
 
-    const DRIVE_DB_NAMES = ['thalys_manifest.json','app_state.json','workouts.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
+    const DRIVE_DB_NAMES = ['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
 
     function getAccessToken(){ return (window.gapi && gapi.client && gapi.client.getToken && gapi.client.getToken())?.access_token || null; }
     function escapeDriveQuery(v){ return String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
@@ -4398,7 +4387,7 @@
       result.workoutPlans=mergeByKey(local.workoutPlans,c.workoutPlans,x=>x.id||x.name);
       result.messages=mergeByKey(local.messages,c.messages,x=>x.id);
       result.consultations=mergeByKey(local.consultations,c.consultations,x=>x.id);
-      result.aiConsults=mergeByKey(local.aiConsults,c.aiConsults,x=>x.id);
+      result.aiConsults=mergeByKey(local.aiConsults,c.aiConsults,x=>x.id);result.workoutHistory=mergeByKey(local.workoutHistory,c.workoutHistory,x=>x.id||`${x.date}|${x.planId}`);result.activeWorkoutPlanHistory=mergeByKey(local.activeWorkoutPlanHistory,c.activeWorkoutPlanHistory,x=>x.id||`${x.planId}|${x.activatedAt}`);
       result.workoutAssignments={...(c.workoutAssignments||{}),...(local.workoutAssignments||{})};
       result.workoutCompletions={...(c.workoutCompletions||{}),...(local.workoutCompletions||{})};
       result.water={...(c.water||{}),...(local.water||{})};
@@ -4412,16 +4401,16 @@
       const cloud={};
       const reads=[];
       const load=(name,key)=>{if(byName.has(name))reads.push(readDriveJSON(name,driveFolders.databaseFolderId).then(d=>{cloud[key]=d;}));};
-      load('app_state.json','appState');load('workouts.json','workouts');load('nutrition.json','nutrition');load('alim_database.json','presets');load('body_metrics.json','bodyMetrics');load('wellness_data.json','wellness');load('water.json','water');load('meditation.json','meditation');load('workout_plans.json','plansPayload');load('foto_index.json','photoIndex');load('foto_profilo.json','profilePhoto');load('messages.json','messages');load('consultations.json','consultations');load('ai_consults.json','aiConsults');
+      load('app_state.json','appState');load('workouts.json','workouts');load('workout_history.json','workoutHistory');load('meal_history.json','mealHistory');load('active_plan_history.json','activeWorkoutPlanHistory');load('nutrition.json','nutrition');load('alim_database.json','presets');load('body_metrics.json','bodyMetrics');load('wellness_data.json','wellness');load('water.json','water');load('meditation.json','meditation');load('workout_plans.json','plansPayload');load('foto_index.json','photoIndex');load('foto_profilo.json','profilePhoto');load('messages.json','messages');load('consultations.json','consultations');load('ai_consults.json','aiConsults');
       await Promise.all(reads);
       if(!byName.has('foto_profilo.json')){
         try{await uploadDriveFile('foto_profilo.json',JSON.stringify(appState.profilePhoto||null),'application/json',driveFolders.databaseFolderId,true);}
         catch(e){console.warn('Creazione foto_profilo.json',e);}
       }
-      const dedicatedConsultations=cloud.consultations, dedicatedAIConsults=cloud.aiConsults;
+      const dedicatedConsultations=cloud.consultations, dedicatedAIConsults=cloud.aiConsults, dedicatedWorkoutHistory=cloud.workoutHistory, dedicatedMealHistory=cloud.mealHistory, dedicatedActivePlanHistory=cloud.activeWorkoutPlanHistory;
       if(cloud.appState&&typeof cloud.appState==='object')Object.assign(cloud,cloud.appState);
       if(dedicatedConsultations!==undefined)cloud.consultations=dedicatedConsultations;
-      if(dedicatedAIConsults!==undefined)cloud.aiConsults=dedicatedAIConsults;
+      if(dedicatedAIConsults!==undefined)cloud.aiConsults=dedicatedAIConsults;if(dedicatedWorkoutHistory!==undefined)cloud.workoutHistory=dedicatedWorkoutHistory;if(dedicatedActivePlanHistory!==undefined)cloud.activeWorkoutPlanHistory=dedicatedActivePlanHistory;if(Array.isArray(dedicatedMealHistory))cloud.nutrition=mergeByKey(cloud.nutrition||[],dedicatedMealHistory,x=>x.id||`${x.date}|${x.meal}|${x.name}|${x.grams}`);
       if(cloud.plansPayload){cloud.workoutPlans=cloud.plansPayload.plans||[];cloud.activeWorkoutPlanId=cloud.plansPayload.activePlanId||cloud.activeWorkoutPlanId||null;cloud.workoutAssignments=cloud.plansPayload.assignments||{};cloud.workoutCompletions=cloud.plansPayload.completions||cloud.workoutCompletions||{};}
       if(cloud.photoIndex&&typeof cloud.photoIndex==='object')localStorage.setItem('photo_index',JSON.stringify({...cloud.photoIndex,...JSON.parse(localStorage.getItem('photo_index')||'{}')}));
       appState=mergeCloudIntoLocal(cloud);window.appState=appState;
@@ -4593,7 +4582,9 @@
       consultations: [],
       aiConsults: [],
       targets: { calories: 2200, p: 150, c: 250, f: 70, satFat: 20, sugars: 50, calcium: 1000, magnesium: 350, zinc: 11, fiber: 30, salt: 5, iron: 11, potassium: 3500 },
-      workouts: [], // [{ id, date, name, category, rpe, recovery, sets: [{weight, reps}] }]
+      workouts: [], // completed per-exercise workout logs
+      workoutHistory: [], // completed training days
+      activeWorkoutPlanHistory: [], // plan activation timeline
       nutrition: [], // consumed-dose values; vitamins are code strings (e.g. B1 B12 C / A D E K)
       water: {}, // { "YYYY-MM-DD": 1500 }
       settings: { waterTargetMl: 2500 },
@@ -4736,7 +4727,7 @@
         ['help.home.coach','help.home.coach.body','fa-wand-magic-sparkles']
       ]},
       workout:{titleKey:'help.workout.title',items:[
-        ['help.workout.plans','help.workout.plans.body','fa-clipboard-list'],
+        ['help.workout.plans','help.workout.plans.body','fa-clipboard-list'],['help.workout.history','help.workout.history.body','fa-database'],
         ['help.workout.active','help.workout.active.body','fa-calendar-check'],
         ['help.workout.import','help.workout.import.body','fa-share-nodes'],
         ['help.workout.complete','help.workout.complete.body','fa-circle-check']
@@ -4750,7 +4741,7 @@
       nutrition:{titleKey:'help.nutrition.title',items:[
         ['help.nutrition.meals','help.nutrition.meals.body','fa-utensils'],
         ['help.nutrition.targets','help.nutrition.targets.body','fa-bullseye'],
-        ['help.nutrition.database','help.nutrition.database.body','fa-database'],
+        ['help.nutrition.database','help.nutrition.database.body','fa-database'],['help.nutrition.database_meals','help.nutrition.database_meals.body','fa-calendar-days'],['help.nutrition.charts','help.nutrition.charts.body','fa-chart-pie'],
         ['help.nutrition.ai_food','help.nutrition.ai_food.body','fa-wand-magic-sparkles'],
         ['help.nutrition.water','help.nutrition.water.body','fa-glass-water']
       ]},
@@ -4761,7 +4752,7 @@
         ['help.body.photos','help.body.photos.body','fa-images']
       ]},
       analytics:{titleKey:'help.analytics.title',items:[
-        ['help.analytics.filter','help.analytics.filter.body','fa-filter'],
+        ['help.analytics.filter','help.analytics.filter.body','fa-filter'],['help.analytics.strength','help.analytics.strength.body','fa-dumbbell'],
         ['help.analytics.health','help.analytics.health.body','fa-heart-pulse'],
         ['help.analytics.body','help.analytics.body.body','fa-chart-line'],
         ['help.analytics.nutrition','help.analytics.nutrition.body','fa-chart-column']
@@ -4775,7 +4766,7 @@
         ['help.consult.history','help.consult.history.body','fa-clock-rotate-left']
       ]},
       settings:{titleKey:'help.settings.title',items:[
-        ['help.settings.access','help.settings.access.body','fa-gear'],
+        ['help.settings.access','help.settings.access.body','fa-gear'],['help.settings.drive_creation','help.settings.drive_creation.body','fa-cloud-arrow-up'],
         ['help.settings.account','help.settings.account.body','fa-user'],
         ['help.settings.sync','help.settings.sync.body','fa-rotate'],
         ['help.settings.backup','help.settings.backup.body','fa-box-archive'],
@@ -4806,7 +4797,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:6,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:7,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4828,7 +4819,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=6`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=7`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4839,7 +4830,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v6`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v7`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4848,7 +4839,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v6`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v7`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4859,7 +4850,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v6`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v7`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -5424,7 +5415,7 @@
     function normalizeAIWorkoutPlan(p){
       if(!p||!p.name||!Array.isArray(p.exercises)||!p.exercises.length)return null;
       const days=['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'];
-      return {id:'plan_'+Date.now(),name:String(p.name).slice(0,80),exercises:p.exercises.map((x,i)=>({id:'plan_ex_'+Date.now()+'_'+i,name:String(x.name||'Esercizio').slice(0,80),dayOfWeek:days.includes(x.dayOfWeek)?x.dayOfWeek:'Lunedì',category:String(x.category||'Altro'),rpe:Math.min(10,Math.max(1,Number(x.rpe)||8)),weight:Math.max(0,Number(x.weight)||0),reps:Math.max(1,Math.round(Number(x.reps)||8)),recovery:Math.max(15,Math.round(Number(x.recovery)||90))})),updatedAt:new Date().toISOString(),source:'Thalys AI'};
+      return {id:'plan_'+Date.now(),name:String(p.name).slice(0,80),restDays:Array.isArray(p.restDays)?p.restDays.filter(d=>days.includes(d)):[],exercises:p.exercises.map((x,i)=>({id:'plan_ex_'+Date.now()+'_'+i,name:String(x.name||'Esercizio').slice(0,80),dayOfWeek:days.includes(x.dayOfWeek)?x.dayOfWeek:'Lunedì',category:String(x.category||'Altro'),series:Math.max(1,Math.round(Number(x.series)||3)),rpe:Math.min(10,Math.max(1,Number(x.rpe)||8)),weight:Math.max(0,Number(x.weight)||0),reps:Math.max(1,Math.round(Number(x.reps)||8)),recovery:Math.max(15,Math.round(Number(x.recovery)||90))})),updatedAt:new Date().toISOString(),source:'Thalys AI'};
     }
     function downloadAIWorkoutPlan(){if(!lastAIWorkoutProposal)return;const b=new Blob([JSON.stringify(lastAIWorkoutProposal,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=(lastAIWorkoutProposal.name||'thalys_ai').toLowerCase().replace(/[^a-z0-9]+/gi,'_')+'_schema.json';a.click();URL.revokeObjectURL(u);}
     function importAIWorkoutPlan(){if(!lastAIWorkoutProposal)return;const p=normalizeAIWorkoutPlan(lastAIWorkoutProposal);if(!p)return;appState.workoutPlans.push(p);saveStateToLocal();renderWorkoutPlans();refreshConsultSelectors();showToast(tr('Scheda IA importata'),'fa-file-import');}
@@ -5579,73 +5570,6 @@
     // ----------------------------------------------------
     function onWorkoutDateChange(date){ if(!date)return; homeSelectedDate=date; const hp=document.getElementById('home-date-picker'); if(hp)hp.value=date; updateDateLabels();renderWorkouts(); renderWorkoutPlans(); renderHomeDashboard(); }
     function shiftWorkoutDate(days){ const input=document.getElementById('workout-date'); if(!input?.value)return; const d=new Date(input.value+'T12:00:00'); d.setDate(d.getDate()+days); const iso=d.toISOString().split('T')[0]; if(input)input.value=iso; onWorkoutDateChange(iso); }
-
-    function saveExercise(e) {
-      e.preventDefault();
-      const date = document.getElementById('workout-date').value;
-      const name = document.getElementById('ex-name').value.trim();
-      const category = document.getElementById('ex-category').value;
-      const rpe = parseFloat(document.getElementById('ex-rpe').value) || 8;
-      const weight = parseFloat(document.getElementById('ex-weight').value) || 0;
-      const reps = parseInt(document.getElementById('ex-reps').value) || 0;
-
-      const recovery = parseInt(document.getElementById('ex-recovery').value) || 90;
-      const newEx = {
-        id: 'ex_' + Date.now(),
-        date: date,
-        name: name,
-        category: category,
-        rpe: rpe,
-        recovery: recovery,
-        sets: [{ weight, reps }]
-      };
-
-      appState.workouts.push(newEx);
-      saveStateToLocal();
-      closeModal('add-exercise-modal');
-      document.getElementById('add-exercise-form').reset();
-      renderWorkouts();
-      // Aggiorna grafici in tempo reale
-      updateAnalyticsCharts();
-      showToast('Esercizio aggiunto!', 'fa-dumbbell');
-    }
-
-    function addSetToExercise(exId) {
-      const ex = appState.workouts.find(w => w.id === exId);
-      if (!ex) return;
-      const lastSet = ex.sets[ex.sets.length - 1] || { weight: 50, reps: 10 };
-      ex.sets.push({ weight: lastSet.weight, reps: lastSet.reps });
-      saveStateToLocal();
-      renderWorkouts();
-    }
-
-    function updateSet(exId, index, field, value) {
-      const ex = appState.workouts.find(w => w.id === exId);
-      if (!ex || !ex.sets[index]) return;
-      ex.sets[index][field] = parseFloat(value) || 0;
-      saveStateToLocal();
-      renderWorkouts();
-    }
-
-    function removeSet(exId, index) {
-      const ex = appState.workouts.find(w => w.id === exId);
-      if (!ex) return;
-      ex.sets.splice(index, 1);
-      if (ex.sets.length === 0) {
-        appState.workouts = appState.workouts.filter(w => w.id !== exId);
-      }
-      saveStateToLocal();
-      renderWorkouts();
-    }
-
-    function deleteExercise(exId) {
-      appState.workouts = appState.workouts.filter(w => w.id !== exId);
-      saveStateToLocal();
-      renderWorkouts();
-      // Aggiorna grafici in tempo reale
-      updateAnalyticsCharts();
-      showToast('Esercizio rimosso');
-    }
 
     function addPlanExerciseRow() {
       const container = document.getElementById('plan-exercises-container');
@@ -5933,7 +5857,7 @@ if(c)c.innerHTML='';
           <div class="text-center py-10 bg-darkcard/50 rounded-2xl border border-dashed border-slate-800">
             <i class="fa-solid fa-dumbbell text-3xl text-slate-600 mb-2"></i>
             <p class="text-xs text-slate-400">Nessun esercizio per questa data.</p>
-            <button onclick="openModal('add-exercise-modal')" class="mt-3 text-xs text-cyan-400 font-bold hover:underline">+ Aggiungi Esercizio</button>
+            <button onclick="openWorkoutPlans()" class="mt-3 text-xs text-cyan-400 font-bold hover:underline">Apri Schede</button>
           </div>
         `;
       }
@@ -6445,8 +6369,7 @@ if(c)c.innerHTML='';
         `Recupero medio settimanale: ${weeklyRecovery ? weeklyRecovery.toFixed(1) : '--'} / 10`,
         `Dieta del giorno: ${dietScore}% rispetto al target`,
         `Volume del giorno: ${currentVolume} kg`,
-        `Readiness media settimanale: ${weeklyReadiness ? weeklyReadiness.toFixed(1) : '--'} / 10`,
-        `Meditazione ultimi 7 giorni: ${(appState.meditation || []).filter(x => { const d=new Date(x.date), n=new Date(); const diff=(n-d)/86400000; return diff>=0 && diff<7.1; }).reduce((s,x)=>s+Number(x.minutes||0),0)} min`
+        `Readiness media settimanale: ${weeklyReadiness ? weeklyReadiness.toFixed(1) : '--'} / 10`
       ];
 
       return {
@@ -8725,6 +8648,133 @@ async function permanentlyDeleteFile(fileId) {
       document.querySelectorAll('nav [id^="nav-"]').forEach(b=>{b.classList.remove('text-cyan-400');b.classList.add('text-slate-400');});
       const hb=document.getElementById('nav-home');if(hb){hb.classList.remove('text-slate-400');hb.classList.add('text-cyan-400');}
     }, { once:true });
+
+/* ==========================================================
+   THALYS V7
+   ========================================================== */
+const THALYS_WEEKDAYS=['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'];
+let planBuilderDay='Lunedì',planBuilderDraft={},planBuilderRest=new Set(),editingWorkoutPlanIdV7=null;
+let planViewerIdV7=null,planViewerDayV7='Lunedì',chartMacroV7=null,chartMicroV7=null;
+
+function normalizePlanExerciseV7(ex={}){
+  return {id:ex.id||('plan_ex_'+Date.now()+'_'+Math.random().toString(16).slice(2)),name:String(ex.name||'').trim(),dayOfWeek:THALYS_WEEKDAYS.includes(ex.dayOfWeek)?ex.dayOfWeek:'Lunedì',category:ex.category||'Altro',series:Math.max(1,Math.round(Number(ex.series??ex.setsCount??ex.sets?.length??3)||3)),reps:Math.max(1,Math.round(Number(ex.reps)||8)),weight:Math.max(0,Number(ex.weight)||0),rpe:Math.min(10,Math.max(1,Number(ex.rpe)||8)),recovery:Math.max(0,Math.round(Number(ex.recovery)||90))};
+}
+function normalizeWorkoutPlanV7(plan={}){
+  return {...plan,exercises:(plan.exercises||[]).map(normalizePlanExerciseV7).filter(x=>x.name),restDays:[...new Set((plan.restDays||[]).filter(d=>THALYS_WEEKDAYS.includes(d)))]};
+}
+function getPlanDays(plan){const p=normalizeWorkoutPlanV7(plan);return THALYS_WEEKDAYS.filter(d=>p.restDays.includes(d)||p.exercises.some(x=>x.dayOfWeek===d));}
+function getExercisesForDate(plan,date){if(!plan)return[];const p=normalizeWorkoutPlanV7(plan),wd=getItalianWeekday(date);return p.restDays.includes(wd)?[]:p.exercises.filter(x=>x.dayOfWeek===wd);}
+function isPlanRestDay(plan,date){if(!plan)return false;const p=normalizeWorkoutPlanV7(plan),wd=getItalianWeekday(date);return p.restDays.includes(wd)||(!p.exercises.some(x=>x.dayOfWeek===wd)&&getPlanDays(p).length>0);}
+
+async function loadExternalAvatarArtwork(force=false){
+  if(window._thalysExternalAvatarLoaded&&!force)return true;
+  try{
+    const [mr,fr]=await Promise.all([fetch('./male.svg',{cache:'no-store'}),fetch('./female.svg',{cache:'no-store'})]);
+    if(!mr.ok||!fr.ok)throw new Error('SVG_NOT_FOUND');
+    const parser=new DOMParser();
+    async function install(res,id){const doc=parser.parseFromString(await res.text(),'image/svg+xml'),svg=doc.documentElement,s=document.getElementById(id);if(!s)return;const vb=svg.getAttribute('viewBox');if(vb)s.setAttribute('viewBox',vb);s.replaceChildren(...Array.from(svg.children).filter(n=>n.tagName.toLowerCase()!=='script').map(n=>document.importNode(n,true)));}
+    await install(mr,'avatar-male-art');await install(fr,'avatar-female-art');window._thalysExternalAvatarLoaded=true;
+    const g=normalizeProfileGenderValue(appState.profile?.gender)==='female'?'femmina':'maschio';avatarSetArtwork(g);aggiornaAvatarDaUltimaMisura();renderHomeAvatar();return true;
+  }catch(e){console.info('male.svg/female.svg non disponibili: fallback incorporato.');return false;}
+}
+const _saveProfileV6=saveProfile;
+saveProfile=function(e){_saveProfileV6(e);const g=normalizeProfileGenderValue(appState.profile?.gender);loadExternalAvatarArtwork(true).finally(()=>{setProfileGender(g,{sync:false});avatarSetArtwork(g==='female'?'femmina':'maschio');aggiornaAvatarDaUltimaMisura();renderHomeAvatar();});};
+function openFoodDatabaseForAdd(){openFoodDatabase();setTimeout(()=>toggleFoodPresetForm(true),180);}
+
+/* Home: diet completed only with all four meals */
+function mealsCompletedForDateV7(date){const have=new Set((appState.nutrition||[]).filter(x=>x.date===date).map(x=>String(x.meal||'')));return ['Colazione','Pranzo','Cena','Spuntino'].every(x=>have.has(x));}
+function getDayGamification(date){
+  const plan=getDayWorkoutPlan(date),c=plan?getWorkoutCompletion(date,plan.id):null,dayEx=plan?getExercisesForDate(plan,date):[];
+  const exerciseTotal=dayEx.length,exerciseDone=plan?dayEx.filter(x=>c?.exercises?.[x.id]).length:0,workoutDone=exerciseTotal>0&&exerciseDone===exerciseTotal;
+  const nutrition=(appState.nutrition||[]).filter(x=>x.date===date),kcal=nutrition.reduce((s,x)=>s+Number(x.kcal||0),0),water=Number(appState.water?.[date]||0),waterTarget=getWaterTarget(date),wellness=appState.wellness?.find(x=>x.date===date),meditation=(appState.meditation||[]).filter(x=>x.date===date).reduce((s,x)=>s+Number(x.minutes||0),0),active=getActiveWorkoutPlan(),scheduled=isPlanScheduledOnDate(active,date),mealDone=mealsCompletedForDateV7(date),mealCount=new Set(nutrition.map(x=>x.meal)).size;
+  const steps=[];if(active)steps.push({label:scheduled?`${tr('Scheda')} ${active.name}`:tr('Riposo programmato'),done:scheduled?workoutDone:true,icon:scheduled?'fa-dumbbell':'fa-moon'});
+  steps.push({label:tr('Check-in wellness'),done:!!wellness,icon:'fa-heart-pulse'},{label:tr('Idratazione'),done:water>=waterTarget*.8,icon:'fa-glass-water'},{label:mealDone?tr('Attività completata'):`${tr('Pasti')} ${mealCount}/4`,done:mealDone,icon:'fa-utensils'},{label:tr('Pausa mentale'),done:meditation>=5,icon:'fa-spa'});
+  return {plan,exerciseDone,exerciseTotal,workoutDone,steps,done:steps.filter(x=>x.done).length,total:steps.length,water,waterTarget,kcal,wellness,meditation,mealDone};
+}
+
+/* Plan builder */
+function resetPlanBuilderV7(){planBuilderDay='Lunedì';planBuilderDraft={};planBuilderRest=new Set();editingWorkoutPlanIdV7=null;THALYS_WEEKDAYS.forEach(d=>planBuilderDraft[d]=[]);}
+function startNewWorkoutPlan(){resetPlanBuilderV7();document.getElementById('plan-builder-panel')?.classList.remove('hidden');document.getElementById('workout-plan-library')?.classList.add('hidden');const n=document.getElementById('plan-name');if(n)n.value='';renderPlanBuilderV7();}
+function cancelPlanBuilder(){document.getElementById('plan-builder-panel')?.classList.add('hidden');document.getElementById('workout-plan-library')?.classList.remove('hidden');resetPlanBuilderV7();renderWorkoutPlans();}
+function selectPlanBuilderDay(d){planBuilderDay=d;renderPlanBuilderV7();}
+function togglePlanBuilderRest(v){if(v)planBuilderRest.add(planBuilderDay);else planBuilderRest.delete(planBuilderDay);renderPlanBuilderV7();}
+function addPlanExerciseV7(ex={}){planBuilderRest.delete(planBuilderDay);planBuilderDraft[planBuilderDay] ||= [];planBuilderDraft[planBuilderDay].push(normalizePlanExerciseV7({...ex,dayOfWeek:planBuilderDay,name:ex.name||''}));renderPlanBuilderV7();}
+function removePlanExerciseV7(day,i){planBuilderDraft[day]?.splice(i,1);renderPlanBuilderV7();}
+function updatePlanDraftFieldV7(day,i,k,v){const ex=planBuilderDraft[day]?.[i];if(!ex)return;ex[k]=['series','reps','recovery'].includes(k)?Math.round(Number(v)||0):['weight','rpe'].includes(k)?Number(v)||0:v;}
+function renderPlanBuilderV7(){
+  const days=document.getElementById('plan-builder-days'),box=document.getElementById('plan-builder-exercises');if(!days||!box)return;
+  days.innerHTML=THALYS_WEEKDAYS.map(d=>`<button type="button" onclick="selectPlanBuilderDay('${d}')" class="v7-day-btn ${d===planBuilderDay?'active':''}">${tr(d)}<div class="mt-1 text-[8px] opacity-60">${planBuilderRest.has(d)?'🌙 '+tr('Riposo'):(planBuilderDraft[d]?.length||0)+' '+tr('esercizi')}</div></button>`).join('');
+  document.getElementById('plan-builder-day-title').textContent=tr(planBuilderDay);document.getElementById('plan-day-rest').checked=planBuilderRest.has(planBuilderDay);document.getElementById('plan-builder-add-btn')?.classList.toggle('hidden',planBuilderRest.has(planBuilderDay));
+  if(planBuilderRest.has(planBuilderDay)){box.innerHTML=`<div class="min-h-52 flex items-center justify-center rounded-2xl bg-violet-500/5 text-center"><div><div class="text-4xl">🌙</div><div class="mt-3 font-black text-violet-200">${tr('Giorno di riposo')}</div></div></div>`;return;}
+  const arr=planBuilderDraft[planBuilderDay]||[];
+  box.innerHTML=arr.length?arr.map((x,i)=>`<div class="v7-ex-card"><div class="flex gap-2"><input value="${escapeHTML(x.name)}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'name',this.value)" placeholder="${tr('Nome esercizio')}" class="min-w-0 flex-1 rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"><button type="button" onclick="removePlanExerciseV7('${planBuilderDay}',${i})" class="w-9 rounded-lg bg-rose-500/10 text-rose-300"><i class="fa-solid fa-trash"></i></button></div><div class="mt-2 grid grid-cols-2 gap-2">
+  <label class="text-[8px] text-slate-500">${tr('Categoria')}<select onchange="updatePlanDraftFieldV7('${planBuilderDay}',${i},'category',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white">${['Petto','Dorso','Gambe','Spalle','Braccia','Core','Cardio','Altro'].map(c=>`<option ${c===x.category?'selected':''}>${c}</option>`).join('')}</select></label>
+  <label class="text-[8px] text-slate-500">${tr('Serie')}<input type="number" min="1" value="${x.series}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'series',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white"></label>
+  <label class="text-[8px] text-slate-500">${tr('Ripetizioni')}<input type="number" min="1" value="${x.reps}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'reps',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white"></label>
+  <label class="text-[8px] text-slate-500">${tr('Peso kg')}<input type="number" min="0" step=".5" value="${x.weight}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'weight',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white"></label>
+  <label class="text-[8px] text-slate-500">RPE<input type="number" min="1" max="10" value="${x.rpe}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'rpe',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white"></label>
+  <label class="text-[8px] text-slate-500">${tr('Recupero sec')}<input type="number" min="0" value="${x.recovery}" oninput="updatePlanDraftFieldV7('${planBuilderDay}',${i},'recovery',this.value)" class="mt-1 w-full rounded-lg bg-slate-900 border border-slate-700 px-2 py-1.5 text-[10px] text-white"></label></div></div>`).join(''):`<div class="rounded-2xl border border-dashed border-slate-800 p-5 text-center text-[10px] text-slate-500">${tr('Nessun esercizio. Aggiungine uno oppure imposta Riposo.')}</div>`;
+}
+function saveWorkoutPlanV7(e){e.preventDefault();const name=document.getElementById('plan-name')?.value.trim();if(!name)return showToast(tr('Inserisci il nome della scheda'));const exercises=THALYS_WEEKDAYS.flatMap(d=>planBuilderRest.has(d)?[]:(planBuilderDraft[d]||[])).filter(x=>x.name).map(normalizePlanExerciseV7),restDays=[...planBuilderRest];if(!exercises.length&&!restDays.length)return showToast(tr('Imposta almeno un allenamento o un giorno di riposo'));const old=(appState.workoutPlans||[]).find(x=>x.id===editingWorkoutPlanIdV7),p={...(old||{}),id:old?.id||('plan_'+Date.now()),name,exercises,restDays,schemaVersion:2,updatedAt:new Date().toISOString()};if(old)appState.workoutPlans[appState.workoutPlans.findIndex(x=>x.id===old.id)]=p;else appState.workoutPlans.push(p);saveStateToLocal();cancelPlanBuilder();renderWorkoutPlans();refreshConsultSelectors();showToast(old?tr('Scheda modificata ✓'):tr('Scheda salvata!'));}
+function editWorkoutPlan(id){const p0=(appState.workoutPlans||[]).find(x=>x.id===id);if(!p0)return;resetPlanBuilderV7();editingWorkoutPlanIdV7=id;const p=normalizeWorkoutPlanV7(p0);p.exercises.forEach(x=>(planBuilderDraft[x.dayOfWeek] ||= []).push({...x}));planBuilderRest=new Set(p.restDays||[]);document.getElementById('plan-name').value=p.name;document.getElementById('plan-builder-panel')?.classList.remove('hidden');document.getElementById('workout-plan-library')?.classList.add('hidden');renderPlanBuilderV7();}
+function renderWorkoutPlans(){const list=document.getElementById('workout-plans-list');if(!list)return;const ps=(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7);list.innerHTML=ps.length?ps.map(p=>`<div class="rounded-2xl border ${p.id===appState.activeWorkoutPlanId?'border-emerald-500/35':'border-slate-800'} bg-slate-900/60 p-3"><button type="button" onclick="viewWorkoutPlan('${p.id}')" class="w-full text-left"><div class="flex justify-between"><b class="text-sm text-white">${escapeHTML(p.name)}</b>${p.id===appState.activeWorkoutPlanId?'<span class="text-[8px] font-black text-emerald-300">ATTIVA</span>':''}</div><div class="mt-1 text-[9px] text-slate-500">${p.exercises.length} ${tr('esercizi')} · ${p.restDays.length} ${tr('giorni riposo')} · ${tr('Tocca per visualizzare')}</div></button><div class="mt-2 flex gap-2"><button type="button" onclick="viewWorkoutPlan('${p.id}')" class="flex-1 rounded-lg bg-slate-800 py-2 text-[9px] font-bold text-cyan-300">${tr('Visualizza')}</button><button type="button" onclick="editWorkoutPlan('${p.id}')" class="rounded-lg bg-slate-800 px-3 text-[9px] text-violet-300">${tr('Modifica')}</button><button type="button" onclick="deleteWorkoutPlan('${p.id}')" class="rounded-lg bg-rose-500/10 px-3 text-rose-300"><i class="fa-solid fa-trash"></i></button></div></div>`).join(''):`<div class="p-5 text-center text-[10px] text-slate-500">${tr('Nessuna scheda salvata.')}</div>`;}
+function viewWorkoutPlan(id,d='Lunedì'){planViewerIdV7=id;planViewerDayV7=d;renderPlanViewerV7();openModal('workout-plan-viewer-modal');}
+function selectPlanViewerDayV7(d){planViewerDayV7=d;renderPlanViewerV7();}
+function renderPlanViewerV7(){const raw=(appState.workoutPlans||[]).find(x=>x.id===planViewerIdV7);if(!raw)return;const p=normalizeWorkoutPlanV7(raw),ds=document.getElementById('plan-view-days'),box=document.getElementById('plan-view-content');document.getElementById('plan-view-title').textContent=p.name;ds.innerHTML=THALYS_WEEKDAYS.map(d=>`<button type="button" onclick="selectPlanViewerDayV7('${d}')" class="v7-day-btn ${d===planViewerDayV7?'active':''}">${tr(d)}<div class="mt-1 text-[8px] opacity-60">${p.restDays.includes(d)?'🌙 '+tr('Riposo'):p.exercises.filter(x=>x.dayOfWeek===d).length+' '+tr('esercizi')}</div></button>`).join('');const ex=p.exercises.filter(x=>x.dayOfWeek===planViewerDayV7);box.innerHTML=p.restDays.includes(planViewerDayV7)||!ex.length?`<div class="h-full flex items-center justify-center text-center"><div><div class="text-4xl">🌙</div><div class="mt-3 font-black text-violet-200">${tr('Giorno di riposo')}</div></div></div>`:ex.map(x=>`<div class="mb-2 rounded-xl bg-slate-900/75 p-3"><div class="flex justify-between"><b class="text-xs text-white">${escapeHTML(x.name)}</b><span class="text-[8px] text-cyan-300">${x.category}</span></div><div class="mt-2 text-[10px] text-slate-400"><b class="text-white">${x.series} ${tr('serie')}</b> × ${x.reps} reps · ${x.weight} kg · RPE ${x.rpe} · ${x.recovery}s</div></div>`).join('');document.getElementById('plan-view-edit').onclick=()=>{closeModal('workout-plan-viewer-modal');editWorkoutPlan(p.id)};document.getElementById('plan-view-export').onclick=()=>exportWorkoutPlan(p.id);const a=document.getElementById('plan-view-activate');a.textContent=p.id===appState.activeWorkoutPlanId?tr('Scheda attiva'):tr('Rendi attiva');a.disabled=p.id===appState.activeWorkoutPlanId;a.onclick=()=>{activateWorkoutPlan(p.id);renderPlanViewerV7()};}
+function activateWorkoutPlan(id){const now=new Date().toISOString();appState.activeWorkoutPlanHistory=Array.isArray(appState.activeWorkoutPlanHistory)?appState.activeWorkoutPlanHistory:[];appState.activeWorkoutPlanHistory.filter(x=>!x.deactivatedAt&&x.planId!==id).forEach(x=>x.deactivatedAt=now);if(appState.activeWorkoutPlanId!==id){const p=(appState.workoutPlans||[]).find(x=>x.id===id);appState.activeWorkoutPlanHistory.push({id:'active_'+Date.now(),planId:id,planName:p?.name||'',activatedAt:now,deactivatedAt:null});}appState.activeWorkoutPlanId=id;saveStateToLocal();renderWorkouts();renderWorkoutPlans();renderHomeDashboard();showToast(`${tr('Scheda attiva')}: ${(appState.workoutPlans||[]).find(x=>x.id===id)?.name||''}`);}
+function importWorkoutPlanFile(){const i=document.createElement('input');i.type='file';i.accept='application/json';i.onchange=e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x?.name||!Array.isArray(x.exercises))throw 0;appState.workoutPlans.push(normalizeWorkoutPlanV7({...x,id:x.id||('plan_'+Date.now())}));saveStateToLocal();renderWorkoutPlans();showToast(tr('Scheda importata'));}catch(_){showToast(tr('File schema non valido'));}};r.readAsText(f)};i.click();}
+
+/* Active workout and history */
+function recordCompletedWorkoutDayV7(date,plan){const p=normalizeWorkoutPlanV7(plan),ex=getExercisesForDate(p,date);if(!ex.length)return;appState.workoutHistory=Array.isArray(appState.workoutHistory)?appState.workoutHistory:[];const id=`${date}|${p.id}`,rec={id,date,planId:p.id,planName:p.name,weekday:getItalianWeekday(date),completedAt:new Date().toISOString(),exercises:ex.map(x=>({...x,sets:Array.from({length:x.series},(_,i)=>({set:i+1,weight:x.weight,reps:x.reps}))}))},old=appState.workoutHistory.find(x=>x.id===id);if(old)Object.assign(old,rec);else appState.workoutHistory.push(rec);appState.workouts=(appState.workouts||[]).filter(x=>!(x.source==='plan'&&x.date===date&&x.planId===p.id));rec.exercises.forEach(x=>appState.workouts.push({id:`wh_${date}_${p.id}_${x.id}`,date,planId:p.id,planName:p.name,name:x.name,category:x.category,rpe:x.rpe,recovery:x.recovery,series:x.series,sets:x.sets.map(s=>({weight:s.weight,reps:s.reps})),source:'plan',completedAt:rec.completedAt}));}
+function removeCompletedWorkoutDayV7(date,id){appState.workoutHistory=(appState.workoutHistory||[]).filter(x=>!(x.date===date&&x.planId===id));appState.workouts=(appState.workouts||[]).filter(x=>!(x.source==='plan'&&x.date===date&&x.planId===id));}
+function updateWorkoutCompletion(date,id){const p=(appState.workoutPlans||[]).find(x=>x.id===id);if(!p)return;const ex=getExercisesForDate(p,date),c=getWorkoutCompletion(date,id),done=ex.filter(x=>c.exercises?.[x.id]).length;c.planId=id;c.completedAt=ex.length&&done===ex.length?new Date().toISOString():null;appState.workoutCompletions[date]=c;if(c.completedAt)recordCompletedWorkoutDayV7(date,p);else removeCompletedWorkoutDayV7(date,id);saveStateToLocal();renderWorkouts();renderHomeDashboard();updateAnalyticsCharts();checkWorkoutMilestones(date);}
+function toggleWorkoutPlanComplete(date,id,on){const p=(appState.workoutPlans||[]).find(x=>x.id===id);if(!p)return;const c=getWorkoutCompletion(date,id);c.exercises={};getExercisesForDate(p,date).forEach(x=>c.exercises[x.id]=!!on);appState.workoutCompletions[date]=c;updateWorkoutCompletion(date,id);}
+function renderWorkouts(){const date=document.getElementById('workout-date')?.value||currentLocalDateStr(),box=document.getElementById('workout-list');if(!box)return;box.innerHTML='';const raw=getActiveWorkoutPlan();if(!raw){box.innerHTML=`<div class="p-8 text-center rounded-3xl border border-dashed border-slate-800"><div class="text-sm font-black">${tr('Nessuna scheda attiva')}</div><button type="button" onclick="openWorkoutPlans()" class="mt-3 rounded-xl bg-cyan-500 px-4 py-2 text-xs font-black text-slate-950">${tr('Apri Schede')}</button></div>`;return;}const p=normalizeWorkoutPlanV7(raw),day=getItalianWeekday(date),ex=getExercisesForDate(p,date);if(isPlanRestDay(p,date)){box.innerHTML=`<div class="rounded-3xl border border-violet-500/20 bg-slate-950 p-4"><div class="text-[9px] text-cyan-300">${tr('Scheda attiva')}</div><div class="text-lg font-black">${escapeHTML(p.name)} 🌙</div><div class="py-10 text-center"><div class="text-5xl">🌙</div><div class="mt-3 text-xl font-black text-violet-200">${tr('Giorno di riposo')}</div></div></div>`;return;}const c=getWorkoutCompletion(date,p.id),done=ex.filter(x=>c.exercises?.[x.id]).length,pct=Math.round(done/Math.max(1,ex.length)*100);box.innerHTML=`<div class="rounded-3xl border border-cyan-500/25 bg-slate-950 p-4"><div class="text-[9px] text-cyan-300">${tr('Scheda attiva')}</div><div class="text-lg font-black">${escapeHTML(p.name)}</div><div class="mt-1 text-[9px] text-slate-500">${tr(day)}</div><div class="mt-3 space-y-2">${ex.map(x=>{const ok=!!c.exercises?.[x.id];return `<label class="flex gap-3 rounded-2xl border ${ok?'border-emerald-500/30':'border-slate-800'} bg-slate-900/70 p-3"><input type="checkbox" ${ok?'checked':''} onchange="toggleWorkoutExerciseComplete('${date}','${p.id}','${x.id}',this.checked)" class="h-5 w-5 accent-emerald-500"><div class="flex-1"><b class="${ok?'line-through text-emerald-300':'text-white'}">${escapeHTML(x.name)}</b><div class="mt-1 text-[10px] text-slate-400"><b>${x.series} ${tr('serie')}</b> × ${x.reps} reps · ${x.weight} kg · RPE ${x.rpe} · ${x.recovery}s</div></div></label>`}).join('')}</div><label class="mt-3 flex justify-between rounded-xl bg-slate-900 p-3 text-[10px] font-bold"><span>${pct===100?'🏆 '+tr('Allenamento completato'):`${done}/${ex.length} ${tr('esercizi completati')}`}</span><input type="checkbox" ${pct===100?'checked':''} onchange="toggleWorkoutPlanComplete('${date}','${p.id}',this.checked)" class="accent-emerald-500"></label></div>`;}
+function openWorkoutHistory(){const d=document.getElementById('workout-history-date');if(d)d.value=currentLocalDateStr();renderWorkoutHistory();openModal('workout-history-modal');}
+function setWorkoutHistoryDate(d){const e=document.getElementById('workout-history-date');if(e)e.value=d;renderWorkoutHistory();}
+function renderWorkoutHistory(){const box=document.getElementById('workout-history-list');if(!box)return;const d=document.getElementById('workout-history-date')?.value||'',rows=[...(appState.workoutHistory||[])].filter(x=>!d||x.date===d).sort((a,b)=>String(b.date).localeCompare(String(a.date)));box.innerHTML=rows.length?rows.map(r=>`<div class="rounded-2xl bg-slate-900/65 p-3"><div class="flex justify-between"><b>${escapeHTML(r.planName)}</b><span class="text-[9px] text-emerald-300">${r.date}</span></div><div class="mt-2 space-y-1">${(r.exercises||[]).map(x=>`<div class="rounded-xl bg-slate-950 p-2 text-[9px]"><b>${escapeHTML(x.name)}</b><div class="text-slate-500">${x.series||x.sets?.length||0} ${tr('serie')} × ${x.reps} · ${x.weight} kg · RPE ${x.rpe} · ${x.recovery}s</div></div>`).join('')}</div></div>`).join(''):`<div class="p-5 text-center text-[10px] text-slate-500">${tr('Nessun allenamento completato per il filtro scelto.')}</div>`;}
+function openMealHistory(){clearMealHistoryFilter(false);renderMealHistory();openModal('meal-history-modal');}
+function clearMealHistoryFilter(r=true){for(const id of ['meal-history-from','meal-history-to']){const e=document.getElementById(id);if(e)e.value=''}if(r)renderMealHistory();}
+function setMealHistoryToday(){const d=currentLocalDateStr();document.getElementById('meal-history-from').value=d;document.getElementById('meal-history-to').value=d;renderMealHistory();}
+function renderMealHistory(){const box=document.getElementById('meal-history-list');if(!box)return;let a=document.getElementById('meal-history-from')?.value||'',b=document.getElementById('meal-history-to')?.value||'';if(a&&b&&a>b)[a,b]=[b,a];const rows=(appState.nutrition||[]).filter(x=>(!a||x.date>=a)&&(!b||x.date<=b)),dates=[...new Set(rows.map(x=>x.date))].sort().reverse();box.innerHTML=dates.length?dates.map(d=>`<div class="rounded-2xl bg-slate-900/60 p-3"><div class="flex justify-between"><b>${weekdayLabel(d)}</b><span class="text-[9px] text-emerald-300">${d}</span></div><div class="mt-2 space-y-2">${['Colazione','Pranzo','Cena','Spuntino'].map(m=>{const xs=rows.filter(x=>x.date===d&&x.meal===m);return `<div class="rounded-xl bg-slate-950 p-2"><b class="text-[9px] text-emerald-300">${tr(m)}</b>${xs.length?xs.map(x=>`<div class="mt-1 flex justify-between text-[9px]"><span>${escapeHTML(x.name)} · ${x.grams}g</span><span class="text-slate-500">${Math.round(x.kcal||0)} kcal</span></div>`).join(''):`<div class="mt-1 text-[9px] text-slate-600">${tr('Nessun alimento')}</div>`}</div>`}).join('')}</div></div>`).join(''):`<div class="p-5 text-center text-[10px] text-slate-500">${tr('Nessun pasto nel periodo selezionato.')}</div>`;}
+
+/* Nutrition donuts */
+function nutritionPeriodDataV7(){const mode=document.getElementById('nutrition-donut-period')?.value||'day',ref=document.getElementById('nutrition-date')?.value||currentLocalDateStr();let dates=[],mult=1,label='';if(mode==='day'){dates=[ref];label=tr('Target del giorno selezionato')}else if(mode==='7'){for(let i=6;i>=0;i--){const d=new Date(ref+'T12:00:00');d.setDate(d.getDate()-i);dates.push(d.toISOString().slice(0,10))}mult=7;label=tr('Target × 7 giorni')}else{const d=new Date(ref+'T12:00:00'),n=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();for(let i=1;i<=n;i++)dates.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`);mult=n;label=`${tr('Target mensile')} × ${n} ${tr('giorni')}`}const logs=(appState.nutrition||[]).filter(x=>dates.includes(x.date)),sum=k=>logs.reduce((s,x)=>s+Number(x[k]||0),0);return {dates,mult,label,water:dates.reduce((s,d)=>s+Number(appState.water?.[d]||0),0),vitId:mergeVitaminCodes(logs.map(x=>x.vitaminsId),'id'),vitLip:mergeVitaminCodes(logs.map(x=>x.vitaminsLip),'lip'),v:{p:sum('p'),c:sum('c'),f:sum('f'),satFat:sum('satFat'),sugars:sum('sugars'),fiber:sum('fiber'),calcium:sum('calcium'),magnesium:sum('magnesium'),zinc:sum('zinc'),iron:sum('iron'),potassium:sum('potassium'),salt:sum('salt')}};}
+function donutDefsV7(d){const t=appState.targets||{},m=d.mult;return {macro:[['p','Proteine','g',t.p||150,'251,113,133'],['c','Carboidrati','g',t.c||250,'251,191,36'],['f','Grassi','g',t.f||70,'96,165,250'],['satFat','Grassi saturi','g',t.satFat||20,'56,189,248',1],['sugars','Zuccheri','g',t.sugars||50,'167,139,250',1],['fiber','Fibre','g',t.fiber||30,'244,114,182']].map(x=>({key:x[0],label:x[1],unit:x[2],value:d.v[x[0]],target:Number(x[3])*m,rgb:x[4],max:!!x[5]})),micro:[['calcium','Calcio','mg',t.calcium||1000,'34,211,238'],['magnesium','Magnesio','mg',t.magnesium||350,'52,211,153'],['zinc','Zinco','mg',t.zinc||11,'45,212,191'],['iron','Ferro','mg',t.iron||11,'251,146,60'],['potassium','Potassio','mg',t.potassium||3500,'163,230,53'],['salt','Sale','g',t.salt||5,'232,121,249',1]].map(x=>({key:x[0],label:x[1],unit:x[2],value:d.v[x[0]],target:Number(x[3])*m,rgb:x[4],max:!!x[5]})).concat([{label:'Acqua',unit:'ml',value:d.water,target:getWaterTarget(d.dates.at(-1))*m,rgb:'96,165,250'},{label:'Vitamine ID',unit:'/9',value:d.vitId?d.vitId.split(/\s+/).filter(Boolean).length:0,target:9,rgb:'129,140,248'},{label:'Vitamine LIP',unit:'/4',value:d.vitLip?d.vitLip.split(/\s+/).filter(Boolean).length:0,target:4,rgb:'250,204,21'}])};}
+function nutrientScoreV7(x){return Math.round(nutritionScore(x.value,x.target,x.max));}
+function showDonutNutrientV7(kind,x){const e=document.getElementById(kind==='macro'?'macro-donut-selection-v7':'micro-donut-selection-v7'),s=nutrientScoreV7(x);if(e)e.innerHTML=`<b>${tr(x.label)}</b><div class="mt-1 text-slate-400">${Number(x.value.toFixed(1))} ${x.unit} / ${x.max?tr('limite'):tr('target')} ${x.target} ${x.unit} · ${s}%</div>`;}
+function renderOneDonutV7(kind,defs){const cv=document.getElementById(kind==='macro'?'macroNutrientDonutV7':'microNutrientDonutV7');if(!cv||!window.Chart)return;const old=kind==='macro'?chartMacroV7:chartMicroV7;if(old)old.destroy();const ch=new Chart(cv.getContext('2d'),{type:'doughnut',data:{labels:defs.map(x=>tr(x.label)),datasets:[{data:defs.map(()=>1),backgroundColor:defs.map(x=>`rgba(${x.rgb},${(.28+.72*nutrientScoreV7(x)/100).toFixed(2)})`),borderColor:'rgba(15,23,42,.96)',borderWidth:4,hoverOffset:9}]},options:{responsive:true,maintainAspectRatio:false,cutout:'63%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const x=defs[c.dataIndex];return `${tr(x.label)} · ${Number(x.value.toFixed(1))}${x.unit} / ${x.target}${x.unit}`}}}},onClick:(evt,els)=>{if(els.length)showDonutNutrientV7(kind,defs[els[0].index])}}});if(kind==='macro')chartMacroV7=ch;else chartMicroV7=ch;const score=Math.round(defs.reduce((s,x)=>s+nutrientScoreV7(x),0)/defs.length),se=document.getElementById(kind==='macro'?'macro-donut-score-v7':'micro-donut-score-v7');if(se)se.textContent=`${tr('Equilibrio')} ${score}%`;const leg=document.getElementById(kind==='macro'?'macro-donut-legend-v7':'micro-donut-legend-v7');if(leg){leg.innerHTML='';defs.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='min-h-10 rounded-xl bg-slate-900/70 p-2 text-left text-[9px]';b.innerHTML=`<span class="inline-block h-2 w-2 rounded-full mr-1" style="background:rgb(${x.rgb})"></span>${tr(x.label)} <b class="float-right">${nutrientScoreV7(x)}%</b>`;b.onclick=()=>showDonutNutrientV7(kind,x);leg.appendChild(b)})}}
+function renderNutritionDonutsV7(){const d=nutritionPeriodDataV7(),e=document.getElementById('nutrition-donut-period-label');if(e)e.textContent=d.label;const defs=donutDefsV7(d);renderOneDonutV7('macro',defs.macro);renderOneDonutV7('micro',defs.micro);}
+const _renderNutritionV6=renderNutrition;renderNutrition=function(){_renderNutritionV6();requestAnimationFrame(renderNutritionDonutsV7)};
+
+/* Analytics */
+function shortWellnessIssueV7(entries){if(!entries?.length)return tr('Nessun dato');const av=k=>entries.reduce((s,x)=>s+Number(x[k]||0),0)/entries.length,issues=[];if(av('sleepHours')<7)issues.push(tr('sonno'));if(av('stress')>6)issues.push(tr('stress'));if(av('recovery')<6)issues.push(tr('recupero'));return issues.length?`${tr('Migliora')}: ${issues.join(', ')}`:tr('Parametri principali ok');}
+const _renderWellnessSummaryV6=renderWellnessSummary;renderWellnessSummary=function(){_renderWellnessSummaryV6();const ref=analyticsSelectedDate||currentLocalDateStr(),dates=[];for(let i=0;i<7;i++){const d=new Date(ref+'T12:00:00');d.setDate(d.getDate()-i);dates.push(d.toISOString().slice(0,10))}const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('health-daily-detail',shortWellnessIssueV7((appState.wellness||[]).filter(x=>x.date===ref)));set('health-weekly-detail',shortWellnessIssueV7((appState.wellness||[]).filter(x=>dates.includes(x.date))));set('health-monthly-detail',shortWellnessIssueV7((appState.wellness||[]).filter(x=>String(x.date).startsWith(ref.slice(0,7)))));}
+function populatePlanHistoryAnalyticsV7(){const s=document.getElementById('chart-plan-history-select');if(!s)return;const cur=s.value,m=new Map();(appState.activeWorkoutPlanHistory||[]).forEach(x=>m.set(x.planId,x.planName||x.planId));(appState.workoutHistory||[]).forEach(x=>m.set(x.planId,x.planName||x.planId));s.innerHTML=`<option value="all">${tr('Tutte le schede')}</option>`+[...m].map(([id,n])=>`<option value="${id}">${escapeHTML(n)}</option>`).join('');if([...s.options].some(o=>o.value===cur))s.value=cur;}
+function updateExerciseChartV7(){const ps=document.getElementById('chart-plan-history-select'),es=document.getElementById('chart-exercise-select'),ctx=document.getElementById('exerciseProgressChart')?.getContext('2d');if(!ctx)return;populatePlanHistoryAnalyticsV7();const pid=ps?.value||'all',day=document.getElementById('chart-specific-date')?.value||'';let rows=(appState.workouts||[]).filter(x=>x.planId);if(pid!=='all')rows=rows.filter(x=>x.planId===pid);if(day)rows=rows.filter(x=>x.date===day);const names=[...new Set(rows.map(x=>x.name))].sort(),old=es?.value;if(es){es.innerHTML=names.length?names.map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(x)}</option>`).join(''):`<option>${tr('Nessun esercizio')}</option>`;if(names.includes(old))es.value=old;}const n=es?.value||names[0],data=rows.filter(x=>x.name===n).sort((a,b)=>String(a.date).localeCompare(String(b.date))),max=data.map(x=>Math.max(0,...(x.sets||[]).map(s=>Number(s.weight||0)))),vol=data.map(x=>(x.sets||[]).reduce((s,q)=>s+Number(q.weight||0)*Number(q.reps||0),0));if(chartEx)chartEx.destroy();chartEx=new Chart(ctx,{type:'line',data:{labels:data.map(x=>x.date),datasets:[{label:tr('Peso massimo kg'),data:max,borderColor:'#22d3ee',tension:.3,yAxisID:'y'},{label:tr('Volume kg'),data:vol,borderColor:'#34d399',tension:.3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#cbd5e1',font:{size:9}}}},scales:{y1:{position:'right',grid:{drawOnChartArea:false}}}}});}
+const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=function(){_updateAnalyticsChartsV6();const d=document.getElementById('chart-specific-date')?.value,s=document.getElementById('analytics-filter-summary');if(d&&s)s.textContent+=` · ${tr('giorno')}: ${d}`;updateExerciseChartV7();renderWellnessSummary();};
+
+/* Drive database payload and single first-run consent */
+function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
+const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=7`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
+
+function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
+document.addEventListener('DOMContentLoaded',()=>{appState.workoutHistory=Array.isArray(appState.workoutHistory)?appState.workoutHistory:[];appState.activeWorkoutPlanHistory=Array.isArray(appState.activeWorkoutPlanHistory)?appState.activeWorkoutPlanHistory:[];appState.workoutPlans=(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7);loadExternalAvatarArtwork();reorderSettingsV7();setTimeout(()=>{renderNutritionDonutsV7();populatePlanHistoryAnalyticsV7()},350);});
+
+
+const _getAnalyticsFilterV6=getAnalyticsFilter;
+getAnalyticsFilter=function(){
+  const specific=document.getElementById('chart-specific-date')?.value||'';
+  if(!specific)return _getAnalyticsFilterV6();
+  const value=document.getElementById('chart-workout-filter')?.value||'all';
+  const periodDates=new Set([specific]);
+  const allowedDates=new Set(value==='all'?[specific]:(appState.workouts||[]).filter(w=>w.date===specific&&(w.category===value||w.name===value||w.planName===value)).map(w=>w.date));
+  const d=new Date(specific+'T12:00:00');
+  return {value,days:'1',start:d,end:d,allowedDates,periodDates};
+};
+
 </script>
 <style>
   /* Thalys mobile / iPhone polish */

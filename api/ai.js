@@ -180,6 +180,7 @@ Return exactly:
 {
   "workoutPlan": {
     "name": "short plan name",
+    "restDays": ["Martedì", "Domenica"],
     "exercises": [
       {
         "name": "exercise name",
@@ -187,6 +188,7 @@ Return exactly:
         "category": "Petto|Dorso|Gambe|Braccia|Core|Cardio|Altro",
         "rpe": 8,
         "weight": 0,
+        "series": 3,
         "reps": 8,
         "recovery": 90
       }
@@ -196,9 +198,11 @@ Return exactly:
 }
 
 IMPORTANT:
-- dayOfWeek MUST use the canonical Italian weekday values shown above because this is the import schema, even if the user interface is another language.
+- dayOfWeek and restDays MUST use the canonical Italian weekday values shown above because this is the import schema, even if the user interface is another language.
+- Use restDays for explicitly programmed rest days.
 - Preserve exercises or structure that already fit the goal.
 - Use weight 0 when the supplied data does not justify a specific load.
+- Every exercise MUST include "series" as an integer >= 1.
 - The plan must be importable by Thalys and must not contain extra fields inside each exercise.`;
   }
 
