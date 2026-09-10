@@ -36,6 +36,8 @@
   
   <!-- Chart.js for interactive analytics -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- html2pdf for styled consultation exports -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Google Identity Services -->
@@ -1748,10 +1750,15 @@
     .consult-filter-chip{min-height:34px;border:1px solid rgba(71,85,105,.75);background:rgba(15,23,42,.72);border-radius:999px;padding:.35rem .65rem;color:#94a3b8;font-size:9px;font-weight:800;touch-action:manipulation}
     .consult-filter-chip.active{border-color:rgba(103,232,249,.45);background:rgba(6,182,212,.13);color:#a5f3fc}
     #tab-consult select,#tab-consult input,#tab-consult textarea{position:relative;z-index:2}
-    .food-db-shell{height:min(92dvh,860px)}
-    .food-ai-form:not(.hidden){flex:0 0 auto;min-height:min(48dvh,450px);max-height:min(56dvh,520px)}
-    .food-db-list{min-height:120px;max-height:190px}
-    @media(max-height:740px){.food-ai-form:not(.hidden){min-height:43dvh;max-height:50dvh}.food-db-list{min-height:100px;max-height:145px}}
+    .food-db-shell{height:min(92dvh,860px);max-height:92dvh!important;overflow:hidden!important}
+    .food-db-list{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto}
+    .food-ai-form{transition:max-height .22s ease,flex-basis .22s ease,opacity .18s ease}
+    .food-db-shell.food-form-open .food-ai-form:not(.hidden){flex:0 0 min(46dvh,440px);min-height:min(42dvh,390px);max-height:min(46dvh,440px)}
+    .food-db-shell.food-form-open .food-db-list{flex:1 1 auto;min-height:115px;max-height:min(28dvh,245px)}
+    @media(max-height:740px){
+      .food-db-shell.food-form-open .food-ai-form:not(.hidden){flex-basis:43dvh;min-height:39dvh;max-height:43dvh}
+      .food-db-shell.food-form-open .food-db-list{min-height:90px;max-height:24dvh}
+    }
 
   </style>
 
@@ -1917,6 +1924,7 @@
         if (remember) localStorage.setItem('google_id_token', idToken);
         else sessionStorage.setItem('google_id_token', idToken);
         const payload = parseJwt(idToken);
+        if(payload)try{sessionStorage.setItem('gymbro_google_profile',JSON.stringify(payload));}catch(_){}
         unlockApp();
         setCloudUserUI(payload);
         updateAuthUI({ displayName: payload && (payload.name || payload.given_name || payload.email), email: payload && payload.email });
@@ -2492,19 +2500,41 @@
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-orange-300">Ferro</span><span class="text-slate-400"><span id="summary-iron">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-iron" class="h-full bg-orange-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-iron">11</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-lime-300">Potassio</span><span class="text-slate-400"><span id="summary-potassium">0</span>mg</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-potassium" class="h-full bg-lime-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Target: <span id="target-potassium">3500</span>mg</div></div>
             <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80"><div class="flex justify-between text-[11px] font-semibold"><span class="text-fuchsia-300">Sale</span><span class="text-slate-400"><span id="summary-salt">0</span>g</span></div><div class="mt-1 w-full h-1.5 bg-slate-800 rounded-full overflow-hidden"><div id="bar-salt" class="h-full bg-fuchsia-400" style="width:0%"></div></div><div class="text-[9px] text-slate-500 mt-1 text-right">Max: <span id="target-salt">5</span>g</div></div>
-            <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80">
-              <div class="text-[11px] font-semibold text-indigo-300">Vitamine</div>
-              <div class="mt-2 grid grid-cols-2 gap-2">
-                <div class="rounded-lg bg-slate-950/45 p-2"><div class="text-[9px] font-bold text-indigo-300">ID</div><div id="summary-vitamins-id" class="mt-1 min-h-[1.2rem] text-[10px] font-bold text-slate-300">—</div><div class="text-[9px] text-slate-500 mt-1">B1 B2 B3 B5 B6 B7 B9 B12 C</div></div>
-                <div class="rounded-lg bg-slate-950/45 p-2"><div class="text-[9px] font-bold text-yellow-300">LIP</div><div id="summary-vitamins-lip" class="mt-1 min-h-[1.2rem] text-[10px] font-bold text-slate-300">—</div><div class="text-[9px] text-slate-500 mt-1">A D E K</div></div>
-              </div>
+            <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80 min-h-[86px]">
+              <div class="flex justify-between gap-2 text-[11px] font-semibold"><span class="text-indigo-300">Vitamine ID</span><span id="summary-vitamins-id-count" class="text-[9px] text-slate-500">0/9</span></div>
+              <div id="summary-vitamins-id" class="mt-2 min-h-[1.4rem] text-[10px] font-bold leading-relaxed text-slate-300">—</div>
+              <div class="mt-1 text-[9px] leading-relaxed text-slate-500">B1 · B2 · B3 · B5 · B6 · B7 · B9 · B12 · C</div>
+            </div>
+            <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-800/80 min-h-[86px]">
+              <div class="flex justify-between gap-2 text-[11px] font-semibold"><span class="text-yellow-300">Vitamine LIP</span><span id="summary-vitamins-lip-count" class="text-[9px] text-slate-500">0/4</span></div>
+              <div id="summary-vitamins-lip" class="mt-2 min-h-[1.4rem] text-[10px] font-bold leading-relaxed text-slate-300">—</div>
+              <div class="mt-1 text-[9px] leading-relaxed text-slate-500">A · D · E · K</div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-[1fr_110px] gap-3 items-center">
-          <div id="nutrition-week-summary" class="bg-slate-900/60 rounded-xl border border-slate-800 p-3 min-h-[96px]"></div>
-          <div class="flex items-center justify-center"><div id="macro-donut" class="h-20 w-20 rounded-full border border-slate-700 shadow-inner" style="background:conic-gradient(#f43f5e 0% 33%,#fbbf24 33% 66%,#60a5fa 66% 100%);"></div></div>
+        <div class="space-y-3">
+          <div id="nutrition-week-summary" class="bg-slate-900/60 rounded-2xl border border-slate-800 p-3 min-h-[96px]"></div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/45 p-3">
+            <div class="flex items-center justify-between gap-2">
+              <div><div class="text-[11px] font-black text-white">Riepilogo nutrienti · 7 giorni</div><div class="text-[9px] text-slate-500">Media giornaliera rispetto ai target impostati</div></div>
+              <span id="nutrition-week-score" class="rounded-lg bg-cyan-500/10 px-2 py-1 text-[10px] font-black text-cyan-300">0%</span>
+            </div>
+            <div id="nutrition-week-bars" class="mt-3 space-y-2"></div>
+            <div id="nutrition-week-vitamin-note" class="mt-3 rounded-xl bg-slate-950/45 p-2.5 text-[9px] leading-relaxed text-slate-500"></div>
+          </div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/45 p-3">
+            <div class="text-[11px] font-black text-white">Torta equilibrio di oggi</div>
+            <div class="mt-1 text-[9px] leading-relaxed text-slate-500">Ogni settore rappresenta un macro o micronutriente. L'intensità indica quanto sei vicino al target; per sale, zuccheri e saturi il punteggio cala quando superi il limite.</div>
+            <div class="mt-3 flex justify-center">
+              <div id="macro-donut" class="relative h-36 w-36 rounded-full border border-slate-700 shadow-inner">
+                <div class="absolute inset-[28px] flex items-center justify-center rounded-full border border-slate-800 bg-slate-950 text-center">
+                  <div><div id="nutrient-donut-score" class="text-xl font-black text-white">0%</div><div class="text-[8px] uppercase tracking-[.12em] text-slate-500">equilibrio</div></div>
+                </div>
+              </div>
+            </div>
+            <div id="nutrient-donut-legend" class="mt-4 grid grid-cols-2 gap-2"></div>
+          </div>
         </div>
       </div>
 
@@ -3028,6 +3058,25 @@
         I suggerimenti IA sono indicazioni generali basate sui dati selezionati: non sono una diagnosi né sostituiscono un professionista sanitario o un nutrizionista.
       </div>
     </section>
+
+    <!-- CONSULTATION SNAPSHOT DETAIL -->
+    <div id="consult-snapshot-modal" class="fixed inset-0 z-50 flex hidden items-end justify-center bg-slate-950/90 p-0 backdrop-blur-md sm:items-center sm:p-4">
+      <div class="w-full max-w-md rounded-t-3xl border-t border-cyan-500/20 bg-darkcard p-4 shadow-2xl sm:rounded-3xl sm:border max-h-[92dvh] overflow-hidden flex flex-col">
+        <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+          <div class="min-w-0">
+            <div class="text-[9px] uppercase tracking-[.2em] text-cyan-300">THALYS · CONSULTO</div>
+            <h3 id="consult-detail-title" class="mt-1 truncate text-base font-black text-white">Quadro generale</h3>
+            <div id="consult-detail-meta" class="mt-1 text-[9px] text-slate-500"></div>
+          </div>
+          <button type="button" onclick="closeModal('consult-snapshot-modal')" class="h-10 w-10 shrink-0 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="consult-detail-body" class="mt-3 flex-1 overflow-y-auto rounded-2xl bg-slate-950/55 p-3 text-[10px] leading-relaxed text-slate-300"></div>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <button id="consult-export-pdf-btn" type="button" class="min-h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-xs font-black text-slate-950"><i class="fa-solid fa-file-pdf mr-1"></i> Esporta PDF</button>
+          <button id="consult-export-txt-btn" type="button" class="min-h-11 rounded-xl border border-slate-700 bg-slate-900 text-xs font-black text-slate-200"><i class="fa-solid fa-file-lines mr-1"></i> Esporta TXT</button>
+        </div>
+      </div>
+    </div>
 
     <!-- ========================================== -->
     <!-- TAB 5: SETTINGS & BACKUP                   -->
@@ -4285,7 +4334,7 @@
     function databasePayloads(){
       const {consultations:_consultations,aiConsults:_aiConsults,...appCore}=appState||{};
       return {
-        'thalys_manifest.json':{app:'Thalys',schemaVersion:6,updatedAt:new Date().toISOString(),databaseVersion:4},
+        'thalys_manifest.json':{app:'Thalys',schemaVersion:7,updatedAt:new Date().toISOString(),databaseVersion:5},
         'app_state.json':{...appCore,photos:[],profilePhoto:null},
         'workouts.json':appState.workouts||[],
         'workout_plans.json':{plans:appState.workoutPlans||[],activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{}},
@@ -4568,6 +4617,7 @@
 
     let appState = JSON.parse(localStorage.getItem('thalys_data') || localStorage.getItem('gymbro_data')) || DEFAULT_STATE;
     appState = {...DEFAULT_STATE, ...appState, profile:{...DEFAULT_STATE.profile,...(appState.profile||{})}, targets:{...DEFAULT_STATE.targets,...(appState.targets||{})}, settings:{...DEFAULT_STATE.settings,...(appState.settings||{})}, avatar:{...DEFAULT_STATE.avatar,...(appState.avatar||{})}};
+    appState.profile.gender=normalizeProfileGenderValue(appState.profile.gender);
     const legacyFoodDb = localStorage.getItem('thalys_foods');
     if (legacyFoodDb) {
       try {
@@ -4756,7 +4806,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:5,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:6,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4778,7 +4828,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=5`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=6`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4789,7 +4839,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v5`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v6`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4798,7 +4848,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v5`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v6`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4809,7 +4859,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v5`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v6`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -5111,13 +5161,157 @@
         </div>`).join(''):`<div class="rounded-xl bg-slate-900/50 p-4 text-center text-[10px] text-slate-500">${tr('Nessun quadro salvato.')}</div>`;
     }
     function formatConsultDate(d){try{return new Date((d||currentLocalDateStr())+'T12:00:00').toLocaleDateString(currentLocale(),{day:'2-digit',month:'short',year:'numeric'})}catch(_){return d||''}}
+    function consultExportSafeName(record,ext){
+      const type=(record?.type||'consulto').replace(/[^a-z0-9_-]/gi,'_');
+      const date=record?.date||currentLocalDateStr();
+      return `Thalys_${type}_${date}.${ext}`;
+    }
+    function consultSnapshotText(record){
+      if(!record)return '';
+      const header=[
+        'THALYS · CONSULTO',
+        '================',
+        `${tr('Tipo')}: ${consultTypeLabel(record.type)}`,
+        `${tr('Data')}: ${formatConsultDate(record.date)}`,
+        `${tr('Periodo')}: ${record.period?.from||'—'} → ${record.period?.to||'—'}`,
+        `${tr('Obiettivo')}: ${record.goal||'—'}`,
+        '',
+        `${tr('Quadro generale')}`,
+        '----------------',
+        JSON.stringify(record.snapshot||{},null,2)
+      ];
+      return header.join('\n');
+    }
+    function downloadTextFile(filename,content){
+      const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
+      const url=URL.createObjectURL(blob),a=document.createElement('a');
+      a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1500);
+    }
+    function exportConsultSnapshotTXT(id){
+      const record=(appState.consultations||[]).find(x=>x.id===id);if(!record)return;
+      downloadTextFile(consultExportSafeName(record,'txt'),consultSnapshotText(record));
+      showToast(tr('Consulto esportato in formato testo'),'fa-file-lines');
+    }
+    function thalysPdfLogoMarkup(){
+      return `<div style="display:flex;align-items:center;gap:12px">
+        <svg viewBox="0 0 64 64" width="44" height="44" aria-hidden="true">
+          <defs><linearGradient id="pdfLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7f3d0"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs>
+          <circle cx="32" cy="32" r="27" fill="none" stroke="#67e8f9" stroke-opacity=".65" stroke-width="2"/>
+          <path d="M16 18h31v7c-4-3-8-4-12-4h-1v23c0 4 1 7 4 9H24c3-2 4-5 4-9V21h-1c-4 0-8 1-11 4v-7z" fill="#f8fafc"/>
+          <path d="M27 50c5-13 14-21 27-24-2 12-9 21-21 27 4-5 8-10 10-15-5 4-10 8-16 12z" fill="url(#pdfLeaf)"/>
+        </svg>
+        <div><div style="font-size:25px;font-weight:900;letter-spacing:.04em;color:#ecfeff">THALYS</div><div style="font-size:9px;letter-spacing:.24em;color:#67e8f9">WELLNESS · CONSULTO</div></div>
+      </div>`;
+    }
+    function consultPdfSection(title,value){
+      const content=escapeHTML(typeof value==='string'?value:JSON.stringify(value,null,2));
+      return `<section style="margin-top:14px;padding:14px;border:1px solid #1e293b;border-radius:14px;background:#0f172a;page-break-inside:avoid">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.08em;color:#67e8f9;text-transform:uppercase">${escapeHTML(title)}</div>
+        <pre style="margin:8px 0 0;white-space:pre-wrap;word-break:break-word;font:10px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#cbd5e1">${content}</pre>
+      </section>`;
+    }
+    async function exportConsultSnapshotPDF(id){
+      const record=(appState.consultations||[]).find(x=>x.id===id);if(!record)return;
+      if(!window.html2pdf){
+        showToast(tr('Modulo PDF in caricamento. Riprova tra un secondo.'),'fa-clock');
+        return;
+      }
+      const root=document.createElement('div');
+      root.style.cssText='position:fixed;left:-10000px;top:0;width:794px;padding:42px;background:#090d16;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;z-index:-1';
+      const sections=Object.entries(record.snapshot||{}).map(([k,v])=>consultPdfSection(tr(k),v)).join('');
+      root.innerHTML=`<div style="border-bottom:2px solid #164e63;padding-bottom:18px">${thalysPdfLogoMarkup()}</div>
+        <div style="margin-top:22px">
+          <div style="font-size:9px;letter-spacing:.16em;color:#94a3b8;text-transform:uppercase">${escapeHTML(consultTypeLabel(record.type))}</div>
+          <div style="margin-top:5px;font-size:22px;font-weight:900;color:#ffffff">${escapeHTML(tr('Quadro generale'))}</div>
+          <div style="margin-top:8px;font-size:11px;color:#94a3b8">${escapeHTML(formatConsultDate(record.date))} · ${escapeHTML(record.period?.from||'—')} → ${escapeHTML(record.period?.to||'—')}</div>
+          <div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:#083344;color:#cffafe;font-size:11px"><b>${escapeHTML(tr('Obiettivo'))}:</b> ${escapeHTML(record.goal||'—')}</div>
+        </div>
+        ${sections}
+        <div style="margin-top:20px;border-top:1px solid #1e293b;padding-top:12px;font-size:8px;color:#64748b">Thalys · ${escapeHTML(tr('Dati esportati dal quadro salvato'))}</div>`;
+      document.body.appendChild(root);
+      try{
+        await html2pdf().set({
+          margin:[8,8,10,8],
+          filename:consultExportSafeName(record,'pdf'),
+          image:{type:'jpeg',quality:.96},
+          html2canvas:{scale:2,useCORS:true,backgroundColor:'#090d16'},
+          jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+          pagebreak:{mode:['css','legacy']}
+        }).from(root).save();
+        showToast(tr('Consulto esportato in PDF'),'fa-file-pdf');
+      }catch(e){
+        console.error('Consult PDF',e);
+        showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');
+      }finally{root.remove();}
+    }
+    function aiConsultText(record){
+      if(!record)return '';
+      return [
+        'THALYS · RISPOSTA IA',
+        '====================',
+        `${tr('Tipo')}: ${tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[record.type]||record.type)}`,
+        `${tr('Data')}: ${formatConsultDate(record.date)}`,
+        `${tr('Obiettivo')}: ${record.goal||'—'}`,
+        `${tr('Richiesta specifica')}: ${record.specificRequest||'—'}`,
+        '',
+        `${tr('Risposta IA')}`,
+        '-----------',
+        JSON.stringify(record.response||{},null,2),
+        record.generatedWorkoutPlan?`\n${tr('Scheda generata')}\n---------------\n${JSON.stringify(record.generatedWorkoutPlan,null,2)}`:''
+      ].join('\n');
+    }
+    function exportAIConsultTXT(id){
+      const record=(appState.aiConsults||[]).find(x=>x.id===id);if(!record)return;
+      downloadTextFile(`Thalys_AI_${record.type||'consulto'}_${record.date||currentLocalDateStr()}.txt`,aiConsultText(record));
+      showToast(tr('Risposta IA esportata in formato testo'),'fa-file-lines');
+    }
+    async function exportAIConsultPDF(id){
+      const record=(appState.aiConsults||[]).find(x=>x.id===id);if(!record)return;
+      if(!window.html2pdf){showToast(tr('Modulo PDF in caricamento. Riprova tra un secondo.'),'fa-clock');return;}
+      const root=document.createElement('div');
+      root.style.cssText='position:fixed;left:-10000px;top:0;width:794px;padding:42px;background:#090d16;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;z-index:-1';
+      root.innerHTML=`<div style="border-bottom:2px solid #164e63;padding-bottom:18px">${thalysPdfLogoMarkup()}</div>
+        <div style="margin-top:22px">
+          <div style="font-size:9px;letter-spacing:.16em;color:#94a3b8;text-transform:uppercase">${escapeHTML(tr('Risposta IA'))}</div>
+          <div style="margin-top:5px;font-size:22px;font-weight:900;color:#fff">${escapeHTML(tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[record.type]||record.type))}</div>
+          <div style="margin-top:8px;font-size:11px;color:#94a3b8">${escapeHTML(formatConsultDate(record.date))}</div>
+          <div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:#083344;color:#cffafe;font-size:11px"><b>${escapeHTML(tr('Obiettivo'))}:</b> ${escapeHTML(record.goal||'—')}</div>
+        </div>
+        ${consultPdfSection(tr('Risposta IA'),record.response||{})}
+        ${record.generatedWorkoutPlan?consultPdfSection(tr('Scheda generata'),record.generatedWorkoutPlan):''}
+        <div style="margin-top:20px;border-top:1px solid #1e293b;padding-top:12px;font-size:8px;color:#64748b">Thalys · ${escapeHTML(tr('Dati esportati dal consulto IA salvato'))}</div>`;
+      document.body.appendChild(root);
+      try{
+        await html2pdf().set({margin:[8,8,10,8],filename:`Thalys_AI_${record.type||'consulto'}_${record.date||currentLocalDateStr()}.pdf`,image:{type:'jpeg',quality:.96},html2canvas:{scale:2,useCORS:true,backgroundColor:'#090d16'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}}).from(root).save();
+        showToast(tr('Risposta IA esportata in PDF'),'fa-file-pdf');
+      }catch(e){console.error('AI consult PDF',e);showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');}
+      finally{root.remove();}
+    }
+
     function openConsultSnapshot(id){
       const x=(appState.consultations||[]).find(r=>r.id===id);if(!x)return;
-      const box=document.getElementById('consult-ai-result');if(!box)return;
-      box.classList.remove('hidden');box.innerHTML=`<div class="flex items-center justify-between gap-2"><div class="text-xs font-black text-white">${tr('Quadro generale')} · ${consultTypeLabel(x.type)}</div><button onclick="document.getElementById('consult-ai-result').classList.add('hidden')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button></div><div class="mt-2 text-[9px] text-slate-400">${escapeHTML(x.goal||'')}</div><pre class="mt-3 max-h-[18rem] overflow-auto whitespace-pre-wrap rounded-xl bg-slate-950 p-3 text-[9px] leading-relaxed text-slate-300">${escapeHTML(JSON.stringify(x.snapshot,null,2))}</pre>`;
-      document.getElementById('consult-ai-snapshot').value=id;
-      box.scrollIntoView({behavior:'smooth',block:'nearest'});
+      const title=document.getElementById('consult-detail-title');
+      const meta=document.getElementById('consult-detail-meta');
+      const body=document.getElementById('consult-detail-body');
+      if(title)title.textContent=`${tr('Quadro generale')} · ${consultTypeLabel(x.type)}`;
+      if(meta)meta.textContent=`${formatConsultDate(x.date)} · ${x.period?.from||'—'} → ${x.period?.to||'—'} · ${x.goal||''}`;
+      if(body){
+        const sections=Object.entries(x.snapshot||{});
+        body.innerHTML=sections.length?sections.map(([key,value])=>`
+          <div class="mb-2 rounded-xl border border-slate-800 bg-slate-900/65 p-3">
+            <div class="text-[9px] font-black uppercase tracking-[.13em] text-cyan-300">${tr(key)}</div>
+            <pre class="mt-2 whitespace-pre-wrap break-words text-[10px] leading-relaxed text-slate-300">${escapeHTML(JSON.stringify(value,null,2))}</pre>
+          </div>`).join(''):`<div class="text-slate-500">${tr('Nessun dato disponibile')}</div>`;
+      }
+      const pdf=document.getElementById('consult-export-pdf-btn'),txt=document.getElementById('consult-export-txt-btn');
+      if(pdf)pdf.onclick=()=>exportConsultSnapshotPDF(id);
+      if(txt)txt.onclick=()=>exportConsultSnapshotTXT(id);
+      const aiSelect=document.getElementById('consult-ai-snapshot');
+      if(aiSelect&&[...aiSelect.options].some(o=>o.value===id))aiSelect.value=id;
+      openModal('consult-snapshot-modal');
     }
+
     function deleteConsultSnapshot(id){appState.consultations=(appState.consultations||[]).filter(x=>x.id!==id);saveStateToLocal();renderConsultations();refreshConsultSelectors();}
     function toggleConsultSnapshotSelection(){consultSnapshotSelectionMode=!consultSnapshotSelectionMode;selectedConsultSnapshotIds.clear();document.getElementById('consult-snapshot-delete-btn')?.classList.toggle('hidden',!consultSnapshotSelectionMode);renderConsultations();}
     function toggleConsultSnapshot(id,on){on?selectedConsultSnapshotIds.add(id):selectedConsultSnapshotIds.delete(id)}
@@ -5243,7 +5437,20 @@
       const list=document.getElementById('ai-history-list');if(!list)return;const rows=visibleAIConsults();
       list.innerHTML=rows.length?rows.map(x=>`<div class="rounded-2xl border border-slate-800 bg-slate-900/55 p-3"><div class="flex items-start gap-2">${aiConsultSelectionMode?`<input type="checkbox" class="mt-1 h-4 w-4 accent-violet-500" ${selectedAIConsultIds.has(x.id)?'checked':''} onchange="toggleAIConsultSelect('${x.id}',this.checked)">`:''}<button onclick="openAIConsultHistory('${x.id}')" class="min-w-0 flex-1 text-left"><div class="flex items-center justify-between gap-2"><span class="text-xs font-black text-white">${tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[x.type]||x.type)}</span><span class="text-[9px] text-violet-300">${formatConsultDate(x.date)}</span></div><div class="mt-1 line-clamp-2 text-[9px] text-slate-400">${escapeHTML(x.goal||x.specificRequest||'')}</div></button><button onclick="deleteAIConsult('${x.id}')" class="w-8 h-8 rounded-lg bg-slate-950 text-rose-300"><i class="fa-solid fa-trash text-[10px]"></i></button></div></div>`).join(''):`<div class="rounded-xl bg-slate-900/50 p-4 text-center text-[10px] text-slate-500">${tr('Nessuna risposta IA salvata.')}</div>`;
     }
-    function openAIConsultHistory(id){const x=(appState.aiConsults||[]).find(r=>r.id===id),box=document.getElementById('consult-ai-result');if(!x||!box)return;box.classList.remove('hidden');box.innerHTML=`<div class="flex items-center justify-between"><div class="text-xs font-black text-white">${tr('Risposta IA')} · ${formatConsultDate(x.date)}</div><button onclick="this.closest('#consult-ai-result').classList.add('hidden')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button></div><pre class="mt-3 max-h-[22rem] overflow-auto whitespace-pre-wrap rounded-xl bg-slate-950 p-3 text-[9px] leading-relaxed text-slate-300">${escapeHTML(JSON.stringify(x.response,null,2))}</pre>${x.generatedWorkoutPlan?`<button onclick="loadStoredAIWorkoutPlan('${x.id}')" class="mt-3 w-full min-h-10 rounded-xl bg-emerald-500 text-[10px] font-black text-slate-950">${tr('Apri scheda generata')}</button>`:''}`;box.scrollIntoView({behavior:'smooth',block:'nearest'});}
+    function openAIConsultHistory(id){
+      const x=(appState.aiConsults||[]).find(r=>r.id===id);if(!x)return;
+      const title=document.getElementById('consult-detail-title'),meta=document.getElementById('consult-detail-meta'),body=document.getElementById('consult-detail-body');
+      if(title)title.textContent=`${tr('Risposta IA')} · ${tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[x.type]||x.type)}`;
+      if(meta)meta.textContent=`${formatConsultDate(x.date)} · ${x.goal||x.specificRequest||''}`;
+      if(body){
+        body.innerHTML=`<div class="rounded-xl border border-violet-500/15 bg-violet-500/5 p-3">${aiResultHTML({data:x.response||{}})}</div>
+          ${x.generatedWorkoutPlan?`<div class="mt-3 rounded-xl border border-emerald-500/15 bg-emerald-500/5 p-3"><div class="text-[9px] font-black uppercase tracking-[.13em] text-emerald-300">${tr('Scheda generata')}</div><button type="button" onclick="closeModal('consult-snapshot-modal');loadStoredAIWorkoutPlan('${x.id}')" class="mt-2 w-full min-h-10 rounded-xl bg-emerald-500 text-[10px] font-black text-slate-950">${tr('Apri scheda generata')}</button></div>`:''}`;
+      }
+      const pdf=document.getElementById('consult-export-pdf-btn'),txt=document.getElementById('consult-export-txt-btn');
+      if(pdf)pdf.onclick=()=>exportAIConsultPDF(id);
+      if(txt)txt.onclick=()=>exportAIConsultTXT(id);
+      openModal('consult-snapshot-modal');
+    }
     function loadStoredAIWorkoutPlan(id){const x=(appState.aiConsults||[]).find(r=>r.id===id);if(!x?.generatedWorkoutPlan)return;lastAIWorkoutProposal=x.generatedWorkoutPlan;const box=document.getElementById('consult-ai-result');if(box)box.innerHTML=`<div class="text-xs font-black text-white">${tr('Scheda proposta')}</div><pre class="mt-3 max-h-[18rem] overflow-auto whitespace-pre-wrap rounded-xl bg-slate-950 p-3 text-[9px] text-slate-300">${escapeHTML(JSON.stringify(lastAIWorkoutProposal,null,2))}</pre><div class="mt-3 grid grid-cols-2 gap-2"><button onclick="downloadAIWorkoutPlan()" class="min-h-10 rounded-xl bg-slate-800 text-[10px] font-bold text-cyan-300">${tr('Scarica JSON')}</button><button onclick="importAIWorkoutPlan()" class="min-h-10 rounded-xl bg-emerald-500 text-[10px] font-black text-slate-950">${tr('Importa in Schede')}</button></div>`}
     function deleteAIConsult(id){appState.aiConsults=(appState.aiConsults||[]).filter(x=>x.id!==id);saveStateToLocal();renderAIConsultHistory();}
     function toggleAIConsultSelection(){aiConsultSelectionMode=!aiConsultSelectionMode;selectedAIConsultIds.clear();document.getElementById('ai-history-delete-btn')?.classList.toggle('hidden',!aiConsultSelectionMode);renderAIConsultHistory();}
@@ -5304,8 +5511,19 @@
       if (tabName === 'meditation') { renderMeditationStats(); renderMeditationPage(); }
       if (tabName === 'body') { renderBodyMetrics(); setTimeout(()=>{aggiornaAvatarDaUltimaMisura();renderHomeAvatar();},50); }
       if (tabName === 'analytics') { updateAnalyticsCharts(); }
-      if (tabName === 'consult') { renderConsultations();renderAIConsultHistory();refreshConsultSelectors();requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'})); }
-      if (tabName === 'settings') requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
+      if (tabName === 'consult') {
+        try{document.activeElement?.blur?.();}catch(_){}
+        const main=document.querySelector('#app-shell > main');
+        if(main)main.scrollTop=0;
+        window.scrollTo(0,0);
+        renderConsultations();renderAIConsultHistory();refreshConsultSelectors();
+        const resetTop=()=>{if(main){main.scrollTop=0;main.scrollTo?.({top:0,left:0,behavior:'auto'});}window.scrollTo(0,0);};
+        requestAnimationFrame(resetTop);setTimeout(resetTop,80);setTimeout(resetTop,220);
+      }
+      if (tabName === 'settings') {
+        const main=document.querySelector('#app-shell > main');if(main)main.scrollTop=0;
+        requestAnimationFrame(()=>{if(main)main.scrollTop=0;window.scrollTo(0,0);});
+      }
     }
 
     function updateModalScrollLock() {
@@ -5988,95 +6206,154 @@ if(c)c.innerHTML='';
       updateAnalyticsCharts();
     }
 
-    function computeWeeklyNutritionSummary() {
-      const target = appState.targets || {};
-      const today = new Date();
-      const dates = [];
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(today);
-        d.setDate(today.getDate() - i);
-        dates.push(d.toISOString().split('T')[0]);
+    function nutritionScore(value,target,isMaximum=false){
+      const v=Math.max(0,Number(value)||0),t=Math.max(.0001,Number(target)||1);
+      if(isMaximum){
+        if(v<=t)return 100;
+        return Math.max(0,Math.min(100,(t/v)*100));
       }
+      return Math.max(0,Math.min(100,(v/t)*100));
+    }
 
-      const daySummaries = dates.map(date => {
-        const items = (appState.nutrition || []).filter(item => item.date === date);
+    function nutritionNutrientDefinitions(target={},waterTarget=2500){
+      return [
+        {key:'kcal',label:'Calorie',target:Number(target.calories||2200),unit:'kcal',rgb:[244,63,94]},
+        {key:'p',label:'Proteine',target:Number(target.p||150),unit:'g',rgb:[251,113,133]},
+        {key:'c',label:'Carboidrati',target:Number(target.c||250),unit:'g',rgb:[251,191,36]},
+        {key:'f',label:'Grassi',target:Number(target.f||70),unit:'g',rgb:[96,165,250]},
+        {key:'satFat',label:'Grassi saturi',target:Number(target.satFat||20),unit:'g',maximum:true,rgb:[56,189,248]},
+        {key:'sugars',label:'Zuccheri',target:Number(target.sugars||50),unit:'g',maximum:true,rgb:[167,139,250]},
+        {key:'fiber',label:'Fibre',target:Number(target.fiber||30),unit:'g',rgb:[251,191,36]},
+        {key:'calcium',label:'Calcio',target:Number(target.calcium||1000),unit:'mg',rgb:[34,211,238]},
+        {key:'magnesium',label:'Magnesio',target:Number(target.magnesium||350),unit:'mg',rgb:[52,211,153]},
+        {key:'zinc',label:'Zinco',target:Number(target.zinc||11),unit:'mg',rgb:[45,212,191]},
+        {key:'iron',label:'Ferro',target:Number(target.iron||11),unit:'mg',rgb:[251,146,60]},
+        {key:'potassium',label:'Potassio',target:Number(target.potassium||3500),unit:'mg',rgb:[163,230,53]},
+        {key:'salt',label:'Sale',target:Number(target.salt||5),unit:'g',maximum:true,rgb:[232,121,249]},
+        {key:'water',label:'Acqua',target:Number(waterTarget||2500),unit:'ml',rgb:[96,165,250]}
+      ];
+    }
+
+    function computeWeeklyNutritionSummary(referenceDate){
+      const target=appState.targets||{};
+      const ref=referenceDate||document.getElementById('nutrition-date')?.value||currentLocalDateStr();
+      const dates=[];
+      for(let i=6;i>=0;i--){
+        const d=new Date(ref+'T12:00:00');d.setDate(d.getDate()-i);dates.push(d.toISOString().slice(0,10));
+      }
+      const daySummaries=dates.map(date=>{
+        const items=(appState.nutrition||[]).filter(item=>item.date===date);
         return {
           date,
-          kcal: items.reduce((sum, item) => sum + (Number(item.kcal) || 0), 0),
-          p: items.reduce((sum, item) => sum + (Number(item.p) || 0), 0),
-          c: items.reduce((sum, item) => sum + (Number(item.c) || 0), 0),
-          f: items.reduce((sum, item) => sum + (Number(item.f) || 0), 0),
-          satFat: items.reduce((sum, item) => sum + (Number(item.satFat) || 0), 0),
-          sugars: items.reduce((sum, item) => sum + (Number(item.sugars) || 0), 0),
-          calcium: items.reduce((sum, item) => sum + (Number(item.calcium) || 0), 0),
-          magnesium: items.reduce((sum, item) => sum + (Number(item.magnesium) || 0), 0),
-          zinc: items.reduce((sum, item) => sum + (Number(item.zinc) || 0), 0),
-          fiber: items.reduce((sum, item) => sum + (Number(item.fiber) || 0), 0),
-          salt: items.reduce((sum, item) => sum + (Number(item.salt) || 0), 0),
-          iron: items.reduce((sum, item) => sum + (Number(item.iron) || 0), 0),
-          potassium: items.reduce((sum, item) => sum + (Number(item.potassium) || 0), 0)
+          kcal:items.reduce((s,x)=>s+Number(x.kcal||0),0),
+          p:items.reduce((s,x)=>s+Number(x.p||0),0),
+          c:items.reduce((s,x)=>s+Number(x.c||0),0),
+          f:items.reduce((s,x)=>s+Number(x.f||0),0),
+          satFat:items.reduce((s,x)=>s+Number(x.satFat||0),0),
+          sugars:items.reduce((s,x)=>s+Number(x.sugars||0),0),
+          fiber:items.reduce((s,x)=>s+Number(x.fiber||0),0),
+          calcium:items.reduce((s,x)=>s+Number(x.calcium||0),0),
+          magnesium:items.reduce((s,x)=>s+Number(x.magnesium||0),0),
+          zinc:items.reduce((s,x)=>s+Number(x.zinc||0),0),
+          iron:items.reduce((s,x)=>s+Number(x.iron||0),0),
+          potassium:items.reduce((s,x)=>s+Number(x.potassium||0),0),
+          salt:items.reduce((s,x)=>s+Number(x.salt||0),0),
+          water:Number(appState.water?.[date]||0),
+          vitaminsId:mergeVitaminCodes(items.map(x=>x.vitaminsId),'id'),
+          vitaminsLip:mergeVitaminCodes(items.map(x=>x.vitaminsLip),'lip'),
+          hasFood:items.length>0
         };
       });
-
-      const checks = [];
-      const missing = [];
-      daySummaries.forEach(day => {
-        if (day.kcal < (target.calories || 2200) * 0.8) missing.push('calorie');
-        checks.push(day.kcal >= (target.calories || 2200) * 0.8 ? 1 : 0);
-
-        if (day.p < (target.p || 150) * 0.8) missing.push('proteine');
-        checks.push(day.p >= (target.p || 150) * 0.8 ? 1 : 0);
-
-        if (day.c < (target.c || 250) * 0.8) missing.push('carbo');
-        checks.push(day.c >= (target.c || 250) * 0.8 ? 1 : 0);
-
-        if (day.f < (target.f || 70) * 0.8) missing.push('grassi');
-        checks.push(day.f >= (target.f || 70) * 0.8 ? 1 : 0);
-
-        if (day.satFat > (target.satFat || 20)) missing.push('grassi saturi');
-        checks.push(day.satFat <= (target.satFat || 20) ? 1 : 0);
-
-        if (day.sugars > (target.sugars || 50)) missing.push('zuccheri');
-        checks.push(day.sugars <= (target.sugars || 50) ? 1 : 0);
-
-        if (day.calcium < (target.calcium || 1000) * 0.8) missing.push('calcio');
-        checks.push(day.calcium >= (target.calcium || 1000) * 0.8 ? 1 : 0);
-
-        if (day.magnesium < (target.magnesium || 350) * 0.8) missing.push('magnesio');
-        checks.push(day.magnesium >= (target.magnesium || 350) * 0.8 ? 1 : 0);
-
-        if (day.zinc < (target.zinc || 11) * 0.8) missing.push('zinco');
-        checks.push(day.zinc >= (target.zinc || 11) * 0.8 ? 1 : 0);
-
-        if (day.fiber < (target.fiber || 30) * 0.8) missing.push('fibre');
-        checks.push(day.fiber >= (target.fiber || 30) * 0.8 ? 1 : 0);
-
-        if (day.salt > (target.salt || 5)) missing.push('sale');
-        checks.push(day.salt <= (target.salt || 5) ? 1 : 0);
-        if (day.potassium < (target.potassium || 3500) * 0.8) missing.push('potassio');
-        checks.push(day.potassium >= (target.potassium || 3500) * 0.8 ? 1 : 0);
-        if (day.iron < (target.iron || 11) * 0.8) missing.push('ferro');
-        checks.push(day.iron >= (target.iron || 11) * 0.8 ? 1 : 0);
-      });
-
-      const compliance = Math.min(100, Math.round((checks.reduce((sum, item) => sum + item, 0) / checks.length) * 100)) || 0;
-      const summary = {
+      const quantitative=nutritionNutrientDefinitions(target,getWaterTarget(ref));
+      const allVitId=mergeVitaminCodes(daySummaries.map(x=>x.vitaminsId),'id');
+      const allVitLip=mergeVitaminCodes(daySummaries.map(x=>x.vitaminsLip),'lip');
+      const averages={};
+      quantitative.forEach(n=>averages[n.key]=Number((daySummaries.reduce((s,d)=>s+Number(d[n.key]||0),0)/7).toFixed(n.unit==='mg'?1:2)));
+      const scores=quantitative.map(n=>nutritionScore(averages[n.key],n.target,n.maximum));
+      scores.push((allVitId?allVitId.split(/\s+/).filter(Boolean).length:0)/9*100);
+      scores.push((allVitLip?allVitLip.split(/\s+/).filter(Boolean).length:0)/4*100);
+      const compliance=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length)||0;
+      const missing=quantitative
+        .map((n,i)=>({label:n.label,score:scores[i]}))
+        .filter(x=>x.score<80)
+        .sort((a,b)=>a.score-b.score)
+        .slice(0,5)
+        .map(x=>x.label.toLowerCase());
+      const summary={
         compliance,
-        isComplete: compliance >= 70,
-        missing: [...new Set(missing)].slice(0, 4).map(label => ({
-          calorie: 'calorie',
-          proteine: 'proteine',
-          carbo: 'carbo',
-          grassi: 'grassi',
-          zuccheri: 'zuccheri',
-          calcio: 'calcio',
-          magnesio: 'magnesio',
-          zinco: 'zinco',
-          fibre: 'fibre'
-        }[label] || label))
+        isComplete:compliance>=70,
+        missing,
+        averages,
+        daySummaries,
+        vitaminsId:allVitId,
+        vitaminsLip:allVitLip,
+        trackedDays:daySummaries.filter(x=>x.hasFood).length,
+        referenceDate:ref
       };
-      appState.weeklyNutritionStatus = summary;
+      appState.weeklyNutritionStatus={compliance:summary.compliance,isComplete:summary.isComplete,missing:summary.missing};
       return summary;
+    }
+
+    function renderNutritionAnalytics(weeklySummary,daily,vitId,vitLip,waterVal,waterTarget){
+      const target=appState.targets||{};
+      const defs=nutritionNutrientDefinitions(target,waterTarget);
+      const scoreEl=document.getElementById('nutrition-week-score');
+      if(scoreEl)scoreEl.textContent=`${weeklySummary.compliance}%`;
+
+      const bars=document.getElementById('nutrition-week-bars');
+      if(bars){
+        bars.innerHTML=defs.map(n=>{
+          const value=Number(weeklySummary.averages?.[n.key]||0);
+          const score=Math.round(nutritionScore(value,n.target,n.maximum));
+          const width=Math.max(2,Math.min(100,score));
+          const cap=n.maximum?tr('max'):tr('target');
+          return `<div class="rounded-xl bg-slate-950/45 p-2.5">
+            <div class="flex items-center justify-between gap-2 text-[10px]">
+              <span class="font-bold text-slate-200">${tr(n.label)}</span>
+              <span class="text-slate-400">${Number(value.toFixed(n.unit==='mg'?1:1))} ${n.unit} <span class="text-slate-600">/ ${cap} ${n.target}</span></span>
+            </div>
+            <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-800"><div class="h-full rounded-full transition-all" style="width:${width}%;background:rgb(${n.rgb.join(',')})"></div></div>
+            <div class="mt-1 text-right text-[8px] font-bold ${score>=80?'text-emerald-300':score>=55?'text-amber-300':'text-rose-300'}">${score}%</div>
+          </div>`;
+        }).join('');
+      }
+
+      const weekVitId=weeklySummary.vitaminsId?weeklySummary.vitaminsId.split(/\s+/).filter(Boolean):[];
+      const weekVitLip=weeklySummary.vitaminsLip?weeklySummary.vitaminsLip.split(/\s+/).filter(Boolean):[];
+      const vitaminNote=document.getElementById('nutrition-week-vitamin-note');
+      if(vitaminNote){
+        vitaminNote.innerHTML=`<div class="grid grid-cols-2 gap-2">
+          <div class="rounded-xl border border-indigo-500/15 bg-indigo-500/5 p-2"><div class="font-bold text-indigo-300">${tr('Vitamine ID')} · ${weekVitId.length}/9</div><div class="mt-1 leading-relaxed">${weekVitId.join(' · ')||'—'}</div></div>
+          <div class="rounded-xl border border-yellow-500/15 bg-yellow-500/5 p-2"><div class="font-bold text-yellow-300">${tr('Vitamine LIP')} · ${weekVitLip.length}/4</div><div class="mt-1 leading-relaxed">${weekVitLip.join(' · ')||'—'}</div></div>
+        </div><div class="mt-2">${tr('Per le vitamine Thalys registra la presenza dichiarata, non la quantità: per questo sono mostrate come copertura e non come dose.')}</div>`;
+      }
+
+      const dailyData={...daily,water:Number(waterVal||0)};
+      const dailyVitId=vitId?vitId.split(/\s+/).filter(Boolean):[];
+      const dailyVitLip=vitLip?vitLip.split(/\s+/).filter(Boolean):[];
+      const wheel=[
+        ...defs.map(n=>({...n,score:Math.round(nutritionScore(dailyData[n.key],n.target,n.maximum))})),
+        {key:'vitId',label:'Vitamine ID',score:Math.round(dailyVitId.length/9*100),rgb:[129,140,248]},
+        {key:'vitLip',label:'Vitamine LIP',score:Math.round(dailyVitLip.length/4*100),rgb:[250,204,21]}
+      ];
+      const overall=Math.round(wheel.reduce((s,n)=>s+n.score,0)/wheel.length)||0;
+      const center=document.getElementById('nutrient-donut-score');if(center)center.textContent=`${overall}%`;
+      const donut=document.getElementById('macro-donut');
+      if(donut){
+        const step=100/wheel.length;
+        donut.style.background=`conic-gradient(${wheel.map((n,i)=>{
+          const alpha=(.20+.80*(n.score/100)).toFixed(2);
+          return `rgba(${n.rgb.join(',')},${alpha}) ${(i*step).toFixed(2)}% ${((i+1)*step).toFixed(2)}%`;
+        }).join(',')})`;
+      }
+      const legend=document.getElementById('nutrient-donut-legend');
+      if(legend){
+        legend.innerHTML=wheel.map(n=>`<div class="flex min-h-9 items-center gap-2 rounded-xl bg-slate-950/45 px-2.5 py-2">
+          <span class="h-2.5 w-2.5 shrink-0 rounded-full" style="background:rgb(${n.rgb.join(',')})"></span>
+          <span class="min-w-0 flex-1 truncate text-[9px] font-bold text-slate-300">${tr(n.label)}</span>
+          <span class="text-[9px] font-black ${n.score>=80?'text-emerald-300':n.score>=55?'text-amber-300':'text-rose-300'}">${n.score}%</span>
+        </div>`).join('');
+      }
     }
 
     let meditationTimer=null, meditationRemaining=300, meditationTotal=300;
@@ -6293,18 +6570,163 @@ if(c)c.innerHTML='';
     }
 
     const HOME_AVATAR_QUIPS={
-      zero:["Il divano mi chiama, ma so che posso farcela a iniziare! 🦥","0%. Performance da soprammobile premium. 😴","Per ora ho completato esattamente... niente. È quasi talento. 🐢"],
-      low:["Qualcosa si muove! Non siamo più arredamento. 😏","Ho iniziato. Ora sarebbe brutto fermarsi. 🐌","Progressi piccoli, ego già enorme. 😎"],
-      mid:["Metà strada circa. Il divano inizia a preoccuparsi. 😌","Abbastanza per vantarmi, non abbastanza per mollare. 😏","Qui si comincia a ragionare. 💪"],
-      high:["Quasi tutto fatto. Fermarsi ora sarebbe imbarazzante. 😂","Sto volando. Qualcuno avvisi il me di stamattina. 🚀","Il 100% mi sta già facendo l’occhiolino. 😎"],
-      full:["Oggi ho fatto tutto. Posso andare in pensione. 🏖️","100%. Chiamate il museo: questa giornata va esposta. 🏆","Missione completata. Ora posso giudicare il me di ieri. 😌"]
+      zero:[
+        ['avatar.zero.01','Il divano mi chiama, ma so che posso farcela a iniziare! 🦥'],
+        ['avatar.zero.02','0%. Performance da soprammobile premium. 😴'],
+        ['avatar.zero.03','Per ora ho completato esattamente... niente. È quasi talento. 🐢'],
+        ['avatar.zero.04','{name}, il piano è semplice: iniziare prima che il divano presenti ricorso. 😏'],
+        ['avatar.zero.05','La motivazione non risponde. Possiamo procedere senza di lei. 💪'],
+        ['avatar.zero.06','Ancora tutto intatto. Anche le scuse, purtroppo. 😂'],
+        ['avatar.zero.07','Il primo passo è gratis. Il secondo pure, non spargere la voce. 🐌'],
+        ['avatar.zero.08','Oggi il bradipo interiore ha preso il comando. Per ora. 🦥'],
+        ['avatar.zero.09','Zero fatto, zero drammi: basta rompere il ghiaccio. ❄️'],
+        ['avatar.zero.10','{name}, puoi iniziare piano. Ma devi pur sempre iniziare. 😌'],
+        ['avatar.zero.11','La giornata è ancora vergine. Facciamole vedere qualcosa di interessante. ✨'],
+        ['avatar.zero.12','Il 100% sembra lontano solo finché non fai l’1%.'],
+        ['avatar.zero.13','Sto aspettando un segnale. Anche un bicchiere d’acqua conta. 🥤'],
+        ['avatar.zero.14','Modalità statua attiva. Disattivarla richiede un solo gesto. 🗿'],
+        ['avatar.zero.15','Non serve sentirsi pronti. Serve cominciare abbastanza male da migliorare. 😎'],
+        ['avatar.zero.16','{name}, oggi niente epica: una cosa piccola e concreta.'],
+        ['avatar.zero.17','Il calendario ha aperto la giornata. Tu quando apri le danze? 💃'],
+        ['avatar.zero.18','0% non è una sentenza, è solo la schermata di caricamento.'],
+        ['avatar.zero.19','Il mio livello di attività al momento è “ornamento da salotto”. Aiutami. 😂'],
+        ['avatar.zero.20','Partenza lenta? Va bene. Basta che non diventi parcheggio permanente. 🚗']
+      ],
+      low:[
+        ['avatar.low.01','Qualcosa si muove! Non siamo più arredamento. 😏'],
+        ['avatar.low.02','Ho iniziato. Ora sarebbe brutto fermarsi. 🐌'],
+        ['avatar.low.03','Progressi piccoli, ego già enorme. 😎'],
+        ['avatar.low.04','{name}, ufficialmente siamo usciti dalla modalità soprammobile.'],
+        ['avatar.low.05','Piccolo passo registrato. Il divano è stato informato.'],
+        ['avatar.low.06','Non è ancora una leggenda, ma almeno c’è una trama. 📖'],
+        ['avatar.low.07','Il motore si è acceso. Evitiamo di spegnerlo al semaforo.'],
+        ['avatar.low.08','Bene. Ora fai finta che fosse tutto pianificato. 😌'],
+        ['avatar.low.09','Hai iniziato: statisticamente è già meglio di non iniziare.'],
+        ['avatar.low.10','{name}, il bradipo che è in me concede un cenno di approvazione. 🦥'],
+        ['avatar.low.11','Una casella fatta. Il perfezionismo può aspettare fuori.'],
+        ['avatar.low.12','Siamo in movimento. Piano, ma con dignità.'],
+        ['avatar.low.13','Il progresso ha bussato. Per una volta hai aperto. 😂'],
+        ['avatar.low.14','Non correre: accumula vittorie piccole e irritantemente efficaci.'],
+        ['avatar.low.15','La giornata sta prendendo forma. Strano, eh?'],
+        ['avatar.low.16','Hai rotto l’inerzia. Quella era la parte antipatica.'],
+        ['avatar.low.17','{name}, continua così e dovrò smettere di prenderti in giro. Forse.'],
+        ['avatar.low.18','Primo livello superato. Nessun boss finale, promesso. 🎮'],
+        ['avatar.low.19','Poco fatto, ma fatto davvero. Questo conta.'],
+        ['avatar.low.20','Il divano perde terreno. Non dirglielo troppo forte.']
+      ],
+      mid:[
+        ['avatar.mid.01','Metà strada circa. Il divano inizia a preoccuparsi. 😌'],
+        ['avatar.mid.02','Abbastanza per vantarmi, non abbastanza per mollare. 😏'],
+        ['avatar.mid.03','Qui si comincia a ragionare. 💪'],
+        ['avatar.mid.04','{name}, sei nella zona pericolosa: quella in cui funziona davvero.'],
+        ['avatar.mid.05','Metà fatta. Le scuse hanno perso la maggioranza.'],
+        ['avatar.mid.06','Ora fermarsi sarebbe una scelta creativa. Non farla. 😂'],
+        ['avatar.mid.07','Il grafico sale e improvvisamente sembri una persona organizzata.'],
+        ['avatar.mid.08','Siamo oltre il riscaldamento psicologico. Bene così.'],
+        ['avatar.mid.09','La parte difficile era partire. Adesso resta solo… il resto. 😎'],
+        ['avatar.mid.10','{name}, il bradipo è confuso: stai facendo sul serio.'],
+        ['avatar.mid.11','Progresso concreto. Puoi già guardare male il te di stamattina.'],
+        ['avatar.mid.12','Metà percorso, zero bisogno di diventare un monaco guerriero.'],
+        ['avatar.mid.13','Stai accumulando abbastanza punti da sbloccare “persona affidabile”. 🎮'],
+        ['avatar.mid.14','Non male. Ho visto lunedì peggiori.'],
+        ['avatar.mid.15','La giornata ha smesso di essere una bozza.'],
+        ['avatar.mid.16','Continua: il 70% è dietro l’angolo a fare il brillante.'],
+        ['avatar.mid.17','{name}, ormai puoi finire per pura testardaggine.'],
+        ['avatar.mid.18','Il ritmo c’è. Non serve accelerare, serve non sparire.'],
+        ['avatar.mid.19','Metà strada: abbastanza lontano dall’inizio, abbastanza vicino al premio.'],
+        ['avatar.mid.20','Hai fatto troppo per poter dire “oggi niente”. Mi spiace. 😌']
+      ],
+      high:[
+        ['avatar.high.01','Quasi tutto fatto. Fermarsi ora sarebbe imbarazzante. 😂'],
+        ['avatar.high.02','Sto volando. Qualcuno avvisi il me di stamattina. 🚀'],
+        ['avatar.high.03','Il 100% mi sta già facendo l’occhiolino. 😎'],
+        ['avatar.high.04','{name}, ormai il divano può solo sperare in un colpo di scena.'],
+        ['avatar.high.05','Sei quasi alla fine. Non trasformare il finale in una trilogia.'],
+        ['avatar.high.06','Molto bene. Sto finendo le battute sarcastiche, ed è grave.'],
+        ['avatar.high.07','Hai fatto il grosso. Ora rifinisci il lavoro come una persona sospettosamente efficiente.'],
+        ['avatar.high.08','Il traguardo è lì. Sì, quello che fingevi di non vedere.'],
+        ['avatar.high.09','{name}, manca poco: il bradipo ha già preparato i coriandoli. 🦥'],
+        ['avatar.high.10','Quasi completo. La tua versione pigra sta chiedendo il VAR.'],
+        ['avatar.high.11','A questo punto mollare richiederebbe più creatività che finire.'],
+        ['avatar.high.12','Il 100% è a distanza di una pessima scusa.'],
+        ['avatar.high.13','Prestazione sospettosamente adulta. Continua.'],
+        ['avatar.high.14','Ci siamo quasi. Puoi già sentire il rumore del check finale.'],
+        ['avatar.high.15','Il grafico è alto. Anche le aspettative, adesso. 😏'],
+        ['avatar.high.16','{name}, oggi stai rendendo difficile il mio lavoro di prenderti in giro.'],
+        ['avatar.high.17','Manca il dettaglio finale. E no, “domani” non è un dettaglio.'],
+        ['avatar.high.18','Quasi missione compiuta. Il divano ha smesso di scrivere.'],
+        ['avatar.high.19','Hai costruito troppo slancio per parcheggiare adesso.'],
+        ['avatar.high.20','Ultimo tratto. Elegante o brutto, basta chiuderlo.']
+      ],
+      full:[
+        ['avatar.full.01','Oggi ho fatto tutto. Posso andare in pensione. 🏖️'],
+        ['avatar.full.02','100%. Chiamate il museo: questa giornata va esposta. 🏆'],
+        ['avatar.full.03','Missione completata. Ora posso giudicare il me di ieri. 😌'],
+        ['avatar.full.04','{name}, oggi il bradipo che è in me ti porta rispetto. 🦥'],
+        ['avatar.full.05','Tutto fatto. Le scuse sono state gentilmente accompagnate all’uscita.'],
+        ['avatar.full.06','100%. Non montarti la testa, ma sì: gran giornata.'],
+        ['avatar.full.07','Hai chiuso il cerchio. Ora recupero senza sensi di colpa.'],
+        ['avatar.full.08','Obiettivi completati. Il divano può finalmente riaverti. 😂'],
+        ['avatar.full.09','{name}, questa volta non ho niente da criticare. Situazione inquietante.'],
+        ['avatar.full.10','Giornata completata. Screenshot mentale e si replica quando serve.'],
+        ['avatar.full.11','Il 100% esiste davvero. Testimoni presenti.'],
+        ['avatar.full.12','Hai fatto tutto. Adesso il riposo è parte del piano, non una fuga.'],
+        ['avatar.full.13','Prestazione premium. Abbonamento alla costanza non ancora incluso. 😏'],
+        ['avatar.full.14','Missione chiusa. Nessun DLC richiesto. 🎮'],
+        ['avatar.full.15','{name}, oggi hai vinto tu. Domani si rinegozia.'],
+        ['avatar.full.16','Tutto verde. Puoi smettere di fissare le percentuali adesso.'],
+        ['avatar.full.17','Obiettivi presi. Bradipo soddisfatto, ego sotto osservazione.'],
+        ['avatar.full.18','100%: efficiente, pulito, quasi sospetto.'],
+        ['avatar.full.19','Fine giornata con tutti i check. Il futuro te ringrazia in silenzio.'],
+        ['avatar.full.20','Hai completato tutto. Ora fai la cosa rivoluzionaria: riposati.']
+      ]
     };
     let homeAvatarQuipIndex=0;
+    let avatarTapTimes=[];
+    let avatarSecretUntil=0;
+
     function getHomeAvatarBucket(p){return p>=100?'full':p>=70?'high':p>=40?'mid':p>0?'low':'zero'}
+
+    function getAvatarUserName(){
+      try{
+        const p=JSON.parse(sessionStorage.getItem('gymbro_google_profile')||'null');
+        const raw=p?.given_name||p?.name||'';
+        if(raw)return String(raw).trim().split(/\s+/)[0];
+      }catch(_){}
+      try{
+        const token=localStorage.getItem('google_id_token')||sessionStorage.getItem('google_id_token');
+        const p=token&&typeof parseJwt==='function'?parseJwt(token):null;
+        const raw=p?.given_name||p?.name||'';
+        if(raw)return String(raw).trim().split(/\s+/)[0];
+      }catch(_){}
+      return '';
+    }
+
+    function avatarQuipText(entry){
+      if(!entry)return '';
+      const name=getAvatarUserName()||tr('campione');
+      return tk(entry[0],entry[1],{name});
+    }
+
+    function avatarTimeZeroQuip(){
+      const h=new Date().getHours();
+      const name=getAvatarUserName()||tr('campione');
+      if(h>=6&&h<=9)return tk('avatar.time.morning.zero','Ancora sonno? Ti capisco, ma un piccolo passo cambierà la giornata!',{name});
+      if(h>=22||h<1)return tk('avatar.time.late.zero','Oggi è andata così, domani ti rifarai! Ora riposati.',{name});
+      return '';
+    }
+
     function renderHomeAvatar(){
       const p=(()=>{try{const g=getDayGamification(homeSelectedDate||currentLocalDateStr());return g.total?Math.round(g.done/g.total*100):0}catch(_){return 0}})();
       const b=getHomeAvatarBucket(p),arr=HOME_AVATAR_QUIPS[b],pc=document.getElementById('home-avatar-percent'),q=document.getElementById('home-avatar-quips');
-      if(pc)pc.textContent=`${p}% ${tr('completato')}`;if(q)q.textContent=tr(arr[homeAvatarQuipIndex%arr.length]);
+      if(pc)pc.textContent=`${p}% ${tr('completato')}`;
+      if(q){
+        let message='';
+        if(Date.now()<avatarSecretUntil)message=tk('avatar.secret.tickles','Ehi! Smetti di solleticarmi e vai a fare i tuoi esercizi! 😂');
+        else if(p===0&&homeAvatarQuipIndex===0)message=avatarTimeZeroQuip();
+        if(!message)message=avatarQuipText(arr[homeAvatarQuipIndex%arr.length]);
+        q.textContent=message;
+      }
       const homeCard=document.querySelector('.home-avatar-card');if(homeCard)homeCard.dataset.progress=getHomeAvatarBucket(p);
       const avatarDay=homeSelectedDate||currentLocalDateStr(),celebrateKey=`thalys_avatar_celebrated_${avatarDay}`;
       if(p>=100&&!localStorage.getItem(celebrateKey)){
@@ -6312,16 +6734,32 @@ if(c)c.innerHTML='';
         setTimeout(()=>{const a=document.getElementById('home-avatar-mini'),s=document.getElementById('home-avatar-sparkle');a?.classList.add('avatar-bounce');if(s){s.classList.remove('hidden');s.classList.add('avatar-sparkle');setTimeout(()=>s.classList.add('hidden'),800)}},120);
       }
       const source=document.getElementById('avatar-art-svg'),mini=document.getElementById('home-avatar-mini');
-      const currentAvatarGender=appState.profile?.gender==='female'?'femmina':'maschio';
+      const currentAvatarGender=normalizeProfileGenderValue(appState.profile?.gender)==='female'?'femmina':'maschio';
       avatarSetArtwork(currentAvatarGender);
-      if(source&&mini){const c=source.cloneNode(true);c.removeAttribute('id');c.style.width='100%';c.style.height='100%';c.querySelector('#avatar-measures-overlay')?.remove();c.querySelector('#avatar-thought-bubble')?.remove();mini.innerHTML='';mini.appendChild(c)}
+      if(source&&mini){
+        const c=source.cloneNode(true);c.removeAttribute('id');c.style.width='100%';c.style.height='100%';
+        c.querySelector('#avatar-measures-overlay')?.remove();c.querySelector('#avatar-thought-bubble')?.remove();
+        mini.innerHTML='';mini.appendChild(c);
+      }
     }
+
     function interactHomeAvatar(){
-      const p=(()=>{try{const g=getDayGamification(homeSelectedDate||currentLocalDateStr());return g.total?Math.round(g.done/g.total*100):0}catch(_){return 0}})(),arr=HOME_AVATAR_QUIPS[getHomeAvatarBucket(p)];
-      homeAvatarQuipIndex=(homeAvatarQuipIndex+1)%arr.length;
+      const now=Date.now();
+      avatarTapTimes=avatarTapTimes.filter(t=>now-t<=5000);
+      avatarTapTimes.push(now);
       const a=document.getElementById('home-avatar-mini'),s=document.getElementById('home-avatar-sparkle');
       a?.classList.remove('avatar-bounce');void a?.offsetWidth;a?.classList.add('avatar-bounce');
       if(s){s.classList.remove('hidden','avatar-sparkle');void s.offsetWidth;s.classList.add('avatar-sparkle');setTimeout(()=>s.classList.add('hidden'),720)}
+      if(avatarTapTimes.length>=10){
+        avatarTapTimes=[];
+        avatarSecretUntil=Date.now()+7000;
+        renderHomeAvatar();
+        try{navigator.vibrate?.([35,30,35])}catch(_){}
+        return;
+      }
+      const p=(()=>{try{const g=getDayGamification(homeSelectedDate||currentLocalDateStr());return g.total?Math.round(g.done/g.total*100):0}catch(_){return 0}})();
+      const arr=HOME_AVATAR_QUIPS[getHomeAvatarBucket(p)];
+      homeAvatarQuipIndex=(homeAvatarQuipIndex+1)%arr.length;
       renderHomeAvatar();try{navigator.vibrate?.(30)}catch(_){}
     }
 
@@ -6717,38 +7155,29 @@ if(c)c.innerHTML='';
       setText('summary-calories',Math.round(totalKcal));setText('summary-p',Math.round(totalP));setText('summary-c',Math.round(totalC));setText('summary-f',Math.round(totalF));setText('summary-sat-fat',Number(totalSatFat.toFixed(1)));setText('summary-sugars',Number(totalSugars.toFixed(1)));setText('summary-calcium',Math.round(totalCalcium));setText('summary-magnesium',Math.round(totalMagnesium));setText('summary-zinc',Number(totalZinc.toFixed(1)));setText('summary-fiber',Number(totalFiber.toFixed(1)));setText('summary-salt',Number(totalSalt.toFixed(2)));setText('summary-iron',Number(totalIron.toFixed(1)));setText('summary-potassium',Math.round(totalPotassium));setText('summary-vitamins-id',vitId||'—');setText('summary-vitamins-lip',vitLip||'—');
       const target=appState.targets||{};const items=[['bar-p',totalP,target.p||150],['bar-c',totalC,target.c||250],['bar-f',totalF,target.f||70],['bar-sat-fat',totalSatFat,target.satFat||20],['bar-sugars',totalSugars,target.sugars||50],['bar-fiber',totalFiber,target.fiber||30],['bar-calcium',totalCalcium,target.calcium||1000],['bar-magnesium',totalMagnesium,target.magnesium||350],['bar-zinc',totalZinc,target.zinc||11],['bar-iron',totalIron,target.iron||11],['bar-potassium',totalPotassium,target.potassium||3500],['bar-salt',totalSalt,target.salt||5]];items.forEach(([id,v,t])=>{const e=document.getElementById(id);if(e)e.style.width=`${Math.min(100,t>0?(v/t)*100:0)}%`;});
 
-      const weeklySummary = computeWeeklyNutritionSummary();
+      const weeklySummary = computeWeeklyNutritionSummary(selectedDate);
       const summaryCard = document.getElementById('nutrition-week-summary');
       if (summaryCard) {
         summaryCard.innerHTML = `
           <div class="text-[11px] text-slate-300">
-            <div class="font-bold text-white mb-2">${tr('Riepilogo settimanale')}</div>
-            <div class="space-y-2">
-              <div class="flex justify-between"><span>${tr('Completamento')}</span><span class="font-semibold ${weeklySummary.compliance >= 70 ? 'text-emerald-400' : 'text-amber-400'}">${weeklySummary.compliance}%</span></div>
-              <div class="flex justify-between"><span>${tr('Status')}</span><span class="font-semibold ${weeklySummary.isComplete ? 'text-emerald-400' : 'text-rose-400'}">${tr(weeklySummary.isComplete ? 'Buono' : 'Da migliorare')}</span></div>
-              <div class="text-[10px] text-slate-400">${weeklySummary.missing.join(', ') || 'Nessun deficit rilevato'}</div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="font-bold text-white">${tr('Riepilogo settimanale')}</div>
+              <div class="text-[9px] text-slate-500">${weeklySummary.trackedDays}/7 ${tr('giorni registrati')}</div>
             </div>
-          </div>
-        `;
+            <div class="mt-3 grid grid-cols-2 gap-2">
+              <div class="rounded-xl bg-slate-950/50 p-2.5"><div class="text-[9px] text-slate-500">${tr('Equilibrio')}</div><div class="mt-1 text-xl font-black ${weeklySummary.compliance >= 70 ? 'text-emerald-300' : 'text-amber-300'}">${weeklySummary.compliance}%</div></div>
+              <div class="rounded-xl bg-slate-950/50 p-2.5"><div class="text-[9px] text-slate-500">${tr('Priorità')}</div><div class="mt-1 text-[10px] font-bold leading-relaxed text-slate-300">${weeklySummary.missing.join(' · ') || tr('Nessun deficit rilevato')}</div></div>
+            </div>
+          </div>`;
       }
 
-      const donut = document.getElementById('macro-donut');
-      if (donut) {
-        const segments = [
-          { value: Math.max(0, totalP), color: '#f43f5e' },
-          { value: Math.max(0, totalC), color: '#fbbf24' },
-          { value: Math.max(0, totalF), color: '#60a5fa' }
-        ];
-        const totalMacro = segments.reduce((sum, item) => sum + item.value, 0) || 1;
-        let current = 0;
-        const gradient = segments.map(item => {
-          const start = (current / totalMacro) * 100;
-          current += item.value;
-          const end = (current / totalMacro) * 100;
-          return `${item.color} ${start}% ${end}%`;
-        }).join(', ');
-        donut.style.background = `conic-gradient(${gradient})`;
-      }
+      setText('summary-vitamins-id-count',`${vitId?vitId.split(/\s+/).filter(Boolean).length:0}/9`);
+      setText('summary-vitamins-lip-count',`${vitLip?vitLip.split(/\s+/).filter(Boolean).length:0}/4`);
+      renderNutritionAnalytics(
+        weeklySummary,
+        {kcal:totalKcal,p:totalP,c:totalC,f:totalF,satFat:totalSatFat,sugars:totalSugars,fiber:totalFiber,calcium:totalCalcium,magnesium:totalMagnesium,zinc:totalZinc,iron:totalIron,potassium:totalPotassium,salt:totalSalt},
+        vitId,vitLip,waterVal,waterTarget
+      );
 
       // Meal Groupings
       const meals = ['Colazione', 'Pranzo', 'Cena', 'Spuntino'];
@@ -6775,7 +7204,7 @@ if(c)c.innerHTML='';
               <div class="flex items-center justify-between text-xs bg-slate-900/40 p-2 rounded-xl border border-slate-800/60">
                 <div>
                   <div class="font-bold text-slate-200">${l.name} <span class="text-[10px] text-slate-400 font-normal">(${l.grams}g)</span></div>
-                  <div class="text-[10px] text-slate-400">P ${Number(l.p||0).toFixed(1)}g · C ${Number(l.c||0).toFixed(1)}g · G ${Number(l.f||0).toFixed(1)}g · Sat ${Number(l.satFat||0).toFixed(1)}g</div><div class="text-[9px] text-slate-500">Sale ${Number(l.salt||0).toFixed(2)}g · Fe ${Number(l.iron||0).toFixed(1)}mg · K ${Math.round(Number(l.potassium||0))}mg · Vit ${[l.vitaminsId,l.vitaminsLip].filter(Boolean).join(' ')||'—'}</div>
+                  <div class="text-[10px] text-slate-400">P ${Number(l.p||0).toFixed(1)}g · C ${Number(l.c||0).toFixed(1)}g · G ${Number(l.f||0).toFixed(1)}g · Sat ${Number(l.satFat||0).toFixed(1)}g</div><div class="text-[9px] leading-relaxed text-slate-500">Ca ${Math.round(Number(l.calcium||0))}mg · Mg ${Math.round(Number(l.magnesium||0))}mg · Zn ${Number(l.zinc||0).toFixed(1)}mg · Fe ${Number(l.iron||0).toFixed(1)}mg · K ${Math.round(Number(l.potassium||0))}mg</div><div class="text-[9px] text-slate-500">Sale ${Number(l.salt||0).toFixed(2)}g · Vit ID ${l.vitaminsId||'—'} · Vit LIP ${l.vitaminsLip||'—'}</div>
                 </div>
                 <div class="flex items-center space-x-2">
                   <span class="font-bold text-slate-300">${l.kcal} kcal</span>
@@ -6805,8 +7234,13 @@ if(c)c.innerHTML='';
     function toggleFoodPresetForm(force){
       const form=document.getElementById('food-preset-form'); if(!form)return;
       const show=typeof force==='boolean'?force:form.classList.contains('hidden');
+      const shell=form.closest('.food-db-shell');
       form.classList.toggle('hidden',!show);
-      if(show && editingFoodPresetIndex===null){ const name=document.getElementById('preset-name'); setTimeout(()=>name?.focus(),80); }
+      shell?.classList.toggle('food-form-open',show);
+      if(show && editingFoodPresetIndex===null){
+        const name=document.getElementById('preset-name');
+        setTimeout(()=>name?.focus(),80);
+      }
     }
     function resetFoodPresetForm(){editingFoodPresetIndex=null;PRESET_FIELD_MAP.forEach(([id])=>{const e=document.getElementById(id);if(e)e.value='';});}
     function editFoodPreset(index){const p=normalizeFoodPreset(appState.presets[index]);editingFoodPresetIndex=index;toggleFoodPresetForm(true);PRESET_FIELD_MAP.forEach(([id,key])=>{const e=document.getElementById(id);if(e)e.value=p[key]??'';});showToast('Modalità modifica attiva');}
@@ -6950,7 +7384,7 @@ if(c)c.innerHTML='';
         function saveProfile(e) {
       e.preventDefault();
       appState.profile = {
-        gender: document.getElementById('prof-input-gender').value,
+        gender: normalizeProfileGenderValue(document.getElementById('prof-input-gender').value),
         age: parseInt(document.getElementById('prof-input-age').value) || 25,
         height: parseInt(document.getElementById('prof-input-height').value) || 175,
         sleepHours: appState.profile?.sleepHours || 7,
@@ -6970,6 +7404,7 @@ if(c)c.innerHTML='';
 
     function loadProfileUI() {
       const p = appState.profile;
+      p.gender=normalizeProfileGenderValue(p.gender);
       document.getElementById('prof-gender').textContent = tr(p.gender === 'female' ? 'Donna' : 'Uomo');
       document.getElementById('prof-age').textContent = `${p.age} anni`;
       document.getElementById('prof-height').textContent = `${p.height} cm`;
@@ -7092,20 +7527,23 @@ if(c)c.innerHTML='';
     }
     function avatarSetArtwork(genere){
       const female=genere==='femmina';
-      const maleUse=document.getElementById('avatar-source-male');
-      const femaleUse=document.getElementById('avatar-source-female');
-      if(maleUse)maleUse.style.display=female?'none':'inline';
-      if(femaleUse)femaleUse.style.display=female?'inline':'none';
-
-      document.getElementById('avatar-gender-male')?.classList.toggle('active', !female);
-      document.getElementById('avatar-gender-female')?.classList.toggle('active', female);
-
       const artGroup=document.getElementById('avatar-artwork-whole');
-      if(artGroup){
+      const symbol=document.getElementById(female?'avatar-female-art':'avatar-male-art');
+      if(artGroup&&symbol){
+        const wanted=female?'female':'male';
+        if(artGroup.dataset.gender!==wanted || artGroup.childElementCount===0){
+          artGroup.replaceChildren(...Array.from(symbol.children).map(node=>node.cloneNode(true)));
+          artGroup.dataset.gender=wanted;
+        }
         artGroup.setAttribute('transform',female
           ? 'translate(349 72) scale(.91) translate(-384 0)'
           : 'translate(-30 0)');
+        artGroup.style.display='inline';
       }
+      document.getElementById('avatar-gender-male')?.classList.toggle('active',!female);
+      document.getElementById('avatar-gender-female')?.classList.toggle('active',female);
+      const svg=document.getElementById('avatar-art-svg');
+      if(svg)svg.dataset.gender=female?'female':'male';
     }
 
     function aggiornaAvatar(misure){
@@ -7113,7 +7551,7 @@ if(c)c.innerHTML='';
       if(!svg)return;
 
       // Single source of truth: profile.gender.
-      const female=appState.profile?.gender==='female';
+      const female=normalizeProfileGenderValue(appState.profile?.gender)==='female';
       const genere=female?'femmina':'maschio';
       const m={...avatarLatestMeasurements(),...(misure||{}),genere};
 
@@ -7236,18 +7674,27 @@ if(c)c.innerHTML='';
       document.getElementById('avatar-measure-toggle')?.classList.toggle('active',avatarShowMeasures);
       appState.avatar={...(appState.avatar||{}),showMeasures:avatarShowMeasures};saveStateToLocal();
     }
+    function normalizeProfileGenderValue(gender){
+      const v=String(gender||'').trim().toLowerCase();
+      return ['female','femmina','donna','woman','mujer','mulher','femeie','f'].includes(v)?'female':'male';
+    }
+
     function setProfileGender(gender,{sync=true}={}){
-      const value=gender==='female'?'female':'male';
+      const value=normalizeProfileGenderValue(gender);
       appState.profile={...(appState.profile||{}),gender:value,updatedAt:new Date().toISOString()};
 
       const profileSelect=document.getElementById('prof-input-gender');
       if(profileSelect)profileSelect.value=value;
 
-      // Body avatar
-      aggiornaAvatarDaUltimaMisura();
-
-      // Home avatar is rebuilt immediately from the same profile.gender.
-      renderHomeAvatar();
+      // Ridisegno reale dei path SVG: immediato + doppio passaggio per Safari/iOS.
+      const redrawGender=()=>{
+        avatarSetArtwork(value==='female'?'femmina':'maschio');
+        aggiornaAvatarDaUltimaMisura();
+        renderHomeAvatar();
+      };
+      redrawGender();
+      requestAnimationFrame(redrawGender);
+      setTimeout(redrawGender,80);
 
       // Profile summary
       const profGender=document.getElementById('prof-gender');
@@ -7329,7 +7776,7 @@ if(c)c.innerHTML='';
 
       // Calculate BMR (Mifflin-St Jeor)
       // BMR = 10 * weight + 6.25 * height - 5 * age + (5 for male, -161 for female)
-      const genderOffset = appState.profile.gender === 'male' ? 5 : -161;
+      const genderOffset = normalizeProfileGenderValue(appState.profile.gender) === 'male' ? 5 : -161;
       const bmr = Math.round((10 * latest.weight) + (6.25 * appState.profile.height) - (5 * appState.profile.age) + genderOffset);
       document.getElementById('calc-bmr').textContent = bmr;
       aggiornaAvatarDaUltimaMisura();

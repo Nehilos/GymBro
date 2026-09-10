@@ -112,7 +112,7 @@ Return this JSON shape:
   "notes": ["limits of the available data"]
 }
 
-Compare calories, protein, carbohydrates, fats, saturated fat, sugars, fiber, water and all available micronutrients with the targets inside the snapshot.
+Compare calories, protein, carbohydrates, fats, saturated fat, sugars, fiber, water and all available micronutrients—including calcium, magnesium, zinc, iron and potassium—with the targets inside the snapshot.
 Call out nutrients that are repeatedly low or high, not single-day noise.
 For each useful correction, suggest common food sources where appropriate.
 Do not prescribe supplements or therapeutic diets.`;
@@ -219,6 +219,7 @@ Return exactly:
   "fiber": number|null,
   "calcium": number|null,
   "magnesium": number|null,
+  "zinc": number|null,
   "iron": number|null,
   "potassium": number|null,
   "salt": number|null,
@@ -232,7 +233,7 @@ Return exactly:
 Units:
 - kcal in kcal/100 g
 - protein/carbs/fat/saturated fat/sugars/fiber/salt in g/100 g
-- calcium/magnesium/iron/potassium in mg/100 g
+- calcium/magnesium/zinc/iron/potassium in mg/100 g
 
 Prefer Open Food Facts values when a candidate clearly matches the requested food.
 Use general food-composition knowledge only to fill missing values, and use null when not reasonably supportable.
