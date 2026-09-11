@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -672,7 +672,11 @@
     "Nessuna foto per i filtri selezionati.": "Nicio fotografie nu corespunde filtrelor.",
     "Foto salvata · sincronizzazione Drive…": "Fotografie salvată · sincronizare cu Drive…",
     "Foto salvata": "Fotografie salvată",
-    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partajarea directă nu este disponibilă: fotografia este pregătită pentru salvare."
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partajarea directă nu este disponibilă: fotografia este pregătită pentru salvare.",
+    "raggiunto": "atins",
+    "mancante": "lipsă",
+    "Raggiunto": "Atins",
+    "Mancante": "Lipsă"
   },
   "words": [
     [
@@ -1001,7 +1005,7 @@
     "help.nutrition.database_meals": "Baza meselor",
     "help.nutrition.database_meals.body": "Baza meselor afișează câte un rând compact pentru fiecare dată. Apasă data pentru detaliile meselor.",
     "help.nutrition.charts": "Grafice macro și micro",
-    "help.nutrition.charts.body": "Cele două diagrame inel separă macro și micronutrienții. Zilnic, 7 zile și Lunar înmulțesc țintele cu numărul de zile. Atinge un sector sau legenda pentru nutrient, valoare și țintă.",
+    "help.nutrition.charts.body": "Fiecare nutrient ocupă o felie de aceeași dimensiune. Zona mai luminoasă arată procentul atins, iar zona mai închisă ceea ce lipsește.",
     "help.analytics.strength": "Forță contextualizată",
     "help.analytics.strength.body": "Graficul afișează doar progresia greutății ridicate pentru un exercițiu. Numele sunt comparate fără diferențiere între litere mari și mici.",
     "help.settings.drive_creation": "Crearea în Drive",

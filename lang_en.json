@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -728,7 +728,11 @@
     "Nessuna foto per i filtri selezionati.": "No photos match the selected filters.",
     "Foto salvata · sincronizzazione Drive…": "Photo saved · syncing to Drive…",
     "Foto salvata": "Photo saved",
-    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Direct sharing is unavailable: the photo is ready to save."
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Direct sharing is unavailable: the photo is ready to save.",
+    "raggiunto": "reached",
+    "mancante": "missing",
+    "Raggiunto": "Reached",
+    "Mancante": "Missing"
   },
   "words": [
     [
@@ -1057,7 +1061,7 @@
     "help.nutrition.database_meals": "Meal database",
     "help.nutrition.database_meals.body": "Meal Database now shows one compact row per date. Tap a date to open Breakfast, Lunch, Dinner and Snack details.",
     "help.nutrition.charts": "Macro and micro charts",
-    "help.nutrition.charts.body": "The two doughnut charts separate macro and micronutrients. Daily, 7-day and Monthly modes multiply targets by the number of days. Tap a segment or legend item to see nutrient, value and target.",
+    "help.nutrition.charts.body": "Each nutrient has an equal-size slice. The brighter area shows the target percentage reached, while the darker area shows what is still missing.",
     "help.analytics.strength": "Contextual strength",
     "help.analytics.strength.body": "The chart now shows only lifted-weight progression for a specific exercise. Exercise names are matched case-insensitively, so “leg press” and “Leg press” are treated as the same exercise.",
     "help.settings.drive_creation": "Drive creation",

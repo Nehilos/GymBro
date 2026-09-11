@@ -3084,6 +3084,92 @@
       pointer-events:none !important;
     }
 
+    /* ===== Thalys V21 ===== */
+
+    /* Nutrition info scrolls as one document; header no longer remains pinned. */
+    #nutrition-info-modal > div{
+      overscroll-behavior:contain !important;
+    }
+    .nutrition-info-header-v21{
+      position:static !important;
+      top:auto !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+    }
+
+    /* Light nutrition guide contrast. */
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-fat-total-v21{
+      color:#355e8b !important;
+      -webkit-text-fill-color:#355e8b !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-fat-sat-v21{
+      color:#2d6f8d !important;
+      -webkit-text-fill-color:#2d6f8d !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-guide-water-v21{
+      background:#e4f0f4 !important;
+      border-color:#b6d0da !important;
+      color:#36545d !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-guide-water-title-v21{
+      color:#245a82 !important;
+      -webkit-text-fill-color:#245a82 !important;
+    }
+
+    /* Main Diet water tracker: lighter Light-mode surface, darker blue label. */
+    body[data-thalys-theme="light"] .nutrition-water-card-v15{
+      background:#e3f0ef !important;
+      border-color:#b8d3d0 !important;
+      box-shadow:0 10px 24px rgba(15,118,110,.045) !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-icon-v15,
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-target-v15{
+      background:#d0e5e3 !important;
+      border-color:#9fc6c2 !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .text-white{
+      color:#245a82 !important;
+      -webkit-text-fill-color:#245a82 !important;
+    }
+
+    /* Body information modal: purple/pink copy is darker in Light mode. */
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-200,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-300,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-400{
+      color:#62408f !important;
+      -webkit-text-fill-color:#62408f !important;
+    }
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-200,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-300,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-400{
+      color:#9b3f6d !important;
+      -webkit-text-fill-color:#9b3f6d !important;
+    }
+
+    /* Progress photos: slightly lighter aqua controls in both themes. */
+    .photo-add-btn-v21,
+    .photo-upload-btn-v21{
+      background:#159da0 !important;
+      border:1px solid rgba(88,210,208,.22) !important;
+      box-shadow:0 8px 20px rgba(8,94,98,.14) !important;
+    }
+    .photo-add-btn-v21:hover,
+    .photo-upload-btn-v21:hover{
+      background:#1ba9aa !important;
+    }
+    body[data-thalys-theme="light"] .photo-add-btn-v21,
+    body[data-thalys-theme="light"] .photo-upload-btn-v21{
+      background:#3caeb0 !important;
+      color:#ffffff !important;
+      border-color:#258f92 !important;
+      box-shadow:0 7px 18px rgba(13,115,119,.10) !important;
+    }
+
+    /* Body measurement chart legend gets darker in Light mode. */
+    body[data-thalys-theme="light"] #bodyMeasurementsChart{
+      color:#314e53 !important;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -3105,7 +3191,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=20" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=21" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -3132,7 +3218,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=20" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=21" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -3161,7 +3247,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=20" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=21" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -5101,14 +5187,14 @@
   <!-- MODAL: NUTRITION INFO -->
   <div id="nutrition-info-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 hidden" style="z-index:130">
     <div class="bg-darkcard border border-cyan-500/20 rounded-3xl p-5 w-full max-w-md max-h-[88vh] overflow-y-auto space-y-4 shadow-2xl">
-      <div class="sticky top-0 bg-darkcard/95 backdrop-blur flex justify-between items-center border-b border-slate-800 pb-3 z-10"><div><h3 class="text-base font-black text-white">Guida nutrizione</h3><p class="text-[10px] text-slate-500">Riferimenti indicativi per adulti sani · OMS / EFSA</p></div><button onclick="closeModal('nutrition-info-modal')" class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-slate-200"><i class="fa-solid fa-xmark text-lg"></i></button></div>
+      <div class="nutrition-info-header-v21 bg-darkcard/95 flex justify-between items-center border-b border-slate-800 pb-3"><div><h3 class="text-base font-black text-white">Guida nutrizione</h3><p class="text-[10px] text-slate-500">Riferimenti indicativi per adulti sani · OMS / EFSA</p></div><button onclick="closeModal('nutrition-info-modal')" class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-slate-200"><i class="fa-solid fa-xmark text-lg"></i></button></div>
       <div class="space-y-4 text-[12px] text-slate-300">
         <div><div class="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Macronutrienti</div>
           <div class="space-y-2">
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-rose-300">Proteine</b><p class="mt-1">Costruzione e riparazione dei tessuti, enzimi, trasporto e mantenimento della massa muscolare.</p><p class="mt-2 text-[10px] text-slate-500"><b>Riferimento:</b> EFSA PRI ≈ 0,83 g/kg/die nell'adulto sano. Il bisogno può aumentare con allenamento e obiettivi specifici. Non è definito un unico UL alimentare per persone sane.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-amber-300">Carboidrati</b><p class="mt-1">Principale fonte energetica; particolarmente utili per cervello e attività fisica.</p><p class="mt-2 text-[10px] text-slate-500"><b>Riferimento:</b> OMS circa 45–75% dell'energia giornaliera, privilegiando cereali integrali, legumi, frutta e verdura. Nessun limite massimo unico applicabile a tutti.</p></div>
-            <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-blue-300">Grassi totali</b><p class="mt-1">Membrane cellulari, ormoni, energia e assorbimento delle vitamine A, D, E e K.</p><p class="mt-2 text-[10px] text-slate-500"><b>Riferimento:</b> OMS: negli adulti almeno ~15% e in genere ≤30% dell'energia giornaliera; privilegiare grassi insaturi.</p></div>
-            <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-sky-300">Grassi saturi</b><p class="mt-1">Sono grassi presenti soprattutto in alcuni prodotti animali e oli tropicali. Un eccesso è associato a un profilo lipidico meno favorevole.</p><p class="mt-2 text-[10px] text-slate-500"><b>Massimo:</b> OMS &lt;10% dell'energia totale. Su 2000 kcal equivale a circa &lt;22 g/die; non esiste un minimo da raggiungere.</p></div>
+            <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="nutrition-fat-total-v21 text-blue-300">Grassi totali</b><p class="mt-1">Membrane cellulari, ormoni, energia e assorbimento delle vitamine A, D, E e K.</p><p class="mt-2 text-[10px] text-slate-500"><b>Riferimento:</b> OMS: negli adulti almeno ~15% e in genere ≤30% dell'energia giornaliera; privilegiare grassi insaturi.</p></div>
+            <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="nutrition-fat-sat-v21 text-sky-300">Grassi saturi</b><p class="mt-1">Sono grassi presenti soprattutto in alcuni prodotti animali e oli tropicali. Un eccesso è associato a un profilo lipidico meno favorevole.</p><p class="mt-2 text-[10px] text-slate-500"><b>Massimo:</b> OMS &lt;10% dell'energia totale. Su 2000 kcal equivale a circa &lt;22 g/die; non esiste un minimo da raggiungere.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-violet-300">Zuccheri</b><p class="mt-1">Carboidrati semplici. L'app registra gli zuccheri dichiarati in etichetta; la raccomandazione OMS riguarda soprattutto gli zuccheri liberi.</p><p class="mt-2 text-[10px] text-slate-500"><b>Massimo:</b> OMS &lt;10% dell'energia, idealmente &lt;5%; a 2000 kcal ≈ &lt;50 g, idealmente &lt;25 g/die di zuccheri liberi.</p></div>
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-amber-200">Fibre</b><p class="mt-1">Favoriscono regolarità intestinale, sazietà e salute metabolica.</p><p class="mt-2 text-[10px] text-slate-500"><b>Minimo:</b> OMS ≥25 g/die negli adulti e ragazzi sopra i 10 anni. Aumentare gradualmente insieme ai liquidi.</p></div>
           </div>
@@ -5125,7 +5211,7 @@
             <div class="rounded-2xl bg-slate-900/60 p-3 border border-slate-800"><b class="text-yellow-300">Vitamine LIP · liposolubili</b><p class="mt-1">A, D, E, K. Importanti per vista e tessuti, ossa e calcio, protezione antiossidante e coagulazione. Possono accumularsi più facilmente rispetto alle idrosolubili.</p><p class="mt-2 text-[10px] text-slate-500"><b>Esempi EFSA adulti:</b> A 750 µg/die uomini / 650 µg donne; D 15 µg/die; E 13 mg uomini / 11 mg donne; K 70 µg/die. Per alcuni esistono UL specifici (es. D 100 µg/die): il campo lettere indica solo presenza.</p></div>
           </div>
         </div>
-        <div class="rounded-2xl bg-blue-950/40 p-3 border border-blue-500/20"><b class="text-blue-300">Acqua</b><p class="mt-1">Il bisogno varia con clima, sudorazione, dieta, attività e condizioni personali. Il target di Thalys è personalizzabile e non sostituisce una valutazione clinica.</p></div>
+        <div class="nutrition-guide-water-v21 rounded-2xl bg-blue-950/40 p-3 border border-blue-500/20"><b class="nutrition-guide-water-title-v21 text-blue-300">Acqua</b><p class="mt-1">Il bisogno varia con clima, sudorazione, dieta, attività e condizioni personali. Il target di Thalys è personalizzabile e non sostituisce una valutazione clinica.</p></div>
         <div class="rounded-2xl bg-amber-500/10 p-3 border border-amber-500/20 text-amber-100"><b>Nota:</b> i riferimenti sono orientativi per adulti sani. Età, sesso, gravidanza, farmaci, patologie, sport e dieta possono cambiare fabbisogni e limiti. Fonti principali: OMS Healthy Diet / Sodium Reduction ed EFSA Dietary Reference Values.</div>
       </div>
     </div>
@@ -5255,7 +5341,7 @@
       <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Corpo</div><h3 class="text-base font-black text-white">Foto progressi</h3><p id="photo-manager-count-v19" class="mt-1 text-[9px] text-slate-500">0 foto</p></div>
         <div class="flex gap-2">
-          <button type="button" onclick="openAddPhotoModalV20()" class="min-h-10 rounded-xl bg-teal-600 px-3 text-[10px] font-black text-white"><i class="fa-solid fa-plus mr-1"></i>Aggiungi foto</button>
+          <button type="button" onclick="openAddPhotoModalV20()" class="photo-add-btn-v21 min-h-10 rounded-xl bg-teal-600 px-3 text-[10px] font-black text-white"><i class="fa-solid fa-plus mr-1"></i>Aggiungi foto</button>
           <button type="button" onclick="closeModal('photo-manager-modal')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
@@ -5311,7 +5397,7 @@
           </select>
         </label>
       </div>
-      <label class="mt-4 min-h-12 w-full rounded-xl bg-teal-600 text-white font-black text-xs flex items-center justify-center cursor-pointer">
+      <label class="photo-upload-btn-v21 mt-4 min-h-12 w-full rounded-xl bg-teal-600 text-white font-black text-xs flex items-center justify-center cursor-pointer">
         <i class="fa-solid fa-camera mr-2"></i>Carica
         <input id="photo-upload-input" type="file" accept="image/*" class="hidden" onchange="handlePhotoUploadV19(event)">
       </label>
@@ -6224,7 +6310,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:20,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:21,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -6246,7 +6332,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=20`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=21`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -6257,7 +6343,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v20`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v21`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -6266,7 +6352,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v20`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v21`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -6277,7 +6363,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v20`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v21`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -10178,7 +10264,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=20`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=21`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10627,7 +10713,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='20.0.0';
+const THALYS_APP_VERSION_V10='21.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -11066,8 +11152,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=20',
-  light:'./Thalys Logo Light.png?v=20'
+  dark:'./Thalys Logo Dark.png?v=21',
+  light:'./Thalys Logo Light.png?v=21'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -12297,6 +12383,221 @@ document.addEventListener('DOMContentLoaded',()=>{
   },260);
 });
 window.addEventListener('pageshow',()=>setTimeout(unlockAppScrollV20,40),{passive:true});
+
+
+/* ==========================================================
+   THALYS V21 — Diet order + target-fill donuts + chart legend
+   ========================================================== */
+
+/* Water tracker belongs before breakfast/meals. */
+function moveWaterBeforeMealsV21(){
+  const meals=document.getElementById('meals-container');
+  const water=document.getElementById('water-amount')?.closest('.bg-darkcard');
+  if(meals&&water&&meals.parentElement===water.parentElement&&water.nextElementSibling!==meals){
+    meals.parentElement.insertBefore(water,meals);
+  }
+  if(water)water.classList.add('nutrition-water-card-v15');
+}
+
+/* Donut helpers: every nutrient always occupies the same angular slice.
+   Its slice is internally split into reached and missing target percentages. */
+function donutProgressPctV21(x){
+  const target=Number(x?.target||0),value=Number(x?.value||0);
+  if(!target||target<=0)return 0;
+  return Math.max(0,Math.min(100,value/target*100));
+}
+function hexRgbV21(hex){
+  const h=String(hex||'#64748b').replace('#','');
+  const s=h.length===3?h.split('').map(x=>x+x).join(''):h.padEnd(6,'0').slice(0,6);
+  return [parseInt(s.slice(0,2),16)||0,parseInt(s.slice(2,4),16)||0,parseInt(s.slice(4,6),16)||0];
+}
+function shadeHexV21(hex,factor){
+  const [r,g,b]=hexRgbV21(hex);
+  const f=v=>Math.max(0,Math.min(255,Math.round(v*factor)));
+  return `rgb(${f(r)},${f(g)},${f(b)})`;
+}
+function rgbaHexV21(hex,a){
+  const [r,g,b]=hexRgbV21(hex);return `rgba(${r},${g},${b},${a})`;
+}
+function donutGradientV21(ctx,base,reached){
+  const area=ctx.chart?.chartArea;
+  if(!area)return reached?base:shadeHexV21(base,.47);
+  const g=ctx.chart.ctx.createLinearGradient(area.left,area.top,area.right,area.bottom);
+  if(reached){
+    g.addColorStop(0,rgbaHexV21(base,.98));
+    g.addColorStop(.58,rgbaHexV21(base,.84));
+    g.addColorStop(1,shadeHexV21(base,.80));
+  }else{
+    g.addColorStop(0,shadeHexV21(base,.46));
+    g.addColorStop(.55,shadeHexV21(base,.38));
+    g.addColorStop(1,rgbaHexV21(base,.30));
+  }
+  return g;
+}
+function renderOneDonutV7(kind,defs){
+  const cv=document.getElementById(kind==='macro'?'macroNutrientDonutV7':'microNutrientDonutV7');
+  if(!cv||!window.Chart)return;
+  const old=kind==='macro'?chartMacroV7:chartMicroV7;if(old)old.destroy();
+
+  const palette=appleDonutPaletteV17(kind);
+  const values=[],labels=[];
+  defs.forEach((x,i)=>{
+    const pct=donutProgressPctV21(x);
+    values.push(pct,100-pct);
+    labels.push(`${tr(x.label)} · ${tr('raggiunto')}`,`${tr(x.label)} · ${tr('mancante')}`);
+  });
+  const ringBg=document.body.dataset.thalysTheme==='light'?'#e8f0f0':'#111827';
+
+  const ch=new Chart(cv.getContext('2d'),{
+    type:'doughnut',
+    data:{
+      labels,
+      datasets:[{
+        data:values,
+        backgroundColor:ctx=>{
+          const nutrient=Math.floor(ctx.dataIndex/2);
+          const reached=ctx.dataIndex%2===0;
+          return donutGradientV21(ctx,palette[nutrient%palette.length],reached);
+        },
+        borderColor:ringBg,
+        borderWidth:2,
+        borderRadius:5,
+        spacing:1,
+        hoverOffset:3
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      cutout:'76%',
+      animation:{duration:450},
+      interaction:{mode:'nearest',intersect:true},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          displayColors:false,
+          backgroundColor:'rgba(15,23,42,.94)',
+          padding:10,
+          cornerRadius:10,
+          callbacks:{
+            title:items=>{
+              const idx=Math.floor((items?.[0]?.dataIndex||0)/2);
+              return tr(defs[idx]?.label||'');
+            },
+            label:c=>{
+              const i=Math.floor(c.dataIndex/2),x=defs[i],pct=donutProgressPctV21(x);
+              return c.dataIndex%2===0
+                ? `${tr('Raggiunto')}: ${pct.toFixed(0)}%`
+                : `${tr('Mancante')}: ${(100-pct).toFixed(0)}%`;
+            },
+            afterLabel:c=>{
+              const x=defs[Math.floor(c.dataIndex/2)];
+              return `${Number(x.value.toFixed(1))}${x.unit} / ${x.target}${x.unit}`;
+            }
+          }
+        }
+      },
+      onClick:(evt,els)=>{
+        if(!els.length)return;
+        const idx=Math.floor(els[0].index/2);
+        showDonutNutrientV7(kind,defs[idx]);
+      }
+    }
+  });
+  if(kind==='macro')chartMacroV7=ch;else chartMicroV7=ch;
+
+  const avg=Math.round(defs.reduce((s,x)=>s+donutProgressPctV21(x),0)/Math.max(1,defs.length));
+  const se=document.getElementById(kind==='macro'?'macro-donut-score-v7':'micro-donut-score-v7');
+  if(se)se.textContent=`${avg}%`;
+
+  const leg=document.getElementById(kind==='macro'?'macro-donut-legend-v7':'micro-donut-legend-v7');
+  if(leg){
+    leg.innerHTML='';
+    defs.forEach((x,i)=>{
+      const pct=Math.round(donutProgressPctV21(x));
+      const base=palette[i%palette.length];
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='min-h-10 p-2 text-left text-[9px]';
+      b.innerHTML=`<span class="inline-block h-2.5 w-2.5 rounded-full mr-1.5" style="background:${base}"></span><span>${tr(x.label)}</span><b class="float-right text-slate-400">${pct}%</b>`;
+      b.onclick=()=>showDonutNutrientV7(kind,x);
+      leg.appendChild(b);
+    });
+  }
+}
+
+/* Body measurements chart: filled circular legend markers, darker Light-mode text. */
+updateBodyMeasurementsChart=function(){
+  const ctx=document.getElementById('bodyMeasurementsChart')?.getContext('2d');if(!ctx)return;
+  const selected=[...document.querySelectorAll('.body-chart-metric:checked')].map(x=>x.value);
+  const f=getAnalyticsFilter();
+  const rows=[...(appState.bodyMetrics||[])].filter(x=>f.periodDates.has(x.date)).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const labels=rows.map(x=>x.date);
+  const colors=['#b04fba','#2d7d83','#318464','#a85f00','#b84a68','#7050a8','#3f6d9d','#a94f82','#667b18'];
+  const datasets=selected.map((key,i)=>({
+    label:bodyMetricLabel(key)+' (cm)',
+    data:rows.map(r=>r[key]===null||r[key]===undefined?null:Number(r[key])),
+    borderColor:colors[i%colors.length],
+    backgroundColor:colors[i%colors.length],
+    pointBackgroundColor:colors[i%colors.length],
+    pointBorderColor:colors[i%colors.length],
+    spanGaps:true,tension:.28,pointRadius:3.2,pointHoverRadius:5,
+    borderWidth:2
+  }));
+  if(chartBodyMeasurements)chartBodyMeasurements.destroy();
+  const light=document.body.dataset.thalysTheme==='light';
+  chartBodyMeasurements=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{
+          display:true,
+          labels:{
+            color:light?'#314e53':'#cbd5e1',
+            usePointStyle:true,
+            pointStyle:'circle',
+            boxWidth:8,
+            boxHeight:8,
+            padding:12,
+            font:{size:9,weight:'600'}
+          }
+        }
+      },
+      scales:{
+        x:{ticks:{color:light?'#516b70':'#64748b',font:{size:9}}},
+        y:{ticks:{color:light?'#516b70':'#64748b',font:{size:10},callback:v=>`${v} cm`}}
+      }
+    }
+  });
+};
+
+/* Re-apply order and chart style after app/theme renders. */
+const _renderNutritionV21Base=renderNutrition;
+renderNutrition=function(){
+  _renderNutritionV21Base();
+  moveWaterBeforeMealsV21();
+};
+const _applyThemeV21Base=applyThalysThemeV13;
+applyThalysThemeV13=function(theme,opts={}){
+  const out=_applyThemeV21Base(theme,opts);
+  setTimeout(()=>{
+    moveWaterBeforeMealsV21();
+    renderNutritionDonutsV7?.();
+    updateBodyMeasurementsChart?.();
+  },40);
+  return out;
+};
+
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    moveWaterBeforeMealsV21();
+    renderNutritionDonutsV7?.();
+    updateBodyMeasurementsChart?.();
+  },300);
+});
 
 </script>
 <style>

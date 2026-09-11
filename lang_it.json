@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -502,7 +502,11 @@
     "Nessuna foto per i filtri selezionati.": "Nessuna foto per i filtri selezionati.",
     "Foto salvata · sincronizzazione Drive…": "Foto salvata · sincronizzazione Drive…",
     "Foto salvata": "Foto salvata",
-    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Condivisione diretta non disponibile: foto pronta per il salvataggio."
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Condivisione diretta non disponibile: foto pronta per il salvataggio.",
+    "raggiunto": "raggiunto",
+    "mancante": "mancante",
+    "Raggiunto": "Raggiunto",
+    "Mancante": "Mancante"
   },
   "words": [],
   "keys": {
@@ -714,7 +718,7 @@
     "help.nutrition.database_meals": "Database pasti",
     "help.nutrition.database_meals.body": "Il Database pasti mostra ora una riga compatta per ogni data. Tocca una data per aprire Colazione, Pranzo, Cena e Spuntino con il dettaglio degli alimenti.",
     "help.nutrition.charts": "Torte macro e micro",
-    "help.nutrition.charts.body": "Le due torte separano macro e micronutrienti. Giornaliero, 7 giorni e Mensile moltiplicano i target per il numero di giorni. Tocca un settore o la legenda per vedere nome, valore e target.",
+    "help.nutrition.charts.body": "Ogni nutriente occupa una fetta di uguale dimensione. La parte più luminosa indica la percentuale del target raggiunta; la parte scura della stessa fetta mostra ciò che manca. Il colore sfuma tra le due zone.",
     "help.analytics.strength": "Forza contestualizzata",
     "help.analytics.strength.body": "Il grafico mostra solo la progressione del peso sollevato per uno specifico esercizio. I nomi vengono confrontati senza distinguere maiuscole/minuscole: “leg press” e “Leg press” sono lo stesso esercizio.",
     "help.settings.drive_creation": "Creazione Drive",

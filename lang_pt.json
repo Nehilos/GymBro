@@ -1,5 +1,5 @@
 {
-  "version": 20,
+  "version": 21,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -672,7 +672,11 @@
     "Nessuna foto per i filtri selezionati.": "Nenhuma foto corresponde aos filtros.",
     "Foto salvata · sincronizzazione Drive…": "Foto guardada · a sincronizar com o Drive…",
     "Foto salvata": "Foto guardada",
-    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partilha direta indisponível: a foto está pronta para guardar."
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partilha direta indisponível: a foto está pronta para guardar.",
+    "raggiunto": "atingido",
+    "mancante": "em falta",
+    "Raggiunto": "Atingido",
+    "Mancante": "Em falta"
   },
   "words": [
     [
@@ -1001,7 +1005,7 @@
     "help.nutrition.database_meals": "Base de refeições",
     "help.nutrition.database_meals.body": "A base de refeições mostra uma linha compacta por data. Toca numa data para abrir o detalhe de Pequeno-almoço, Almoço, Jantar e Lanche.",
     "help.nutrition.charts": "Gráficos macro e micro",
-    "help.nutrition.charts.body": "Os dois gráficos em anel separam macro e micronutrientes. Diário, 7 dias e Mensal multiplicam as metas pelo número de dias. Toca num setor ou legenda para ver nutriente, valor e meta.",
+    "help.nutrition.charts.body": "Cada nutriente ocupa uma fatia do mesmo tamanho. A parte mais clara mostra a percentagem atingida e a parte escura o que falta.",
     "help.analytics.strength": "Força contextualizada",
     "help.analytics.strength.body": "O gráfico mostra apenas a progressão do peso levantado por exercício. Os nomes são comparados sem distinguir maiúsculas de minúsculas.",
     "help.settings.drive_creation": "Criação no Drive",
