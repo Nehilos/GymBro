@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -1005,6 +1005,8 @@
     "appearance_title": "Apariencia",
     "appearance_desc": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio.",
     "help.settings.appearance": "Apariencia",
-    "help.settings.appearance.body": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio."
+    "help.settings.appearance.body": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio.",
+    "help.settings.modals": "Finestre e scorrimento",
+    "help.settings.modals.body": "Desde V14 todas las ventanas usan un único sistema: el fondo se bloquea, el desplazamiento queda en la ventana activa y al cambiar de sección se cierran overlays residuales."
   }
 }

@@ -2129,6 +2129,257 @@
       }
     }
 
+    /* ===== Thalys V14 — systematic modal isolation ===== */
+    #app-shell > main.thalys-background-locked{
+      overflow:hidden !important;
+      overscroll-behavior:none !important;
+      touch-action:none !important;
+    }
+    body.thalys-modal-active,
+    html.thalys-modal-active{
+      overscroll-behavior:none !important;
+    }
+    [id$="-modal"].thalys-modal-open{
+      display:flex !important;
+      pointer-events:auto !important;
+      visibility:visible !important;
+      overscroll-behavior:contain !important;
+      touch-action:none !important;
+    }
+    [id$="-modal"].hidden{
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    [id$="-modal"].thalys-modal-open > div{
+      position:relative;
+      z-index:1;
+      overscroll-behavior:contain !important;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y !important;
+    }
+    .food-db-shell,
+    #workout-plans-modal > div,
+    #workout-plan-viewer-modal > div,
+    #workout-history-modal > div,
+    #meal-history-modal > div,
+    #consult-snapshot-modal > div{
+      overscroll-behavior:contain !important;
+    }
+    .food-db-list,
+    .food-ai-form,
+    #plan-builder-panel,
+    #plan-builder-exercises,
+    #workout-plan-library,
+    #plan-view-content,
+    #workout-history-list,
+    #meal-history-list,
+    #consult-detail-body{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain !important;
+    }
+    .food-ai-form:not(.hidden){overflow-y:auto !important}
+
+    /* ===== Brand palette: aqua-green from the logo ===== */
+    :root{
+      --thalys-aqua:#14b8a6;
+      --thalys-aqua-deep:#0f766e;
+      --thalys-aqua-dark:#115e59;
+      --thalys-aqua-soft:#5eead4;
+      --thalys-violet-deep:#6d4bb8;
+    }
+    #app-shell > nav button.text-cyan-400,
+    .header-timer-center,
+    .header-message-button:hover{
+      color:var(--thalys-aqua-soft) !important;
+    }
+    .consult-choice.active,
+    .consult-filter-chip.active,
+    .v7-day-btn.active,
+    .ambient-sound-btn.active,
+    .breath-tech-btn.active,
+    .mind-duration-btn.active{
+      border-color:rgba(45,212,191,.62) !important;
+      background:rgba(20,184,166,.15) !important;
+      color:#ccfbf1 !important;
+    }
+    .ambient-volume{accent-color:var(--thalys-aqua) !important}
+
+    /* Header logo: raw supplied image only, no frame/ring/card. */
+    .thalys-header-logo{
+      background:transparent !important;
+      border:0 !important;
+      box-shadow:none !important;
+      border-radius:0 !important;
+      padding:0 !important;
+    }
+    .thalys-header-logo .thalys-theme-logo{
+      border-radius:0 !important;
+      object-fit:contain !important;
+    }
+
+    /* Bigger Dark / Light choices */
+    .theme-choice-shell{min-width:196px}
+    #theme-dark-btn,#theme-light-btn{white-space:nowrap;overflow:hidden}
+
+    /* ===== Refined LIGHT MODE ===== */
+    body[data-thalys-theme="light"]{
+      background:#dfeeee !important;
+      color:#173337 !important;
+    }
+    body[data-thalys-theme="light"] #app-shell{
+      background:
+        radial-gradient(circle at 12% 4%,rgba(20,184,166,.10),transparent 26%),
+        radial-gradient(circle at 90% 14%,rgba(15,118,110,.08),transparent 30%),
+        #e3f0f0 !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen{
+      background:
+        radial-gradient(circle at 50% 8%,rgba(20,184,166,.12),transparent 30%),
+        radial-gradient(circle at 18% 84%,rgba(16,185,129,.09),transparent 32%),
+        linear-gradient(180deg,#eef8f7 0%,#dceeed 50%,#e8f4f3 100%) !important;
+    }
+    body[data-thalys-theme="light"] .app-header,
+    body[data-thalys-theme="light"] nav{
+      background:rgba(241,248,248,.97) !important;
+      border-color:#bfd5d6 !important;
+    }
+    body[data-thalys-theme="light"] .bg-darkcard,
+    body[data-thalys-theme="light"] [class*="bg-darkcard"]{
+      background-color:#edf5f5 !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-950"]{
+      background-color:#dce9ea !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-900"]{
+      background-color:#d4e3e5 !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-800"]{
+      background-color:#c8dadd !important;
+    }
+    body[data-thalys-theme="light"] #tab-home > div:first-child{
+      background:
+        radial-gradient(circle at 88% 12%,rgba(20,184,166,.16),transparent 31%),
+        linear-gradient(135deg,#e9f5f4,#d6ebea 58%,#e1e7f2) !important;
+      border-color:rgba(15,118,110,.24) !important;
+    }
+    /* Higher text contrast */
+    body[data-thalys-theme="light"] .text-white,
+    body[data-thalys-theme="light"] .text-slate-100,
+    body[data-thalys-theme="light"] .text-slate-200{color:#16363a !important}
+    body[data-thalys-theme="light"] .text-slate-300{color:#38565b !important}
+    body[data-thalys-theme="light"] .text-slate-400{color:#536b70 !important}
+    body[data-thalys-theme="light"] .text-slate-500{color:#667d82 !important}
+    body[data-thalys-theme="light"] .text-cyan-100,
+    body[data-thalys-theme="light"] .text-cyan-200,
+    body[data-thalys-theme="light"] .text-cyan-300,
+    body[data-thalys-theme="light"] .text-cyan-400{color:#0f766e !important}
+    body[data-thalys-theme="light"] .text-emerald-200,
+    body[data-thalys-theme="light"] .text-emerald-300,
+    body[data-thalys-theme="light"] .text-emerald-400{color:#047857 !important}
+    body[data-thalys-theme="light"] .text-violet-200,
+    body[data-thalys-theme="light"] .text-violet-300,
+    body[data-thalys-theme="light"] .text-violet-400,
+    body[data-thalys-theme="light"] .text-purple-300,
+    body[data-thalys-theme="light"] .text-purple-400{color:#6446a3 !important}
+    body[data-thalys-theme="light"] [class*="border-cyan-"],
+    body[data-thalys-theme="light"] [class*="border-emerald-"]{border-color:rgba(15,118,110,.28) !important}
+
+    /* Bottom selected tab and central timer: logo-like aqua, not blue. */
+    body[data-thalys-theme="light"] #app-shell > nav button.text-cyan-400,
+    body[data-thalys-theme="light"] .header-timer-center{color:#0f766e !important}
+    body[data-thalys-theme="dark"] #app-shell > nav button.text-cyan-400,
+    body[data-thalys-theme="dark"] .header-timer-center{color:#2dd4bf !important}
+
+    /* Mind: cards explicitly redesigned for light mode */
+    body[data-thalys-theme="light"] #tab-meditation .mind-tool-card,
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-card,
+    body[data-thalys-theme="light"] #tab-meditation > .rounded-3xl{
+      background:#e7f1f1 !important;
+      border-color:#bfd7d8 !important;
+      box-shadow:0 10px 28px rgba(15,118,110,.06) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .mind-tool-card.recommended{
+      background:linear-gradient(145deg,#e1eeee,#ddd8eb) !important;
+      border-color:#8e75bd !important;
+      box-shadow:0 10px 28px rgba(78,55,130,.10) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .emotion-chip{
+      background:#d4e3e4 !important;
+      border-color:#b5cbcd !important;
+      color:#29494e !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .emotion-chip.active{
+      background:#c9e5df !important;
+      border-color:#0f766e !important;
+      box-shadow:0 0 0 2px rgba(15,118,110,.10) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-card{
+      background:
+        radial-gradient(circle at 90% 0%,rgba(20,184,166,.12),transparent 36%),
+        linear-gradient(145deg,#dceceb,#d4e5e6) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-btn,
+    body[data-thalys-theme="light"] #tab-meditation .mind-control,
+    body[data-thalys-theme="light"] #tab-meditation .breath-tech-btn,
+    body[data-thalys-theme="light"] #tab-meditation .mind-duration-btn{
+      background:#d1e1e2 !important;
+      border-color:#afc7c9 !important;
+      color:#29474c !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-btn.active,
+    body[data-thalys-theme="light"] #tab-meditation .breath-tech-btn.active,
+    body[data-thalys-theme="light"] #tab-meditation .mind-duration-btn.active{
+      background:#bfe0da !important;
+      border-color:#0f766e !important;
+      color:#0b5f58 !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .mind-breath-orb{
+      background:radial-gradient(circle at 42% 38%,rgba(255,255,255,.7),rgba(20,184,166,.18) 48%,rgba(173,202,204,.28) 74%) !important;
+      border-color:rgba(15,118,110,.32) !important;
+    }
+
+    /* Body: latest-reading cells should belong to the light palette. */
+    body[data-thalys-theme="light"] #body-history-detail-list > div,
+    body[data-thalys-theme="light"] .body-history-card{
+      background:#e3eeee !important;
+      border-color:#bfd3d5 !important;
+    }
+    body[data-thalys-theme="light"] #body-history-detail-list .bg-slate-950\/60{
+      background:#d2e2e3 !important;
+    }
+
+    /* Consult: retain a premium dark hero, but make all blue accents readable. */
+    body[data-thalys-theme="light"] #tab-consult > div:first-child{
+      background:linear-gradient(135deg,#4d347f 0%,#392d55 58%,#174f51 100%) !important;
+      border-color:#7056a1 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult > div:first-child h2,
+    body[data-thalys-theme="light"] #tab-consult > div:first-child .text-white{
+      color:#ffffff !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult > div:first-child .text-slate-400{
+      color:#d8dce6 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-choice{
+      background:#d6e3e4 !important;
+      border-color:#b2c7c9 !important;
+      color:#28484d !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-choice.active,
+    body[data-thalys-theme="light"] #tab-consult .consult-filter-chip.active{
+      background:#bcded8 !important;
+      border-color:#0f766e !important;
+      color:#0b5e57 !important;
+    }
+
+    /* Purple accents: slightly deeper throughout Light mode */
+    body[data-thalys-theme="light"] [class*="bg-violet-500/10"],
+    body[data-thalys-theme="light"] [class*="bg-violet-500/15"],
+    body[data-thalys-theme="light"] [class*="bg-purple-500/10"]{
+      background-color:rgba(100,70,163,.15) !important;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2150,7 +2401,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=13" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=14" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2210,8 +2461,8 @@
   <!-- Top Navigation Bar -->
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
-      <div class="thalys-header-logo rounded-xl ring-1 ring-emerald-400/20 shadow-lg flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=13" alt="">
+      <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=14" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="text-sm sm:text-lg font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -3473,9 +3724,9 @@
             <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-circle-half-stroke text-emerald-300 mr-1"></i> <span data-i18n-key="appearance_title">Aspetto</span></h3>
             <p class="mt-1 text-[10px] leading-relaxed text-slate-400" data-i18n-key="appearance_desc">Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.</p>
           </div>
-          <div class="grid grid-cols-2 gap-1.5 rounded-xl border border-slate-700 bg-slate-900 p-1">
-            <button id="theme-dark-btn" type="button" onclick="setThalysThemeV13('dark')" class="min-h-9 rounded-lg px-3 text-[10px] font-black transition"><i class="fa-solid fa-moon mr-1"></i><span>Dark</span></button>
-            <button id="theme-light-btn" type="button" onclick="setThalysThemeV13('light')" class="min-h-9 rounded-lg px-3 text-[10px] font-black transition"><i class="fa-solid fa-sun mr-1"></i><span>Light</span></button>
+          <div class="theme-choice-shell grid w-[196px] shrink-0 grid-cols-2 gap-2 rounded-2xl border border-slate-700 bg-slate-900 p-1.5">
+            <button id="theme-dark-btn" type="button" onclick="setThalysThemeV13('dark')" class="min-h-11 rounded-xl px-4 text-[11px] font-black transition"><i class="fa-solid fa-moon mr-1"></i><span>Dark</span></button>
+            <button id="theme-light-btn" type="button" onclick="setThalysThemeV13('light')" class="min-h-11 rounded-xl px-4 text-[11px] font-black transition"><i class="fa-solid fa-sun mr-1"></i><span>Light</span></button>
           </div>
         </div>
       </div>
@@ -5172,7 +5423,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:13,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:14,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5194,7 +5445,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=13`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=14`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5205,7 +5456,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v13`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v14`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5214,7 +5465,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v13`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v14`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5225,7 +5476,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v13`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v14`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9126,7 +9377,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=13`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=14`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -9575,7 +9826,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='13.0.0';
+const THALYS_APP_VERSION_V10='14.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10014,8 +10265,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=13',
-  light:'./Thalys Logo Light.png?v=13'
+  dark:'./Thalys Logo Dark.png?v=14',
+  light:'./Thalys Logo Light.png?v=14'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -10083,6 +10334,164 @@ renderAllViews=function(){
   applyThalysThemeV13(savedThalysThemeV13());
   reorderThemeCardV13();
 };
+
+
+/* ==========================================================
+   THALYS V14 — one modal system for the whole app
+   ========================================================== */
+const THALYS_MODAL_SELECTOR_V14='[id$="-modal"]';
+let thalysMainScrollV14=0;
+
+function openModalsV14(){
+  return [...document.querySelectorAll(THALYS_MODAL_SELECTOR_V14)]
+    .filter(m=>m.classList.contains('thalys-modal-open')&&!m.classList.contains('hidden'));
+}
+function lockBackgroundV14(){
+  const main=document.querySelector('#app-shell > main');
+  if(main && !main.classList.contains('thalys-background-locked')){
+    thalysMainScrollV14=main.scrollTop;
+    main.classList.add('thalys-background-locked');
+  }
+  document.documentElement.classList.add('thalys-modal-active');
+  document.body.classList.add('thalys-modal-active');
+}
+function unlockBackgroundV14(){
+  if(openModalsV14().length)return;
+  const main=document.querySelector('#app-shell > main');
+  if(main){
+    main.classList.remove('thalys-background-locked');
+    main.style.pointerEvents='';
+    main.style.touchAction='';
+    if(Math.abs(main.scrollTop-thalysMainScrollV14)>2)main.scrollTop=thalysMainScrollV14;
+  }
+  document.documentElement.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.body.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.body.style.top='';
+  document.body.style.position='';
+}
+function openModalV14(modalId){
+  const modal=document.getElementById(modalId);if(!modal)return;
+  modal.classList.remove('hidden');
+  modal.classList.add('thalys-modal-open');
+  modal.dataset.thalysModalOpen='1';
+  modal.style.pointerEvents='auto';
+  modal.style.visibility='visible';
+  modal.setAttribute('aria-hidden','false');
+  modal.removeAttribute('inert');
+  lockBackgroundV14();
+  if(modalId==='cloud-modal'){
+    try{
+      const p=JSON.parse(sessionStorage.getItem('gymbro_google_profile')||'null');
+      updateAuthUI?.(p);
+    }catch(_){updateAuthUI?.(null)}
+  }
+}
+function closeModalV14(modalId){
+  const modal=document.getElementById(modalId);if(!modal)return;
+  modal.classList.add('hidden');
+  modal.classList.remove('thalys-modal-open');
+  delete modal.dataset.thalysModalOpen;
+  modal.style.pointerEvents='none';
+  modal.style.visibility='hidden';
+  modal.setAttribute('aria-hidden','true');
+  try{modal.setAttribute('inert','')}catch(_){}
+  requestAnimationFrame(()=>{
+    modal.style.visibility='';
+    unlockBackgroundV14();
+  });
+}
+function closeAllModalsV14(){
+  document.querySelectorAll(THALYS_MODAL_SELECTOR_V14).forEach(modal=>{
+    if(!modal.classList.contains('hidden')){
+      modal.classList.add('hidden');
+      modal.classList.remove('thalys-modal-open');
+      delete modal.dataset.thalysModalOpen;
+      modal.style.pointerEvents='none';
+      modal.setAttribute('aria-hidden','true');
+      try{modal.setAttribute('inert','')}catch(_){}
+    }
+  });
+  requestAnimationFrame(unlockBackgroundV14);
+}
+
+/* Replace every legacy modal entry point. */
+openModal=openModalV14;
+closeModal=closeModalV14;
+updateModalScrollLock=function(){
+  if(openModalsV14().length)lockBackgroundV14();else unlockBackgroundV14();
+};
+
+/* Scroll wheel is always consumed by the foreground modal. */
+function findModalScrollerV14(target,modal){
+  let el=target instanceof Element?target:null;
+  while(el && el!==modal){
+    const st=getComputedStyle(el);
+    if((st.overflowY==='auto'||st.overflowY==='scroll') && el.scrollHeight>el.clientHeight+2)return el;
+    el=el.parentElement;
+  }
+  const candidates=[...modal.querySelectorAll('*')].filter(x=>{
+    const st=getComputedStyle(x);
+    return (st.overflowY==='auto'||st.overflowY==='scroll')&&x.scrollHeight>x.clientHeight+2;
+  });
+  return candidates[0]||null;
+}
+document.addEventListener('wheel',e=>{
+  const modal=e.target?.closest?.(`${THALYS_MODAL_SELECTOR_V14}.thalys-modal-open`);
+  if(!modal)return;
+  const scroller=findModalScrollerV14(e.target,modal);
+  e.preventDefault();
+  e.stopPropagation();
+  if(scroller)scroller.scrollTop+=e.deltaY;
+},{capture:true,passive:false});
+
+/* Prevent touch gestures from leaking through the backdrop. */
+document.addEventListener('touchmove',e=>{
+  const modal=e.target?.closest?.(`${THALYS_MODAL_SELECTOR_V14}.thalys-modal-open`);
+  if(!modal)return;
+  const scroller=findModalScrollerV14(e.target,modal);
+  if(!scroller && e.cancelable)e.preventDefault();
+},{capture:true,passive:false});
+
+/* Generic backdrop close, but never when interacting with the modal card. */
+document.addEventListener('pointerdown',e=>{
+  const modal=e.target instanceof Element?e.target.closest(THALYS_MODAL_SELECTOR_V14):null;
+  if(modal?.classList.contains('thalys-modal-open') && e.target===modal){
+    closeModalV14(modal.id);
+  }
+},{capture:true});
+
+/* Escape always closes the topmost open modal. */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const open=openModalsV14();
+  if(open.length){
+    const top=open.sort((a,b)=>(parseInt(getComputedStyle(a).zIndex)||0)-(parseInt(getComputedStyle(b).zIndex)||0)).pop();
+    closeModalV14(top.id);
+  }
+});
+
+/* Changing main section closes any foreground overlay first. */
+const _switchTabV14Base=switchTab;
+switchTab=function(tabName){
+  closeAllModalsV14();
+  requestAnimationFrame(()=>_switchTabV14Base(tabName));
+};
+
+/* Normalize stale modal states after browser restore/background. */
+function normalizeAllModalsV14(){
+  document.querySelectorAll(THALYS_MODAL_SELECTOR_V14).forEach(m=>{
+    if(m.classList.contains('hidden')){
+      m.classList.remove('thalys-modal-open');
+      delete m.dataset.thalysModalOpen;
+      m.style.pointerEvents='none';
+      m.setAttribute('aria-hidden','true');
+    }
+  });
+  if(openModalsV14().length)lockBackgroundV14();else unlockBackgroundV14();
+}
+window.addEventListener('pageshow',normalizeAllModalsV14,{passive:true});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)normalizeAllModalsV14()});
+document.addEventListener('DOMContentLoaded',normalizeAllModalsV14);
 
 </script>
 <style>

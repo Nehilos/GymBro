@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -1003,6 +1003,8 @@
     "appearance_title": "Aspect",
     "appearance_desc": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire.",
     "help.settings.appearance": "Aspect",
-    "help.settings.appearance.body": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire."
+    "help.settings.appearance.body": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire.",
+    "help.settings.modals": "Finestre e scorrimento",
+    "help.settings.modals.body": "Din V14 toate ferestrele folosesc același sistem: fundalul este blocat, derularea rămâne în fereastra activă, iar overlay-urile rămase sunt închise la schimbarea secțiunii."
   }
 }

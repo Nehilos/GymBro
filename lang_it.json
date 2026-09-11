@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -708,6 +708,8 @@
     "appearance_title": "Aspetto",
     "appearance_desc": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.",
     "help.settings.appearance": "Tema chiaro/scuro",
-    "help.settings.appearance.body": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio."
+    "help.settings.appearance.body": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.",
+    "help.settings.modals": "Finestre e scorrimento",
+    "help.settings.modals.body": "Da V14 tutte le finestre usano lo stesso sistema: quando una finestra è aperta lo sfondo viene bloccato, lo scroll resta nella finestra in primo piano e cambiando sezione eventuali overlay residui vengono chiusi automaticamente."
   }
 }
