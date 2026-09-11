@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -657,7 +657,8 @@
     "Peso sollevato": "Peso levantado",
     "Creazione PDF…": "A criar PDF…",
     "Progressione peso per esercizio": "Progressão de peso por exercício",
-    "Chiudi visualizzazione": "Fechar visualização"
+    "Chiudi visualizzazione": "Fechar visualização",
+    "Chiudi foto profilo": "Fechar foto de perfil"
   },
   "words": [
     [
@@ -994,6 +995,6 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "Desde a V11, os PDFs são documentos A4 nativos em vez de capturas, evitando o corte horizontal no iOS/WebKit."
+    "help.settings.pdf_export.body": "Desde a V12 a exportação PDF usa jsPDF 2.5.1 com fallback por vários CDN. O PDF continua A4 nativo, sem capturas."
   }
 }

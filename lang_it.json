@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -479,7 +479,8 @@
     "Peso sollevato": "Peso sollevato",
     "Creazione PDF…": "Creazione PDF…",
     "Progressione peso per esercizio": "Progressione peso per esercizio",
-    "Chiudi visualizzazione": "Chiudi visualizzazione"
+    "Chiudi visualizzazione": "Chiudi visualizzazione",
+    "Chiudi foto profilo": "Chiudi foto profilo"
   },
   "words": [],
   "keys": {
@@ -699,6 +700,6 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "Da V11 i PDF di Consulto non sono più screenshot della pagina: vengono generati come documento A4 nativo, con testo impaginato e pagine automatiche. Questo evita il taglio orizzontale di iOS/WebKit."
+    "help.settings.pdf_export.body": "Da V12 l'esportazione PDF usa jsPDF 2.5.1 con caricamento di riserva da più CDN. Il PDF resta nativo A4 e non usa screenshot/canvas."
   }
 }

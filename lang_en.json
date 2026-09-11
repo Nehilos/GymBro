@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -705,7 +705,8 @@
     "Peso sollevato": "Weight lifted",
     "Creazione PDF…": "Creating PDF…",
     "Progressione peso per esercizio": "Weight progression by exercise",
-    "Chiudi visualizzazione": "Close viewer"
+    "Chiudi visualizzazione": "Close viewer",
+    "Chiudi foto profilo": "Close profile photo"
   },
   "words": [
     [
@@ -1042,6 +1043,6 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "From V11, Consult PDFs are generated as native A4 documents instead of page screenshots, preventing iOS/WebKit horizontal clipping."
+    "help.settings.pdf_export.body": "From V12 PDF export uses jsPDF 2.5.1 with multi-CDN fallback. PDFs remain native A4 documents rather than screenshots."
   }
 }
