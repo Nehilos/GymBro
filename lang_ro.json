@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -658,7 +658,11 @@
     "Creazione PDF…": "Se creează PDF…",
     "Progressione peso per esercizio": "Progresia greutății pe exercițiu",
     "Chiudi visualizzazione": "Închide vizualizarea",
-    "Chiudi foto profilo": "Închide fotografia de profil"
+    "Chiudi foto profilo": "Închide fotografia de profil",
+    "Modalità chiara attivata": "Mod luminos activat",
+    "Modalità scura attivata": "Mod întunecat activat",
+    "Aspetto": "Aspect",
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire."
   },
   "words": [
     [
@@ -995,6 +999,10 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "Din V12 exportul PDF folosește jsPDF 2.5.1 cu fallback pe mai multe CDN-uri. PDF-ul rămâne document A4 nativ, nu captură."
+    "help.settings.pdf_export.body": "Din V12 exportul PDF folosește jsPDF 2.5.1 cu fallback pe mai multe CDN-uri. PDF-ul rămâne document A4 nativ, nu captură.",
+    "appearance_title": "Aspect",
+    "appearance_desc": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire.",
+    "help.settings.appearance": "Aspect",
+    "help.settings.appearance.body": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire."
   }
 }

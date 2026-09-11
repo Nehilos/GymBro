@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -658,7 +658,11 @@
     "Creazione PDF…": "A criar PDF…",
     "Progressione peso per esercizio": "Progressão de peso por exercício",
     "Chiudi visualizzazione": "Fechar visualização",
-    "Chiudi foto profilo": "Fechar foto de perfil"
+    "Chiudi foto profilo": "Fechar foto de perfil",
+    "Modalità chiara attivata": "Modo claro ativado",
+    "Modalità scura attivata": "Modo escuro ativado",
+    "Aspetto": "Aparência",
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura."
   },
   "words": [
     [
@@ -995,6 +999,10 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "Desde a V12 a exportação PDF usa jsPDF 2.5.1 com fallback por vários CDN. O PDF continua A4 nativo, sem capturas."
+    "help.settings.pdf_export.body": "Desde a V12 a exportação PDF usa jsPDF 2.5.1 com fallback por vários CDN. O PDF continua A4 nativo, sem capturas.",
+    "appearance_title": "Aparência",
+    "appearance_desc": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura.",
+    "help.settings.appearance": "Aparência",
+    "help.settings.appearance.body": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura."
   }
 }

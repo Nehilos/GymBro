@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -480,7 +480,11 @@
     "Creazione PDF…": "Creazione PDF…",
     "Progressione peso per esercizio": "Progressione peso per esercizio",
     "Chiudi visualizzazione": "Chiudi visualizzazione",
-    "Chiudi foto profilo": "Chiudi foto profilo"
+    "Chiudi foto profilo": "Chiudi foto profilo",
+    "Modalità chiara attivata": "Modalità chiara attivata",
+    "Modalità scura attivata": "Modalità scura attivata",
+    "Aspetto": "Aspetto",
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio."
   },
   "words": [],
   "keys": {
@@ -700,6 +704,10 @@
     "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
     "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
     "help.settings.pdf_export": "Esportazione PDF",
-    "help.settings.pdf_export.body": "Da V12 l'esportazione PDF usa jsPDF 2.5.1 con caricamento di riserva da più CDN. Il PDF resta nativo A4 e non usa screenshot/canvas."
+    "help.settings.pdf_export.body": "Da V12 l'esportazione PDF usa jsPDF 2.5.1 con caricamento di riserva da più CDN. Il PDF resta nativo A4 e non usa screenshot/canvas.",
+    "appearance_title": "Aspetto",
+    "appearance_desc": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.",
+    "help.settings.appearance": "Tema chiaro/scuro",
+    "help.settings.appearance.body": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio."
   }
 }
