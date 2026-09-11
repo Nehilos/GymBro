@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -488,7 +488,9 @@
     "Seleziona un file immagine": "Seleziona un file immagine",
     "Foto Thalys salvata e sincronizzata": "Foto Thalys salvata e sincronizzata",
     "Foto Google ripristinata": "Foto Google ripristinata",
-    "Non riesco a elaborare questa foto": "Non riesco a elaborare questa foto"
+    "Non riesco a elaborare questa foto": "Non riesco a elaborare questa foto",
+    "pasti": "pasti",
+    "Google Drive connesso": "Google Drive connesso"
   },
   "words": [],
   "keys": {
@@ -698,7 +700,7 @@
     "help.workout.history": "Database allenamenti",
     "help.workout.history.body": "Quando completi tutti gli esercizi previsti in un giorno, Thalys registra automaticamente l’allenamento in workout_history.json e i singoli esercizi in workouts.json. Puoi filtrare lo storico per data.",
     "help.nutrition.database_meals": "Database pasti",
-    "help.nutrition.database_meals.body": "meal_history.json conserva il diario alimentare. Dal pulsante Database pasti puoi filtrare un intervallo di date e vedere Colazione, Pranzo, Cena e Spuntino in modo ordinato.",
+    "help.nutrition.database_meals.body": "Il Database pasti mostra ora una riga compatta per ogni data. Tocca una data per aprire Colazione, Pranzo, Cena e Spuntino con il dettaglio degli alimenti.",
     "help.nutrition.charts": "Torte macro e micro",
     "help.nutrition.charts.body": "Le due torte separano macro e micronutrienti. Giornaliero, 7 giorni e Mensile moltiplicano i target per il numero di giorni. Tocca un settore o la legenda per vedere nome, valore e target.",
     "help.analytics.strength": "Forza contestualizzata",

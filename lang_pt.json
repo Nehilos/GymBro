@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -666,7 +666,9 @@
     "Seleziona un file immagine": "Seleciona um ficheiro de imagem",
     "Foto Thalys salvata e sincronizzata": "Foto Thalys guardada e sincronizada",
     "Foto Google ripristinata": "Foto Google restaurada",
-    "Non riesco a elaborare questa foto": "Não consegui processar esta foto"
+    "Non riesco a elaborare questa foto": "Não consegui processar esta foto",
+    "pasti": "refeições",
+    "Google Drive connesso": "Google Drive ligado"
   },
   "words": [
     [
@@ -993,7 +995,7 @@
     "help.workout.history": "Base de treinos",
     "help.workout.history.body": "Ao concluir todos os exercícios previstos de um dia, o Thalys guarda automaticamente a sessão em workout_history.json e os exercícios em workouts.json. Podes filtrar por data.",
     "help.nutrition.database_meals": "Base de refeições",
-    "help.nutrition.database_meals.body": "meal_history.json guarda o diário alimentar. Na Base de refeições podes filtrar um intervalo e ver pequeno-almoço, almoço, jantar e lanche de forma organizada.",
+    "help.nutrition.database_meals.body": "A base de refeições mostra uma linha compacta por data. Toca numa data para abrir o detalhe de Pequeno-almoço, Almoço, Jantar e Lanche.",
     "help.nutrition.charts": "Gráficos macro e micro",
     "help.nutrition.charts.body": "Os dois gráficos em anel separam macro e micronutrientes. Diário, 7 dias e Mensal multiplicam as metas pelo número de dias. Toca num setor ou legenda para ver nutriente, valor e meta.",
     "help.analytics.strength": "Força contextualizada",

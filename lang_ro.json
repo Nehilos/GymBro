@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -666,7 +666,9 @@
     "Seleziona un file immagine": "Selectează un fișier imagine",
     "Foto Thalys salvata e sincronizzata": "Fotografia Thalys a fost salvată și sincronizată",
     "Foto Google ripristinata": "Fotografia Google a fost restaurată",
-    "Non riesco a elaborare questa foto": "Nu pot procesa această fotografie"
+    "Non riesco a elaborare questa foto": "Nu pot procesa această fotografie",
+    "pasti": "mese",
+    "Google Drive connesso": "Google Drive conectat"
   },
   "words": [
     [
@@ -993,7 +995,7 @@
     "help.workout.history": "Baza antrenamentelor",
     "help.workout.history.body": "Când finalizezi toate exercițiile planificate într-o zi, Thalys salvează automat sesiunea în workout_history.json și exercițiile în workouts.json. Poți filtra după dată.",
     "help.nutrition.database_meals": "Baza meselor",
-    "help.nutrition.database_meals.body": "meal_history.json păstrează jurnalul alimentar. Din Baza meselor poți filtra un interval și vedea micul dejun, prânzul, cina și gustarea ordonat.",
+    "help.nutrition.database_meals.body": "Baza meselor afișează câte un rând compact pentru fiecare dată. Apasă data pentru detaliile meselor.",
     "help.nutrition.charts": "Grafice macro și micro",
     "help.nutrition.charts.body": "Cele două diagrame inel separă macro și micronutrienții. Zilnic, 7 zile și Lunar înmulțesc țintele cu numărul de zile. Atinge un sector sau legenda pentru nutrient, valoare și țintă.",
     "help.analytics.strength": "Forță contextualizată",

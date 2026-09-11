@@ -2621,6 +2621,171 @@
       margin-top:.65rem;
     }
 
+    /* ===== Thalys V17 visual polish ===== */
+    :root{
+      --thalys-aqua:#118f93;
+      --thalys-aqua-deep:#0d7377;
+      --thalys-aqua-dark:#0a5e62;
+      --thalys-aqua-soft:#3bb7b7;
+    }
+
+    /* Header / global selected aqua */
+    .header-timer-center,
+    #app-shell > nav button.text-cyan-400,
+    .header-message-button:hover{
+      color:var(--thalys-aqua-soft) !important;
+    }
+    body[data-thalys-theme="light"] .header-timer-center,
+    body[data-thalys-theme="light"] #app-shell > nav button.text-cyan-400{
+      color:var(--thalys-aqua-deep) !important;
+    }
+    .consult-choice.active,
+    .consult-filter-chip.active,
+    .v7-day-btn.active,
+    .ambient-sound-btn.active,
+    .breath-tech-btn.active,
+    .mind-duration-btn.active{
+      border-color:rgba(17,143,147,.58) !important;
+      background:rgba(17,143,147,.14) !important;
+    }
+
+    /* Home hero mini metrics: distinct premium surfaces instead of flat grey */
+    .home-metric-card-v17{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.10) !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 10px 24px rgba(0,0,0,.08);
+    }
+    .home-metric-readiness{background:linear-gradient(145deg,rgba(90,67,145,.22),rgba(15,23,42,.52)) !important}
+    .home-metric-water{background:linear-gradient(145deg,rgba(17,143,147,.20),rgba(15,23,42,.52)) !important}
+    .home-metric-kcal{background:linear-gradient(145deg,rgba(5,120,87,.20),rgba(15,23,42,.52)) !important}
+    .home-metric-workout{background:linear-gradient(145deg,rgba(14,116,144,.18),rgba(15,23,42,.52)) !important}
+    body[data-thalys-theme="light"] .home-metric-readiness{background:linear-gradient(145deg,#ded8e8,#d6e5e5) !important;border-color:#c4b8d3 !important}
+    body[data-thalys-theme="light"] .home-metric-water{background:linear-gradient(145deg,#c9e1df,#d7e9e7) !important;border-color:#9dc1bf !important}
+    body[data-thalys-theme="light"] .home-metric-kcal{background:linear-gradient(145deg,#d1e5d9,#dcebe7) !important;border-color:#aac9b5 !important}
+    body[data-thalys-theme="light"] .home-metric-workout{background:linear-gradient(145deg,#cfe1e2,#dce8ea) !important;border-color:#aac6c9 !important}
+
+    /* Apple-like nutrition donuts */
+    #tab-nutrition .v7-apple-donut{
+      border-radius:28px !important;
+      box-shadow:none !important;
+      border-width:1px !important;
+      backdrop-filter:none !important;
+    }
+    #macro-donut-legend-v7 button,
+    #micro-donut-legend-v7 button{
+      border:1px solid rgba(148,163,184,.12);
+      background:transparent !important;
+      border-radius:14px !important;
+      padding:.55rem .65rem !important;
+    }
+    #macro-donut-selection-v7,
+    #micro-donut-selection-v7{
+      border:1px solid rgba(148,163,184,.10);
+      background:rgba(15,23,42,.28) !important;
+    }
+    body[data-thalys-theme="light"] #macro-donut-selection-v7,
+    body[data-thalys-theme="light"] #micro-donut-selection-v7{
+      background:#e7efef !important;
+      border-color:#ccdada !important;
+    }
+
+    /* Body: Light mode controls */
+    body[data-thalys-theme="light"] #body-new-measure-btn,
+    body[data-thalys-theme="light"] #add-body-modal button[type="submit"]{
+      background:linear-gradient(135deg,#8d73c0,#7b63aa) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+    #add-body-modal #body-date{
+      width:min(72%,12rem) !important;
+      max-width:12rem !important;
+    }
+    body[data-thalys-theme="light"] #add-body-modal label.text-purple-200{color:#614595 !important}
+    body[data-thalys-theme="light"] #add-body-modal label.text-pink-200{color:#9d3d68 !important}
+    body[data-thalys-theme="light"] .body-index-info-btn{
+      background:#e7eeee !important;
+      border-color:#cbdadb !important;
+      color:#456166 !important;
+    }
+    body[data-thalys-theme="light"] .body-history-card,
+    body[data-thalys-theme="light"] #body-history-detail-list > div{
+      background:#f4f8f8 !important;
+      border-color:#d2dfe0 !important;
+    }
+
+    /* Analytics health button: lighter in Light, one line everywhere */
+    #analytics-health-btn{
+      white-space:nowrap !important;
+      min-width:max-content !important;
+    }
+    body[data-thalys-theme="light"] #analytics-health-btn{
+      background:linear-gradient(135deg,#9b84c7,#836cac) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+
+    /* Consult */
+    .consult-ai-label-v17{color:#fff !important}
+    body[data-thalys-theme="light"] .consult-privacy-note-v17{
+      color:#29494e !important;
+      background:#d5e5e2 !important;
+      border-color:#aac7c2 !important;
+    }
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 i{color:#0d7377 !important}
+
+    /* Quick Help selection */
+    .help-tree-tab.active{
+      background:rgba(17,143,147,.18) !important;
+      border-color:rgba(17,143,147,.55) !important;
+      color:#70d6d6 !important;
+    }
+    body[data-thalys-theme="light"] .help-tree-tab.active{
+      background:#c5dedd !important;
+      border-color:#0d7377 !important;
+      color:#0a5e62 !important;
+    }
+
+    /* Options account indicator: small meaningful dot instead of big square */
+    #tab-settings #cloud-status-icon{
+      width:12px !important;
+      height:12px !important;
+      min-width:12px !important;
+      border-radius:999px !important;
+      padding:0 !important;
+      font-size:0 !important;
+      border-width:2px !important;
+      background:#22c55e !important;
+      border-color:#d1fae5 !important;
+      box-shadow:0 0 0 2px rgba(34,197,94,.10);
+    }
+    #tab-settings #cloud-status-icon i{display:none !important}
+    body[data-thalys-theme="light"] #options-disconnect-btn{color:#9f2940 !important}
+    #options-disconnect-btn{color:#fb7185 !important}
+
+    /* Header title */
+    .thalys-header-title{font-size:17px !important}
+    @media(min-width:640px){.thalys-header-title{font-size:20px !important}}
+    @media(min-width:1024px){.thalys-header-title{font-size:22px !important}}
+
+    /* Meal history summary */
+    .meal-day-row-v17{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.75rem;
+      padding:.85rem .95rem;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,.12);
+      background:rgba(15,23,42,.44);
+      text-align:left;
+    }
+    body[data-thalys-theme="light"] .meal-day-row-v17{
+      background:#edf4f4;
+      border-color:#ccdada;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2642,7 +2807,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=16" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=17" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2669,7 +2834,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=16" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=17" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -2681,7 +2846,7 @@
       <p class="thalys-quote mx-auto max-w-[24rem]">
         <span class="thalys-quote-lead">Cura l'oggi.</span>
         <span class="thalys-quote-rest">Il domani avrà cura di te.</span>
-        <span class="thalys-quote-signature">— D</span>
+        <span class="thalys-quote-signature">- Dece -</span>
       </p>
 
       <button id="enter-app-btn" onclick="enterApp()" class="thalys-google-btn mt-6 flex w-full items-center justify-center gap-3 rounded-[1.65rem] bg-gradient-to-r from-emerald-100 via-emerald-50 to-green-100 px-6 py-3.5 text-[15px] font-semibold text-slate-950 transition active:scale-[0.985]">
@@ -2698,10 +2863,10 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=16" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=17" alt="">
       </div>
       <div class="min-w-0">
-        <h1 class="text-sm sm:text-lg font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
+        <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
         <span class="hidden sm:block text-[10px] text-slate-400 tracking-wider font-semibold uppercase">Wellness</span>
       </div>
       <div class="hidden sm:block text-[9px] italic text-slate-300/80 leading-tight max-w-[190px] ml-1">
@@ -2978,10 +3143,10 @@
             <span id="home-sync-badge" class="rounded-full bg-slate-900/70 px-2.5 py-1 text-[9px] text-slate-400">Locale</span>
           </div>
           <div class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <div class="rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Readiness</div><div id="home-readiness" class="mt-1 text-lg font-black text-violet-300">—</div><div class="text-[9px] text-slate-500">oggi</div></div>
-            <div class="rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Acqua</div><div id="home-water" class="mt-1 text-lg font-black text-blue-300">0 ml</div><div id="home-water-target" class="text-[9px] text-slate-500">/ 2500 ml</div></div>
-            <div class="rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Calorie</div><div id="home-kcal" class="mt-1 text-lg font-black text-emerald-300">0</div><div id="home-kcal-target" class="text-[9px] text-slate-500">/ 2200 kcal</div></div>
-            <div class="rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Allenamento</div><div id="home-workout-count" class="mt-1 text-lg font-black text-cyan-300">0</div><div id="home-workout-label" class="text-[9px] text-slate-500">esercizi</div></div>
+            <div class="home-metric-card-v17 home-metric-readiness rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Readiness</div><div id="home-readiness" class="mt-1 text-lg font-black text-violet-300">—</div><div class="text-[9px] text-slate-500">oggi</div></div>
+            <div class="home-metric-card-v17 home-metric-water rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Acqua</div><div id="home-water" class="mt-1 text-lg font-black text-blue-300">0 ml</div><div id="home-water-target" class="text-[9px] text-slate-500">/ 2500 ml</div></div>
+            <div class="home-metric-card-v17 home-metric-kcal rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Calorie</div><div id="home-kcal" class="mt-1 text-lg font-black text-emerald-300">0</div><div id="home-kcal-target" class="text-[9px] text-slate-500">/ 2200 kcal</div></div>
+            <div class="home-metric-card-v17 home-metric-workout rounded-2xl border border-white/5 bg-slate-950/45 p-3"><div class="text-[10px] text-slate-400">Allenamento</div><div id="home-workout-count" class="mt-1 text-lg font-black text-cyan-300">0</div><div id="home-workout-label" class="text-[9px] text-slate-500">esercizi</div></div>
           </div>
         </div>
       </div>
@@ -3426,7 +3591,7 @@
           </h2>
           <p class="text-xs text-slate-400">Peso, circonferenze e foto progressi</p>
         </div>
-        <button onclick="openModal('add-body-modal')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-400 text-slate-950 font-bold text-xs flex items-center space-x-1.5 shadow-md">
+        <button id="body-new-measure-btn" onclick="openModal('add-body-modal')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-400 text-slate-950 font-bold text-xs flex items-center space-x-1.5 shadow-md">
           <i class="fa-solid fa-plus text-sm"></i>
           <span>Nuova Misura</span>
         </button>
@@ -3588,7 +3753,7 @@
           </h2>
           <p class="text-xs text-slate-400">Visualizza i tuoi progressi nel tempo</p>
         </div>
-        <button onclick="openModal('wellness-modal')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-500 text-slate-950 font-bold text-[11px] shadow-md">
+        <button id="analytics-health-btn" onclick="openModal('wellness-modal')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-500 text-slate-950 font-bold text-[11px] shadow-md">
           <i class="fa-solid fa-brain mr-1"></i> Stato salute
         </button>
       </div>
@@ -3735,13 +3900,13 @@
       <div class="relative overflow-hidden rounded-3xl border border-violet-500/20 bg-gradient-to-br from-violet-950/70 via-slate-950 to-cyan-950/50 p-5 shadow-xl">
         <div class="absolute -right-10 -top-14 h-36 w-36 rounded-full bg-violet-400/10 blur-3xl"></div>
         <div class="relative">
-          <div class="text-[9px] uppercase tracking-[.22em] text-violet-300">THALYS AI</div>
+          <div class="consult-ai-label-v17 text-[9px] uppercase tracking-[.22em] text-white">THALYS AI</div>
           <div class="mt-1 flex items-center gap-2">
             <i class="fa-solid fa-user-doctor text-violet-300"></i>
             <h2 class="text-2xl font-black text-white">Consulto</h2>
           </div>
           <p class="mt-2 text-[11px] leading-relaxed text-slate-400">Crea un quadro congelato dei tuoi dati, scegli cosa vuoi migliorare e chiedi all’IA di analizzarlo. Nulla viene modificato automaticamente.</p>
-          <div class="mt-3 rounded-2xl border border-cyan-500/15 bg-slate-950/45 p-3 text-[9px] leading-relaxed text-slate-400">
+          <div class="consult-privacy-note-v17 mt-3 rounded-2xl border border-cyan-500/15 bg-slate-950/45 p-3 text-[9px] leading-relaxed text-slate-400">
             <i class="fa-solid fa-shield-halved mr-1 text-cyan-300"></i>
             I dati vengono inviati all’IA solo quando premi il pulsante di consulto. L’API key resta sul server Vercel e non è presente nell’HTML.
           </div>
@@ -4220,6 +4385,16 @@
         <button type="button" onclick="closeModal('workout-history-detail-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="workout-history-detail-list" class="mt-3 flex-1 overflow-y-auto space-y-2"></div>
+    </div>
+  </div>
+
+  <div id="meal-history-detail-modal" class="fixed inset-0 z-[60] bg-slate-950/92 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-md h-[72dvh] sm:h-[560px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-emerald-500/20 p-4 flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-emerald-300">Dettaglio giornata</div><h3 id="meal-history-detail-title" class="text-base font-black text-white">—</h3><div id="meal-history-detail-date" class="mt-1 text-[9px] text-slate-500">—</div></div>
+        <button type="button" onclick="closeModal('meal-history-detail-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="meal-history-detail-list" class="mt-3 flex-1 overflow-y-auto space-y-3"></div>
     </div>
   </div>
 
@@ -5661,7 +5836,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:16,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:17,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5683,7 +5858,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=16`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=17`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5694,7 +5869,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v16`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v17`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5703,7 +5878,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v16`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v17`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5714,7 +5889,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v16`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v17`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9615,7 +9790,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=16`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=17`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10064,7 +10239,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='16.0.0';
+const THALYS_APP_VERSION_V10='17.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10503,8 +10678,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=16',
-  light:'./Thalys Logo Light.png?v=16'
+  dark:'./Thalys Logo Dark.png?v=17',
+  light:'./Thalys Logo Light.png?v=17'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -10979,6 +11154,112 @@ document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(renderProfilePhotoUI,220);
 });
 window.addEventListener('pageshow',()=>setTimeout(renderProfilePhotoUI,70),{passive:true});
+
+
+/* ==========================================================
+   THALYS V17 — meal calendar, Apple donuts, final graphics
+   ========================================================== */
+function renderMealHistory(){
+  const box=document.getElementById('meal-history-list');if(!box)return;
+  let a=document.getElementById('meal-history-from')?.value||'',b=document.getElementById('meal-history-to')?.value||'';
+  if(a&&b&&a>b)[a,b]=[b,a];
+  const rows=(appState.nutrition||[]).filter(x=>(!a||x.date>=a)&&(!b||x.date<=b));
+  const dates=[...new Set(rows.map(x=>x.date))].sort().reverse();
+  box.innerHTML=dates.length?dates.map(d=>{
+    const dayRows=rows.filter(x=>x.date===d);
+    const kcal=Math.round(dayRows.reduce((s,x)=>s+Number(x.kcal||0),0));
+    const meals=new Set(dayRows.map(x=>x.meal)).size;
+    return `<button type="button" class="meal-day-row-v17" onclick="openMealHistoryDetailV17('${d}')">
+      <div class="min-w-0"><div class="text-[12px] font-black text-white">${weekdayLabel(d)}</div><div class="mt-1 text-[9px] text-slate-500">${d}</div></div>
+      <div class="shrink-0 text-right"><div class="text-[10px] font-black text-emerald-300">${meals} ${tr('pasti')}</div><div class="mt-1 text-[9px] text-slate-500">${kcal} kcal <i class="fa-solid fa-chevron-right ml-1"></i></div></div>
+    </button>`;
+  }).join(''):`<div class="p-5 text-center text-[10px] text-slate-500">${tr('Nessun pasto nel periodo selezionato.')}</div>`;
+}
+function openMealHistoryDetailV17(date){
+  const rows=(appState.nutrition||[]).filter(x=>x.date===date);
+  const title=document.getElementById('meal-history-detail-title');
+  const dateEl=document.getElementById('meal-history-detail-date');
+  const list=document.getElementById('meal-history-detail-list');
+  if(title)title.textContent=weekdayLabel(date);
+  if(dateEl)dateEl.textContent=date;
+  if(list)list.innerHTML=['Colazione','Pranzo','Cena','Spuntino'].map(meal=>{
+    const xs=rows.filter(x=>x.meal===meal);
+    const kcal=Math.round(xs.reduce((s,x)=>s+Number(x.kcal||0),0));
+    return `<div class="rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="flex items-center justify-between"><b class="text-[10px] text-emerald-300">${tr(meal)}</b><span class="text-[9px] text-slate-500">${kcal} kcal</span></div>
+      ${xs.length?xs.map(x=>`<div class="mt-2 flex items-center justify-between gap-3 text-[10px]"><span class="min-w-0 truncate">${escapeHTML(x.name)} · ${Number(x.grams||0)}g</span><span class="shrink-0 text-slate-500">${Math.round(x.kcal||0)} kcal</span></div>`).join(''):`<div class="mt-2 text-[9px] text-slate-600">${tr('Nessun alimento')}</div>`}
+    </div>`;
+  }).join('');
+  openModal('meal-history-detail-modal');
+}
+
+/* Minimal Apple-like doughnuts: slim ring, spacing between segments, no heavy borders. */
+function appleDonutPaletteV17(kind){
+  return kind==='macro'
+    ? ['#e76f83','#b98222','#607ca6','#477f91','#7d62a8','#b65c8d']
+    : ['#2c7f83','#3c8b70','#167c78','#b95b24','#68832e','#9a4b87','#397b92','#665aa5','#9a6a12'];
+}
+function renderOneDonutV7(kind,defs){
+  const cv=document.getElementById(kind==='macro'?'macroNutrientDonutV7':'microNutrientDonutV7');
+  if(!cv||!window.Chart)return;
+  const old=kind==='macro'?chartMacroV7:chartMicroV7;if(old)old.destroy();
+  const pal=appleDonutPaletteV17(kind);
+  const colors=defs.map((x,i)=>{
+    const score=Math.max(.24,Math.min(1,nutrientScoreV7(x)/100));
+    const hex=pal[i%pal.length];
+    return hex;
+  });
+  const ringBg=document.body.dataset.thalysTheme==='light'?'#e3ecec':'#172033';
+  const ch=new Chart(cv.getContext('2d'),{
+    type:'doughnut',
+    data:{labels:defs.map(x=>tr(x.label)),datasets:[{
+      data:defs.map(()=>1),
+      backgroundColor:colors,
+      borderColor:ringBg,
+      borderWidth:3,
+      borderRadius:8,
+      spacing:2,
+      hoverOffset:4
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,cutout:'76%',
+      animation:{duration:420},
+      plugins:{
+        legend:{display:false},
+        tooltip:{displayColors:false,backgroundColor:'rgba(15,23,42,.92)',padding:10,cornerRadius:10,callbacks:{
+          label:c=>{const x=defs[c.dataIndex];return `${tr(x.label)} · ${Number(x.value.toFixed(1))}${x.unit} / ${x.target}${x.unit}`}
+        }}
+      },
+      onClick:(evt,els)=>{if(els.length)showDonutNutrientV7(kind,defs[els[0].index])}
+    }
+  });
+  if(kind==='macro')chartMacroV7=ch;else chartMicroV7=ch;
+  const score=Math.round(defs.reduce((s,x)=>s+nutrientScoreV7(x),0)/defs.length);
+  const se=document.getElementById(kind==='macro'?'macro-donut-score-v7':'micro-donut-score-v7');
+  if(se)se.textContent=`${score}%`;
+  const leg=document.getElementById(kind==='macro'?'macro-donut-legend-v7':'micro-donut-legend-v7');
+  if(leg){
+    leg.innerHTML='';
+    defs.forEach((x,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='min-h-10 p-2 text-left text-[9px]';
+      b.innerHTML=`<span class="inline-block h-2 w-2 rounded-full mr-1.5" style="background:${colors[i]}"></span><span>${tr(x.label)}</span><b class="float-right text-slate-400">${nutrientScoreV7(x)}%</b>`;
+      b.onclick=()=>showDonutNutrientV7(kind,x);
+      leg.appendChild(b);
+    });
+  }
+}
+
+/* Mark body-history cards generated dynamically so Light CSS always applies. */
+function markV17DynamicUI(){
+  document.querySelectorAll('#body-history-list > div,#body-history-list > button').forEach(x=>x.classList.add('body-history-card'));
+  const cloud=document.getElementById('cloud-status-icon');if(cloud)cloud.title=tr('Google Drive connesso');
+}
+const _renderBodyMetricsV17Base=renderBodyMetrics;
+renderBodyMetrics=function(){_renderBodyMetricsV17Base();requestAnimationFrame(markV17DynamicUI)};
+
+document.addEventListener('DOMContentLoaded',()=>setTimeout(markV17DynamicUI,200));
 
 </script>
 <style>

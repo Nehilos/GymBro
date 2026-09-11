@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -714,7 +714,9 @@
     "Seleziona un file immagine": "Select an image file",
     "Foto Thalys salvata e sincronizzata": "Thalys photo saved and synced",
     "Foto Google ripristinata": "Google photo restored",
-    "Non riesco a elaborare questa foto": "I could not process this photo"
+    "Non riesco a elaborare questa foto": "I could not process this photo",
+    "pasti": "meals",
+    "Google Drive connesso": "Google Drive connected"
   },
   "words": [
     [
@@ -1041,7 +1043,7 @@
     "help.workout.history": "Workout database",
     "help.workout.history.body": "When all planned exercises are completed for a day, Thalys automatically stores the session in workout_history.json and the individual exercises in workouts.json. Filter completed sessions by date.",
     "help.nutrition.database_meals": "Meal database",
-    "help.nutrition.database_meals.body": "meal_history.json stores the food diary. Use Meal database to filter a date range and review Breakfast, Lunch, Dinner and Snack cleanly.",
+    "help.nutrition.database_meals.body": "Meal Database now shows one compact row per date. Tap a date to open Breakfast, Lunch, Dinner and Snack details.",
     "help.nutrition.charts": "Macro and micro charts",
     "help.nutrition.charts.body": "The two doughnut charts separate macro and micronutrients. Daily, 7-day and Monthly modes multiply targets by the number of days. Tap a segment or legend item to see nutrient, value and target.",
     "help.analytics.strength": "Contextual strength",

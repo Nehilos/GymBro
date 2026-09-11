@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 17,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -668,7 +668,9 @@
     "Seleziona un file immagine": "Selecciona un archivo de imagen",
     "Foto Thalys salvata e sincronizzata": "Foto de Thalys guardada y sincronizada",
     "Foto Google ripristinata": "Foto de Google restaurada",
-    "Non riesco a elaborare questa foto": "No puedo procesar esta foto"
+    "Non riesco a elaborare questa foto": "No puedo procesar esta foto",
+    "pasti": "comidas",
+    "Google Drive connesso": "Google Drive conectado"
   },
   "words": [
     [
@@ -995,7 +997,7 @@
     "help.workout.history": "Base de entrenamientos",
     "help.workout.history.body": "Al completar todos los ejercicios previstos de un día, Thalys guarda automáticamente la sesión en workout_history.json y los ejercicios en workouts.json. Puedes filtrar por fecha.",
     "help.nutrition.database_meals": "Base de comidas",
-    "help.nutrition.database_meals.body": "meal_history.json guarda el diario alimentario. Desde Base de comidas puedes filtrar un intervalo y revisar desayuno, comida, cena y snack de forma ordenada.",
+    "help.nutrition.database_meals.body": "La base de comidas muestra una fila compacta por fecha. Toca una fecha para abrir el detalle de Desayuno, Almuerzo, Cena y Tentempié.",
     "help.nutrition.charts": "Gráficos macro y micro",
     "help.nutrition.charts.body": "Los dos gráficos de dona separan macro y micronutrientes. Diario, 7 días y Mensual multiplican los objetivos por el número de días. Toca un sector o la leyenda para ver nutriente, valor y objetivo.",
     "help.analytics.strength": "Fuerza contextualizada",
