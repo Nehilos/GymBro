@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -704,7 +704,8 @@
     "Peso massimo": "Max weight",
     "Peso sollevato": "Weight lifted",
     "Creazione PDF…": "Creating PDF…",
-    "Progressione peso per esercizio": "Weight progression by exercise"
+    "Progressione peso per esercizio": "Weight progression by exercise",
+    "Chiudi visualizzazione": "Close viewer"
   },
   "words": [
     [

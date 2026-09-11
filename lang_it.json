@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -478,7 +478,8 @@
     "Peso massimo": "Peso massimo",
     "Peso sollevato": "Peso sollevato",
     "Creazione PDF…": "Creazione PDF…",
-    "Progressione peso per esercizio": "Progressione peso per esercizio"
+    "Progressione peso per esercizio": "Progressione peso per esercizio",
+    "Chiudi visualizzazione": "Chiudi visualizzazione"
   },
   "words": [],
   "keys": {

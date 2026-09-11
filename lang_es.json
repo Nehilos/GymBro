@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -658,7 +658,8 @@
     "Peso massimo": "Peso máximo",
     "Peso sollevato": "Peso levantado",
     "Creazione PDF…": "Creando PDF…",
-    "Progressione peso per esercizio": "Progresión de peso por ejercicio"
+    "Progressione peso per esercizio": "Progresión de peso por ejercicio",
+    "Chiudi visualizzazione": "Cerrar visualización"
   },
   "words": [
     [

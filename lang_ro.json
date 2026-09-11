@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -656,7 +656,8 @@
     "Peso massimo": "Greutate maximă",
     "Peso sollevato": "Greutate ridicată",
     "Creazione PDF…": "Se creează PDF…",
-    "Progressione peso per esercizio": "Progresia greutății pe exercițiu"
+    "Progressione peso per esercizio": "Progresia greutății pe exercițiu",
+    "Chiudi visualizzazione": "Închide vizualizarea"
   },
   "words": [
     [
