@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -1015,6 +1015,7 @@
     "help.settings.ios_navigation": "Navigazione iPhone",
     "help.settings.ios_navigation.body": "Desde a V15 a troca de separadores usa um único caminho síncrono e restaura pointer-events, touch-action e bloqueios antes da nova secção, evitando o bloqueio no iPhone após Consulto.",
     "help.settings.profile_photo": "Foto profilo",
-    "help.settings.profile_photo.body": "Por padrão o Thalys mostra a foto da conta Google. Uma foto carregada no Thalys torna-se um override da app guardado em foto_profilo.json no Drive e é reutilizada noutros dispositivos. Usar Google remove o override."
+    "help.settings.profile_photo.body": "Por padrão o Thalys mostra a foto da conta Google. Uma foto carregada no Thalys torna-se um override da app guardado em foto_profilo.json no Drive e é reutilizada noutros dispositivos. Usar Google remove o override.",
+    "help.nutrition.barcode.body": "A câmara abre diretamente a partir do gesto do utilizador; o Thalys usa BarcodeDetector ou ZXing como fallback. Erros de permissão já não bloqueiam a app."
   }
 }

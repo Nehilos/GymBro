@@ -2786,6 +2786,82 @@
       border-color:#ccdada;
     }
 
+    /* ===== Thalys V18 — Light mode finishing ===== */
+
+    /* Corpo: latest measurement chips much lighter in Light mode. */
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip{
+      background:#e7f0f1 !important;
+      border:1px solid #cfdddf !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.72) !important;
+    }
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip .text-slate-500{
+      color:#6b8589 !important;
+    }
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip .text-slate-200{
+      color:#285b60 !important;
+    }
+
+    /* Palestra: viewer weekdays should not look like dark-mode pills. */
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .v7-day-btn{
+      background:#e3eded !important;
+      border-color:#c8d9da !important;
+      color:#3f5d62 !important;
+      box-shadow:none !important;
+    }
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .v7-day-btn.active{
+      background:#c9dfdf !important;
+      border-color:#0d7377 !important;
+      color:#0a5e62 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-200,
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-300,
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-400{
+      color:#0d7377 !important;
+    }
+
+    /* Mente date capsule: arrows are part of the same capsule, no white end caps. */
+    body[data-thalys-theme="light"] .med-date-mini{
+      overflow:hidden !important;
+      background:#c8dadd !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini button,
+    body[data-thalys-theme="light"] .med-date-mini input,
+    body[data-thalys-theme="light"] #meditation-date{
+      background:#c8dadd !important;
+      border:0 !important;
+      box-shadow:none !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini button:hover,
+    body[data-thalys-theme="light"] .med-date-mini button:active{
+      background:#bcd0d2 !important;
+    }
+
+    /* Consult: privacy copy stronger + Analyze AI button softer. */
+    body[data-thalys-theme="light"] .consult-privacy-note-v17,
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 *{
+      color:#24484c !important;
+    }
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 i{
+      color:#0a686c !important;
+    }
+    body[data-thalys-theme="light"] #consult-ai-run{
+      background:#8b73b8 !important;
+      color:#ffffff !important;
+      box-shadow:none !important;
+    }
+
+    /* Barcode modal: always above app content and touch-safe. */
+    #scan-product-modal.thalys-modal-open{
+      z-index:2400 !important;
+    }
+    #scan-product-modal > div{
+      touch-action:pan-y !important;
+    }
+    #barcode-video{
+      transform:translateZ(0);
+      -webkit-transform:translateZ(0);
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2807,7 +2883,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=17" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=18" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2834,7 +2910,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=17" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=18" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -2863,7 +2939,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=17" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=18" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -4530,7 +4606,7 @@
           <i class="fa-solid fa-barcode text-amber-400"></i>
           <span>Scansiona prodotto</span>
         </h3>
-        <button onclick="closeScanProductModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <button type="button" onclick="closeScanProductModalV18()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
       </div>
       <div class="space-y-3 pt-3">
         <div id="barcode-camera-wrap" class="relative overflow-hidden rounded-2xl border border-slate-700 bg-slate-900">
@@ -4551,14 +4627,16 @@
           </div>
         </div>
 
+        <div id="barcode-camera-message-v18" class="hidden rounded-xl border border-slate-700 bg-slate-900/60 px-3 py-2 text-[9px] leading-relaxed text-slate-300"></div>
+
         <div class="flex gap-2">
-          <button id="start-camera-btn" onclick="startBarcodeCamera()" class="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 font-bold text-[11px] py-2.5">
+          <button id="start-camera-btn" type="button" onclick="startBarcodeCameraV18()" class="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 font-bold text-[11px] py-2.5">
             <i class="fa-solid fa-camera mr-1"></i> Camera
           </button>
-          <button id="flash-camera-btn" onclick="toggleBarcodeFlash()" class="flex-1 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] py-2.5">
+          <button id="flash-camera-btn" type="button" onclick="toggleBarcodeFlash()" class="flex-1 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] py-2.5">
             <i class="fa-solid fa-bolt mr-1"></i> Flash
           </button>
-          <button id="stop-camera-btn" onclick="stopBarcodeCamera()" class="hidden flex-1 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] py-2.5">
+          <button id="stop-camera-btn" type="button" onclick="stopBarcodeCamera()" class="hidden flex-1 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] py-2.5">
             Chiudi
           </button>
         </div>
@@ -4571,7 +4649,7 @@
 
         <label class="text-xs text-slate-400 block">Codice a barre</label>
         <input id="barcode-input" type="text" inputmode="numeric" placeholder="es. 3017624010701" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
-        <button onclick="submitBarcodeLookup()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm shadow-lg">
+        <button type="button" onclick="submitBarcodeLookup()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm shadow-lg">
           Cerca nutrizione
         </button>
       </div>
@@ -5836,7 +5914,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:17,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:18,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5858,7 +5936,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=17`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=18`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5869,7 +5947,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v17`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v18`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5878,7 +5956,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v17`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v18`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5889,7 +5967,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v17`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v18`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9790,7 +9868,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=17`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=18`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10239,7 +10317,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='17.0.0';
+const THALYS_APP_VERSION_V10='18.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10678,8 +10756,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=17',
-  light:'./Thalys Logo Light.png?v=17'
+  dark:'./Thalys Logo Dark.png?v=18',
+  light:'./Thalys Logo Light.png?v=18'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -11260,6 +11338,216 @@ const _renderBodyMetricsV17Base=renderBodyMetrics;
 renderBodyMetrics=function(){_renderBodyMetricsV17Base();requestAnimationFrame(markV17DynamicUI)};
 
 document.addEventListener('DOMContentLoaded',()=>setTimeout(markV17DynamicUI,200));
+
+
+/* ==========================================================
+   THALYS V18 — robust barcode camera
+   ========================================================== */
+let barcodeNativeDetectorV18=null;
+let barcodeNativeLoopV18=0;
+let barcodeStartingV18=false;
+
+function barcodeMessageV18(text,tone='normal'){
+  const el=document.getElementById('barcode-camera-message-v18');if(!el)return;
+  if(!text){el.classList.add('hidden');el.textContent='';return;}
+  el.textContent=text;el.classList.remove('hidden');
+  el.classList.toggle('text-rose-300',tone==='error');
+  el.classList.toggle('border-rose-500/30',tone==='error');
+  el.classList.toggle('text-slate-300',tone!=='error');
+}
+function openScanProductModal(){
+  stopBarcodeCamera();
+  openModal('scan-product-modal');
+  const input=document.getElementById('barcode-input');
+  if(input)setTimeout(()=>input.focus({preventScroll:true}),100);
+  barcodeMessageV18('');
+}
+function closeScanProductModalV18(){
+  stopBarcodeCameraV18();
+  closeModal('scan-product-modal');
+}
+function closeScanProductModal(){closeScanProductModalV18();}
+
+async function ensureZXingV18(){
+  if(window.ZXing?.BrowserMultiFormatReader)return true;
+  const sources=[
+    'https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js',
+    'https://unpkg.com/@zxing/library@0.19.1/umd/index.min.js'
+  ];
+  for(let i=0;i<sources.length;i++){
+    try{
+      await loadScriptV12?.(sources[i],`thalys-zxing-v18-${i}`);
+      if(window.ZXing?.BrowserMultiFormatReader)return true;
+    }catch(_){}
+  }
+  return !!window.ZXing?.BrowserMultiFormatReader;
+}
+function barcodeSetRunningUIV18(running){
+  const video=document.getElementById('barcode-video');
+  const empty=document.getElementById('barcode-camera-empty');
+  const start=document.getElementById('start-camera-btn');
+  const stop=document.getElementById('stop-camera-btn');
+  if(video)video.classList.toggle('hidden',!running);
+  if(empty)empty.classList.toggle('hidden',running);
+  if(start){start.classList.toggle('hidden',running);start.disabled=barcodeStartingV18;}
+  if(stop)stop.classList.toggle('hidden',!running);
+}
+async function startNativeBarcodeLoopV18(video){
+  if(!('BarcodeDetector' in window))return false;
+  try{
+    const formats=await BarcodeDetector.getSupportedFormats?.();
+    const wanted=['ean_13','ean_8','upc_a','upc_e','code_128'].filter(x=>!formats||formats.includes(x));
+    barcodeNativeDetectorV18=new BarcodeDetector(wanted.length?{formats:wanted}:undefined);
+  }catch(_){
+    try{barcodeNativeDetectorV18=new BarcodeDetector()}catch(e){return false}
+  }
+  const scan=async()=>{
+    if(!barcodeScanActive||!barcodeNativeDetectorV18||!video)return;
+    try{
+      if(video.readyState>=2){
+        const found=await barcodeNativeDetectorV18.detect(video);
+        const raw=found?.[0]?.rawValue;
+        if(raw){handleBarcodeScanResult(raw);return;}
+      }
+    }catch(_){}
+    barcodeNativeLoopV18=requestAnimationFrame(scan);
+  };
+  barcodeNativeLoopV18=requestAnimationFrame(scan);
+  return true;
+}
+async function startZXingLoopV18(video){
+  if(!await ensureZXingV18())return false;
+  try{
+    barcodeCameraReader=new ZXing.BrowserMultiFormatReader();
+    const cb=(result,error)=>{
+      if(!barcodeScanActive)return;
+      if(result){
+        const text=result.getText?result.getText():String(result.text||'');
+        if(text)handleBarcodeScanResult(text);
+      }else if(error && error.name && !/NotFound/i.test(error.name)){
+        console.debug('Barcode scan',error.name);
+      }
+    };
+    if(typeof barcodeCameraReader.decodeFromVideoElementContinuously==='function'){
+      barcodeCameraReader.decodeFromVideoElementContinuously(video,cb);
+      return true;
+    }
+    if(typeof barcodeCameraReader.decodeFromVideoElement==='function'){
+      barcodeCameraReader.decodeFromVideoElement(video,cb);
+      return true;
+    }
+    if(typeof barcodeCameraReader.decodeFromStream==='function'){
+      barcodeCameraReader.decodeFromStream(barcodeCameraStream,video,cb);
+      return true;
+    }
+  }catch(e){console.warn('ZXing V18',e)}
+  return false;
+}
+async function requestCameraStreamV18(){
+  const attempts=[
+    {video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false},
+    {video:{facingMode:'environment'},audio:false},
+    {video:true,audio:false}
+  ];
+  let last=null;
+  for(const constraints of attempts){
+    try{return await navigator.mediaDevices.getUserMedia(constraints)}
+    catch(e){last=e;if(e?.name==='NotAllowedError'||e?.name==='SecurityError')break}
+  }
+  throw last||new Error('CAMERA_FAILED');
+}
+async function startBarcodeCameraV18(){
+  if(barcodeStartingV18||barcodeCameraStream)return;
+  if(!window.isSecureContext && !['localhost','127.0.0.1'].includes(location.hostname)){
+    barcodeMessageV18(tr('La fotocamera richiede HTTPS.'),'error');return;
+  }
+  if(!navigator.mediaDevices?.getUserMedia){
+    barcodeMessageV18(tr('Fotocamera non disponibile nel browser.'),'error');return;
+  }
+
+  barcodeStartingV18=true;
+  barcodeScanActive=false;
+  barcodeSetRunningUIV18(false);
+  barcodeMessageV18(tr('Apertura fotocamera…'));
+  try{
+    /* getUserMedia is requested immediately from the user gesture.
+       This matters on iOS/Chrome, where delaying it behind library loading can fail. */
+    const stream=await requestCameraStreamV18();
+    barcodeCameraStream=stream;
+    barcodeScanActive=true;
+
+    const video=document.getElementById('barcode-video');
+    if(!video)throw new Error('VIDEO_MISSING');
+    video.srcObject=stream;
+    video.setAttribute('playsinline','');
+    video.playsInline=true;video.muted=true;
+    barcodeSetRunningUIV18(true);
+
+    try{await video.play()}catch(e){
+      console.warn('Video play V18',e);
+      await new Promise(r=>setTimeout(r,100));
+      await video.play();
+    }
+
+    barcodeMessageV18(tr('Inquadra il codice a barre nel riquadro.'));
+    const nativeStarted=await startNativeBarcodeLoopV18(video);
+    if(!nativeStarted){
+      const zxingStarted=await startZXingLoopV18(video);
+      if(!zxingStarted){
+        barcodeMessageV18(tr('Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.'));
+      }
+    }
+  }catch(err){
+    console.error('Camera V18',err);
+    stopBarcodeCameraV18();
+    const name=err?.name||'';
+    if(name==='NotAllowedError'||name==='SecurityError'){
+      barcodeMessageV18(tr('Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.'),'error');
+    }else if(name==='NotFoundError'||name==='DevicesNotFoundError'){
+      barcodeMessageV18(tr('Nessuna fotocamera disponibile.'),'error');
+    }else{
+      barcodeMessageV18(tr('Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.'),'error');
+    }
+  }finally{
+    barcodeStartingV18=false;
+    const start=document.getElementById('start-camera-btn');if(start)start.disabled=false;
+  }
+}
+function stopBarcodeCameraV18(){
+  barcodeScanActive=false;
+  barcodeStartingV18=false;
+  if(barcodeNativeLoopV18){cancelAnimationFrame(barcodeNativeLoopV18);barcodeNativeLoopV18=0}
+  barcodeNativeDetectorV18=null;
+  if(barcodeCameraControls?.stop){try{barcodeCameraControls.stop()}catch(_){}}
+  barcodeCameraControls=null;
+  if(barcodeCameraReader?.reset){try{barcodeCameraReader.reset()}catch(_){}}
+  barcodeCameraReader=null;
+  if(barcodeCameraStream){
+    try{barcodeCameraStream.getTracks().forEach(t=>t.stop())}catch(_){}
+    barcodeCameraStream=null;
+  }
+  const video=document.getElementById('barcode-video');
+  if(video){try{video.pause()}catch(_){} video.srcObject=null}
+  barcodeFlashEnabled=false;
+  barcodeSetRunningUIV18(false);
+  const flash=document.getElementById('flash-camera-btn');
+  if(flash){
+    flash.classList.remove('bg-amber-500','text-slate-950');
+    flash.classList.add('bg-slate-800','text-slate-200');
+    flash.innerHTML='<i class="fa-solid fa-bolt mr-1"></i> Flash';
+  }
+}
+stopBarcodeCamera=stopBarcodeCameraV18;
+
+/* If the generic modal system closes the scanner, release the camera too. */
+const _closeModalV18Base=closeModal;
+closeModal=function(id){
+  if(id==='scan-product-modal')stopBarcodeCameraV18();
+  return _closeModalV18Base(id);
+};
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && barcodeCameraStream)stopBarcodeCameraV18();
+});
 
 </script>
 <style>

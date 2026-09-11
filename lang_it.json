@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -490,7 +490,15 @@
     "Foto Google ripristinata": "Foto Google ripristinata",
     "Non riesco a elaborare questa foto": "Non riesco a elaborare questa foto",
     "pasti": "pasti",
-    "Google Drive connesso": "Google Drive connesso"
+    "Google Drive connesso": "Google Drive connesso",
+    "La fotocamera richiede HTTPS.": "La fotocamera richiede HTTPS.",
+    "Fotocamera non disponibile nel browser.": "Fotocamera non disponibile nel browser.",
+    "Apertura fotocamera…": "Apertura fotocamera…",
+    "Inquadra il codice a barre nel riquadro.": "Inquadra il codice a barre nel riquadro.",
+    "Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.": "Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.",
+    "Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.": "Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.",
+    "Nessuna fotocamera disponibile.": "Nessuna fotocamera disponibile.",
+    "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.": "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente."
   },
   "words": [],
   "keys": {
@@ -720,6 +728,7 @@
     "help.settings.ios_navigation": "Navigazione iPhone",
     "help.settings.ios_navigation.body": "Da V15 il cambio scheda usa un unico percorso sincrono e ripristina sempre pointer-events, touch-action e lock dello sfondo prima di aprire la nuova sezione. Questo evita il blocco che su iPhone poteva comparire dopo l'ingresso in Consulto.",
     "help.settings.profile_photo": "Foto profilo",
-    "help.settings.profile_photo.body": "Per impostazione predefinita Thalys mostra la foto del tuo account Google. Se carichi una foto dentro Thalys, quella foto diventa un override dell'app e viene salvata in foto_profilo.json su Drive, così viene riutilizzata sugli altri dispositivi. Usa Google rimuove l'override."
+    "help.settings.profile_photo.body": "Per impostazione predefinita Thalys mostra la foto del tuo account Google. Se carichi una foto dentro Thalys, quella foto diventa un override dell'app e viene salvata in foto_profilo.json su Drive, così viene riutilizzata sugli altri dispositivi. Usa Google rimuove l'override.",
+    "help.nutrition.barcode.body": "La fotocamera viene aperta subito dal gesto dell'utente, poi Thalys usa BarcodeDetector quando disponibile oppure ZXing come fallback. Se il permesso viene negato, la finestra resta utilizzabile e mostra il motivo senza bloccare l'app."
   }
 }
