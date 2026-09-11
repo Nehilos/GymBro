@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -662,7 +662,11 @@
     "Modalità chiara attivata": "Modo claro ativado",
     "Modalità scura attivata": "Modo escuro ativado",
     "Aspetto": "Aparência",
-    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura."
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura.",
+    "Seleziona un file immagine": "Seleciona um ficheiro de imagem",
+    "Foto Thalys salvata e sincronizzata": "Foto Thalys guardada e sincronizada",
+    "Foto Google ripristinata": "Foto Google restaurada",
+    "Non riesco a elaborare questa foto": "Não consegui processar esta foto"
   },
   "words": [
     [
@@ -1007,6 +1011,8 @@
     "help.settings.modals": "Finestre e scorrimento",
     "help.settings.modals.body": "Desde a V14 todas as janelas usam um único sistema: o fundo fica bloqueado, o scroll permanece na janela ativa e overlays residuais são fechados ao mudar de secção.",
     "help.settings.ios_navigation": "Navigazione iPhone",
-    "help.settings.ios_navigation.body": "Desde a V15 a troca de separadores usa um único caminho síncrono e restaura pointer-events, touch-action e bloqueios antes da nova secção, evitando o bloqueio no iPhone após Consulto."
+    "help.settings.ios_navigation.body": "Desde a V15 a troca de separadores usa um único caminho síncrono e restaura pointer-events, touch-action e bloqueios antes da nova secção, evitando o bloqueio no iPhone após Consulto.",
+    "help.settings.profile_photo": "Foto profilo",
+    "help.settings.profile_photo.body": "Por padrão o Thalys mostra a foto da conta Google. Uma foto carregada no Thalys torna-se um override da app guardado em foto_profilo.json no Drive e é reutilizada noutros dispositivos. Usar Google remove o override."
   }
 }

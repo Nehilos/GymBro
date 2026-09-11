@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -664,7 +664,11 @@
     "Modalità chiara attivata": "Modo claro activado",
     "Modalità scura attivata": "Modo oscuro activado",
     "Aspetto": "Apariencia",
-    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio."
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio.",
+    "Seleziona un file immagine": "Selecciona un archivo de imagen",
+    "Foto Thalys salvata e sincronizzata": "Foto de Thalys guardada y sincronizada",
+    "Foto Google ripristinata": "Foto de Google restaurada",
+    "Non riesco a elaborare questa foto": "No puedo procesar esta foto"
   },
   "words": [
     [
@@ -1009,6 +1013,8 @@
     "help.settings.modals": "Finestre e scorrimento",
     "help.settings.modals.body": "Desde V14 todas las ventanas usan un único sistema: el fondo se bloquea, el desplazamiento queda en la ventana activa y al cambiar de sección se cierran overlays residuales.",
     "help.settings.ios_navigation": "Navigazione iPhone",
-    "help.settings.ios_navigation.body": "Desde V15 el cambio de pestaña usa una ruta síncrona única y restaura pointer-events, touch-action y bloqueos antes de abrir la nueva sección, evitando el bloqueo de iPhone tras Consulto."
+    "help.settings.ios_navigation.body": "Desde V15 el cambio de pestaña usa una ruta síncrona única y restaura pointer-events, touch-action y bloqueos antes de abrir la nueva sección, evitando el bloqueo de iPhone tras Consulto.",
+    "help.settings.profile_photo": "Foto profilo",
+    "help.settings.profile_photo.body": "Por defecto Thalys muestra la foto de tu cuenta de Google. Una foto subida en Thalys se convierte en un override de la app guardado en foto_profilo.json en Drive y se reutiliza en los demás dispositivos. Usar Google elimina el override."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -484,7 +484,11 @@
     "Modalità chiara attivata": "Modalità chiara attivata",
     "Modalità scura attivata": "Modalità scura attivata",
     "Aspetto": "Aspetto",
-    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio."
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.",
+    "Seleziona un file immagine": "Seleziona un file immagine",
+    "Foto Thalys salvata e sincronizzata": "Foto Thalys salvata e sincronizzata",
+    "Foto Google ripristinata": "Foto Google ripristinata",
+    "Non riesco a elaborare questa foto": "Non riesco a elaborare questa foto"
   },
   "words": [],
   "keys": {
@@ -712,6 +716,8 @@
     "help.settings.modals": "Finestre e scorrimento",
     "help.settings.modals.body": "Da V14 tutte le finestre usano lo stesso sistema: quando una finestra è aperta lo sfondo viene bloccato, lo scroll resta nella finestra in primo piano e cambiando sezione eventuali overlay residui vengono chiusi automaticamente.",
     "help.settings.ios_navigation": "Navigazione iPhone",
-    "help.settings.ios_navigation.body": "Da V15 il cambio scheda usa un unico percorso sincrono e ripristina sempre pointer-events, touch-action e lock dello sfondo prima di aprire la nuova sezione. Questo evita il blocco che su iPhone poteva comparire dopo l'ingresso in Consulto."
+    "help.settings.ios_navigation.body": "Da V15 il cambio scheda usa un unico percorso sincrono e ripristina sempre pointer-events, touch-action e lock dello sfondo prima di aprire la nuova sezione. Questo evita il blocco che su iPhone poteva comparire dopo l'ingresso in Consulto.",
+    "help.settings.profile_photo": "Foto profilo",
+    "help.settings.profile_photo.body": "Per impostazione predefinita Thalys mostra la foto del tuo account Google. Se carichi una foto dentro Thalys, quella foto diventa un override dell'app e viene salvata in foto_profilo.json su Drive, così viene riutilizzata sugli altri dispositivi. Usa Google rimuove l'override."
   }
 }

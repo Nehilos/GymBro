@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -662,7 +662,11 @@
     "Modalità chiara attivata": "Mod luminos activat",
     "Modalità scura attivata": "Mod întunecat activat",
     "Aspetto": "Aspect",
-    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire."
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire.",
+    "Seleziona un file immagine": "Selectează un fișier imagine",
+    "Foto Thalys salvata e sincronizzata": "Fotografia Thalys a fost salvată și sincronizată",
+    "Foto Google ripristinata": "Fotografia Google a fost restaurată",
+    "Non riesco a elaborare questa foto": "Nu pot procesa această fotografie"
   },
   "words": [
     [
@@ -1007,6 +1011,8 @@
     "help.settings.modals": "Finestre e scorrimento",
     "help.settings.modals.body": "Din V14 toate ferestrele folosesc același sistem: fundalul este blocat, derularea rămâne în fereastra activă, iar overlay-urile rămase sunt închise la schimbarea secțiunii.",
     "help.settings.ios_navigation": "Navigazione iPhone",
-    "help.settings.ios_navigation.body": "Din V15 schimbarea filelor folosește un singur flux sincron și restaurează pointer-events, touch-action și blocările înainte de noua secțiune, evitând blocarea pe iPhone după Consulto."
+    "help.settings.ios_navigation.body": "Din V15 schimbarea filelor folosește un singur flux sincron și restaurează pointer-events, touch-action și blocările înainte de noua secțiune, evitând blocarea pe iPhone după Consulto.",
+    "help.settings.profile_photo": "Foto profilo",
+    "help.settings.profile_photo.body": "Implicit, Thalys afișează fotografia contului Google. O fotografie încărcată în Thalys devine un override al aplicației, salvat în foto_profilo.json pe Drive și reutilizat pe celelalte dispozitive. Folosește Google elimină override-ul."
   }
 }

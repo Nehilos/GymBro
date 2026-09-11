@@ -2573,6 +2573,54 @@
     [id$="-modal"].thalys-modal-open{z-index:2000 !important}
     #app-shell > main{position:relative;z-index:1}
 
+    /* ===== Thalys V16 — Loto breathing mark ===== */
+    .thalys-lotus-image{
+      width:3.35rem !important;
+      height:3.35rem !important;
+      object-fit:contain;
+      opacity:.72 !important;
+      filter:drop-shadow(0 0 13px rgba(94,234,212,.20)) !important;
+      user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+    body[data-thalys-theme="light"] .thalys-lotus-image{
+      opacity:.86 !important;
+      filter:drop-shadow(0 4px 9px rgba(15,118,110,.18)) !important;
+    }
+
+    /* Stronger inhale/exhale arcs in Light mode. */
+    body[data-thalys-theme="light"] .thalys-breath-arc-base{
+      stroke:rgba(15,118,110,.30) !important;
+      stroke-width:2.8 !important;
+    }
+    body[data-thalys-theme="light"] .thalys-breath-arc-in,
+    body[data-thalys-theme="light"] .thalys-breath-arc-out{
+      stroke-width:6.2 !important;
+      filter:drop-shadow(0 0 5px rgba(15,118,110,.25)) !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-1,
+    body[data-thalys-theme="light"] .breath-out-stop-1{
+      stop-color:#0f766e !important;stop-opacity:.46 !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-2,
+    body[data-thalys-theme="light"] .breath-out-stop-2{
+      stop-color:#14b8a6 !important;stop-opacity:.92 !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-3,
+    body[data-thalys-theme="light"] .breath-out-stop-3{
+      stop-color:#115e59 !important;stop-opacity:.62 !important;
+    }
+
+    /* Profile-photo copy: Google is the default source; a custom app photo is an override. */
+    .profile-photo-source-note-v16{
+      color:#64748b;
+      font-size:9px;
+      line-height:1.45;
+      text-align:center;
+      margin-top:.65rem;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2594,7 +2642,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=15" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=16" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2606,14 +2654,14 @@
             <svg class="thalys-breath-arcs" viewBox="0 0 220 220" aria-hidden="true">
               <defs>
                 <linearGradient id="breathArcIn" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#d1fae5" stop-opacity=".38"/>
-                  <stop offset=".52" stop-color="#ecfdf5" stop-opacity=".96"/>
-                  <stop offset="1" stop-color="#6ee7b7" stop-opacity=".58"/>
+                  <stop class="breath-in-stop-1" offset="0" stop-color="#d1fae5" stop-opacity=".38"/>
+                  <stop class="breath-in-stop-2" offset=".52" stop-color="#ecfdf5" stop-opacity=".96"/>
+                  <stop class="breath-in-stop-3" offset="1" stop-color="#6ee7b7" stop-opacity=".58"/>
                 </linearGradient>
                 <linearGradient id="breathArcOut" x1="1" y1="1" x2="0" y2="1">
-                  <stop offset="0" stop-color="#d1fae5" stop-opacity=".38"/>
-                  <stop offset=".52" stop-color="#ecfdf5" stop-opacity=".94"/>
-                  <stop offset="1" stop-color="#6ee7b7" stop-opacity=".56"/>
+                  <stop class="breath-out-stop-1" offset="0" stop-color="#d1fae5" stop-opacity=".38"/>
+                  <stop class="breath-out-stop-2" offset=".52" stop-color="#ecfdf5" stop-opacity=".94"/>
+                  <stop class="breath-out-stop-3" offset="1" stop-color="#6ee7b7" stop-opacity=".56"/>
                 </linearGradient>
               </defs>
               <circle class="thalys-breath-arc-base" cx="110" cy="110" r="98"/>
@@ -2621,12 +2669,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <svg class="thalys-lotus" viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M32 13c7 8 9 15 0 25-9-10-7-17 0-25Z" fill="none" stroke="#a7f3d0" stroke-width="2.2"/>
-                <path d="M12 29c10 1 17 6 20 15-11 0-18-5-20-15Z" fill="none" stroke="#a7f3d0" stroke-width="2.2"/>
-                <path d="M52 29c-10 1-17 6-20 15 11 0 18-5 20-15Z" fill="none" stroke="#a7f3d0" stroke-width="2.2"/>
-                <path d="M19 42c8 7 18 9 27 0" fill="none" stroke="#a7f3d0" stroke-width="2.2" stroke-linecap="round"/>
-              </svg>
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=16" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -2655,7 +2698,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=15" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=16" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="text-sm sm:text-lg font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -4764,9 +4807,10 @@
         </div>
         <div class="mt-4 grid grid-cols-2 gap-2 w-full">
           <button type="button" onclick="document.getElementById('profile-photo-input').click()" class="min-h-11 rounded-xl bg-cyan-500 px-3 text-xs font-black text-slate-950">Cambia foto</button>
-          <button type="button" onclick="removeProfilePhoto();closeModal('profile-photo-modal')" class="min-h-11 rounded-xl bg-slate-800 px-3 text-xs font-bold text-slate-300">Rimuovi</button>
+          <button type="button" onclick="removeProfilePhoto();closeModal('profile-photo-modal')" class="min-h-11 rounded-xl bg-slate-800 px-3 text-xs font-bold text-slate-300"><i class="fa-brands fa-google mr-1"></i>Usa Google</button>
         </div>
       </div>
+      <div class="profile-photo-source-note-v16">Di default Thalys usa la foto del tuo account Google. Se carichi una foto qui, diventa la foto Thalys e viene sincronizzata sui tuoi dispositivi.</div>
       <input id="profile-photo-input" type="file" accept="image/*" class="hidden" onchange="handleProfilePhotoChange(event)">
     </div>
   </div>
@@ -5226,8 +5270,9 @@
         try{await uploadDriveFile('foto_profilo.json',JSON.stringify(appState.profilePhoto||null),'application/json',driveFolders.databaseFolderId,true);}
         catch(e){console.warn('Creazione foto_profilo.json',e);}
       }
-      const dedicatedConsultations=cloud.consultations, dedicatedAIConsults=cloud.aiConsults, dedicatedWorkoutHistory=cloud.workoutHistory, dedicatedMealHistory=cloud.mealHistory, dedicatedActivePlanHistory=cloud.activeWorkoutPlanHistory;
+      const dedicatedConsultations=cloud.consultations, dedicatedAIConsults=cloud.aiConsults, dedicatedWorkoutHistory=cloud.workoutHistory, dedicatedMealHistory=cloud.mealHistory, dedicatedActivePlanHistory=cloud.activeWorkoutPlanHistory, dedicatedProfilePhoto=cloud.profilePhoto;
       if(cloud.appState&&typeof cloud.appState==='object')Object.assign(cloud,cloud.appState);
+      if(dedicatedProfilePhoto!==undefined)cloud.profilePhoto=dedicatedProfilePhoto;
       if(dedicatedConsultations!==undefined)cloud.consultations=dedicatedConsultations;
       if(dedicatedAIConsults!==undefined)cloud.aiConsults=dedicatedAIConsults;if(dedicatedWorkoutHistory!==undefined)cloud.workoutHistory=dedicatedWorkoutHistory;if(dedicatedActivePlanHistory!==undefined)cloud.activeWorkoutPlanHistory=dedicatedActivePlanHistory;if(Array.isArray(dedicatedMealHistory))cloud.nutrition=mergeByKey(cloud.nutrition||[],dedicatedMealHistory,x=>x.id||`${x.date}|${x.meal}|${x.name}|${x.grams}`);
       if(cloud.plansPayload){cloud.workoutPlans=cloud.plansPayload.plans||[];cloud.activeWorkoutPlanId=cloud.plansPayload.activePlanId||cloud.activeWorkoutPlanId||null;cloud.workoutAssignments=cloud.plansPayload.assignments||{};cloud.workoutCompletions=cloud.plansPayload.completions||cloud.workoutCompletions||{};}
@@ -5616,7 +5661,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:15,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:16,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5638,7 +5683,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=15`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=16`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5649,7 +5694,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v15`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v16`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5658,7 +5703,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v15`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v16`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5669,7 +5714,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v15`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v16`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9570,7 +9615,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=15`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=16`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10019,7 +10064,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='15.0.0';
+const THALYS_APP_VERSION_V10='16.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10458,8 +10503,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=15',
-  light:'./Thalys Logo Light.png?v=15'
+  dark:'./Thalys Logo Dark.png?v=16',
+  light:'./Thalys Logo Light.png?v=16'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -10840,6 +10885,100 @@ applyThalysThemeV13=function(theme,opts={}){
   setTimeout(()=>{markThemeTargetsV15();retoneChartsV15()},30);
   return out;
 };
+
+
+/* ==========================================================
+   THALYS V16 — profile photo source consistency
+   ========================================================== */
+function googleProfilePictureV16(){
+  try{
+    const session=JSON.parse(sessionStorage.getItem('gymbro_google_profile')||'null');
+    if(session?.picture)return session.picture;
+  }catch(_){}
+  try{
+    const token=localStorage.getItem('google_id_token')||sessionStorage.getItem('google_id_token');
+    const payload=token&&typeof parseJwt==='function'?parseJwt(token):null;
+    if(payload?.picture)return payload.picture;
+  }catch(_){}
+  return '';
+}
+function normalizeProfilePhotoStateV16(){
+  const p=appState?.profilePhoto;
+  if(p?.dataUrl && !p.mode){
+    // Existing Thalys custom photos remain explicit overrides after migration.
+    appState.profilePhoto={...p,mode:'custom'};
+  }else if(!p){
+    appState.profilePhoto={mode:'google',dataUrl:'',updatedAt:new Date(0).toISOString()};
+  }else if(!p.mode){
+    appState.profilePhoto={...p,mode:'google'};
+  }
+  return appState.profilePhoto;
+}
+function profilePhotoSourceV12(){
+  const p=normalizeProfilePhotoStateV16();
+  if(p?.mode==='custom' && p.dataUrl)return p.dataUrl;
+  return googleProfilePictureV16();
+}
+function renderProfilePhotoUI(){
+  const data=profilePhotoSourceV12();
+  document.querySelectorAll('.profile-photo-img').forEach(img=>{
+    if(data){
+      if(img.src!==data)img.src=data;
+      img.classList.remove('hidden');
+      img.style.display='block';
+      img.onerror=()=>{
+        const google=googleProfilePictureV16();
+        if(img.src!==google && google){img.src=google;return;}
+        img.classList.add('hidden');img.style.display='none';
+        img.closest('button,div')?.querySelector('.profile-photo-fallback')?.classList.remove('hidden');
+      };
+    }else{
+      img.removeAttribute('src');img.classList.add('hidden');img.style.display='none';
+    }
+  });
+  document.querySelectorAll('.profile-photo-fallback').forEach(el=>el.classList.toggle('hidden',!!data));
+}
+const _handleProfilePhotoChangeV16Base=handleProfilePhotoChange;
+handleProfilePhotoChange=async function(event){
+  const file=event?.target?.files?.[0];
+  if(!file)return;
+  if(!file.type.startsWith('image/')){showToast(tr('Seleziona un file immagine'),'fa-triangle-exclamation');event.target.value='';return;}
+  try{
+    const dataUrl=await resizeProfilePhoto(file);
+    appState.profilePhoto={mode:'custom',dataUrl,updatedAt:new Date().toISOString()};
+    saveStateToLocal();
+    try{scheduleDriveSync?.(150)}catch(_){}
+    renderProfilePhotoUI();
+    showToast(tr('Foto Thalys salvata e sincronizzata'),'fa-user-check');
+  }catch(e){
+    console.warn('Profile photo V16',e);
+    showToast(tr('Non riesco a elaborare questa foto'),'fa-triangle-exclamation');
+  }finally{event.target.value='';}
+};
+removeProfilePhoto=function(){
+  appState.profilePhoto={mode:'google',dataUrl:'',updatedAt:new Date().toISOString()};
+  saveStateToLocal();
+  try{scheduleDriveSync?.(150)}catch(_){}
+  renderProfilePhotoUI();
+  showToast(tr('Foto Google ripristinata'),'fa-brands fa-google');
+};
+
+/* Preserve the dedicated Drive photo choice against app_state.json's intentional null.
+   Also normalize legacy state after each cloud/render pass. */
+const _mergeCloudIntoLocalV16Base=mergeCloudIntoLocal;
+mergeCloudIntoLocal=function(cloud){
+  const result=_mergeCloudIntoLocalV16Base(cloud);
+  const p=result.profilePhoto;
+  if(p?.dataUrl&&!p.mode)result.profilePhoto={...p,mode:'custom'};
+  else if(!p)result.profilePhoto={mode:'google',dataUrl:'',updatedAt:new Date(0).toISOString()};
+  else if(!p.mode)result.profilePhoto={...p,mode:'google'};
+  return result;
+};
+document.addEventListener('DOMContentLoaded',()=>{
+  normalizeProfilePhotoStateV16();
+  setTimeout(renderProfilePhotoUI,220);
+});
+window.addEventListener('pageshow',()=>setTimeout(renderProfilePhotoUI,70),{passive:true});
 
 </script>
 <style>

@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -710,7 +710,11 @@
     "Modalità chiara attivata": "Light mode enabled",
     "Modalità scura attivata": "Dark mode enabled",
     "Aspetto": "Appearance",
-    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Choose light or dark mode. Your choice is kept for the next launch."
+    "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.": "Choose light or dark mode. Your choice is kept for the next launch.",
+    "Seleziona un file immagine": "Select an image file",
+    "Foto Thalys salvata e sincronizzata": "Thalys photo saved and synced",
+    "Foto Google ripristinata": "Google photo restored",
+    "Non riesco a elaborare questa foto": "I could not process this photo"
   },
   "words": [
     [
@@ -1055,6 +1059,8 @@
     "help.settings.modals": "Finestre e scorrimento",
     "help.settings.modals.body": "From V14 all dialogs use one system: the background is locked while a dialog is open, scrolling stays in the foreground dialog, and switching sections automatically clears stale overlays.",
     "help.settings.ios_navigation": "Navigazione iPhone",
-    "help.settings.ios_navigation.body": "From V15 tab switching uses one synchronous path and always restores pointer-events, touch-action and background locks before opening the next section, preventing the iPhone lock after Consult."
+    "help.settings.ios_navigation.body": "From V15 tab switching uses one synchronous path and always restores pointer-events, touch-action and background locks before opening the next section, preventing the iPhone lock after Consult.",
+    "help.settings.profile_photo": "Foto profilo",
+    "help.settings.profile_photo.body": "By default Thalys shows your Google account photo. If you upload a photo in Thalys, it becomes an app-specific override stored in foto_profilo.json on Drive and reused on your other devices. Use Google removes the override."
   }
 }
