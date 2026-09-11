@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -710,6 +710,8 @@
     "help.settings.appearance": "Tema chiaro/scuro",
     "help.settings.appearance.body": "Scegli modalità chiara o scura. La scelta resta salvata al prossimo avvio.",
     "help.settings.modals": "Finestre e scorrimento",
-    "help.settings.modals.body": "Da V14 tutte le finestre usano lo stesso sistema: quando una finestra è aperta lo sfondo viene bloccato, lo scroll resta nella finestra in primo piano e cambiando sezione eventuali overlay residui vengono chiusi automaticamente."
+    "help.settings.modals.body": "Da V14 tutte le finestre usano lo stesso sistema: quando una finestra è aperta lo sfondo viene bloccato, lo scroll resta nella finestra in primo piano e cambiando sezione eventuali overlay residui vengono chiusi automaticamente.",
+    "help.settings.ios_navigation": "Navigazione iPhone",
+    "help.settings.ios_navigation.body": "Da V15 il cambio scheda usa un unico percorso sincrono e ripristina sempre pointer-events, touch-action e lock dello sfondo prima di aprire la nuova sezione. Questo evita il blocco che su iPhone poteva comparire dopo l'ingresso in Consulto."
   }
 }

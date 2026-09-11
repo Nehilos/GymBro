@@ -2380,6 +2380,199 @@
       background-color:rgba(100,70,163,.15) !important;
     }
 
+    /* ===== Thalys V15 — Light-mode contrast pass ===== */
+
+    /* Mente: header/calendar and date capsule */
+    body[data-thalys-theme="light"] #tab-meditation > div:first-child{
+      background:
+        radial-gradient(circle at 92% 8%,rgba(20,184,166,.13),transparent 31%),
+        linear-gradient(135deg,#dde9e9 0%,#d8dde8 52%,#d6e8e5 100%) !important;
+      border-color:#b8cdd0 !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation > div:first-child .text-violet-300{color:#60448f !important}
+    body[data-thalys-theme="light"] .med-date-mini{
+      background:#c8dadd !important;
+      border-color:#9fbabc !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+    }
+    body[data-thalys-theme="light"] .med-date-mini button{
+      color:#0f766e !important;
+      background:#dbe8e9 !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini input,
+    body[data-thalys-theme="light"] #meditation-date{
+      background:transparent !important;
+      color:#29494e !important;
+      border:0 !important;
+      box-shadow:none !important;
+      color-scheme:light !important;
+    }
+    body[data-thalys-theme="light"] #meditation-date::-webkit-calendar-picker-indicator{
+      opacity:.62;
+      filter:none;
+    }
+
+    /* Mindfulness timer ring: no black center in light mode. */
+    body[data-thalys-theme="light"] .mind-progress-ring{
+      background:conic-gradient(#6d4bb8 var(--progress),#b7c9cb 0) !important;
+      box-shadow:0 12px 28px rgba(71,51,110,.08);
+    }
+    body[data-thalys-theme="light"] .mind-progress-ring::after{
+      background:#dfeaea !important;
+      border-color:#b8a8d1 !important;
+    }
+    body[data-thalys-theme="light"] #mindfulness-time{color:#5d428f !important}
+    body[data-thalys-theme="light"] #mindfulness-prompt{
+      background:#d5e2e3 !important;
+      color:#29474c !important;
+    }
+
+    /* Diario / Gratitudine: warmer, darker amber for white/light surfaces. */
+    body[data-thalys-theme="light"] #mind-card-gratitude{
+      background:linear-gradient(145deg,#ebe5d5,#e3ecea) !important;
+      border-color:#c6ad78 !important;
+    }
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-200,
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-300,
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-400{
+      color:#925700 !important;
+    }
+    body[data-thalys-theme="light"] #mind-card-gratitude [class*="bg-amber-500/5"],
+    body[data-thalys-theme="light"] #mind-card-gratitude [class*="bg-amber-500/10"]{
+      background:#e9ddc4 !important;
+    }
+    body[data-thalys-theme="light"] .gratitude-memory{
+      border-left-color:#9a6700 !important;
+      background:#e7ece8 !important;
+    }
+
+    /* Global Light accent contrast: yellow/orange/teal/lime/indigo/fuchsia. */
+    body[data-thalys-theme="light"] .text-yellow-200,
+    body[data-thalys-theme="light"] .text-yellow-300,
+    body[data-thalys-theme="light"] .text-yellow-400{color:#8a5a00 !important}
+    body[data-thalys-theme="light"] .text-amber-100,
+    body[data-thalys-theme="light"] .text-amber-200,
+    body[data-thalys-theme="light"] .text-amber-300,
+    body[data-thalys-theme="light"] .text-amber-400{color:#955600 !important}
+    body[data-thalys-theme="light"] .text-orange-200,
+    body[data-thalys-theme="light"] .text-orange-300,
+    body[data-thalys-theme="light"] .text-orange-400{color:#a33f0b !important}
+    body[data-thalys-theme="light"] .text-teal-200,
+    body[data-thalys-theme="light"] .text-teal-300,
+    body[data-thalys-theme="light"] .text-teal-400{color:#0d675f !important}
+    body[data-thalys-theme="light"] .text-lime-200,
+    body[data-thalys-theme="light"] .text-lime-300,
+    body[data-thalys-theme="light"] .text-lime-400{color:#4d6f12 !important}
+    body[data-thalys-theme="light"] .text-indigo-200,
+    body[data-thalys-theme="light"] .text-indigo-300,
+    body[data-thalys-theme="light"] .text-indigo-400{color:#4f46a5 !important}
+    body[data-thalys-theme="light"] .text-fuchsia-200,
+    body[data-thalys-theme="light"] .text-fuchsia-300,
+    body[data-thalys-theme="light"] .text-fuchsia-400{color:#9b2f85 !important}
+
+    /* Dieta: water card becomes logo-teal rather than blue. */
+    body[data-thalys-theme="light"] .nutrition-water-card-v15{
+      background:#cfe5e1 !important;
+      border-color:#8fbbb4 !important;
+      box-shadow:0 12px 28px rgba(15,118,110,.07);
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-icon-v15{
+      background:#b8d9d2 !important;
+      border-color:#72a9a0 !important;
+      color:#0f766e !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-target-v15{
+      background:#b8d9d2 !important;
+      border-color:#72a9a0 !important;
+      color:#0b625b !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 #water-amount{color:#0f766e !important}
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 #water-progress-bar{background:#14b8a6 !important}
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-add-v15{
+      background:#0f8f82 !important;
+      color:white !important;
+    }
+    body[data-thalys-theme="light"] #tab-nutrition .v7-apple-donut{
+      background:#dbe8e9 !important;
+      border-color:#b8cecf !important;
+    }
+
+    /* Corpo: gender controls and latest readings. */
+    body[data-thalys-theme="light"] #avatar-gender-male,
+    body[data-thalys-theme="light"] #avatar-gender-female,
+    body[data-thalys-theme="light"] .avatar-art-control{
+      background:#d2e1e2 !important;
+      border-color:#a9c2c4 !important;
+      color:#315156 !important;
+    }
+    body[data-thalys-theme="light"] #avatar-gender-male.active,
+    body[data-thalys-theme="light"] #avatar-gender-female.active,
+    body[data-thalys-theme="light"] .avatar-art-control.active{
+      background:#b8dcd6 !important;
+      border-color:#0f766e !important;
+      color:#0a5c55 !important;
+      box-shadow:0 0 0 1px rgba(15,118,110,.10);
+    }
+    body[data-thalys-theme="light"] .body-history-card{
+      background:#f0f6f6 !important;
+      border-color:#c8d9db !important;
+    }
+    body[data-thalys-theme="light"] .body-history-card .text-slate-400{color:#4b6469 !important}
+    body[data-thalys-theme="light"] #body-history-detail-list > div{
+      background:#eef5f5 !important;
+      border-color:#c6d7d9 !important;
+    }
+    body[data-thalys-theme="light"] #body-history-detail-list [class*="bg-slate-950"]{
+      background:#f8fbfb !important;
+      border:1px solid #d2dfe0;
+    }
+
+    /* Consult: privacy notice must be dark enough on its light inset card. */
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v15{
+      background:#cfe2df !important;
+      border-color:#9dbeb9 !important;
+      color:#304f53 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v15 i{
+      color:#0f766e !important;
+    }
+
+    /* Options: amber/orange already darkened globally; keep cards readable. */
+    body[data-thalys-theme="light"] #tab-settings [class*="text-amber-"],
+    body[data-thalys-theme="light"] #tab-settings [class*="text-yellow-"]{color:#8a5200 !important}
+    body[data-thalys-theme="light"] #tab-settings [class*="text-orange-"]{color:#9a3f0d !important}
+
+    /* Welcome breathing visual: slightly deeper and more visible in Light mode. */
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-field::before{
+      border-color:rgba(15,118,110,.34) !important;
+      background:
+        radial-gradient(circle at 50% 46%,rgba(20,184,166,.20) 0%,rgba(15,118,110,.10) 44%,rgba(184,211,210,.18) 68%,transparent 73%) !important;
+      box-shadow:inset 0 0 28px rgba(15,118,110,.08),0 0 32px rgba(15,118,110,.10) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-field::after{
+      border-color:rgba(68,72,120,.18) !important;
+      background:radial-gradient(circle,rgba(255,255,255,.30),rgba(20,184,166,.10) 58%,transparent 72%) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-core{
+      background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(20,184,166,.14)),rgba(190,214,213,.42) !important;
+      border-color:rgba(15,118,110,.26) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breath-arc-base{
+      stroke:rgba(15,118,110,.18) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breath-label{
+      color:#31545a !important;
+    }
+
+    /* iPhone navigation: nav remains above app content, but below any real modal. */
+    #app-shell > nav{
+      z-index:90 !important;
+      pointer-events:auto !important;
+      touch-action:manipulation !important;
+    }
+    [id$="-modal"].thalys-modal-open{z-index:2000 !important}
+    #app-shell > main{position:relative;z-index:1}
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2401,7 +2594,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=14" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=15" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2462,7 +2655,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=14" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=15" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="text-sm sm:text-lg font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -5423,7 +5616,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:14,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:15,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5445,7 +5638,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=14`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=15`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5456,7 +5649,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v14`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v15`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5465,7 +5658,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v14`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v15`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5476,7 +5669,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v14`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v15`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9377,7 +9570,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=14`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=15`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -9826,7 +10019,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='14.0.0';
+const THALYS_APP_VERSION_V10='15.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10265,8 +10458,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=14',
-  light:'./Thalys Logo Light.png?v=14'
+  dark:'./Thalys Logo Dark.png?v=15',
+  light:'./Thalys Logo Light.png?v=15'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -10492,6 +10685,161 @@ function normalizeAllModalsV14(){
 window.addEventListener('pageshow',normalizeAllModalsV14,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)normalizeAllModalsV14()});
 document.addEventListener('DOMContentLoaded',normalizeAllModalsV14);
+
+
+/* ==========================================================
+   THALYS V15 — iPhone navigation reset + Light refinements
+   ========================================================== */
+
+/* Mark cards that need more precise Light-mode styling. */
+function markThemeTargetsV15(){
+  const water=document.getElementById('water-amount')?.closest('.bg-darkcard');
+  if(water){
+    water.classList.add('nutrition-water-card-v15');
+    const icon=water.querySelector('.fa-glass-water')?.parentElement;icon?.classList.add('water-icon-v15');
+    const target=[...water.querySelectorAll('button')].find(b=>b.textContent?.trim()==='Target');target?.classList.add('water-target-v15');
+    const add=[...water.querySelectorAll('button')].find(b=>b.textContent?.includes('250 ml')&&b.querySelector('.fa-plus'));add?.classList.add('water-add-v15');
+  }
+  const consultHero=document.querySelector('#tab-consult > div:first-child');
+  if(consultHero){
+    const note=[...consultHero.querySelectorAll('.rounded-2xl')].find(x=>x.textContent?.includes('I dati vengono inviati'));
+    note?.classList.add('consult-privacy-note-v15');
+  }
+}
+
+/* Retone canvas charts in Light mode so amber/yellow/teal/violet remain readable. */
+function themeChartColorV15(c){
+  if(typeof c!=='string')return c;
+  const light=document.body.dataset.thalysTheme==='light';
+  if(!light)return c;
+  const exact={
+    '#f59e0b':'#a85f00','#fbbf24':'#9a6700','#facc15':'#8f6400','#fb923c':'#b84a0b',
+    '#22d3ee':'#0f766e','#34d399':'#047857','#2dd4bf':'#0f766e','#a78bfa':'#6d4bb8',
+    '#8b5cf6':'#6542a4','#c4b5fd':'#6d4bb8','#84cc16':'#53760f'
+  };
+  const low=c.toLowerCase();
+  if(exact[low])return exact[low];
+  return c
+    .replace(/rgba?\(251,\s*191,\s*36(?:,\s*([.\d]+))?\)/gi,(_,a)=>a?`rgba(154,103,0,${a})`:'rgb(154,103,0)')
+    .replace(/rgba?\(251,\s*146,\s*60(?:,\s*([.\d]+))?\)/gi,(_,a)=>a?`rgba(184,74,11,${a})`:'rgb(184,74,11)')
+    .replace(/rgba?\(45,\s*212,\s*191(?:,\s*([.\d]+))?\)/gi,(_,a)=>a?`rgba(15,118,110,${a})`:'rgb(15,118,110)')
+    .replace(/rgba?\(34,\s*211,\s*238(?:,\s*([.\d]+))?\)/gi,(_,a)=>a?`rgba(15,118,110,${a})`:'rgb(15,118,110)')
+    .replace(/rgba?\(167,\s*139,\s*250(?:,\s*([.\d]+))?\)/gi,(_,a)=>a?`rgba(109,75,184,${a})`:'rgb(109,75,184)');
+}
+function retoneChartsV15(){
+  if(!window.Chart)return;
+  const instances=Chart.instances?Object.values(Chart.instances):[];
+  instances.forEach(ch=>{
+    (ch.data?.datasets||[]).forEach(ds=>{
+      ['borderColor','backgroundColor','pointBackgroundColor','pointBorderColor'].forEach(k=>{
+        if(Array.isArray(ds[k]))ds[k]=ds[k].map(themeChartColorV15);
+        else ds[k]=themeChartColorV15(ds[k]);
+      });
+    });
+    try{ch.update('none')}catch(_){}
+  });
+}
+
+/* A single, synchronous tab switch for all platforms.
+   This intentionally bypasses the V9/V10/V14 wrapper chain, which could leave
+   WebKit/iPhone in an intermediate locked frame after entering Consulto. */
+function hardUnlockNavigationV15(){
+  document.querySelectorAll('[id$="-modal"]').forEach(modal=>{
+    if(modal.classList.contains('hidden')){
+      modal.classList.remove('thalys-modal-open');
+      delete modal.dataset.thalysModalOpen;
+      modal.style.pointerEvents='none';
+      modal.setAttribute('aria-hidden','true');
+    }
+  });
+  const main=document.querySelector('#app-shell > main');
+  const nav=document.querySelector('#app-shell > nav');
+  [main,nav].forEach(el=>{
+    if(!el)return;
+    el.removeAttribute('inert');
+    el.style.pointerEvents='auto';
+    el.style.touchAction=el===nav?'manipulation':'pan-y';
+  });
+  main?.classList.remove('thalys-background-locked');
+  document.documentElement.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.body.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.body.style.top='';
+  document.body.style.position='';
+  document.body.style.inset='';
+  document.body.style.width='';
+}
+function closeAllModalsImmediateV15(){
+  document.querySelectorAll('[id$="-modal"]').forEach(modal=>{
+    if(!modal.classList.contains('hidden')){
+      modal.classList.add('hidden');
+      modal.classList.remove('thalys-modal-open');
+      delete modal.dataset.thalysModalOpen;
+      modal.style.pointerEvents='none';
+      modal.setAttribute('aria-hidden','true');
+      try{modal.setAttribute('inert','')}catch(_){}
+    }
+  });
+  hardUnlockNavigationV15();
+}
+function switchTabV15(tabName){
+  closeAllModalsImmediateV15();
+  const tabs=['home','workout','meditation','nutrition','body','analytics','consult','settings'];
+  tabs.forEach(t=>{
+    const section=document.getElementById(`tab-${t}`);
+    const navBtn=document.getElementById(`nav-${t}`);
+    if(!section)return;
+    const active=t===tabName;
+    section.classList.toggle('hidden',!active);
+    if(navBtn){
+      navBtn.classList.toggle('text-cyan-400',active);
+      navBtn.classList.toggle('text-slate-400',!active);
+      navBtn.setAttribute('aria-current',active?'page':'false');
+    }
+  });
+  const main=document.querySelector('#app-shell > main');
+  if(main)main.scrollTop=0;
+
+  if(tabName==='home'){renderTodayDashboard();renderHomeAvatar();}
+  if(tabName==='meditation'){renderMeditationStats();renderMeditationPage();}
+  if(tabName==='body'){renderBodyMetrics();setTimeout(()=>{aggiornaAvatarDaUltimaMisura();renderHomeAvatar()},50);}
+  if(tabName==='analytics'){updateAnalyticsCharts();setTimeout(retoneChartsV15,30);}
+  if(tabName==='consult'){renderConsultations();renderAIConsultHistory();refreshConsultSelectors();}
+  if(tabName==='settings'){updateOptionsFocusToggle?.();}
+
+  markThemeTargetsV15();
+  if(document.body.dataset.thalysTheme==='light')setTimeout(retoneChartsV15,20);
+  hardUnlockNavigationV15();
+}
+/* Final authoritative override. No requestAnimationFrame wrapper. */
+switchTab=switchTabV15;
+
+/* Touch fallback for iPhone fixed bottom navigation.
+   pointerup is used only as a recovery path when WebKit suppresses the synthetic click. */
+document.querySelector('#app-shell > nav')?.addEventListener('pointerup',e=>{
+  const btn=e.target?.closest?.('button[id^="nav-"]');if(!btn)return;
+  if(e.pointerType==='touch'){
+    const tab=btn.id.replace(/^nav-/,'');
+    if(tab && !document.getElementById(`tab-${tab}`)?.classList.contains('hidden'))return;
+    switchTabV15(tab);
+  }
+},{passive:true});
+
+function applyV15ThemeFinishing(){
+  markThemeTargetsV15();
+  hardUnlockNavigationV15();
+  if(document.body.dataset.thalysTheme==='light')setTimeout(retoneChartsV15,20);
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(applyV15ThemeFinishing,220));
+window.addEventListener('pageshow',()=>setTimeout(applyV15ThemeFinishing,50),{passive:true});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(applyV15ThemeFinishing,40)});
+
+/* Retone newly rendered charts whenever theme changes. */
+const _applyThalysThemeV15Base=applyThalysThemeV13;
+applyThalysThemeV13=function(theme,opts={}){
+  const out=_applyThalysThemeV15Base(theme,opts);
+  setTimeout(()=>{markThemeTargetsV15();retoneChartsV15()},30);
+  return out;
+};
 
 </script>
 <style>

@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -1005,6 +1005,8 @@
     "help.settings.appearance": "Aparência",
     "help.settings.appearance.body": "Escolhe o modo claro ou escuro. A escolha fica guardada para a próxima abertura.",
     "help.settings.modals": "Finestre e scorrimento",
-    "help.settings.modals.body": "Desde a V14 todas as janelas usam um único sistema: o fundo fica bloqueado, o scroll permanece na janela ativa e overlays residuais são fechados ao mudar de secção."
+    "help.settings.modals.body": "Desde a V14 todas as janelas usam um único sistema: o fundo fica bloqueado, o scroll permanece na janela ativa e overlays residuais são fechados ao mudar de secção.",
+    "help.settings.ios_navigation": "Navigazione iPhone",
+    "help.settings.ios_navigation.body": "Desde a V15 a troca de separadores usa um único caminho síncrono e restaura pointer-events, touch-action e bloqueios antes da nova secção, evitando o bloqueio no iPhone após Consulto."
   }
 }

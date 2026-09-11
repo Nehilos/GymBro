@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -1053,6 +1053,8 @@
     "help.settings.appearance": "Appearance",
     "help.settings.appearance.body": "Choose light or dark mode. Your choice is kept for the next launch.",
     "help.settings.modals": "Finestre e scorrimento",
-    "help.settings.modals.body": "From V14 all dialogs use one system: the background is locked while a dialog is open, scrolling stays in the foreground dialog, and switching sections automatically clears stale overlays."
+    "help.settings.modals.body": "From V14 all dialogs use one system: the background is locked while a dialog is open, scrolling stays in the foreground dialog, and switching sections automatically clears stale overlays.",
+    "help.settings.ios_navigation": "Navigazione iPhone",
+    "help.settings.ios_navigation.body": "From V15 tab switching uses one synchronous path and always restores pointer-events, touch-action and background locks before opening the next section, preventing the iPhone lock after Consult."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -1005,6 +1005,8 @@
     "help.settings.appearance": "Aspect",
     "help.settings.appearance.body": "Alege modul luminos sau întunecat. Alegerea rămâne salvată pentru următoarea pornire.",
     "help.settings.modals": "Finestre e scorrimento",
-    "help.settings.modals.body": "Din V14 toate ferestrele folosesc același sistem: fundalul este blocat, derularea rămâne în fereastra activă, iar overlay-urile rămase sunt închise la schimbarea secțiunii."
+    "help.settings.modals.body": "Din V14 toate ferestrele folosesc același sistem: fundalul este blocat, derularea rămâne în fereastra activă, iar overlay-urile rămase sunt închise la schimbarea secțiunii.",
+    "help.settings.ios_navigation": "Navigazione iPhone",
+    "help.settings.ios_navigation.body": "Din V15 schimbarea filelor folosește un singur flux sincron și restaurează pointer-events, touch-action și blocările înainte de noua secțiune, evitând blocarea pe iPhone după Consulto."
   }
 }

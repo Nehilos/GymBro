@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -1007,6 +1007,8 @@
     "help.settings.appearance": "Apariencia",
     "help.settings.appearance.body": "Elige modo claro u oscuro. Tu elección se conserva para el próximo inicio.",
     "help.settings.modals": "Finestre e scorrimento",
-    "help.settings.modals.body": "Desde V14 todas las ventanas usan un único sistema: el fondo se bloquea, el desplazamiento queda en la ventana activa y al cambiar de sección se cierran overlays residuales."
+    "help.settings.modals.body": "Desde V14 todas las ventanas usan un único sistema: el fondo se bloquea, el desplazamiento queda en la ventana activa y al cambiar de sección se cierran overlays residuales.",
+    "help.settings.ios_navigation": "Navigazione iPhone",
+    "help.settings.ios_navigation.body": "Desde V15 el cambio de pestaña usa una ruta síncrona única y restaura pointer-events, touch-action y bloqueos antes de abrir la nueva sección, evitando el bloqueo de iPhone tras Consulto."
   }
 }
