@@ -1809,6 +1809,83 @@
     /* V9 deliberately does NOT use position:fixed/inset on body while a modal is open:
        the app has its own scroll container, and fixing the body could trap navigation. */
 
+    /* ===== Thalys V10 iOS / WebKit hardening ===== */
+    :root{
+      --thalys-vh: 1vh;
+      --thalys-safe-top: env(safe-area-inset-top, 0px);
+      --thalys-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    html,body{
+      min-height:100%;
+      -webkit-text-size-adjust:100%;
+      overscroll-behavior-y:none;
+    }
+    body{
+      min-height:calc(var(--thalys-vh,1vh) * 100);
+    }
+    #app-shell{
+      min-height:calc(var(--thalys-vh,1vh) * 100);
+    }
+    #app-shell > main{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      min-height:0;
+    }
+    .fixed.inset-0,
+    [id$="-modal"]{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+    }
+    .thalys-ios-scroll{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      touch-action:pan-y;
+    }
+    button,select,input,textarea{
+      touch-action:manipulation;
+    }
+    /* prevent invisible overlays from catching taps on iOS */
+    .hidden{
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    /* consult viewer: always stays between header and bottom nav on iPhone */
+    #consult-snapshot-modal:not(.hidden){
+      top:calc(var(--thalys-safe-top) + 4.15rem) !important;
+      bottom:calc(var(--thalys-safe-bottom) + 4.55rem) !important;
+      height:auto !important;
+      max-height:none !important;
+      align-items:stretch !important;
+    }
+    #consult-snapshot-modal > div{
+      height:100% !important;
+      max-height:100% !important;
+      min-height:0 !important;
+      overflow:hidden !important;
+    }
+    #consult-detail-body{
+      -webkit-overflow-scrolling:touch;
+      overflow-y:auto !important;
+      min-height:0 !important;
+      overscroll-behavior:contain;
+    }
+    @supports (-webkit-touch-callout:none){
+      /* iOS WebKit only */
+      #workout-plans-modal > div,
+      #workout-plan-viewer-modal > div,
+      #workout-history-modal > div,
+      #meal-history-modal > div{
+        max-height:calc(var(--thalys-vh,1vh) * 92) !important;
+      }
+      input[type="date"],select,input,textarea{
+        font-size:16px; /* avoids iOS focus zoom */
+      }
+      .text-\[9px\] input,.text-\[10px\] input,.text-\[11px\] input{
+        font-size:16px !important;
+      }
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -4849,7 +4926,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:9,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:10,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4871,7 +4948,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=9`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=10`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4882,7 +4959,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v9`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v10`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4891,7 +4968,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v9`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v10`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4902,7 +4979,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v9`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v10`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -8803,7 +8880,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=9`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=10`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -9246,6 +9323,206 @@ document.addEventListener('DOMContentLoaded',()=>{
     el.setAttribute('aria-hidden','true');
   });
   forceNavigationUnlockV9();
+});
+
+
+/* ==========================================================
+   THALYS V10 — iOS/WebKit robustness + full PDF export
+   ========================================================== */
+const THALYS_APP_VERSION_V10='10.0.0';
+const THALYS_VERSION_KEY_V10='thalys_app_version';
+const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
+
+function updateViewportUnitV10(){
+  const h=(window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight||0);
+  if(h>0)document.documentElement.style.setProperty('--thalys-vh',`${h/100}px`);
+}
+updateViewportUnitV10();
+window.addEventListener('resize',updateViewportUnitV10,{passive:true});
+window.visualViewport?.addEventListener('resize',updateViewportUnitV10,{passive:true});
+window.visualViewport?.addEventListener('scroll',updateViewportUnitV10,{passive:true});
+
+function normalizeModalStateV10(){
+  document.querySelectorAll('[id$="-modal"]').forEach(modal=>{
+    if(modal.classList.contains('hidden')){
+      modal.style.pointerEvents='none';
+      modal.setAttribute('aria-hidden','true');
+      try{modal.setAttribute('inert','');}catch(_){}
+      delete modal.dataset.thalysModalOpen;
+    }else{
+      modal.style.pointerEvents='auto';
+      modal.setAttribute('aria-hidden','false');
+      modal.removeAttribute('inert');
+    }
+  });
+  clearLegacyModalBodyLockV9?.();
+  if(typeof getOpenModalsV9==='function' && getOpenModalsV9().length===0){
+    document.documentElement.classList.remove('modal-open-v9');
+    document.body.classList.remove('modal-open-v9');
+  }
+}
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden){updateViewportUnitV10();normalizeModalStateV10();}
+});
+window.addEventListener('pageshow',()=>{updateViewportUnitV10();normalizeModalStateV10();},{passive:true});
+
+/* Persistent version check: if an iPhone/Chrome tab kept an older bundle alive,
+   do one cache-busted reload after a deployment version changes. */
+function ensureFreshVersionV10(){
+  try{
+    const previous=localStorage.getItem(THALYS_VERSION_KEY_V10);
+    if(previous!==THALYS_APP_VERSION_V10){
+      localStorage.setItem(THALYS_VERSION_KEY_V10,THALYS_APP_VERSION_V10);
+      const guard=sessionStorage.getItem(THALYS_RELOAD_KEY_V10);
+      if(guard!==THALYS_APP_VERSION_V10){
+        sessionStorage.setItem(THALYS_RELOAD_KEY_V10,THALYS_APP_VERSION_V10);
+        const url=new URL(location.href);
+        url.searchParams.set('thalys_v',THALYS_APP_VERSION_V10);
+        location.replace(url.toString());
+        return false;
+      }
+    }
+  }catch(_){}
+  return true;
+}
+
+/* Safer tab switching on WebKit: close overlays first and defer the actual tab
+   mutation until the browser has released the old pointer target. */
+const _switchTabV10Base=switchTab;
+switchTab=function(tabName){
+  forceNavigationUnlockV9?.();
+  normalizeModalStateV10();
+  requestAnimationFrame(()=>{
+    _switchTabV10Base(tabName);
+    requestAnimationFrame(()=>{
+      normalizeModalStateV10();
+      updateViewportUnitV10();
+      const main=document.querySelector('#app-shell > main');
+      if(main){main.style.pointerEvents='auto';main.style.touchAction='pan-y';}
+    });
+  });
+};
+
+/* More defensive consult close for Chrome/iOS. */
+closeConsultViewerV9=function(ev){
+  ev?.preventDefault?.();ev?.stopPropagation?.();
+  const modal=document.getElementById('consult-snapshot-modal');
+  if(modal){
+    modal.classList.add('hidden');
+    modal.style.display='none';
+    modal.style.pointerEvents='none';
+    modal.setAttribute('aria-hidden','true');
+    try{modal.setAttribute('inert','');}catch(_){}
+    delete modal.dataset.thalysModalOpen;
+    setTimeout(()=>{modal.style.display='';normalizeModalStateV10();},0);
+  }
+  clearLegacyModalBodyLockV9?.();
+  document.documentElement.classList.remove('modal-open-v9');
+  document.body.classList.remove('modal-open-v9');
+};
+
+/* Full PDF export.
+   Instead of capturing a fixed-width viewport that can clip on mobile, build a
+   dedicated document-sized element in normal flow and let html2pdf paginate it. */
+function createFullPdfDocumentV10(){
+  const host=document.createElement('div');
+  host.style.cssText='position:fixed;left:0;top:0;z-index:2147483646;width:100vw;height:100vh;overflow:auto;background:#090d16;';
+  const root=document.createElement('div');
+  root.style.cssText='position:relative;width:210mm;min-height:297mm;margin:0 auto;padding:14mm;box-sizing:border-box;background:#090d16;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;overflow:visible;';
+  const status=document.createElement('div');
+  status.style.cssText='position:fixed;right:12px;top:12px;z-index:2147483647;padding:9px 12px;border-radius:12px;background:#083344;color:#cffafe;font:700 11px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;';
+  status.textContent=tr('Creazione PDF…');
+  host.append(root,status);
+  document.body.appendChild(host);
+  return {host,root};
+}
+async function waitFullPdfLayoutV10(root){
+  try{await document.fonts?.ready;}catch(_){}
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  // Force a complete layout pass before capture.
+  void root.offsetHeight;
+  await new Promise(r=>setTimeout(r,120));
+}
+function pdfOptionsV10(filename){
+  return {
+    margin:[8,8,10,8],
+    filename,
+    image:{type:'jpeg',quality:.98},
+    html2canvas:{
+      scale:2,
+      useCORS:true,
+      allowTaint:false,
+      backgroundColor:'#090d16',
+      logging:false,
+      scrollX:0,
+      scrollY:0,
+      windowWidth:794,
+      width:794
+    },
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+    pagebreak:{mode:['css','legacy','avoid-all'],before:'.thalys-pdf-page-before'}
+  };
+}
+function buildAIConsultPdfHTMLV10(record){
+  const response=record.response||{};
+  const sections=Object.entries(response).map(([k,v])=>`<section style="page-break-inside:avoid;margin-top:12px">${consultPdfSection(tr(k),v)}</section>`).join('')||consultPdfSection(tr('Risposta IA'),response);
+  return `<div style="border-bottom:2px solid #164e63;padding-bottom:18px">${thalysPdfLogoMarkup()}</div>
+    <div style="margin-top:22px">
+      <div style="font-size:9px;letter-spacing:.16em;color:#94a3b8;text-transform:uppercase">${escapeHTML(tr('Risposta IA'))}</div>
+      <div style="margin-top:5px;font-size:22px;font-weight:900;color:#fff">${escapeHTML(tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[record.type]||record.type))}</div>
+      <div style="margin-top:8px;font-size:11px;color:#94a3b8">${escapeHTML(formatConsultDate(record.date))}</div>
+      <div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:#083344;color:#cffafe;font-size:11px"><b>${escapeHTML(tr('Obiettivo'))}:</b> ${escapeHTML(record.goal||'—')}</div>
+    </div>
+    ${sections}
+    ${record.generatedWorkoutPlan?`<section style="page-break-inside:avoid;margin-top:12px">${consultPdfSection(tr('Scheda generata'),record.generatedWorkoutPlan)}</section>`:''}
+    <div style="margin-top:20px;border-top:1px solid #1e293b;padding-top:12px;font-size:8px;color:#64748b">Thalys · ${escapeHTML(tr('Dati esportati dal consulto IA salvato'))}</div>`;
+}
+async function exportAIConsultPDF(id){
+  const record=(appState.aiConsults||[]).find(x=>x.id===id);if(!record)return;
+  if(!window.html2pdf){showToast(tr('Modulo PDF in caricamento. Riprova tra un secondo.'),'fa-clock');return;}
+  const {host,root}=createFullPdfDocumentV10();
+  root.innerHTML=buildAIConsultPdfHTMLV10(record);
+  try{
+    await waitFullPdfLayoutV10(root);
+    await html2pdf().set(pdfOptionsV10(`Thalys_AI_${record.type||'consulto'}_${record.date||currentLocalDateStr()}.pdf`)).from(root).save();
+    showToast(tr('Risposta IA esportata in PDF'),'fa-file-pdf');
+  }catch(e){
+    console.error('AI consult PDF V10',e);
+    showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');
+  }finally{
+    host.remove();normalizeModalStateV10();
+  }
+}
+async function exportConsultSnapshotPDF(id){
+  const record=(appState.consultations||[]).find(x=>x.id===id);if(!record)return;
+  if(!window.html2pdf){showToast(tr('Modulo PDF in caricamento. Riprova tra un secondo.'),'fa-clock');return;}
+  const {host,root}=createFullPdfDocumentV10();
+  const sections=Object.entries(record.snapshot||{}).map(([k,v])=>`<section style="page-break-inside:avoid;margin-top:12px">${consultPdfSection(tr(k),v)}</section>`).join('');
+  root.innerHTML=`<div style="border-bottom:2px solid #164e63;padding-bottom:18px">${thalysPdfLogoMarkup()}</div>
+    <div style="margin-top:22px">
+      <div style="font-size:9px;letter-spacing:.16em;color:#94a3b8;text-transform:uppercase">${escapeHTML(consultTypeLabel(record.type))}</div>
+      <div style="margin-top:5px;font-size:22px;font-weight:900;color:#fff">${escapeHTML(tr('Quadro generale'))}</div>
+      <div style="margin-top:8px;font-size:11px;color:#94a3b8">${escapeHTML(formatConsultDate(record.date))} · ${escapeHTML(record.period?.from||'—')} → ${escapeHTML(record.period?.to||'—')}</div>
+      <div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:#083344;color:#cffafe;font-size:11px"><b>${escapeHTML(tr('Obiettivo'))}:</b> ${escapeHTML(record.goal||'—')}</div>
+    </div>
+    ${sections}
+    <div style="margin-top:20px;border-top:1px solid #1e293b;padding-top:12px;font-size:8px;color:#64748b">Thalys · ${escapeHTML(tr('Dati esportati dal quadro salvato'))}</div>`;
+  try{
+    await waitFullPdfLayoutV10(root);
+    await html2pdf().set(pdfOptionsV10(consultExportSafeName(record,'pdf'))).from(root).save();
+    showToast(tr('Consulto esportato in PDF'),'fa-file-pdf');
+  }catch(e){
+    console.error('Consult PDF V10',e);
+    showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');
+  }finally{
+    host.remove();normalizeModalStateV10();
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  updateViewportUnitV10();
+  normalizeModalStateV10();
+  setTimeout(()=>ensureFreshVersionV10(),80);
 });
 
 </script>
