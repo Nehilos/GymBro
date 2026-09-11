@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -668,7 +668,11 @@
     "Foto Google ripristinata": "Foto Google restaurada",
     "Non riesco a elaborare questa foto": "Não consegui processar esta foto",
     "pasti": "refeições",
-    "Google Drive connesso": "Google Drive ligado"
+    "Google Drive connesso": "Google Drive ligado",
+    "Nessuna foto per i filtri selezionati.": "Nenhuma foto corresponde aos filtros.",
+    "Foto salvata · sincronizzazione Drive…": "Foto guardada · a sincronizar com o Drive…",
+    "Foto salvata": "Foto guardada",
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partilha direta indisponível: a foto está pronta para guardar."
   },
   "words": [
     [
@@ -841,8 +845,8 @@
     "help.body.measure.body": "Salva peso e circunferências com uma data. Para comparar tendências, medir sempre no mesmo ponto e em condições semelhantes é mais importante que perseguir precisão milimétrica.",
     "help.body.avatar": "Avatar corporal",
     "help.body.avatar.body": "O Thalys carrega male.svg ou female.svg diretamente do repositório. Atualizar dados força uma recarga sem cache, volta a guardar o sexo e redesenha Corpo e Home.",
-    "help.body.photos": "Fotos de progresso",
-    "help.body.photos.body": "As fotos são armazenadas separadamente dos dados numéricos e podem ser filtradas por data ou ano. Mantenha pose e luz semelhantes para comparações mais consistentes.",
+    "help.body.photos": "Foto progressi",
+    "help.body.photos.body": "Corpo mostra apenas o contador. Abre-o para adicionar fotos com Data, Vista e Parte, filtrar, marcar favoritas e partilhar/guardar. O nome usa Data_Vista_Parte.",
     "help.analytics.title": "Gráficos",
     "help.analytics.filter": "Filtros",
     "help.analytics.filter.body": "O filtro global altera o mesmo intervalo para todos os gráficos. O seletor de treino limita força/volume sem modificar o histórico salvo.",

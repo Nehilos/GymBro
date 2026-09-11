@@ -2862,6 +2862,102 @@
       -webkit-transform:translateZ(0);
     }
 
+    /* ===== Thalys V19 ===== */
+
+    /* Consult Light: force dark readable copy inside the pale privacy note. */
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17,
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17:not(.x),
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17 span{
+      color:#183f43 !important;
+      -webkit-text-fill-color:#183f43 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17 i{
+      color:#0d7377 !important;
+      -webkit-text-fill-color:#0d7377 !important;
+    }
+
+    /* Health modal submit: softer/lighter violet in Light mode. */
+    body[data-thalys-theme="light"] #wellness-modal button[type="submit"]{
+      background:linear-gradient(135deg,#a58acb,#8871b4) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+
+    /* Workout plan creation: use almost the whole viewport and let the entire sheet scroll. */
+    #workout-plans-modal{
+      align-items:flex-start !important;
+      padding-top:max(.35rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(.35rem,env(safe-area-inset-bottom)) !important;
+    }
+    #workout-plans-modal > div{
+      height:calc(100dvh - max(.7rem,env(safe-area-inset-top) + env(safe-area-inset-bottom))) !important;
+      max-height:calc(100dvh - max(.7rem,env(safe-area-inset-top) + env(safe-area-inset-bottom))) !important;
+      overflow-y:auto !important;
+      overscroll-behavior:contain !important;
+      border-radius:1.35rem !important;
+    }
+    #workout-plans-modal #plan-builder-panel{
+      flex:none !important;
+      min-height:auto !important;
+      overflow:visible !important;
+    }
+    #workout-plans-modal #workout-plan-form{
+      height:auto !important;
+      min-height:0 !important;
+      overflow:visible !important;
+    }
+    #workout-plans-modal #plan-builder-exercises{
+      max-height:none !important;
+      overflow:visible !important;
+      padding-right:0 !important;
+    }
+    #workout-plans-modal #workout-plan-library{
+      overflow:visible !important;
+      flex:none !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-panel{
+      background:#e9f1f1 !important;
+      border-color:#c8dbdc !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-days .v7-day-btn{
+      background:#dbe7e8 !important;
+      border-color:#bfd2d4 !important;
+      color:#415f64 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-days .v7-day-btn.active{
+      background:#c1dcdb !important;
+      border-color:#0d7377 !important;
+      color:#095b5e !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises .v7-ex-card{
+      background:#f0f5f5 !important;
+      border-color:#ccdcdc !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises input,
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises select,
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-day-rest{
+      background:#e1ebec !important;
+      color:#24464a !important;
+      border-color:#bfd0d2 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-add-btn{
+      background:#c9e0df !important;
+      border-color:#74aba9 !important;
+      color:#0a5f61 !important;
+    }
+
+    /* Photo summary + Light manager */
+    body[data-thalys-theme="light"] #body-photo-summary-card{
+      background:linear-gradient(135deg,#e5efef,#d8e8e6) !important;
+      border-color:#c5d8d8 !important;
+    }
+    body[data-thalys-theme="light"] #photo-manager-modal > div,
+    body[data-thalys-theme="light"] #add-photo-modal-v19 > div,
+    body[data-thalys-theme="light"] #photo-viewer-modal-v19 > div{
+      background:#eef5f5 !important;
+      border-color:#c5d8d8 !important;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2883,7 +2979,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=18" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=19" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -2910,7 +3006,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=18" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=19" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -2939,7 +3035,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=18" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=19" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -3797,23 +3893,23 @@
         </div>
       </div>
 
-      <!-- Progress Photos Gallery -->
+      <!-- Progress Photos Gallery · compact V19 -->
       <div class="space-y-3 pt-2">
-        <div class="flex justify-between items-center">
-          <h3 class="text-sm font-bold text-slate-300 flex items-center space-x-2">
-            <i class="fa-solid fa-camera text-pink-400"></i>
-            <span>Galleria Foto Progressi</span>
-          </h3>
-          <label class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-pink-400 font-semibold cursor-pointer border border-slate-700">
-            <i class="fa-solid fa-upload mr-1"></i> Carica Foto
-            <input type="file" id="photo-upload-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
-          </label>
-        </div>
-
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-3 space-y-2"><div class="text-[10px] uppercase tracking-[0.18rem] text-slate-500">Filtra foto</div><div class="grid grid-cols-2 gap-2"><select id="photo-filter-type" onchange="updatePhotoFilterUI();renderPhotos()" class="bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white"><option value="all">Tutte</option><option value="date">Data</option><option value="month">Mese</option><option value="year">Anno</option></select><input id="photo-filter-date" type="date" onchange="renderPhotos()" class="hidden bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white"><input id="photo-filter-month" type="month" onchange="renderPhotos()" class="hidden bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white"><input id="photo-filter-year" type="number" min="2000" max="2100" placeholder="Anno" onchange="renderPhotos()" class="hidden bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white"></div></div>
-        <div id="photo-gallery" class="grid grid-cols-2 gap-3">
-          <!-- Rendered dynamically -->
-        </div>
+        <button id="body-photo-summary-card" type="button" onclick="openPhotoManagerV19()" class="w-full rounded-3xl border border-slate-800 bg-darkcard p-4 text-left shadow-lg transition active:scale-[.995]">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-500/10 text-teal-300"><i class="fa-solid fa-images"></i></div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-200">Foto progressi</h3>
+                <p class="mt-1 text-[10px] text-slate-500">Apri galleria, filtri e preferiti</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <div id="photo-count-v19" class="text-2xl font-black text-teal-300">0</div>
+              <div class="text-[9px] uppercase tracking-[.14em] text-slate-500">foto</div>
+            </div>
+          </div>
+        </button>
       </div>
     </section>
 
@@ -5027,6 +5123,94 @@
     </div>
   </div>
 
+  <!-- MODAL: PHOTO MANAGER V19 -->
+  <div id="photo-manager-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-slate-950/90 backdrop-blur-md p-0 sm:p-4">
+    <div class="w-full max-w-lg h-[88dvh] sm:h-[720px] rounded-t-3xl sm:rounded-3xl border-t sm:border border-teal-500/20 bg-darkcard p-4 shadow-2xl flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Corpo</div><h3 class="text-base font-black text-white">Foto progressi</h3><p id="photo-manager-count-v19" class="mt-1 text-[9px] text-slate-500">0 foto</p></div>
+        <div class="flex gap-2">
+          <button type="button" onclick="openAddPhotoModalV19()" class="min-h-10 rounded-xl bg-teal-600 px-3 text-[10px] font-black text-white"><i class="fa-solid fa-plus mr-1"></i>Aggiungi foto</button>
+          <button type="button" onclick="closeModal('photo-manager-modal')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        <label class="text-[9px] text-slate-500">Filtro data
+          <select id="photo-filter-type" onchange="updatePhotoFilterUIV19();renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
+            <option value="all">Tutte le date</option><option value="date">Data</option><option value="month">Mese</option><option value="year">Anno</option>
+          </select>
+        </label>
+        <label class="text-[9px] text-slate-500">Vista
+          <select id="photo-filter-view-v19" onchange="renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
+            <option value="all">Tutte</option><option value="Fronte">Fronte</option><option value="Retro">Retro</option>
+          </select>
+        </label>
+        <div id="photo-filter-date-wrap-v19" class="hidden"><label class="text-[9px] text-slate-500">Data<input id="photo-filter-date" type="date" onchange="renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"></label></div>
+        <div id="photo-filter-month-wrap-v19" class="hidden"><label class="text-[9px] text-slate-500">Mese<input id="photo-filter-month" type="month" onchange="renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"></label></div>
+        <div id="photo-filter-year-wrap-v19" class="hidden"><label class="text-[9px] text-slate-500">Anno<input id="photo-filter-year" type="number" min="2000" max="2100" onchange="renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white"></label></div>
+        <label class="text-[9px] text-slate-500">Parte
+          <select id="photo-filter-part-v19" onchange="renderPhotos()" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[10px] text-white">
+            <option value="all">Tutte</option><option value="Full">Full</option><option value="Superiore">Superiore</option><option value="Inferiore">Inferiore</option><option value="Altro">Altro</option>
+          </select>
+        </label>
+        <label class="col-span-2 flex min-h-10 items-center justify-between rounded-xl border border-slate-700 bg-slate-900 px-3 text-[10px] font-bold text-slate-300">
+          <span><i class="fa-solid fa-star mr-1 text-amber-400"></i>Solo preferiti</span>
+          <input id="photo-filter-favorites-v19" type="checkbox" onchange="renderPhotos()" class="h-4 w-4 accent-amber-500">
+        </label>
+      </div>
+
+      <div id="photo-gallery" class="mt-3 grid flex-1 grid-cols-2 gap-3 overflow-y-auto pr-1"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD PHOTO V19 -->
+  <div id="add-photo-modal-v19" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-slate-950/90 backdrop-blur-md p-0 sm:p-4">
+    <div class="w-full max-w-md rounded-t-3xl sm:rounded-3xl border-t sm:border border-teal-500/20 bg-darkcard p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Nuova foto</div><h3 class="text-base font-black text-white">Aggiungi foto progresso</h3></div>
+        <button type="button" onclick="closeModal('add-photo-modal-v19')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mt-4 grid grid-cols-2 gap-3">
+        <label class="col-span-2 text-[10px] text-slate-400">Data
+          <input id="photo-add-date-v19" type="date" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white">
+        </label>
+        <label class="text-[10px] text-slate-400">Vista
+          <select id="photo-add-view-v19" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white">
+            <option value="Fronte">Fronte</option><option value="Retro">Retro</option>
+          </select>
+        </label>
+        <label class="text-[10px] text-slate-400">Parte
+          <select id="photo-add-part-v19" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white">
+            <option value="Full">Full</option><option value="Superiore">Superiore</option><option value="Inferiore">Inferiore</option><option value="Altro">Altro</option>
+          </select>
+        </label>
+      </div>
+      <label class="mt-4 min-h-12 w-full rounded-xl bg-teal-600 text-white font-black text-xs flex items-center justify-center cursor-pointer">
+        <i class="fa-solid fa-camera mr-2"></i>Carica
+        <input id="photo-upload-input" type="file" accept="image/*" class="hidden" onchange="handlePhotoUploadV19(event)">
+      </label>
+      <p class="mt-2 text-center text-[9px] leading-relaxed text-slate-500">Dal telefono puoi scegliere una foto esistente oppure usare la fotocamera, in base alle opzioni offerte dal dispositivo.</p>
+    </div>
+  </div>
+
+  <!-- MODAL: PHOTO VIEWER V19 -->
+  <div id="photo-viewer-modal-v19" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/95 backdrop-blur-md p-3">
+    <div class="w-full max-w-lg max-h-[92dvh] rounded-3xl border border-slate-700 bg-darkcard p-4 shadow-2xl flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div><h3 id="photo-viewer-title-v19" class="text-sm font-black text-white">Foto progresso</h3><div id="photo-viewer-meta-v19" class="mt-1 text-[9px] text-slate-500"></div></div>
+        <button type="button" onclick="closeModal('photo-viewer-modal-v19')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="mt-3 min-h-0 flex-1 overflow-auto rounded-2xl bg-slate-950/60 flex items-center justify-center">
+        <img id="photo-viewer-img-v19" alt="Foto progresso" class="max-h-[68dvh] w-full object-contain">
+      </div>
+      <div class="mt-3 grid grid-cols-3 gap-2">
+        <button id="photo-viewer-fav-v19" type="button" class="min-h-11 rounded-xl bg-slate-800 text-[10px] font-bold text-amber-300"><i class="fa-regular fa-star mr-1"></i>Preferito</button>
+        <button id="photo-viewer-share-v19" type="button" class="min-h-11 rounded-xl bg-teal-600 text-[10px] font-black text-white"><i class="fa-solid fa-share-nodes mr-1"></i>Condividi</button>
+        <button id="photo-viewer-save-v19" type="button" class="min-h-11 rounded-xl bg-slate-800 text-[10px] font-bold text-teal-300"><i class="fa-solid fa-download mr-1"></i>Salva</button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: BODY MEASUREMENT HISTORY DETAIL -->
   <div id="body-history-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-2 hidden" style="z-index:140">
     <div class="bg-darkcard border border-purple-500/20 rounded-3xl p-4 w-[calc(100vw-1rem)] max-w-md max-h-[90dvh] overflow-y-auto space-y-4 shadow-2xl">
@@ -5914,7 +6098,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:18,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:19,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -5936,7 +6120,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=18`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=19`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -5947,7 +6131,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v18`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v19`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -5956,7 +6140,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v18`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v19`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -5967,7 +6151,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v18`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v19`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -9868,7 +10052,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=18`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=19`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10317,7 +10501,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='18.0.0';
+const THALYS_APP_VERSION_V10='19.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10756,8 +10940,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=18',
-  light:'./Thalys Logo Light.png?v=18'
+  dark:'./Thalys Logo Dark.png?v=19',
+  light:'./Thalys Logo Light.png?v=19'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -11547,6 +11731,208 @@ closeModal=function(id){
 };
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden && barcodeCameraStream)stopBarcodeCameraV18();
+});
+
+
+/* ==========================================================
+   THALYS V19 — photo manager + tab swipe
+   ========================================================== */
+function photoSafeTokenV19(v){
+  return String(v||'').trim().replace(/[^\p{L}\p{N}_-]+/gu,'-').replace(/^-+|-+$/g,'')||'NA';
+}
+function photoExtV19(file){
+  const type=String(file?.type||'').toLowerCase();
+  if(type.includes('png'))return 'png';
+  if(type.includes('webp'))return 'webp';
+  if(type.includes('heic')||type.includes('heif'))return 'heic';
+  return 'jpg';
+}
+function photoFilenameV19(date,view,part,ext='jpg'){
+  return `${date}_${photoSafeTokenV19(view)}_${photoSafeTokenV19(part)}.${ext}`;
+}
+function normalizePhotoV19(p){
+  return {
+    ...p,
+    date:p.date||String(p.createdAt||p.updatedAt||new Date().toISOString()).slice(0,10),
+    view:p.view||'Fronte',
+    part:p.part||'Full',
+    favorite:!!p.favorite,
+    filename:p.filename||p.driveName||photoFilenameV19(p.date||currentLocalDateStr(),p.view||'Fronte',p.part||'Full','jpg')
+  };
+}
+function normalizeAllPhotosV19(){
+  appState.photos=Array.isArray(appState.photos)?appState.photos.map(normalizePhotoV19):[];
+}
+function updatePhotoCounterV19(){
+  normalizeAllPhotosV19();
+  const n=appState.photos.length;
+  const c=document.getElementById('photo-count-v19');if(c)c.textContent=n;
+  const m=document.getElementById('photo-manager-count-v19');if(m)m.textContent=`${n} ${n===1?tr('foto'):tr('foto')}`;
+}
+function openPhotoManagerV19(){
+  updatePhotoCounterV19();
+  updatePhotoFilterUIV19();
+  renderPhotos();
+  openModal('photo-manager-modal');
+}
+function openAddPhotoModalV19(){
+  const d=document.getElementById('photo-add-date-v19');if(d)d.value=currentLocalDateStr();
+  openModal('add-photo-modal-v19');
+}
+function updatePhotoFilterUIV19(){
+  const t=document.getElementById('photo-filter-type')?.value||'all';
+  ['date','month','year'].forEach(x=>document.getElementById(`photo-filter-${x}-wrap-v19`)?.classList.toggle('hidden',t!==x));
+}
+function photoFiltersV19(){
+  return {
+    type:document.getElementById('photo-filter-type')?.value||'all',
+    date:document.getElementById('photo-filter-date')?.value||'',
+    month:document.getElementById('photo-filter-month')?.value||'',
+    year:document.getElementById('photo-filter-year')?.value||'',
+    view:document.getElementById('photo-filter-view-v19')?.value||'all',
+    part:document.getElementById('photo-filter-part-v19')?.value||'all',
+    favorites:!!document.getElementById('photo-filter-favorites-v19')?.checked
+  };
+}
+function visiblePhotosV19(){
+  normalizeAllPhotosV19();
+  const f=photoFiltersV19();
+  return appState.photos.filter(p=>{
+    const dateOK=f.type==='all'||(f.type==='date'&&p.date===f.date)||(f.type==='month'&&String(p.date).startsWith(f.month))||(f.type==='year'&&String(p.date).startsWith(String(f.year)));
+    return dateOK&&(f.view==='all'||p.view===f.view)&&(f.part==='all'||p.part===f.part)&&(!f.favorites||p.favorite);
+  }).sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+}
+function renderPhotos(){
+  updatePhotoCounterV19();
+  const gallery=document.getElementById('photo-gallery');if(!gallery)return;
+  const photos=visiblePhotosV19();
+  gallery.innerHTML=photos.length?photos.map(photo=>`
+    <button type="button" onclick="openPhotoViewerV19('${photo.id}')" class="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 text-left">
+      <img src="${photo.base64||''}" alt="${escapeHTML(photo.filename||'Foto progresso')}" class="h-full w-full object-cover">
+      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent px-2.5 pb-2 pt-7">
+        <div class="flex items-end justify-between gap-2">
+          <div class="min-w-0"><div class="truncate text-[10px] font-black text-white">${escapeHTML(photo.view)} · ${escapeHTML(photo.part)}</div><div class="mt-0.5 text-[8px] text-slate-300">${photo.date}</div></div>
+          ${photo.favorite?'<i class="fa-solid fa-star text-amber-300"></i>':''}
+        </div>
+      </div>
+    </button>`).join(''):`<div class="col-span-2 rounded-2xl border border-dashed border-slate-700 p-6 text-center text-[10px] text-slate-500">${tr('Nessuna foto per i filtri selezionati.')}</div>`;
+}
+async function handlePhotoUploadV19(event){
+  const file=event.target.files?.[0];if(!file)return;
+  if(!file.type.startsWith('image/')){showToast(tr('Seleziona un’immagine valida'));event.target.value='';return;}
+  const date=document.getElementById('photo-add-date-v19')?.value||currentLocalDateStr();
+  const view=document.getElementById('photo-add-view-v19')?.value||'Fronte';
+  const part=document.getElementById('photo-add-part-v19')?.value||'Full';
+  const filename=photoFilenameV19(date,view,part,photoExtV19(file));
+  try{
+    const base64=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});
+    const photo={id:'photo_'+Date.now(),date,view,part,favorite:false,filename,base64,updatedAt:new Date().toISOString()};
+    appState.photos=Array.isArray(appState.photos)?appState.photos:[];
+    appState.photos.unshift(photo);
+    saveStateToLocal();
+    closeModal('add-photo-modal-v19');
+    updatePhotoCounterV19();renderPhotos();
+    showToast(getAccessToken()?tr('Foto salvata · sincronizzazione Drive…'):tr('Foto salvata'),'fa-camera');
+
+    if(getAccessToken()){
+      try{
+        await initializeDriveWorkspace();
+        const folder=driveFolders?.photoFolderId||(await ensureFolderAfterConsent('foto',driveFolders.appFolderId,'La cartella foto non esiste. Vuoi crearla in Thalys App?'))?.id;
+        if(folder){
+          driveFolders.photoFolderId=folder;
+          const uploadFile=new File([file],filename,{type:file.type||'image/jpeg'});
+          const uploaded=await uploadDriveFile(filename,uploadFile,uploadFile.type,folder,true);
+          photo.driveFileId=uploaded.id;photo.driveName=filename;photo.updatedAt=new Date().toISOString();
+          saveStateToLocal();scheduleDriveSync?.(200);
+        }
+      }catch(e){console.warn('Photo Drive V19',e);showSyncError?.(classifyDriveError?.(e)||e);}
+    }
+  }catch(e){console.error(e);showToast(tr('Impossibile caricare la foto'))}
+  finally{event.target.value='';}
+}
+handlePhotoUpload=handlePhotoUploadV19;
+function photoByIdV19(id){normalizeAllPhotosV19();return appState.photos.find(p=>p.id===id)}
+function openPhotoViewerV19(id){
+  const p=photoByIdV19(id);if(!p)return;
+  const img=document.getElementById('photo-viewer-img-v19');if(img)img.src=p.base64||'';
+  const title=document.getElementById('photo-viewer-title-v19');if(title)title.textContent=p.filename||'Foto progresso';
+  const meta=document.getElementById('photo-viewer-meta-v19');if(meta)meta.textContent=`${p.date} · ${p.view} · ${p.part}`;
+  const fav=document.getElementById('photo-viewer-fav-v19');
+  if(fav){
+    fav.innerHTML=p.favorite?'<i class="fa-solid fa-star mr-1"></i>Preferito':'<i class="fa-regular fa-star mr-1"></i>Preferito';
+    fav.onclick=()=>togglePhotoFavoriteV19(id);
+  }
+  const share=document.getElementById('photo-viewer-share-v19');if(share)share.onclick=()=>sharePhotoV19(id);
+  const save=document.getElementById('photo-viewer-save-v19');if(save)save.onclick=()=>savePhotoToDeviceV19(id);
+  openModal('photo-viewer-modal-v19');
+}
+function togglePhotoFavoriteV19(id){
+  const p=photoByIdV19(id);if(!p)return;p.favorite=!p.favorite;p.updatedAt=new Date().toISOString();saveStateToLocal();scheduleDriveSync?.(250);renderPhotos();openPhotoViewerV19(id);
+}
+function dataUrlToBlobV19(dataUrl){
+  const [head,data]=String(dataUrl||'').split(',');const mime=(head.match(/data:([^;]+)/)||[])[1]||'image/jpeg';
+  const bin=atob(data||''),arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+  return new Blob([arr],{type:mime});
+}
+async function sharePhotoV19(id){
+  const p=photoByIdV19(id);if(!p?.base64)return;
+  const blob=dataUrlToBlobV19(p.base64);
+  const file=new File([blob],p.filename||'thalys-photo.jpg',{type:blob.type});
+  try{
+    if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+      await navigator.share({files:[file],title:'Thalys',text:`${p.date} · ${p.view} · ${p.part}`});
+      return;
+    }
+  }catch(e){if(e?.name==='AbortError')return}
+  savePhotoToDeviceV19(id);
+  showToast(tr('Condivisione diretta non disponibile: foto pronta per il salvataggio.'));
+}
+function savePhotoToDeviceV19(id){
+  const p=photoByIdV19(id);if(!p?.base64)return;
+  const a=document.createElement('a');a.href=p.base64;a.download=p.filename||'thalys-photo.jpg';document.body.appendChild(a);a.click();a.remove();
+}
+const _deletePhotoV19Base=deletePhoto;
+deletePhoto=function(id){
+  appState.photos=(appState.photos||[]).filter(p=>p.id!==id);saveStateToLocal();scheduleDriveSync?.(250);renderPhotos();updatePhotoCounterV19();showToast(tr('Foto eliminata'));
+};
+
+/* Swipe among the seven bottom-navigation sections.
+   User convention: swipe RIGHT => next section. LEFT => previous section.
+   Limits stop at Home and Consulto. */
+const THALYS_SWIPE_TABS_V19=['home','workout','meditation','nutrition','body','analytics','consult'];
+let swipeStartV19=null;
+function currentMainTabV19(){
+  return THALYS_SWIPE_TABS_V19.find(t=>!document.getElementById(`tab-${t}`)?.classList.contains('hidden'))||'home';
+}
+function swipeExcludedV19(target){
+  return !!target?.closest?.('[id$="-modal"],input,textarea,select,button,a,canvas,[contenteditable="true"],.overflow-x-auto,.overflow-y-auto');
+}
+function installTabSwipeV19(){
+  const main=document.querySelector('#app-shell > main');if(!main||main.dataset.swipeV19)return;main.dataset.swipeV19='1';
+  main.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1||swipeExcludedV19(e.target)){swipeStartV19=null;return}
+    const t=e.touches[0];swipeStartV19={x:t.clientX,y:t.clientY,time:Date.now()};
+  },{passive:true});
+  main.addEventListener('touchend',e=>{
+    if(!swipeStartV19||!e.changedTouches?.length){swipeStartV19=null;return}
+    const t=e.changedTouches[0],dx=t.clientX-swipeStartV19.x,dy=t.clientY-swipeStartV19.y,dt=Date.now()-swipeStartV19.time;
+    swipeStartV19=null;
+    if(dt>800||Math.abs(dx)<65||Math.abs(dx)<Math.abs(dy)*1.25)return;
+    const current=currentMainTabV19(),i=THALYS_SWIPE_TABS_V19.indexOf(current);
+    const next=dx>0?i+1:i-1;
+    if(next<0||next>=THALYS_SWIPE_TABS_V19.length)return;
+    switchTab(THALYS_SWIPE_TABS_V19[next]);
+  },{passive:true});
+}
+
+/* Photo count follows all renders and cloud restores. */
+const _renderAllViewsV19Base=renderAllViews;
+renderAllViews=function(){
+  _renderAllViewsV19Base();
+  normalizeAllPhotosV19();updatePhotoCounterV19();
+};
+document.addEventListener('DOMContentLoaded',()=>{
+  normalizeAllPhotosV19();updatePhotoCounterV19();installTabSwipeV19();
 });
 
 </script>

@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -724,7 +724,11 @@
     "Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.": "Camera is active. Automatic scanning is unavailable; you can enter the code manually.",
     "Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.": "Camera permission denied. Enable it in browser settings and try again.",
     "Nessuna fotocamera disponibile.": "No camera is available.",
-    "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.": "I could not open the camera. Try again or enter the code manually."
+    "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.": "I could not open the camera. Try again or enter the code manually.",
+    "Nessuna foto per i filtri selezionati.": "No photos match the selected filters.",
+    "Foto salvata · sincronizzazione Drive…": "Photo saved · syncing to Drive…",
+    "Foto salvata": "Photo saved",
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Direct sharing is unavailable: the photo is ready to save."
   },
   "words": [
     [
@@ -897,8 +901,8 @@
     "help.body.measure.body": "Stores weight and circumferences with a date. For trends, measuring consistently at the same point and under similar conditions matters more than chasing millimeter precision.",
     "help.body.avatar": "Body avatar",
     "help.body.avatar.body": "Thalys loads male.svg or female.svg directly from the repository. Update data performs a forced cache-busted refresh, saves the selected gender again and redraws Body and Home.",
-    "help.body.photos": "Progress photos",
-    "help.body.photos.body": "Photos are stored separately from numeric data and can be filtered by date or year. Keep pose and lighting similar for more consistent visual comparisons.",
+    "help.body.photos": "Foto progressi",
+    "help.body.photos.body": "Body shows only the photo counter. Open it to add photos with Date, View and Body Part, filter or favorite them, view them full screen and Share/Save them. Filenames use Date_View_Part.",
     "help.analytics.title": "Charts",
     "help.analytics.filter": "Filters",
     "help.analytics.filter.body": "The global filter changes the same time range for all charts. The workout selector limits strength/volume data without changing saved history.",

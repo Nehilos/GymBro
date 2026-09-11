@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -498,7 +498,11 @@
     "Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.": "Fotocamera attiva. Scanner automatico non disponibile: puoi inserire il codice manualmente.",
     "Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.": "Permesso fotocamera negato. Abilitalo nelle impostazioni del browser e riprova.",
     "Nessuna fotocamera disponibile.": "Nessuna fotocamera disponibile.",
-    "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.": "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente."
+    "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.": "Non riesco ad aprire la fotocamera. Riprova o inserisci il codice manualmente.",
+    "Nessuna foto per i filtri selezionati.": "Nessuna foto per i filtri selezionati.",
+    "Foto salvata · sincronizzazione Drive…": "Foto salvata · sincronizzazione Drive…",
+    "Foto salvata": "Foto salvata",
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Condivisione diretta non disponibile: foto pronta per il salvataggio."
   },
   "words": [],
   "keys": {
@@ -555,7 +559,7 @@
     "help.body.avatar": "Avatar corporeo",
     "help.body.avatar.body": "Thalys carica male.svg o female.svg direttamente dal repository. Aggiorna dati esegue un refresh forzato con cache-busting, risalva il sesso selezionato e ridisegna Corpo e Home; è utile se il browser non aggiorna subito l’SVG.",
     "help.body.photos": "Foto progressi",
-    "help.body.photos.body": "Le foto sono archiviate separatamente dai dati numerici e possono essere filtrate per data o anno. Mantieni pose e luce simili se vuoi confronti visivi più coerenti.",
+    "help.body.photos.body": "La pagina Corpo mostra solo il contatore foto. Aprendolo puoi aggiungere foto con Data, Vista e Parte, filtrarle, segnarle come preferite, aprirle a tutto schermo e usare Condividi/Salva. Il nome usa Data_Vista_Parte.",
     "help.analytics.title": "Grafici",
     "help.analytics.filter": "Filtri",
     "help.analytics.filter.body": "Il filtro globale modifica lo stesso intervallo temporale per tutti i grafici. Il selettore allenamento limita i dati di forza/volume senza modificare lo storico salvato.",

@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -670,7 +670,11 @@
     "Foto Google ripristinata": "Foto de Google restaurada",
     "Non riesco a elaborare questa foto": "No puedo procesar esta foto",
     "pasti": "comidas",
-    "Google Drive connesso": "Google Drive conectado"
+    "Google Drive connesso": "Google Drive conectado",
+    "Nessuna foto per i filtri selezionati.": "No hay fotos para los filtros seleccionados.",
+    "Foto salvata · sincronizzazione Drive…": "Foto guardada · sincronizando con Drive…",
+    "Foto salvata": "Foto guardada",
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "La opción de compartir directamente no está disponible: la foto está lista para guardarse."
   },
   "words": [
     [
@@ -843,8 +847,8 @@
     "help.body.measure.body": "Guarda peso y perímetros con una fecha. Para comparar tendencias importa más medir siempre en el mismo punto y condiciones similares que perseguir precisión milimétrica.",
     "help.body.avatar": "Avatar corporal",
     "help.body.avatar.body": "Thalys carga male.svg o female.svg directamente desde el repositorio. Actualizar datos fuerza una recarga sin caché, guarda de nuevo el sexo elegido y redibuja Cuerpo y Home.",
-    "help.body.photos": "Fotos de progreso",
-    "help.body.photos.body": "Las fotos se guardan separadas de los datos numéricos y se pueden filtrar por fecha o año. Mantén pose y luz similares para comparaciones visuales más coherentes.",
+    "help.body.photos": "Foto progressi",
+    "help.body.photos.body": "Corpo muestra solo el contador. Ábrelo para añadir fotos con Fecha, Vista y Parte, filtrar, marcar favoritas y compartir/guardar. El nombre usa Fecha_Vista_Parte.",
     "help.analytics.title": "Gráficos",
     "help.analytics.filter": "Filtros",
     "help.analytics.filter.body": "El filtro global cambia el mismo intervalo temporal para todos los gráficos. El selector de entrenamiento limita fuerza/volumen sin modificar el historial guardado.",

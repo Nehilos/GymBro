@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -668,7 +668,11 @@
     "Foto Google ripristinata": "Fotografia Google a fost restaurată",
     "Non riesco a elaborare questa foto": "Nu pot procesa această fotografie",
     "pasti": "mese",
-    "Google Drive connesso": "Google Drive conectat"
+    "Google Drive connesso": "Google Drive conectat",
+    "Nessuna foto per i filtri selezionati.": "Nicio fotografie nu corespunde filtrelor.",
+    "Foto salvata · sincronizzazione Drive…": "Fotografie salvată · sincronizare cu Drive…",
+    "Foto salvata": "Fotografie salvată",
+    "Condivisione diretta non disponibile: foto pronta per il salvataggio.": "Partajarea directă nu este disponibilă: fotografia este pregătită pentru salvare."
   },
   "words": [
     [
@@ -841,8 +845,8 @@
     "help.body.measure.body": "Salvează greutatea și circumferințele cu o dată. Pentru trenduri contează mai mult să măsori consecvent în același punct și condiții similare decât precizia la milimetru.",
     "help.body.avatar": "Avatar corporal",
     "help.body.avatar.body": "Thalys încarcă male.svg sau female.svg direct din repository. Actualizare date forțează reîncărcarea fără cache, salvează din nou sexul și redesenează Corp și Home.",
-    "help.body.photos": "Fotografii progres",
-    "help.body.photos.body": "Fotografiile sunt stocate separat de datele numerice și pot fi filtrate după dată sau an. Păstrează poziția și lumina similare pentru comparații vizuale mai coerente.",
+    "help.body.photos": "Foto progressi",
+    "help.body.photos.body": "Corpo afișează doar contorul foto. Deschide-l pentru a adăuga fotografii cu Dată, Vedere și Parte, a filtra, favorita și partaja/salva. Numele folosește Dată_Vedere_Parte.",
     "help.analytics.title": "Grafice",
     "help.analytics.filter": "Filtre",
     "help.analytics.filter.body": "Filtrul global schimbă același interval pentru toate graficele. Selectorul de antrenament limitează datele de forță/volum fără a modifica istoricul salvat.",
