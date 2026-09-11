@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -1026,6 +1026,8 @@
     "help.settings.profile_photo.body": "Implicit, Thalys afișează fotografia contului Google. O fotografie încărcată în Thalys devine un override al aplicației, salvat în foto_profilo.json pe Drive și reutilizat pe celelalte dispozitive. Folosește Google elimină override-ul.",
     "help.nutrition.barcode.body": "Camera se deschide direct din gestul utilizatorului; Thalys folosește BarcodeDetector sau ZXing ca rezervă. Erorile de permisiune nu mai blochează aplicația.",
     "help.navigation.swipe": "Swipe tra sezioni",
-    "help.navigation.swipe.body": "Glisează orizontal pe conținutul principal: spre dreapta mergi la secțiunea următoare, spre stânga la cea anterioară."
+    "help.navigation.swipe.body": "Glisează orizontal pe conținutul principal: spre dreapta mergi la secțiunea următoare, spre stânga la cea anterioară.",
+    "help.nutrition.target_calculator": "Calcolatore target nutrizionali",
+    "help.nutrition.target_calculator.body": "Folosește sexul, vârsta, înălțimea și greutatea din Corpo, estimează masa slabă cu Boer și masa grasă prin scădere, apoi combină metabolismul, activitatea, starea fiziologică și obiectivul. Valorile pot fi editate, iar fișele pot fi consultate, activate, filtrate și importate/exportate."
   }
 }

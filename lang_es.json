@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -1028,6 +1028,8 @@
     "help.settings.profile_photo.body": "Por defecto Thalys muestra la foto de tu cuenta de Google. Una foto subida en Thalys se convierte en un override de la app guardado en foto_profilo.json en Drive y se reutiliza en los demás dispositivos. Usar Google elimina el override.",
     "help.nutrition.barcode.body": "La cámara se abre directamente desde el gesto del usuario; Thalys usa BarcodeDetector o ZXing como alternativa. Los errores de permiso ya no bloquean la app.",
     "help.navigation.swipe": "Swipe tra sezioni",
-    "help.navigation.swipe.body": "Desliza horizontalmente sobre el contenido principal: a la derecha vas a la sección siguiente y a la izquierda a la anterior."
+    "help.navigation.swipe.body": "Desliza horizontalmente sobre el contenido principal: a la derecha vas a la sección siguiente y a la izquierda a la anterior.",
+    "help.nutrition.target_calculator": "Calcolatore target nutrizionali",
+    "help.nutrition.target_calculator.body": "Usa sexo, edad, altura y peso de Corpo, estima masa magra con Boer y grasa por sustracción, y combina metabolismo, actividad, estado fisiológico y objetivo. Los valores son editables y las fichas pueden consultarse, activarse, filtrarse e importarse/exportarse."
   }
 }

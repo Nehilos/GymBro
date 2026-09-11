@@ -3170,6 +3170,129 @@
       color:#314e53 !important;
     }
 
+    /* ===== Thalys V22 ===== */
+
+    /* Light header icons: slightly darker and more defined. */
+    body[data-thalys-theme="light"] .app-header .header-message-button{
+      color:#3f5f64 !important;
+    }
+    body[data-thalys-theme="light"] .app-header .header-message-button i{
+      color:#31545a !important;
+      opacity:1 !important;
+      filter:drop-shadow(0 1px 0 rgba(255,255,255,.65));
+    }
+    body[data-thalys-theme="light"] .app-header .header-message-button:hover,
+    body[data-thalys-theme="light"] .app-header .header-message-button:active{
+      color:#0d7377 !important;
+      background:rgba(13,115,119,.07) !important;
+      border-radius:.75rem;
+    }
+
+    /* Target manager */
+    #target-modal{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #target-modal > .target-manager-shell-v22{
+      width:100% !important;
+      max-width:760px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      overflow-y:auto !important;
+      overscroll-behavior:contain !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    @media(min-width:768px){
+      #target-modal{align-items:center !important;padding:1rem !important}
+      #target-modal > .target-manager-shell-v22{
+        height:min(94dvh,900px) !important;
+        max-height:min(94dvh,900px) !important;
+        border-radius:1.6rem !important;
+      }
+    }
+    .target-section-v22{
+      border:1px solid rgba(71,85,105,.42);
+      border-radius:1.2rem;
+      background:rgba(15,23,42,.42);
+      padding:.85rem;
+    }
+    .target-readonly-v22{
+      border:1px solid rgba(71,85,105,.58);
+      border-radius:.85rem;
+      background:rgba(15,23,42,.7);
+      padding:.55rem .65rem;
+      min-height:2.6rem;
+    }
+    .target-value-grid-v22 input,
+    .target-context-grid-v22 select,
+    .target-context-grid-v22 input,
+    .target-filter-grid-v22 select,
+    .target-filter-grid-v22 input{
+      border:1px solid #334155;
+      background:#0f172a;
+      color:#f8fafc;
+      border-radius:.8rem;
+    }
+    .target-plan-card-v22{
+      border:1px solid rgba(71,85,105,.42);
+      background:rgba(15,23,42,.58);
+      border-radius:1.1rem;
+      padding:.8rem;
+    }
+    .target-plan-card-v22.active{
+      border-color:rgba(45,212,191,.48);
+      box-shadow:inset 0 0 0 1px rgba(45,212,191,.09);
+    }
+
+    body[data-thalys-theme="light"] #target-modal > .target-manager-shell-v22,
+    body[data-thalys-theme="light"] #target-plan-viewer-modal-v22 > div,
+    body[data-thalys-theme="light"] #target-info-modal-v22 > div{
+      background:#edf4f4 !important;
+      border-color:#c5d7d8 !important;
+    }
+    body[data-thalys-theme="light"] .target-section-v22{
+      background:#e5eeee !important;
+      border-color:#c6d8d9 !important;
+    }
+    body[data-thalys-theme="light"] .target-readonly-v22{
+      background:#f5f9f9 !important;
+      border-color:#bfd2d4 !important;
+      color:#24464a !important;
+    }
+    body[data-thalys-theme="light"] .target-value-grid-v22 input,
+    body[data-thalys-theme="light"] .target-context-grid-v22 select,
+    body[data-thalys-theme="light"] .target-context-grid-v22 input,
+    body[data-thalys-theme="light"] .target-filter-grid-v22 select,
+    body[data-thalys-theme="light"] .target-filter-grid-v22 input{
+      background:#f7fbfb !important;
+      border-color:#adc4c6 !important;
+      color:#203f43 !important;
+    }
+    body[data-thalys-theme="light"] .target-plan-card-v22{
+      background:#f3f7f7 !important;
+      border-color:#cbdadb !important;
+    }
+    body[data-thalys-theme="light"] .target-plan-card-v22.active{
+      background:#dceceb !important;
+      border-color:#0d7377 !important;
+    }
+    body[data-thalys-theme="light"] .target-source-card-v22{
+      background:#e5eeee !important;
+      border-color:#bfd2d4 !important;
+      color:#34565b !important;
+    }
+    body[data-thalys-theme="light"] .target-source-card-v22 a{
+      color:#0d7377 !important;
+    }
+
+    /* One nutrient = one outlined slice. The missing part is drawn as stripes by canvas plugin. */
+    #macroNutrientDonutV7,
+    #microNutrientDonutV7{
+      filter:drop-shadow(0 8px 18px rgba(15,23,42,.08));
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -3191,7 +3314,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=21" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=22" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -3218,7 +3341,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=21" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=22" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -3247,7 +3370,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=21" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=22" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -3873,7 +3996,7 @@
             <span class="text-xs text-slate-400">Calorie Totali</span>
             <div class="text-2xl font-black text-emerald-400"><span id="summary-calories">0</span> <span class="text-xs font-normal text-slate-400">/ <span id="target-calories">2200</span> kcal</span></div>
           </div>
-          <button onclick="openModal('target-modal')" class="text-xs text-cyan-400 hover:underline flex items-center space-x-1"><i class="fa-solid fa-sliders"></i><span>Target</span></button>
+          <button onclick="openTargetManagerV22()" class="text-xs text-cyan-400 hover:underline flex items-center space-x-1"><i class="fa-solid fa-sliders"></i><span>Target</span></button>
         </div>
 
         <div>
@@ -5113,74 +5236,166 @@
     </div>
   </div>
 
-  <!-- MODAL: TARGET NUTRITION -->
-  <div id="target-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-darkcard border border-darkborder rounded-3xl p-5 w-full max-w-sm space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
-        <h3 class="text-base font-bold text-white">Imposta Obiettivi Dieta</h3>
-        <button onclick="closeModal('target-modal')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+  <!-- MODAL: TARGET NUTRITION V22 -->
+  <div id="target-modal" class="fixed inset-0 z-50 bg-slate-950/88 backdrop-blur-md flex items-center justify-center hidden">
+    <div class="target-manager-shell-v22 bg-darkcard border border-darkborder p-4 sm:p-5 shadow-2xl">
+      <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+        <div>
+          <div class="text-[9px] uppercase tracking-[.18em] text-teal-300">Nutrizione personalizzata</div>
+          <h3 class="mt-1 text-lg font-black text-white">Target nutrizionali</h3>
+          <p class="mt-1 text-[10px] leading-relaxed text-slate-400">Calcola, modifica, salva e confronta nel tempo le tue schede target.</p>
+        </div>
+        <div class="flex gap-2">
+          <button type="button" onclick="openTargetInfoV22()" class="h-10 w-10 rounded-xl bg-slate-800 text-teal-300" aria-label="Come vengono calcolati i target"><i class="fa-solid fa-circle-info"></i></button>
+          <button type="button" onclick="document.getElementById('target-import-input-v22').click()" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300" aria-label="Importa JSON"><i class="fa-solid fa-file-import"></i></button>
+          <button type="button" onclick="closeModal('target-modal')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <input id="target-import-input-v22" type="file" accept=".json,application/json" class="hidden" onchange="importTargetPlansJSONV22(event)">
+
+      <div id="target-missing-data-v22" class="mt-4 hidden rounded-2xl border border-amber-500/25 bg-amber-500/10 p-3 text-[10px] leading-relaxed text-amber-200">
+        <div class="font-black"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Dati corporei mancanti</div>
+        <div id="target-missing-data-text-v22" class="mt-1"></div>
+        <button type="button" onclick="closeModal('target-modal');switchTab('body')" class="mt-2 rounded-xl bg-amber-400 px-3 py-2 font-black text-slate-950">Vai a Corpo</button>
       </div>
 
-      <form onsubmit="saveTargets(event)" class="space-y-3">
-        <div>
-          <label class="text-xs text-slate-400 block mb-1">Target Calorie (kcal)</label>
-          <input type="number" id="target-input-kcal" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+      <div class="target-section-v22 mt-4">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-[10px] font-black uppercase tracking-[.16em] text-teal-300">01 · Situazione fisica</div>
+            <p class="mt-1 text-[9px] leading-relaxed text-slate-500">I dati anagrafici e il peso vengono letti dalla sezione Corpo. Massa magra e massa grassa sono stime Boer.</p>
+          </div>
+          <span id="target-body-date-v22" class="text-[9px] text-slate-500">—</span>
         </div>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Sesso</div><div id="target-auto-sex-v22" class="mt-1 text-[11px] font-black text-slate-200">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Età</div><div id="target-auto-age-v22" class="mt-1 text-[11px] font-black text-slate-200">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Altezza</div><div id="target-auto-height-v22" class="mt-1 text-[11px] font-black text-slate-200">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Peso attuale</div><div id="target-auto-weight-v22" class="mt-1 text-[11px] font-black text-slate-200">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Massa magra</div><div id="target-auto-lean-v22" class="mt-1 text-[11px] font-black text-emerald-300">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">Massa grassa</div><div id="target-auto-fat-v22" class="mt-1 text-[11px] font-black text-rose-300">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">BMI</div><div id="target-auto-bmi-v22" class="mt-1 text-[11px] font-black text-violet-300">—</div></div>
+          <div class="target-readonly-v22"><div class="text-[8px] text-slate-500">BMR combinato</div><div id="target-auto-bmr-v22" class="mt-1 text-[11px] font-black text-amber-300">—</div></div>
+        </div>
+      </div>
+
+      <div class="target-section-v22 mt-3">
+        <div class="text-[10px] font-black uppercase tracking-[.16em] text-teal-300">02 · Contesto</div>
+        <div class="target-context-grid-v22 mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <label class="text-[9px] text-slate-400">Livello attività
+            <select id="target-calc-activity-v22" class="mt-1 w-full px-3 py-2 text-xs">
+              <option value="">Seleziona…</option>
+              <option value="sedentario">Sedentario</option>
+              <option value="attivo">Attivo</option>
+              <option value="sportivo">Sportivo</option>
+            </select>
+          </label>
+          <label class="text-[9px] text-slate-400">Stato fisiologico
+            <select id="target-calc-physiology-v22" class="mt-1 w-full px-3 py-2 text-xs">
+              <option value="none">Nessuno</option>
+              <option value="pregnancy1">Gravidanza · 1° trimestre</option>
+              <option value="pregnancy2">Gravidanza · 2° trimestre</option>
+              <option value="pregnancy3">Gravidanza · 3° trimestre</option>
+              <option value="lactation">Allattamento</option>
+              <option value="menopause">Menopausa</option>
+              <option value="older">Terza età</option>
+            </select>
+          </label>
+          <label class="text-[9px] text-slate-400">Obiettivo
+            <select id="target-calc-goal-v22" class="mt-1 w-full px-3 py-2 text-xs">
+              <option value="">Seleziona…</option>
+              <option value="loss">Dimagrimento</option>
+              <option value="maintain">Mantenimento</option>
+              <option value="gain">Aumento massa</option>
+            </select>
+          </label>
+        </div>
+        <div class="mt-3 grid grid-cols-[1fr_auto] gap-2">
+          <input id="target-plan-name-v22" type="text" class="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white" placeholder="Nome scheda · es. Ricomposizione settembre">
+          <button type="button" onclick="calculateNutritionTargetsV22()" class="min-h-10 rounded-xl bg-teal-600 px-4 text-[10px] font-black text-white"><i class="fa-solid fa-calculator mr-1"></i>Calcola</button>
+        </div>
+      </div>
+
+      <div class="target-section-v22 mt-3">
+        <div class="flex items-start justify-between gap-3">
           <div>
-            <label class="text-[10px] text-rose-400 block mb-1">Proteine (g)</label>
-            <input type="number" id="target-input-p" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
+            <div class="text-[10px] font-black uppercase tracking-[.16em] text-teal-300">03 · Valori consigliati</div>
+            <p class="mt-1 text-[9px] text-slate-500">Sono modificabili prima del salvataggio.</p>
           </div>
-          <div>
-            <label class="text-[10px] text-amber-400 block mb-1">Carbo (g)</label>
-            <input type="number" id="target-input-c" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-blue-400 block mb-1">Grassi (g)</label>
-            <input type="number" id="target-input-f" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-sky-300 block mb-1">Grassi saturi max (g)</label>
-            <input type="number" id="target-input-sat-fat" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-violet-400 block mb-1">Zuccheri max (g)</label>
-            <input type="number" id="target-input-sugars" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-cyan-400 block mb-1">Calcio (mg)</label>
-            <input type="number" id="target-input-calcium" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-emerald-400 block mb-1">Magnesio (mg)</label>
-            <input type="number" id="target-input-magnesium" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-teal-300 block mb-1">Zinco (mg)</label>
-            <input type="number" id="target-input-zinc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-amber-300 block mb-1">Fibre (g)</label>
-            <input type="number" id="target-input-fiber" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-fuchsia-300 block mb-1">Sale max (g)</label>
-            <input type="number" id="target-input-salt" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-orange-300 block mb-1">Ferro (mg)</label>
-            <input type="number" id="target-input-iron" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
-          <div>
-            <label class="text-[10px] text-lime-300 block mb-1">Potassio (mg)</label>
-            <input type="number" id="target-input-potassium" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-xs text-white">
-          </div>
+          <span id="target-calc-confidence-v22" class="rounded-full border border-slate-700 bg-slate-900 px-2 py-1 text-[8px] font-black text-slate-400">Da calcolare</span>
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm">
-          Aggiorna Obiettivi
-        </button>
-      </form>
+        <div class="target-value-grid-v22 mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <label class="text-[8px] text-slate-500">Calorie kcal<input type="number" id="target-input-kcal" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Proteine g<input type="number" id="target-input-p" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Carbo g<input type="number" id="target-input-c" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Grassi g<input type="number" id="target-input-f" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Saturi max g<input type="number" step=".1" id="target-input-sat-fat" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Zuccheri max g<input type="number" id="target-input-sugars" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Fibre g<input type="number" id="target-input-fiber" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Acqua ml<input type="number" id="target-input-water-v22" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Calcio mg<input type="number" id="target-input-calcium" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Magnesio mg<input type="number" id="target-input-magnesium" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Zinco mg<input type="number" step=".1" id="target-input-zinc" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Ferro mg<input type="number" step=".1" id="target-input-iron" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Potassio mg<input type="number" id="target-input-potassium" class="mt-1 w-full px-2 py-2 text-xs"></label>
+          <label class="text-[8px] text-slate-500">Sale max g<input type="number" step=".1" id="target-input-salt" class="mt-1 w-full px-2 py-2 text-xs"></label>
+        </div>
+
+        <div class="mt-3 flex flex-col sm:flex-row gap-2">
+          <label class="flex flex-1 min-h-11 items-center justify-between rounded-xl border border-slate-700 bg-slate-900 px-3 text-[10px] font-bold text-slate-300">
+            <span>Rendi attiva dopo il salvataggio</span>
+            <input id="target-save-active-v22" type="checkbox" checked class="h-4 w-4 accent-teal-500">
+          </label>
+          <button type="button" onclick="saveNutritionTargetPlanV22()" class="min-h-11 rounded-xl bg-teal-600 px-4 text-[10px] font-black text-white"><i class="fa-solid fa-floppy-disk mr-1"></i>Salva scheda target</button>
+        </div>
+      </div>
+
+      <div class="target-section-v22 mt-3 mb-4">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-[10px] font-black uppercase tracking-[.16em] text-teal-300">04 · Schede target salvate</div>
+            <div id="target-active-summary-v22" class="mt-1 text-[9px] text-slate-500">Nessuna scheda attiva</div>
+          </div>
+          <button type="button" onclick="exportAllTargetPlansJSONV22()" class="rounded-xl bg-slate-800 px-3 py-2 text-[9px] font-bold text-slate-300"><i class="fa-solid fa-file-export mr-1"></i>JSON</button>
+        </div>
+        <div class="target-filter-grid-v22 mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <input id="target-filter-search-v22" oninput="renderTargetPlanLibraryV22()" class="px-3 py-2 text-[10px]" placeholder="Cerca nome / obiettivo">
+          <select id="target-filter-status-v22" onchange="renderTargetPlanLibraryV22()" class="px-3 py-2 text-[10px]">
+            <option value="all">Tutte</option><option value="active">Attiva</option><option value="inactive">Non attive</option>
+          </select>
+          <input id="target-filter-date-v22" type="date" onchange="renderTargetPlanLibraryV22()" class="px-3 py-2 text-[10px]">
+        </div>
+        <div id="target-plan-list-v22" class="mt-3 space-y-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TARGET PLAN VIEWER V22 -->
+  <div id="target-plan-viewer-modal-v22" class="fixed inset-0 z-[2700] hidden items-center justify-center bg-slate-950/92 backdrop-blur-md p-3">
+    <div class="w-full max-w-xl max-h-[92dvh] overflow-y-auto rounded-3xl border border-slate-700 bg-darkcard p-4 shadow-2xl">
+      <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Scheda target</div><h3 id="target-view-title-v22" class="mt-1 text-base font-black text-white">—</h3><div id="target-view-date-v22" class="mt-1 text-[9px] text-slate-500">—</div></div>
+        <button type="button" onclick="closeModal('target-plan-viewer-modal-v22')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="target-view-body-v22" class="mt-3 space-y-3"></div>
+      <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <button id="target-view-active-btn-v22" type="button" class="min-h-11 rounded-xl bg-teal-600 text-[10px] font-black text-white">Rendi attiva</button>
+        <button id="target-view-info-btn-v22" type="button" class="min-h-11 rounded-xl bg-slate-800 text-[10px] font-bold text-teal-300"><i class="fa-solid fa-circle-info mr-1"></i>Calcoli</button>
+        <button id="target-view-json-btn-v22" type="button" class="min-h-11 rounded-xl bg-slate-800 text-[10px] font-bold text-slate-300"><i class="fa-solid fa-code mr-1"></i>JSON</button>
+        <button id="target-view-pdf-btn-v22" type="button" class="min-h-11 rounded-xl bg-slate-800 text-[10px] font-bold text-slate-300"><i class="fa-solid fa-file-pdf mr-1"></i>PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TARGET CALCULATION INFO V22 -->
+  <div id="target-info-modal-v22" class="fixed inset-0 z-[2800] hidden items-center justify-center bg-slate-950/92 backdrop-blur-md p-3">
+    <div class="w-full max-w-xl max-h-[92dvh] overflow-y-auto rounded-3xl border border-slate-700 bg-darkcard p-4 shadow-2xl">
+      <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+        <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Trasparenza del calcolo</div><h3 class="mt-1 text-base font-black text-white">Come Thalys stima i target</h3></div>
+        <button type="button" onclick="closeModal('target-info-modal-v22')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="target-info-body-v22" class="mt-3 space-y-3 text-[10px] leading-relaxed text-slate-300"></div>
     </div>
   </div>
 
@@ -5212,6 +5427,11 @@
           </div>
         </div>
         <div class="nutrition-guide-water-v21 rounded-2xl bg-blue-950/40 p-3 border border-blue-500/20"><b class="nutrition-guide-water-title-v21 text-blue-300">Acqua</b><p class="mt-1">Il bisogno varia con clima, sudorazione, dieta, attività e condizioni personali. Il target di Thalys è personalizzabile e non sostituisce una valutazione clinica.</p></div>
+        <div class="rounded-2xl border border-teal-500/20 bg-teal-500/10 p-3">
+          <div class="font-black text-teal-300"><i class="fa-solid fa-calculator mr-1"></i>Nuovo · Calcolatore Target</div>
+          <p class="mt-1">La sezione Target può usare i dati di Corpo, stimare massa magra/massa grassa con Boer, combinare due stime del metabolismo basale e applicare attività, stato fisiologico e obiettivo. I valori restano modificabili e ogni situazione può essere salvata come scheda storica, resa attiva, importata/esportata e consultata in PDF.</p>
+          <p class="mt-2 text-[9px] text-slate-500">Le stime sono orientative per persone sane e non sostituiscono una valutazione dietetica o clinica, soprattutto in gravidanza, allattamento, patologie o terza età fragile.</p>
+        </div>
         <div class="rounded-2xl bg-amber-500/10 p-3 border border-amber-500/20 text-amber-100"><b>Nota:</b> i riferimenti sono orientativi per adulti sani. Età, sesso, gravidanza, farmaci, patologie, sport e dieta possono cambiare fabbisogni e limiti. Fonti principali: OMS Healthy Diet / Sodium Reduction ed EFSA Dietary Reference Values.</div>
       </div>
     </div>
@@ -5680,7 +5900,7 @@
     let driveFolders = null, lastDriveSyncAt = Number(localStorage.getItem('thalys_last_drive_sync') || 0) || null, driveDirty = localStorage.getItem('thalys_drive_dirty')==='1';
     let lastSyncError=null;
 
-    const DRIVE_DB_NAMES = ['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
+    const DRIVE_DB_NAMES = ['thalys_manifest.json','app_state.json','nutrition_targets.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
 
     function getAccessToken(){ return (window.gapi && gapi.client && gapi.client.getToken && gapi.client.getToken())?.access_token || null; }
     function escapeDriveQuery(v){ return String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
@@ -6310,7 +6530,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:21,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:22,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -6332,7 +6552,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=21`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=22`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -6343,7 +6563,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v21`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v22`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -6352,7 +6572,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v21`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v22`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -6363,7 +6583,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v21`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v22`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -10263,8 +10483,8 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
-const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=21`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','nutrition_targets.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=22`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10713,7 +10933,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='21.0.0';
+const THALYS_APP_VERSION_V10='22.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -11152,8 +11372,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=21',
-  light:'./Thalys Logo Light.png?v=21'
+  dark:'./Thalys Logo Dark.png?v=22',
+  light:'./Thalys Logo Light.png?v=22'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -12597,6 +12817,572 @@ document.addEventListener('DOMContentLoaded',()=>{
     renderNutritionDonutsV7?.();
     updateBodyMeasurementsChart?.();
   },300);
+});
+
+
+/* ==========================================================
+   THALYS V22 — Target calculator / database / donut single-slice
+   ========================================================== */
+
+const THALYS_TARGET_SOURCES_V22=[
+  {name:'SINU · LARN V Revisione',url:'https://sinu.it/larn/',note:'Riferimenti italiani per energia e nutrienti; V Revisione 2024.'},
+  {name:'SINU · Tabelle LARN',url:'https://sinu.it/materiale-supplementare-larn/',note:'Tabelle riassuntive e materiale supplementare LARN.'},
+  {name:'CREA · Linee guida sana alimentazione',url:'https://www.crea.gov.it/web/alimenti-e-nutrizione',note:'Indicazioni pratiche italiane per una sana alimentazione.'},
+  {name:'Ministero della Salute',url:'https://www.salute.gov.it/new/it/tema/nutrizione/',note:'Indicazioni nazionali per condizioni fisiologiche e salute pubblica.'},
+  {name:'EFSA · Dietary Reference Values',url:'https://multimedia.efsa.europa.eu/drvs/index.htm',note:'DRV europei per energia e nutrienti.'},
+  {name:'WHO · Healthy diet',url:'https://www.who.int/news-room/fact-sheets/detail/healthy-diet',note:'Principi globali di adeguatezza, equilibrio, moderazione e diversità.'},
+  {name:'FAO · Nutrition requirements',url:'https://www.fao.org/nutrition/requirements/en',note:'Riferimenti internazionali su fabbisogni energetici e nutrienti.'}
+];
+
+function ensureTargetStateV22(){
+  if(!Array.isArray(appState.nutritionTargetPlans))appState.nutritionTargetPlans=[];
+  if(appState.activeNutritionTargetPlanId===undefined)appState.activeNutritionTargetPlanId=null;
+}
+function latestBodyForTargetsV22(){
+  return [...(appState.bodyMetrics||[])].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0]||null;
+}
+function targetAutoDataV22(){
+  const p=appState.profile||{},m=latestBodyForTargetsV22();
+  const sex=normalizeProfileGenderValue(p.gender);
+  const age=Number(p.age||0),height=Number(p.height||0),weight=Number(m?.weight||0);
+  const missing=[];
+  if(!['male','female'].includes(sex))missing.push(tr('sesso'));
+  if(age<=0)missing.push(tr('età'));
+  if(height<=0)missing.push(tr('altezza'));
+  if(weight<=0)missing.push(tr('peso attuale'));
+  if(missing.length)return {missing,sex,age,height,weight,bodyDate:m?.date||null};
+
+  // Boer lean body mass. Height is in centimetres.
+  let leanKg=sex==='male'
+    ? .407*weight+.267*height-19.2
+    : .252*weight+.473*height-48.3;
+  // Keep the estimate physiologically bounded against obvious input errors.
+  leanKg=Math.max(weight*.45,Math.min(weight*.96,leanKg));
+  const fatKg=Math.max(0,weight-leanKg),leanPct=leanKg/weight*100,fatPct=fatKg/weight*100;
+  const bmi=weight/Math.pow(height/100,2);
+  const mifflin=sex==='male'
+    ? 10*weight+6.25*height-5*age+5
+    : 10*weight+6.25*height-5*age-161;
+  const katch=370+21.6*leanKg;
+  const mergedBmr=(mifflin+katch)/2;
+  return {missing:[],sex,age,height,weight,leanKg,fatKg,leanPct,fatPct,bmi,mifflin,katch,mergedBmr,bodyDate:m?.date||null,
+    bodyContext:{neck:m?.neck||null,waist:m?.waist||null,hips:m?.hips||null,biceps:m?.biceps||null,thigh:m?.thigh||null,calf:m?.calf||null,bfRecorded:m?.bf||null}};
+}
+function setTargetAutoUIV22(d){
+  const tx=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  tx('target-auto-sex-v22',d.sex==='female'?tr('Donna'):tr('Uomo'));
+  tx('target-auto-age-v22',d.age?`${d.age} ${tr('anni')}`:'—');
+  tx('target-auto-height-v22',d.height?`${d.height} cm`:'—');
+  tx('target-auto-weight-v22',d.weight?`${d.weight.toFixed(1)} kg`:'—');
+  tx('target-auto-lean-v22',d.leanPct?`${d.leanPct.toFixed(1)}% · ${d.leanKg.toFixed(1)} kg`:'—');
+  tx('target-auto-fat-v22',d.fatPct!==undefined?`${d.fatPct.toFixed(1)}% · ${d.fatKg.toFixed(1)} kg`:'—');
+  tx('target-auto-bmi-v22',d.bmi?d.bmi.toFixed(1):'—');
+  tx('target-auto-bmr-v22',d.mergedBmr?`${Math.round(d.mergedBmr)} kcal`:'—');
+  tx('target-body-date-v22',d.bodyDate?`${tr('Misura')}: ${d.bodyDate}`:'—');
+  const wrap=document.getElementById('target-missing-data-v22'),msg=document.getElementById('target-missing-data-text-v22');
+  if(wrap)wrap.classList.toggle('hidden',!d.missing?.length);
+  if(msg&&d.missing?.length)msg.textContent=`${tr('Completa in Corpo')}: ${d.missing.join(', ')}.`;
+}
+function activityFactorV22(v){return v==='sportivo'?1.725:v==='attivo'?1.55:1.2}
+function goalFactorV22(v){return v==='loss'?.85:v==='gain'?1.10:1}
+function physiologyEnergyV22(v){
+  return v==='pregnancy1'?70:v==='pregnancy2'?350:v==='pregnancy3'?460:v==='lactation'?500:0;
+}
+function targetContextLabelV22(kind,v){
+  const maps={
+    activity:{sedentario:'Sedentario',attivo:'Attivo',sportivo:'Sportivo'},
+    physiology:{none:'Nessuno',pregnancy1:'Gravidanza · 1° trimestre',pregnancy2:'Gravidanza · 2° trimestre',pregnancy3:'Gravidanza · 3° trimestre',lactation:'Allattamento',menopause:'Menopausa',older:'Terza età'},
+    goal:{loss:'Dimagrimento',maintain:'Mantenimento',gain:'Aumento massa'}
+  };
+  return tr(maps[kind]?.[v]||v||'—');
+}
+function calculateTargetNumbersV22(d,activity,physiology,goal){
+  const af=activityFactorV22(activity);
+  const baseTdee=d.mergedBmr*af;
+  let calories=baseTdee*goalFactorV22(goal)+physiologyEnergyV22(physiology);
+  calories=Math.round(Math.max(1200,calories)/10)*10;
+
+  // Protein: LARN adult baseline (0.9 g/kg); older adult SDT 1.1 g/kg.
+  // Activity/goal multipliers are Thalys planning heuristics, bounded against energy share.
+  let pk=activity==='sportivo'?1.6:activity==='attivo'?1.2:.9;
+  if(goal==='loss')pk=Math.max(pk,1.6);
+  if(goal==='gain')pk=Math.max(pk,1.6);
+  if(physiology==='older'||d.age>=65)pk=Math.max(pk,1.1);
+  let protein=pk*d.weight;
+  if(physiology==='pregnancy1')protein+=1;
+  if(physiology==='pregnancy2')protein+=8;
+  if(physiology==='pregnancy3')protein+=26;
+  if(physiology==='lactation')protein+=21;
+
+  const proteinFloor=calories*.12/4;
+  const proteinCeil=calories*(activity==='sportivo'||goal!=='maintain'?.25:.20)/4;
+  protein=Math.round(Math.max(proteinFloor,Math.min(protein,proteinCeil)));
+
+  // Fats kept inside WHO/LARN compatible energy envelope; carbohydrates use the remaining energy.
+  let fatPct=physiology.startsWith('pregnancy')||physiology==='lactation'?.30:.28;
+  let fat=Math.round(calories*fatPct/9);
+  let carbs=Math.round((calories-protein*4-fat*9)/4);
+  let carbPct=carbs*4/calories;
+  if(carbPct<.45){
+    fatPct=.22;fat=Math.round(calories*fatPct/9);carbs=Math.round((calories-protein*4-fat*9)/4);
+  }
+  if(carbs*4/calories>.70){
+    fatPct=.30;fat=Math.round(calories*fatPct/9);carbs=Math.round((calories-protein*4-fat*9)/4);
+  }
+
+  const satFat=Math.round((calories*.10/9)*10)/10;
+  const sugars=Math.round(calories*.10/4);
+  const fiber=calories>=2400?30:25;
+  const salt=5;
+
+  let waterBase=d.sex==='male'?2500:2000;
+  let water=Math.max(waterBase,d.weight*30);
+  if(activity==='attivo')water+=300;
+  if(activity==='sportivo')water+=600;
+  if(physiology==='lactation')water+=700;
+  water=Math.round(water/50)*50;
+
+  let calcium=1000;
+  if(physiology==='menopause'||physiology==='older'||d.age>=65)calcium=1200;
+  let magnesium=d.sex==='male'?350:300;
+  let zinc=d.sex==='male'?11:8;
+  let iron=d.sex==='male'?11:16;
+  if(physiology==='menopause'||physiology==='older')iron=11;
+  if(physiology.startsWith('pregnancy')){iron=27;zinc=11;}
+  if(physiology==='lactation'){iron=11;zinc=12;}
+  const potassium=3500;
+
+  return {
+    calories, p:protein, c:Math.max(0,carbs), f:fat, satFat, sugars, fiber, salt,
+    calcium, magnesium, zinc, iron, potassium, water,
+    calculations:{
+      boerLeanKg:Number(d.leanKg.toFixed(2)),
+      boerFatKg:Number(d.fatKg.toFixed(2)),
+      boerLeanPct:Number(d.leanPct.toFixed(2)),
+      boerFatPct:Number(d.fatPct.toFixed(2)),
+      mifflinBmr:Math.round(d.mifflin),
+      katchBmr:Math.round(d.katch),
+      mergedBmr:Math.round(d.mergedBmr),
+      activityFactor:af,
+      baseTdee:Math.round(baseTdee),
+      goalFactor:goalFactorV22(goal),
+      physiologicalEnergyAdd:physiologyEnergyV22(physiology),
+      proteinCoefficient:pk
+    }
+  };
+}
+function setTargetValueInputsV22(t){
+  const map={
+    'target-input-kcal':t.calories,'target-input-p':t.p,'target-input-c':t.c,'target-input-f':t.f,
+    'target-input-sat-fat':t.satFat,'target-input-sugars':t.sugars,'target-input-fiber':t.fiber,
+    'target-input-water-v22':t.water||getWaterTarget(currentLocalDateStr()),
+    'target-input-calcium':t.calcium,'target-input-magnesium':t.magnesium,'target-input-zinc':t.zinc,
+    'target-input-iron':t.iron,'target-input-potassium':t.potassium,'target-input-salt':t.salt
+  };
+  Object.entries(map).forEach(([id,v])=>{const e=document.getElementById(id);if(e&&v!==undefined)e.value=v});
+}
+function readTargetValueInputsV22(){
+  const n=id=>Number(document.getElementById(id)?.value||0);
+  return {
+    calories:Math.round(n('target-input-kcal')),p:Math.round(n('target-input-p')),c:Math.round(n('target-input-c')),f:Math.round(n('target-input-f')),
+    satFat:Number(n('target-input-sat-fat').toFixed(1)),sugars:Math.round(n('target-input-sugars')),fiber:Math.round(n('target-input-fiber')),
+    water:Math.round(n('target-input-water-v22')),calcium:Math.round(n('target-input-calcium')),magnesium:Math.round(n('target-input-magnesium')),
+    zinc:Number(n('target-input-zinc').toFixed(1)),iron:Number(n('target-input-iron').toFixed(1)),potassium:Math.round(n('target-input-potassium')),
+    salt:Number(n('target-input-salt').toFixed(1))
+  };
+}
+let targetLastCalcV22=null;
+
+function openTargetManagerV22(){
+  ensureTargetStateV22();
+  const d=targetAutoDataV22();
+  setTargetAutoUIV22(d);
+  setTargetValueInputsV22({...appState.targets,water:getWaterTarget(currentLocalDateStr())});
+  const name=document.getElementById('target-plan-name-v22');
+  if(name&&!name.value)name.value=`Target ${currentLocalDateStr()}`;
+  const act=document.getElementById('target-calc-activity-v22');
+  if(act&&!act.value){
+    const life=String(appState.profile?.lifestyle||'').toLowerCase();
+    act.value=life.includes('sed')?'sedentario':life.includes('att')?'sportivo':'attivo';
+  }
+  renderTargetPlanLibraryV22();
+  openModal('target-modal');
+}
+function calculateNutritionTargetsV22(){
+  const d=targetAutoDataV22();setTargetAutoUIV22(d);
+  if(d.missing.length){showToast(tr('Completa prima i dati necessari nella sezione Corpo'),'fa-triangle-exclamation');return}
+  const activity=document.getElementById('target-calc-activity-v22')?.value||'';
+  const physiology=document.getElementById('target-calc-physiology-v22')?.value||'none';
+  const goal=document.getElementById('target-calc-goal-v22')?.value||'';
+  if(!activity||!goal){showToast(tr('Seleziona livello attività e obiettivo'),'fa-list-check');return}
+  const t=calculateTargetNumbersV22(d,activity,physiology,goal);
+  setTargetValueInputsV22(t);
+  targetLastCalcV22={...t,anthropometry:d,context:{activity,physiology,goal},calculatedAt:new Date().toISOString()};
+  const c=document.getElementById('target-calc-confidence-v22');
+  if(c){c.textContent=tr('Stima personalizzata');c.className='rounded-full border border-teal-500/30 bg-teal-500/10 px-2 py-1 text-[8px] font-black text-teal-300'}
+}
+function normalizeTargetPlanV22(p={}){
+  return {
+    id:p.id||`target_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+    name:p.name||`Target ${p.date||currentLocalDateStr()}`,
+    date:p.date||currentLocalDateStr(),
+    createdAt:p.createdAt||new Date().toISOString(),
+    updatedAt:p.updatedAt||p.createdAt||new Date().toISOString(),
+    anthropometry:p.anthropometry||{},
+    context:p.context||{},
+    calculations:p.calculations||{},
+    targets:{...DEFAULT_STATE.targets,...(p.targets||{}),water:Number(p.targets?.water||p.water||2500)},
+    sources:Array.isArray(p.sources)?p.sources:THALYS_TARGET_SOURCES_V22.map(x=>x.name),
+    calculatorVersion:p.calculatorVersion||'22.0'
+  };
+}
+function saveNutritionTargetPlanV22(){
+  ensureTargetStateV22();
+  const d=targetAutoDataV22();
+  if(d.missing.length){setTargetAutoUIV22(d);showToast(tr('Completa prima i dati necessari nella sezione Corpo'),'fa-triangle-exclamation');return}
+  const activity=document.getElementById('target-calc-activity-v22')?.value||'';
+  const physiology=document.getElementById('target-calc-physiology-v22')?.value||'none';
+  const goal=document.getElementById('target-calc-goal-v22')?.value||'';
+  if(!activity||!goal){showToast(tr('Seleziona livello attività e obiettivo'),'fa-list-check');return}
+  const targets=readTargetValueInputsV22();
+  if(!targets.calories||!targets.p||!targets.c||!targets.f){showToast(tr('Calcola o compila i target prima di salvare'),'fa-calculator');return}
+  const name=(document.getElementById('target-plan-name-v22')?.value||'').trim()||`Target ${currentLocalDateStr()}`;
+  const calc=targetLastCalcV22?.context?.activity===activity&&targetLastCalcV22?.context?.goal===goal
+    ? targetLastCalcV22
+    : {calculations:calculateTargetNumbersV22(d,activity,physiology,goal).calculations};
+  const plan=normalizeTargetPlanV22({
+    name,date:currentLocalDateStr(),anthropometry:{
+      sex:d.sex,age:d.age,height:d.height,weight:d.weight,leanKg:d.leanKg,leanPct:d.leanPct,fatKg:d.fatKg,fatPct:d.fatPct,bmi:d.bmi,bodyDate:d.bodyDate,bodyContext:d.bodyContext
+    },
+    context:{activity,physiology,goal},
+    calculations:calc.calculations||{},
+    targets,
+    sources:THALYS_TARGET_SOURCES_V22.map(x=>x.name)
+  });
+  appState.nutritionTargetPlans.unshift(plan);
+  if(document.getElementById('target-save-active-v22')?.checked)activateNutritionTargetPlanV22(plan.id,false);
+  saveStateToLocal();scheduleDriveSync?.(180);renderTargetPlanLibraryV22();renderNutrition();
+  showToast(tr('Scheda target salvata'),'fa-bullseye');
+}
+function activateNutritionTargetPlanV22(id,toast=true){
+  ensureTargetStateV22();
+  const p=appState.nutritionTargetPlans.find(x=>x.id===id);if(!p)return;
+  appState.activeNutritionTargetPlanId=id;
+  appState.targets={...appState.targets,...p.targets};
+  if(p.targets.water)appState.settings={...(appState.settings||{}),waterTargetMl:Number(p.targets.water)};
+  appState.targetsConfirmed=true;
+  saveStateToLocal();scheduleDriveSync?.(180);
+  loadTargetsUI();renderNutrition();renderTargetPlanLibraryV22();
+  if(toast)showToast(tr('Scheda target attivata'),'fa-circle-check');
+}
+function deactivateNutritionTargetPlanV22(id){
+  if(appState.activeNutritionTargetPlanId===id)appState.activeNutritionTargetPlanId=null;
+  saveStateToLocal();scheduleDriveSync?.(180);renderTargetPlanLibraryV22();
+  showToast(tr('Scheda target disattivata'),'fa-circle');
+}
+function targetPlanMatchesV22(p){
+  const q=(document.getElementById('target-filter-search-v22')?.value||'').trim().toLowerCase();
+  const st=document.getElementById('target-filter-status-v22')?.value||'all';
+  const dt=document.getElementById('target-filter-date-v22')?.value||'';
+  const active=p.id===appState.activeNutritionTargetPlanId;
+  if(st==='active'&&!active)return false;if(st==='inactive'&&active)return false;
+  if(dt&&p.date!==dt)return false;
+  if(q&&!`${p.name} ${targetContextLabelV22('goal',p.context?.goal)} ${targetContextLabelV22('physiology',p.context?.physiology)} ${targetContextLabelV22('activity',p.context?.activity)}`.toLowerCase().includes(q))return false;
+  return true;
+}
+function renderTargetPlanLibraryV22(){
+  ensureTargetStateV22();
+  appState.nutritionTargetPlans=appState.nutritionTargetPlans.map(normalizeTargetPlanV22);
+  const box=document.getElementById('target-plan-list-v22');if(!box)return;
+  const plans=appState.nutritionTargetPlans.filter(targetPlanMatchesV22);
+  const active=appState.nutritionTargetPlans.find(x=>x.id===appState.activeNutritionTargetPlanId);
+  const sum=document.getElementById('target-active-summary-v22');if(sum)sum.textContent=active?`${tr('Attiva')}: ${active.name}`:tr('Nessuna scheda attiva');
+  box.innerHTML=plans.length?plans.map(p=>{
+    const isActive=p.id===appState.activeNutritionTargetPlanId;
+    return `<button type="button" onclick="openNutritionTargetPlanV22('${p.id}')" class="target-plan-card-v22 ${isActive?'active':''} w-full text-left">
+      <div class="flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <div class="truncate text-[11px] font-black text-white">${escapeHTML(p.name)}</div>
+          <div class="mt-1 text-[9px] text-slate-500">${p.date} · ${escapeHTML(targetContextLabelV22('goal',p.context?.goal))} · ${escapeHTML(targetContextLabelV22('activity',p.context?.activity))}</div>
+        </div>
+        ${isActive?'<span class="rounded-full bg-teal-500/10 border border-teal-500/25 px-2 py-1 text-[8px] font-black text-teal-300">ATTIVA</span>':'<i class="fa-solid fa-chevron-right mt-1 text-slate-600"></i>'}
+      </div>
+      <div class="mt-2 grid grid-cols-4 gap-1 text-center"><span class="rounded-lg bg-slate-900/55 p-1.5 text-[8px] text-slate-400"><b class="block text-slate-200">${p.targets.calories}</b>kcal</span><span class="rounded-lg bg-slate-900/55 p-1.5 text-[8px] text-slate-400"><b class="block text-slate-200">${p.targets.p}g</b>P</span><span class="rounded-lg bg-slate-900/55 p-1.5 text-[8px] text-slate-400"><b class="block text-slate-200">${p.targets.c}g</b>C</span><span class="rounded-lg bg-slate-900/55 p-1.5 text-[8px] text-slate-400"><b class="block text-slate-200">${p.targets.f}g</b>G</span></div>
+    </button>`;
+  }).join(''):`<div class="rounded-2xl border border-dashed border-slate-700 p-5 text-center text-[10px] text-slate-500">${tr('Nessuna scheda target trovata')}</div>`;
+}
+function targetPlanBodyHtmlV22(p){
+  const a=p.anthropometry||{},t=p.targets||{},c=p.calculations||{};
+  const physical=[
+    ['Sesso',a.sex==='female'?'Donna':'Uomo'],['Età',a.age?`${a.age} anni`:'—'],['Altezza',a.height?`${a.height} cm`:'—'],['Peso',a.weight?`${Number(a.weight).toFixed(1)} kg`:'—'],
+    ['Massa magra',a.leanPct?`${Number(a.leanPct).toFixed(1)}%`:'—'],['Massa grassa',a.fatPct!==undefined?`${Number(a.fatPct).toFixed(1)}%`:'—'],['BMI',a.bmi?Number(a.bmi).toFixed(1):'—'],['BMR',c.mergedBmr?`${c.mergedBmr} kcal`:'—']
+  ];
+  const values=[
+    ['Calorie',`${t.calories} kcal`],['Proteine',`${t.p} g`],['Carboidrati',`${t.c} g`],['Grassi',`${t.f} g`],['Saturi max',`${t.satFat} g`],['Zuccheri max',`${t.sugars} g`],['Fibre',`${t.fiber} g`],['Acqua',`${t.water||'—'} ml`],
+    ['Calcio',`${t.calcium} mg`],['Magnesio',`${t.magnesium} mg`],['Zinco',`${t.zinc} mg`],['Ferro',`${t.iron} mg`],['Potassio',`${t.potassium} mg`],['Sale max',`${t.salt} g`]
+  ];
+  return `<div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-3">
+    <div class="text-[9px] font-black uppercase tracking-[.14em] text-teal-300">Situazione fisica</div>
+    <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">${physical.map(x=>`<div class="rounded-xl bg-slate-950/45 p-2"><div class="text-[8px] text-slate-500">${tr(x[0])}</div><div class="mt-1 text-[10px] font-black text-slate-200">${x[1]}</div></div>`).join('')}</div>
+  </div>
+  <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-3">
+    <div class="text-[9px] font-black uppercase tracking-[.14em] text-teal-300">Contesto</div>
+    <div class="mt-2 text-[10px] text-slate-300">${targetContextLabelV22('activity',p.context?.activity)} · ${targetContextLabelV22('physiology',p.context?.physiology)} · ${targetContextLabelV22('goal',p.context?.goal)}</div>
+  </div>
+  <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-3">
+    <div class="text-[9px] font-black uppercase tracking-[.14em] text-teal-300">Target</div>
+    <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">${values.map(x=>`<div class="rounded-xl bg-slate-950/45 p-2"><div class="text-[8px] text-slate-500">${tr(x[0])}</div><div class="mt-1 text-[10px] font-black text-slate-200">${x[1]}</div></div>`).join('')}</div>
+  </div>`;
+}
+function openNutritionTargetPlanV22(id){
+  ensureTargetStateV22();const p=appState.nutritionTargetPlans.find(x=>x.id===id);if(!p)return;
+  const title=document.getElementById('target-view-title-v22'),date=document.getElementById('target-view-date-v22'),body=document.getElementById('target-view-body-v22');
+  if(title)title.textContent=p.name;if(date)date.textContent=p.date;if(body)body.innerHTML=targetPlanBodyHtmlV22(p);
+  const active=p.id===appState.activeNutritionTargetPlanId,ab=document.getElementById('target-view-active-btn-v22');
+  if(ab){ab.textContent=active?tr('Disattiva'):tr('Rendi attiva');ab.onclick=()=>{active?deactivateNutritionTargetPlanV22(p.id):activateNutritionTargetPlanV22(p.id);closeModal('target-plan-viewer-modal-v22')}}
+  const ib=document.getElementById('target-view-info-btn-v22');if(ib)ib.onclick=()=>openTargetInfoV22(p.id);
+  const jb=document.getElementById('target-view-json-btn-v22');if(jb)jb.onclick=()=>exportTargetPlanJSONV22(p.id);
+  const pb=document.getElementById('target-view-pdf-btn-v22');if(pb)pb.onclick=()=>exportTargetPlanPDFV22(p.id);
+  openModal('target-plan-viewer-modal-v22');
+}
+function openTargetInfoV22(id=null){
+  const p=id?(appState.nutritionTargetPlans||[]).find(x=>x.id===id):null;
+  const info=document.getElementById('target-info-body-v22');if(!info)return;
+  const calc=p?.calculations||targetLastCalcV22?.calculations||{};
+  const live=p?.anthropometry||targetAutoDataV22();
+  info.innerHTML=`
+    <div class="target-source-card-v22 rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="font-black text-teal-300">Composizione corporea · Boer</div>
+      <p class="mt-1">Uomo: LBM = 0,407×peso + 0,267×altezza(cm) − 19,2.<br>Donna: LBM = 0,252×peso + 0,473×altezza(cm) − 48,3.</p>
+      <p class="mt-1 text-slate-500">Massa grassa = peso − massa magra. Le percentuali sono rapportate al peso totale. Boer usa sesso, altezza e peso; le circonferenze registrate in Corpo restano contesto antropometrico ma non entrano direttamente nella formula.</p>
+    </div>
+    <div class="target-source-card-v22 rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="font-black text-teal-300">Energia</div>
+      <p class="mt-1">Thalys combina Mifflin–St Jeor con Katch–McArdle (quest'ultima usa la massa magra Boer) e usa la media come BMR operativo. Il BMR viene moltiplicato per il livello di attività; l'obiettivo applica un aggiustamento moderato (−15% dimagrimento, 0% mantenimento, +10% aumento massa).</p>
+      ${calc.mergedBmr?`<p class="mt-1 text-slate-500">Questa scheda: Mifflin ${calc.mifflinBmr||'—'} kcal · Katch ${calc.katchBmr||'—'} kcal · media ${calc.mergedBmr||'—'} kcal · fattore attività ${calc.activityFactor||'—'}.</p>`:''}
+      <p class="mt-1 text-slate-500">Per gravidanza/allattamento vengono applicati surplus energetici di riferimento; nelle condizioni speciali il risultato è da considerare solo orientativo.</p>
+    </div>
+    <div class="target-source-card-v22 rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="font-black text-teal-300">Macronutrienti e prevenzione</div>
+      <p class="mt-1">Proteine: base LARN adulto 0,9 g/kg; Thalys aumenta il coefficiente quando selezioni attività/sport o obiettivi che richiedono maggiore tutela della massa magra. Per la terza età usa almeno 1,1 g/kg. Grassi restano normalmente entro ~20–30% dell'energia. Carboidrati ricevono l'energia residua mantenendo una quota compatibile con gli intervalli generali WHO. Saturi e zuccheri sono limitati al 10% dell'energia; sale max 5 g/die; fibra almeno 25 g/die.</p>
+    </div>
+    <div class="target-source-card-v22 rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="font-black text-teal-300">Enti e riferimenti utilizzati</div>
+      <div class="mt-2 space-y-2">${THALYS_TARGET_SOURCES_V22.map(s=>`<div><a href="${s.url}" target="_blank" rel="noopener" class="font-bold underline">${escapeHTML(s.name)}</a><div class="text-slate-500">${escapeHTML(s.note)}</div></div>`).join('')}</div>
+    </div>
+    <div class="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-3 text-amber-100">
+      <b>${tr('Importante')}:</b> ${tr('questo calcolatore fornisce stime orientative per persone sane. Non sostituisce un piano dietetico professionale o una valutazione medica, soprattutto in gravidanza, allattamento, patologie, terapia farmacologica o fragilità geriatrica.')}
+    </div>`;
+  openModal('target-info-modal-v22');
+}
+function exportTargetPlanJSONV22(id){
+  const p=(appState.nutritionTargetPlans||[]).find(x=>x.id===id);if(!p)return;
+  const blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=u;a.download=`Thalys_Target_${photoSafeTokenV19(p.name)}_${p.date}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
+}
+function exportAllTargetPlansJSONV22(){
+  ensureTargetStateV22();
+  const blob=new Blob([JSON.stringify({version:22,activeId:appState.activeNutritionTargetPlanId,plans:appState.nutritionTargetPlans},null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=u;a.download=`Thalys_Targets_${currentLocalDateStr()}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);
+}
+async function importTargetPlansJSONV22(event){
+  const file=event.target.files?.[0];if(!file)return;
+  try{
+    const raw=JSON.parse(await file.text());
+    const arr=Array.isArray(raw)?raw:Array.isArray(raw.plans)?raw.plans:[raw];
+    const incoming=arr.filter(x=>x&&typeof x==='object'&&(x.targets||x.calories)).map(x=>{
+      if(!x.targets&&x.calories)x={...x,targets:{calories:x.calories,p:x.p,c:x.c,f:x.f,satFat:x.satFat,sugars:x.sugars,fiber:x.fiber,calcium:x.calcium,magnesium:x.magnesium,zinc:x.zinc,iron:x.iron,potassium:x.potassium,salt:x.salt,water:x.water}};
+      return normalizeTargetPlanV22(x);
+    });
+    ensureTargetStateV22();
+    const map=new Map(appState.nutritionTargetPlans.map(x=>[x.id,x]));incoming.forEach(x=>map.set(x.id,x));appState.nutritionTargetPlans=[...map.values()];
+    saveStateToLocal();scheduleDriveSync?.(180);renderTargetPlanLibraryV22();showToast(`${tr('Schede target importate')}: ${incoming.length}`,'fa-file-import');
+  }catch(e){console.error(e);showToast(tr('JSON target non valido'),'fa-triangle-exclamation')}
+  finally{event.target.value=''}
+}
+async function exportTargetPlanPDFV22(id){
+  const p=(appState.nutritionTargetPlans||[]).find(x=>x.id===id);if(!p)return;
+  try{
+    if(!await ensureJsPdfV11())throw new Error('JSPDF_NOT_LOADED');
+    const pdf=makeThalysPdfV11(`Target nutrizionali · ${p.name}`,[
+      p.date,
+      `${tr('Attività')}: ${targetContextLabelV22('activity',p.context?.activity)}`,
+      `${tr('Stato fisiologico')}: ${targetContextLabelV22('physiology',p.context?.physiology)}`,
+      `${tr('Obiettivo')}: ${targetContextLabelV22('goal',p.context?.goal)}`
+    ]);
+    const a=p.anthropometry||{},t=p.targets||{},c=p.calculations||{};
+    pdf.section(tr('Situazione fisica'),[
+      `Sesso: ${a.sex==='female'?'Donna':'Uomo'}`,`Età: ${a.age||'—'} anni`,`Altezza: ${a.height||'—'} cm`,`Peso: ${a.weight||'—'} kg`,
+      `Massa magra Boer: ${a.leanPct?Number(a.leanPct).toFixed(1):'—'}% (${a.leanKg?Number(a.leanKg).toFixed(1):'—'} kg)`,
+      `Massa grassa stimata: ${a.fatPct!==undefined?Number(a.fatPct).toFixed(1):'—'}% (${a.fatKg?Number(a.fatKg).toFixed(1):'—'} kg)`,
+      `BMI: ${a.bmi?Number(a.bmi).toFixed(1):'—'}`,`BMR combinato: ${c.mergedBmr||'—'} kcal`
+    ].join('\n'));
+    pdf.section(tr('Target consigliati'),[
+      `Energia: ${t.calories} kcal`,`Proteine: ${t.p} g`,`Carboidrati: ${t.c} g`,`Grassi: ${t.f} g`,`Grassi saturi max: ${t.satFat} g`,`Zuccheri max: ${t.sugars} g`,
+      `Fibre: ${t.fiber} g`,`Acqua: ${t.water||'—'} ml`,`Calcio: ${t.calcium} mg`,`Magnesio: ${t.magnesium} mg`,`Zinco: ${t.zinc} mg`,`Ferro: ${t.iron} mg`,`Potassio: ${t.potassium} mg`,`Sale max: ${t.salt} g`
+    ].join('\n'));
+    pdf.section(tr('Metodo di calcolo'),`Boer per massa magra; massa grassa per sottrazione. BMR operativo = media Mifflin–St Jeor e Katch–McArdle. Energia adattata a livello di attività, obiettivo e stato fisiologico. Target preventivi confrontati con LARN/SINU, CREA, Ministero della Salute, EFSA, WHO e FAO. Le stime restano orientative e modificabili.`);
+    pdf.section(tr('Fonti'),THALYS_TARGET_SOURCES_V22.map(x=>`${x.name} — ${x.url}`).join('\n'));
+    const pages=pdf.doc.getNumberOfPages();for(let i=1;i<=pages;i++){pdf.doc.setPage(i);pdf.doc.setTextColor(100,116,139);pdf.doc.setFontSize(7);pdf.doc.text(`Thalys · ${i}/${pages}`,194,289,{align:'right'})}
+    pdf.doc.save(`Thalys_Target_${photoSafeTokenV19(p.name)}_${p.date}.pdf`);
+  }catch(e){console.error('Target PDF V22',e);showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation')}
+}
+
+/* Existing saveTargets now creates a target plan instead of bypassing history. */
+saveTargets=function(e){e?.preventDefault?.();saveNutritionTargetPlanV22()};
+
+/* Existing loader remains compatible and also populates water. */
+const _loadTargetsUIV22Base=loadTargetsUI;
+loadTargetsUI=function(){
+  _loadTargetsUIV22Base();
+  const w=document.getElementById('target-input-water-v22');if(w)w.value=getWaterTarget(currentLocalDateStr());
+};
+
+/* Dedicated nutrition target database. */
+ensureTargetStateV22();
+const _databasePayloadsV22Base=databasePayloads;
+databasePayloads=function(){
+  const out=_databasePayloadsV22Base();
+  out['nutrition_targets.json']={
+    version:22,
+    activeId:appState.activeNutritionTargetPlanId||null,
+    plans:(appState.nutritionTargetPlans||[]).map(normalizeTargetPlanV22),
+    updatedAt:new Date().toISOString()
+  };
+  if(out['thalys_manifest.json']){
+    out['thalys_manifest.json']={...out['thalys_manifest.json'],schemaVersion:9,databaseVersion:7};
+  }
+  return out;
+};
+const _loadDatabasesFromDriveV22Base=loadDatabasesFromDrive;
+loadDatabasesFromDrive=async function(consolidate=false){
+  const ok=await _loadDatabasesFromDriveV22Base(consolidate);
+  if(!ok||!getAccessToken()||!driveFolders?.databaseFolderId)return ok;
+  try{
+    const d=await readDriveJSON('nutrition_targets.json',driveFolders.databaseFolderId);
+    if(d){
+      ensureTargetStateV22();
+      const incoming=Array.isArray(d)?d:(d.plans||[]);
+      const map=new Map(appState.nutritionTargetPlans.map(x=>[x.id,normalizeTargetPlanV22(x)]));
+      incoming.map(normalizeTargetPlanV22).forEach(x=>map.set(x.id,x));
+      appState.nutritionTargetPlans=[...map.values()];
+      if(d.activeId&&appState.nutritionTargetPlans.some(x=>x.id===d.activeId))appState.activeNutritionTargetPlanId=d.activeId;
+      const active=appState.nutritionTargetPlans.find(x=>x.id===appState.activeNutritionTargetPlanId);
+      if(active){
+        appState.targets={...appState.targets,...active.targets};
+        if(active.targets.water)appState.settings={...(appState.settings||{}),waterTargetMl:Number(active.targets.water)};
+      }
+      localStorage.setItem('thalys_data',JSON.stringify(appState));
+      renderTargetPlanLibraryV22();
+      loadTargetsUI();renderNutrition();
+    }
+  }catch(e){console.warn('nutrition_targets load V22',e)}
+  return ok;
+};
+
+/* One slice per nutrient. The missing percentage is striped inside the same arc. */
+function donutSlicePathV22(ctx,arc,start,end,innerPad=1.5,outerPad=1.5){
+  const ir=Math.max(0,arc.innerRadius+innerPad),or=Math.max(ir+1,arc.outerRadius-outerPad);
+  ctx.beginPath();
+  ctx.arc(arc.x,arc.y,or,start,end,false);
+  ctx.arc(arc.x,arc.y,ir,end,start,true);
+  ctx.closePath();
+}
+const targetStripePluginV22={
+  id:'thalysTargetStripeV22',
+  afterDatasetDraw(chart,args,opts){
+    if(args.index!==0)return;
+    const defs=chart.$thalysDefsV22||[],meta=chart.getDatasetMeta(0),ctx=chart.ctx;
+    meta.data.forEach((arc,i)=>{
+      const x=defs[i];if(!x)return;
+      const pct=donutProgressPctV21(x)/100;
+      const start=arc.startAngle,end=arc.endAngle,split=start+(end-start)*pct;
+      const base=chart.$thalysPaletteV22?.[i]||'#64748b';
+
+      // Completed portion: solid/soft gradient.
+      if(pct>0){
+        ctx.save();
+        donutSlicePathV22(ctx,arc,start,split);
+        const g=ctx.createLinearGradient(arc.x-arc.outerRadius,arc.y-arc.outerRadius,arc.x+arc.outerRadius,arc.y+arc.outerRadius);
+        g.addColorStop(0,rgbaHexV21(base,1));g.addColorStop(.6,rgbaHexV21(base,.88));g.addColorStop(1,shadeHexV21(base,.82));
+        ctx.fillStyle=g;ctx.fill();
+        ctx.restore();
+      }
+
+      // Missing portion: same hue, darker base plus soft diagonal bars.
+      if(pct<1){
+        ctx.save();
+        donutSlicePathV22(ctx,arc,split,end);
+        ctx.clip();
+        ctx.fillStyle=shadeHexV21(base,.42);
+        ctx.fillRect(arc.x-arc.outerRadius,arc.y-arc.outerRadius,arc.outerRadius*2,arc.outerRadius*2);
+        ctx.globalAlpha=.26;
+        ctx.strokeStyle=rgbaHexV21(base,.95);
+        ctx.lineWidth=3;
+        const r=arc.outerRadius*2.8;
+        for(let k=-r;k<r;k+=10){
+          ctx.beginPath();
+          ctx.moveTo(arc.x-r,arc.y+k);
+          ctx.lineTo(arc.x+r,arc.y+k+r);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    });
+  }
+};
+function renderOneDonutV7(kind,defs){
+  const cv=document.getElementById(kind==='macro'?'macroNutrientDonutV7':'microNutrientDonutV7');if(!cv||!window.Chart)return;
+  const old=kind==='macro'?chartMacroV7:chartMicroV7;if(old)old.destroy();
+  const palette=appleDonutPaletteV17(kind);
+  const ringBg=document.body.dataset.thalysTheme==='light'?'#e8f0f0':'#111827';
+  const ch=new Chart(cv.getContext('2d'),{
+    type:'doughnut',
+    data:{labels:defs.map(x=>tr(x.label)),datasets:[{
+      data:defs.map(()=>1),
+      backgroundColor:defs.map((x,i)=>shadeHexV21(palette[i%palette.length],.42)),
+      borderColor:ringBg,
+      borderWidth:3,
+      borderRadius:7,
+      spacing:2,
+      hoverOffset:4
+    }]},
+    plugins:[targetStripePluginV22],
+    options:{
+      responsive:true,maintainAspectRatio:false,cutout:'76%',animation:{duration:430},
+      plugins:{
+        legend:{display:false},
+        tooltip:{displayColors:false,backgroundColor:'rgba(15,23,42,.94)',padding:10,cornerRadius:10,callbacks:{
+          title:items=>tr(defs[items?.[0]?.dataIndex||0]?.label||''),
+          label:c=>{const x=defs[c.dataIndex],pct=donutProgressPctV21(x);return `${tr('Raggiunto')}: ${pct.toFixed(0)}% · ${Number(x.value.toFixed(1))}${x.unit} / ${x.target}${x.unit}`},
+          afterLabel:c=>`${tr('Mancante')}: ${(100-donutProgressPctV21(defs[c.dataIndex])).toFixed(0)}%`
+        }}
+      },
+      onClick:(evt,els)=>{if(els.length)showDonutNutrientV7(kind,defs[els[0].index])}
+    }
+  });
+  ch.$thalysDefsV22=defs;ch.$thalysPaletteV22=palette;ch.update('none');
+  if(kind==='macro')chartMacroV7=ch;else chartMicroV7=ch;
+  const avg=Math.round(defs.reduce((s,x)=>s+donutProgressPctV21(x),0)/Math.max(1,defs.length));
+  const se=document.getElementById(kind==='macro'?'macro-donut-score-v7':'micro-donut-score-v7');if(se)se.textContent=`${avg}%`;
+  const leg=document.getElementById(kind==='macro'?'macro-donut-legend-v7':'micro-donut-legend-v7');
+  if(leg){
+    leg.innerHTML='';
+    defs.forEach((x,i)=>{
+      const pct=Math.round(donutProgressPctV21(x)),base=palette[i%palette.length];
+      const b=document.createElement('button');b.type='button';b.className='min-h-10 p-2 text-left text-[9px]';
+      b.innerHTML=`<span class="inline-block h-2.5 w-2.5 rounded-full mr-1.5" style="background:${base}"></span><span>${tr(x.label)}</span><b class="float-right text-slate-400">${pct}%</b>`;
+      b.onclick=()=>showDonutNutrientV7(kind,x);leg.appendChild(b);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  ensureTargetStateV22();
+  setTimeout(()=>{
+    renderTargetPlanLibraryV22();
+    const d=targetAutoDataV22();setTargetAutoUIV22(d);
+  },350);
 });
 
 </script>

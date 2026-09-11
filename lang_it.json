@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -506,7 +506,19 @@
     "raggiunto": "raggiunto",
     "mancante": "mancante",
     "Raggiunto": "Raggiunto",
-    "Mancante": "Mancante"
+    "Mancante": "Mancante",
+    "Completa prima i dati necessari nella sezione Corpo": "Completa prima i dati necessari nella sezione Corpo",
+    "Seleziona livello attività e obiettivo": "Seleziona livello attività e obiettivo",
+    "Calcola o compila i target prima di salvare": "Calcola o compila i target prima di salvare",
+    "Scheda target salvata": "Scheda target salvata",
+    "Scheda target attivata": "Scheda target attivata",
+    "Scheda target disattivata": "Scheda target disattivata",
+    "Nessuna scheda target trovata": "Nessuna scheda target trovata",
+    "Schede target importate": "Schede target importate",
+    "JSON target non valido": "JSON target non valido",
+    "Stima personalizzata": "Stima personalizzata",
+    "Importante": "Importante",
+    "questo calcolatore fornisce stime orientative per persone sane. Non sostituisce un piano dietetico professionale o una valutazione medica, soprattutto in gravidanza, allattamento, patologie, terapia farmacologica o fragilità geriatrica.": "questo calcolatore fornisce stime orientative per persone sane. Non sostituisce un piano dietetico professionale o una valutazione medica, soprattutto in gravidanza, allattamento, patologie, terapia farmacologica o fragilità geriatrica."
   },
   "words": [],
   "keys": {
@@ -739,6 +751,8 @@
     "help.settings.profile_photo.body": "Per impostazione predefinita Thalys mostra la foto del tuo account Google. Se carichi una foto dentro Thalys, quella foto diventa un override dell'app e viene salvata in foto_profilo.json su Drive, così viene riutilizzata sugli altri dispositivi. Usa Google rimuove l'override.",
     "help.nutrition.barcode.body": "La fotocamera viene aperta subito dal gesto dell'utente, poi Thalys usa BarcodeDetector quando disponibile oppure ZXing come fallback. Se il permesso viene negato, la finestra resta utilizzabile e mostra il motivo senza bloccare l'app.",
     "help.navigation.swipe": "Swipe tra sezioni",
-    "help.navigation.swipe.body": "Scorri orizzontalmente sul contenuto principale: verso destra vai alla sezione successiva, verso sinistra alla precedente. Lo swipe non parte dentro modali, pulsanti, campi o aree orizzontali."
+    "help.navigation.swipe.body": "Scorri orizzontalmente sul contenuto principale: verso destra vai alla sezione successiva, verso sinistra alla precedente. Lo swipe non parte dentro modali, pulsanti, campi o aree orizzontali.",
+    "help.nutrition.target_calculator": "Calcolatore target nutrizionali",
+    "help.nutrition.target_calculator.body": "Usa sesso, età, altezza e peso registrati in Corpo; stima massa magra con Boer e massa grassa per sottrazione. Combina due stime del metabolismo basale, attività, stato fisiologico e obiettivo. I valori restano modificabili prima di salvare una scheda target. Ogni scheda può essere consultata, attivata, filtrata, importata/esportata in JSON e PDF. Il database dedicato è nutrition_targets.json."
   }
 }

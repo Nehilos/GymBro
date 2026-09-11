@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -648,7 +648,7 @@
     "Rendi attiva": "Activate",
     "Tocca per visualizzare": "Tap to view",
     "giorni riposo": "rest days",
-    "Nessuna scheda attiva": "No active plan",
+    "Nessuna scheda attiva": "No active target plan",
     "Apri Schede": "Open Plans",
     "Allenamento completato": "Workout complete",
     "esercizi completati": "exercises completed",
@@ -732,7 +732,19 @@
     "raggiunto": "reached",
     "mancante": "missing",
     "Raggiunto": "Reached",
-    "Mancante": "Missing"
+    "Mancante": "Missing",
+    "Completa prima i dati necessari nella sezione Corpo": "Complete the required Body data first",
+    "Seleziona livello attività e obiettivo": "Select activity level and goal",
+    "Calcola o compila i target prima di salvare": "Calculate or fill in the targets before saving",
+    "Scheda target salvata": "Target plan saved",
+    "Scheda target attivata": "Target plan activated",
+    "Scheda target disattivata": "Target plan deactivated",
+    "Nessuna scheda target trovata": "No target plans found",
+    "Schede target importate": "Target plans imported",
+    "JSON target non valido": "Invalid target JSON",
+    "Stima personalizzata": "Personalized estimate",
+    "Importante": "Important",
+    "questo calcolatore fornisce stime orientative per persone sane. Non sostituisce un piano dietetico professionale o una valutazione medica, soprattutto in gravidanza, allattamento, patologie, terapia farmacologica o fragilità geriatrica.": "this calculator provides approximate estimates for healthy people. It does not replace professional dietary or medical assessment, especially during pregnancy, breastfeeding, illness, medication use or geriatric frailty."
   },
   "words": [
     [
@@ -1082,6 +1094,8 @@
     "help.settings.profile_photo.body": "By default Thalys shows your Google account photo. If you upload a photo in Thalys, it becomes an app-specific override stored in foto_profilo.json on Drive and reused on your other devices. Use Google removes the override.",
     "help.nutrition.barcode.body": "The camera opens directly from the user gesture, then Thalys uses BarcodeDetector when available or ZXing as a fallback. Permission errors no longer lock the app.",
     "help.navigation.swipe": "Swipe tra sezioni",
-    "help.navigation.swipe.body": "Swipe horizontally on the main content: right goes to the next section, left to the previous one. Swipe is ignored inside dialogs, controls and horizontal scrollers."
+    "help.navigation.swipe.body": "Swipe horizontally on the main content: right goes to the next section, left to the previous one. Swipe is ignored inside dialogs, controls and horizontal scrollers.",
+    "help.nutrition.target_calculator": "Calcolatore target nutrizionali",
+    "help.nutrition.target_calculator.body": "Uses sex, age, height and weight from Body, estimates lean mass with Boer and fat mass by subtraction, then combines two BMR estimates with activity, physiological state and goal. Values remain editable before saving a target plan. Plans can be viewed, activated, filtered, imported/exported as JSON and PDF. The dedicated database is nutrition_targets.json."
   }
 }
