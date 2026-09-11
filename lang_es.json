@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "locale": "es-ES",
   "phrases": {
     "Lingua": "Idioma",
@@ -848,7 +848,7 @@
     "help.body.avatar": "Avatar corporal",
     "help.body.avatar.body": "Thalys carga male.svg o female.svg directamente desde el repositorio. Actualizar datos fuerza una recarga sin caché, guarda de nuevo el sexo elegido y redibuja Cuerpo y Home.",
     "help.body.photos": "Foto progressi",
-    "help.body.photos.body": "Corpo muestra solo el contador. Ábrelo para añadir fotos con Fecha, Vista y Parte, filtrar, marcar favoritas y compartir/guardar. El nombre usa Fecha_Vista_Parte.",
+    "help.body.photos.body": "Fotos de progreso abre una página completa. Añade Fecha, Vista y Parte; filtra, marca favoritas, abre, comparte y guarda.",
     "help.analytics.title": "Gráficos",
     "help.analytics.filter": "Filtros",
     "help.analytics.filter.body": "El filtro global cambia el mismo intervalo temporal para todos los gráficos. El selector de entrenamiento limita fuerza/volumen sin modificar el historial guardado.",
@@ -1022,6 +1022,8 @@
     "help.settings.ios_navigation.body": "Desde V15 el cambio de pestaña usa una ruta síncrona única y restaura pointer-events, touch-action y bloqueos antes de abrir la nueva sección, evitando el bloqueo de iPhone tras Consulto.",
     "help.settings.profile_photo": "Foto profilo",
     "help.settings.profile_photo.body": "Por defecto Thalys muestra la foto de tu cuenta de Google. Una foto subida en Thalys se convierte en un override de la app guardado en foto_profilo.json en Drive y se reutiliza en los demás dispositivos. Usar Google elimina el override.",
-    "help.nutrition.barcode.body": "La cámara se abre directamente desde el gesto del usuario; Thalys usa BarcodeDetector o ZXing como alternativa. Los errores de permiso ya no bloquean la app."
+    "help.nutrition.barcode.body": "La cámara se abre directamente desde el gesto del usuario; Thalys usa BarcodeDetector o ZXing como alternativa. Los errores de permiso ya no bloquean la app.",
+    "help.navigation.swipe": "Swipe tra sezioni",
+    "help.navigation.swipe.body": "Desliza horizontalmente sobre el contenido principal: a la derecha vas a la sección siguiente y a la izquierda a la anterior."
   }
 }

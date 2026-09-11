@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -846,7 +846,7 @@
     "help.body.avatar": "Avatar corporal",
     "help.body.avatar.body": "Thalys încarcă male.svg sau female.svg direct din repository. Actualizare date forțează reîncărcarea fără cache, salvează din nou sexul și redesenează Corp și Home.",
     "help.body.photos": "Foto progressi",
-    "help.body.photos.body": "Corpo afișează doar contorul foto. Deschide-l pentru a adăuga fotografii cu Dată, Vedere și Parte, a filtra, favorita și partaja/salva. Numele folosește Dată_Vedere_Parte.",
+    "help.body.photos.body": "Fotografiile de progres se deschid pe o pagină completă. Adaugă Dată, Vedere și Parte; filtrează, favoritează, deschide, partajează și salvează.",
     "help.analytics.title": "Grafice",
     "help.analytics.filter": "Filtre",
     "help.analytics.filter.body": "Filtrul global schimbă același interval pentru toate graficele. Selectorul de antrenament limitează datele de forță/volum fără a modifica istoricul salvat.",
@@ -1020,6 +1020,8 @@
     "help.settings.ios_navigation.body": "Din V15 schimbarea filelor folosește un singur flux sincron și restaurează pointer-events, touch-action și blocările înainte de noua secțiune, evitând blocarea pe iPhone după Consulto.",
     "help.settings.profile_photo": "Foto profilo",
     "help.settings.profile_photo.body": "Implicit, Thalys afișează fotografia contului Google. O fotografie încărcată în Thalys devine un override al aplicației, salvat în foto_profilo.json pe Drive și reutilizat pe celelalte dispozitive. Folosește Google elimină override-ul.",
-    "help.nutrition.barcode.body": "Camera se deschide direct din gestul utilizatorului; Thalys folosește BarcodeDetector sau ZXing ca rezervă. Erorile de permisiune nu mai blochează aplicația."
+    "help.nutrition.barcode.body": "Camera se deschide direct din gestul utilizatorului; Thalys folosește BarcodeDetector sau ZXing ca rezervă. Erorile de permisiune nu mai blochează aplicația.",
+    "help.navigation.swipe": "Swipe tra sezioni",
+    "help.navigation.swipe.body": "Glisează orizontal pe conținutul principal: spre dreapta mergi la secțiunea următoare, spre stânga la cea anterioară."
   }
 }

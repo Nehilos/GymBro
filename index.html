@@ -2958,6 +2958,132 @@
       border-color:#c5d8d8 !important;
     }
 
+    /* ===== Thalys V20 ===== */
+
+    /* Welcome Light: Loto more saturated / alive. */
+    body[data-thalys-theme="light"] .thalys-lotus-image{
+      opacity:1 !important;
+      filter:saturate(1.42) contrast(1.08) brightness(.96) drop-shadow(0 4px 10px rgba(13,115,119,.24)) !important;
+    }
+
+    /* Consult Light: saved-snapshot filters use light surfaces. */
+    body[data-thalys-theme="light"] #consult-filter-type-buttons .consult-filter-chip{
+      background:#e5eeee !important;
+      border-color:#c6d7d8 !important;
+      color:#3a5d61 !important;
+    }
+    body[data-thalys-theme="light"] #consult-filter-type-buttons .consult-filter-chip.active{
+      background:#c7dddd !important;
+      border-color:#0d7377 !important;
+      color:#085c60 !important;
+    }
+    body[data-thalys-theme="light"] #consult-filter-month{
+      background:#edf4f4 !important;
+      border-color:#bfd1d3 !important;
+      color:#24484c !important;
+    }
+    body[data-thalys-theme="light"] #consult-snapshot-select-btn,
+    body[data-thalys-theme="light"] #tab-consult button[onclick="clearConsultFilters()"]{
+      background:#dde9e9 !important;
+      border:1px solid #bfd1d3 !important;
+      color:#36585d !important;
+    }
+
+    /* Food preset editor: clearly defined fields in Light mode. */
+    body[data-thalys-theme="light"] #food-preset-form{
+      background:#e5eeee !important;
+      border-color:#bfd1d3 !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form input,
+    body[data-thalys-theme="light"] #food-preset-form select,
+    body[data-thalys-theme="light"] #food-preset-form textarea{
+      background:#f7fbfb !important;
+      border:1px solid #aabfc2 !important;
+      color:#203f43 !important;
+      box-shadow:inset 0 1px 2px rgba(15,23,42,.04) !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form input:focus,
+    body[data-thalys-theme="light"] #food-preset-form select:focus,
+    body[data-thalys-theme="light"] #food-preset-form textarea:focus{
+      border-color:#0d7377 !important;
+      box-shadow:0 0 0 2px rgba(13,115,119,.10) !important;
+      outline:none !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form label{
+      color:#46666a !important;
+    }
+
+    /* Meal Database: real full-screen sheet. */
+    #meal-history-modal,
+    #meal-history-detail-modal{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #meal-history-modal > div,
+    #meal-history-detail-modal > div{
+      width:100% !important;
+      max-width:680px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      border-top:0 !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    #meal-history-detail-modal.thalys-modal-open{
+      z-index:2700 !important;
+    }
+    #meal-history-modal.thalys-modal-open{
+      z-index:2500 !important;
+    }
+    @media(min-width:768px){
+      #meal-history-modal,
+      #meal-history-detail-modal{padding:1rem !important;align-items:center !important}
+      #meal-history-modal > div,
+      #meal-history-detail-modal > div{
+        height:min(92dvh,820px) !important;
+        max-height:min(92dvh,820px) !important;
+        border-radius:1.5rem !important;
+        border:1px solid rgba(71,85,105,.35) !important;
+        padding-top:1rem !important;
+        padding-bottom:1rem !important;
+      }
+    }
+
+    /* Photo manager / add / viewer: full-height and deterministic stacking. */
+    #photo-manager-modal,
+    #add-photo-modal-v19,
+    #photo-viewer-modal-v19{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #photo-manager-modal > div,
+    #add-photo-modal-v19 > div,
+    #photo-viewer-modal-v19 > div{
+      width:100% !important;
+      max-width:680px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    #photo-manager-modal.thalys-modal-open{z-index:2500 !important}
+    #add-photo-modal-v19.thalys-modal-open{z-index:2700 !important;display:flex !important;visibility:visible !important;pointer-events:auto !important}
+    #photo-viewer-modal-v19.thalys-modal-open{z-index:2800 !important;display:flex !important;visibility:visible !important;pointer-events:auto !important}
+    @media(min-width:768px){
+      #photo-manager-modal,#add-photo-modal-v19,#photo-viewer-modal-v19{padding:1rem !important;align-items:center !important}
+      #photo-manager-modal > div,#add-photo-modal-v19 > div,#photo-viewer-modal-v19 > div{
+        height:min(92dvh,820px) !important;max-height:min(92dvh,820px) !important;border-radius:1.5rem !important;
+      }
+    }
+
+    /* Ensure the final consult viewer close never leaves scroll locked. */
+    #consult-snapshot-modal.hidden{
+      display:none !important;
+      pointer-events:none !important;
+    }
+
   </style>
 
   <meta name="theme-color" content="#090d16">
@@ -2979,7 +3105,7 @@
   <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center px-4 welcome-fade" style="height: var(--app-vh, 1vh) * 100; min-height: var(--app-vh, 1vh) * 100;">
     <div class="thalys-welcome-card text-center">
       <div class="thalys-logo-mark" aria-label="Logo Thalys">
-        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=19" alt="Logo Thalys">
+        <img id="welcome-thalys-logo" class="thalys-theme-logo h-full w-full object-contain" src="./Thalys Logo Dark.png?v=20" alt="Logo Thalys">
       </div>
 
       <h1 class="thalys-brand-name mt-4 text-[2.7rem] font-light text-slate-50">THALYS</h1>
@@ -3006,7 +3132,7 @@
               <path class="thalys-breath-arc-out" d="M 186 174 A 98 98 0 0 1 34 174"/>
             </svg>
             <div class="thalys-breathe-core">
-              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=19" alt="" aria-hidden="true">
+              <img class="thalys-lotus thalys-lotus-image" src="./Loto.png?v=20" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="thalys-orbit-dot"></div>
@@ -3035,7 +3161,7 @@
   <header class="app-header relative bg-darkcard/90 backdrop-blur-md border-b border-darkborder px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
       <div class="thalys-header-logo flex items-center justify-center overflow-hidden" aria-hidden="true">
-        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=19" alt="">
+        <img id="header-thalys-logo" class="thalys-theme-logo h-full w-full object-cover" src="./Thalys Logo Dark.png?v=20" alt="">
       </div>
       <div class="min-w-0">
         <h1 class="thalys-header-title text-[17px] sm:text-xl font-bold leading-none bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Thalys</h1>
@@ -4015,7 +4141,7 @@
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="neck" onchange="updateBodyMeasurementsChart()">Collo</label>
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="shoulders" onchange="updateBodyMeasurementsChart()">Spalle</label>
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="chest" onchange="updateBodyMeasurementsChart()">Petto</label>
-          <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="waist" checked onchange="updateBodyMeasurementsChart()">Vita</label>
+          <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="waist" onchange="updateBodyMeasurementsChart()">Vita</label>
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="hips" onchange="updateBodyMeasurementsChart()">Fianchi</label>
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="biceps" checked onchange="updateBodyMeasurementsChart()">Bicipite</label>
           <label class="rounded-xl border border-slate-700 bg-slate-900 p-2"><input class="body-chart-metric mr-1" type="checkbox" value="forearm" onchange="updateBodyMeasurementsChart()">Avambr.</label>
@@ -4564,7 +4690,7 @@
     <div class="w-full max-w-md h-[72dvh] sm:h-[560px] bg-darkcard rounded-t-3xl sm:rounded-3xl border-t sm:border border-emerald-500/20 p-4 flex flex-col overflow-hidden">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div><div class="text-[9px] uppercase tracking-[.16em] text-emerald-300">Dettaglio giornata</div><h3 id="meal-history-detail-title" class="text-base font-black text-white">—</h3><div id="meal-history-detail-date" class="mt-1 text-[9px] text-slate-500">—</div></div>
-        <button type="button" onclick="closeModal('meal-history-detail-modal')" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeMealHistoryAllV20()" class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="meal-history-detail-list" class="mt-3 flex-1 overflow-y-auto space-y-3"></div>
     </div>
@@ -5129,7 +5255,7 @@
       <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Corpo</div><h3 class="text-base font-black text-white">Foto progressi</h3><p id="photo-manager-count-v19" class="mt-1 text-[9px] text-slate-500">0 foto</p></div>
         <div class="flex gap-2">
-          <button type="button" onclick="openAddPhotoModalV19()" class="min-h-10 rounded-xl bg-teal-600 px-3 text-[10px] font-black text-white"><i class="fa-solid fa-plus mr-1"></i>Aggiungi foto</button>
+          <button type="button" onclick="openAddPhotoModalV20()" class="min-h-10 rounded-xl bg-teal-600 px-3 text-[10px] font-black text-white"><i class="fa-solid fa-plus mr-1"></i>Aggiungi foto</button>
           <button type="button" onclick="closeModal('photo-manager-modal')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
@@ -5168,7 +5294,7 @@
     <div class="w-full max-w-md rounded-t-3xl sm:rounded-3xl border-t sm:border border-teal-500/20 bg-darkcard p-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div><div class="text-[9px] uppercase tracking-[.16em] text-teal-300">Nuova foto</div><h3 class="text-base font-black text-white">Aggiungi foto progresso</h3></div>
-        <button type="button" onclick="closeModal('add-photo-modal-v19')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closeAddPhotoModalV20()" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="mt-4 grid grid-cols-2 gap-3">
         <label class="col-span-2 text-[10px] text-slate-400">Data
@@ -5198,7 +5324,7 @@
     <div class="w-full max-w-lg max-h-[92dvh] rounded-3xl border border-slate-700 bg-darkcard p-4 shadow-2xl flex flex-col overflow-hidden">
       <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div><h3 id="photo-viewer-title-v19" class="text-sm font-black text-white">Foto progresso</h3><div id="photo-viewer-meta-v19" class="mt-1 text-[9px] text-slate-500"></div></div>
-        <button type="button" onclick="closeModal('photo-viewer-modal-v19')" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" onclick="closePhotoViewerV20()" class="h-10 w-10 rounded-xl bg-slate-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="mt-3 min-h-0 flex-1 overflow-auto rounded-2xl bg-slate-950/60 flex items-center justify-center">
         <img id="photo-viewer-img-v19" alt="Foto progresso" class="max-h-[68dvh] w-full object-contain">
@@ -6098,7 +6224,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:19,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:20,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -6120,7 +6246,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=19`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=20`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -6131,7 +6257,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v19`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v20`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -6140,7 +6266,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v19`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v20`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -6151,7 +6277,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v19`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v20`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -10052,7 +10178,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=19`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=20`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -10501,7 +10627,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    THALYS V10 — iOS/WebKit robustness + full PDF export
    ========================================================== */
-const THALYS_APP_VERSION_V10='19.0.0';
+const THALYS_APP_VERSION_V10='20.0.0';
 const THALYS_VERSION_KEY_V10='thalys_app_version';
 const THALYS_RELOAD_KEY_V10='thalys_version_reload_guard';
 
@@ -10940,8 +11066,8 @@ document.addEventListener('DOMContentLoaded',()=>setTimeout(renderProfilePhotoUI
    ========================================================== */
 const THALYS_THEME_KEY_V13='thalys_theme';
 const THALYS_THEME_FILES_V13={
-  dark:'./Thalys Logo Dark.png?v=19',
-  light:'./Thalys Logo Light.png?v=19'
+  dark:'./Thalys Logo Dark.png?v=20',
+  light:'./Thalys Logo Light.png?v=20'
 };
 function normalizeThalysThemeV13(v){return v==='light'?'light':'dark';}
 function savedThalysThemeV13(){
@@ -11934,6 +12060,243 @@ renderAllViews=function(){
 document.addEventListener('DOMContentLoaded',()=>{
   normalizeAllPhotosV19();updatePhotoCounterV19();installTabSwipeV19();
 });
+
+
+/* ==========================================================
+   THALYS V20 — modal flow, swipe, photo manager, scroll recovery
+   ========================================================== */
+function unlockAppScrollV20(){
+  const main=document.querySelector('#app-shell > main');
+  const nav=document.querySelector('#app-shell > nav');
+  document.documentElement.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.body.classList.remove('thalys-modal-active','modal-open','modal-open-v9');
+  document.documentElement.style.overflow='';
+  document.body.style.overflow='';
+  document.body.style.position='';
+  document.body.style.top='';
+  document.body.style.inset='';
+  document.body.style.width='';
+  if(main){
+    main.classList.remove('thalys-background-locked');
+    main.removeAttribute('inert');
+    main.style.overflowY='';
+    main.style.pointerEvents='auto';
+    main.style.touchAction='pan-y';
+  }
+  if(nav){
+    nav.removeAttribute('inert');
+    nav.style.pointerEvents='auto';
+    nav.style.touchAction='manipulation';
+  }
+}
+function forceHideModalV20(id){
+  const m=document.getElementById(id);if(!m)return;
+  m.classList.add('hidden');
+  m.classList.remove('thalys-modal-open');
+  delete m.dataset.thalysModalOpen;
+  m.style.pointerEvents='none';
+  m.style.visibility='';
+  m.setAttribute('aria-hidden','true');
+  try{m.setAttribute('inert','')}catch(_){}
+}
+function forceShowModalV20(id){
+  const m=document.getElementById(id);if(!m)return;
+  m.classList.remove('hidden');
+  m.classList.add('thalys-modal-open');
+  m.dataset.thalysModalOpen='1';
+  m.style.pointerEvents='auto';
+  m.style.visibility='visible';
+  m.removeAttribute('inert');
+  m.setAttribute('aria-hidden','false');
+  lockBackgroundV14?.();
+}
+
+/* Meal database: child detail is truly above the dates page; X closes the whole database. */
+function openMealHistory(){
+  const a=document.getElementById('meal-history-from'),b=document.getElementById('meal-history-to');
+  if(a&&!a.value)a.value='';if(b&&!b.value)b.value='';
+  renderMealHistory();
+  forceShowModalV20('meal-history-modal');
+}
+function openMealHistoryDetailV17(date){
+  const rows=(appState.nutrition||[]).filter(x=>x.date===date);
+  const title=document.getElementById('meal-history-detail-title');
+  const dateEl=document.getElementById('meal-history-detail-date');
+  const list=document.getElementById('meal-history-detail-list');
+  if(title)title.textContent=weekdayLabel(date);
+  if(dateEl)dateEl.textContent=date;
+  if(list)list.innerHTML=['Colazione','Pranzo','Cena','Spuntino'].map(meal=>{
+    const xs=rows.filter(x=>x.meal===meal);
+    const kcal=Math.round(xs.reduce((s,x)=>s+Number(x.kcal||0),0));
+    return `<div class="rounded-2xl border border-slate-800 bg-slate-900/55 p-3">
+      <div class="flex items-center justify-between"><b class="text-[10px] text-emerald-300">${tr(meal)}</b><span class="text-[9px] text-slate-500">${kcal} kcal</span></div>
+      ${xs.length?xs.map(x=>`<div class="mt-2 flex items-center justify-between gap-3 text-[10px]"><span class="min-w-0 truncate">${escapeHTML(x.name)} · ${Number(x.grams||0)}g</span><span class="shrink-0 text-slate-500">${Math.round(x.kcal||0)} kcal</span></div>`).join(''):`<div class="mt-2 text-[9px] text-slate-600">${tr('Nessun alimento')}</div>`}
+    </div>`;
+  }).join('');
+  forceShowModalV20('meal-history-detail-modal');
+}
+function closeMealHistoryAllV20(){
+  forceHideModalV20('meal-history-detail-modal');
+  forceHideModalV20('meal-history-modal');
+  unlockAppScrollV20();
+}
+
+/* Photo manager: never leave one hidden sheet underneath another. */
+function openPhotoManagerV19(){
+  forceHideModalV20('add-photo-modal-v19');
+  forceHideModalV20('photo-viewer-modal-v19');
+  updatePhotoCounterV19();updatePhotoFilterUIV19();renderPhotos();
+  forceShowModalV20('photo-manager-modal');
+}
+function openAddPhotoModalV20(){
+  forceHideModalV20('photo-manager-modal');
+  const d=document.getElementById('photo-add-date-v19');if(d)d.value=currentLocalDateStr();
+  forceShowModalV20('add-photo-modal-v19');
+}
+function closeAddPhotoModalV20(){
+  forceHideModalV20('add-photo-modal-v19');
+  unlockAppScrollV20();
+  openPhotoManagerV19();
+}
+function openPhotoViewerV19(id){
+  const p=photoByIdV19(id);if(!p)return;
+  forceHideModalV20('photo-manager-modal');
+  const img=document.getElementById('photo-viewer-img-v19');if(img)img.src=p.base64||'';
+  const title=document.getElementById('photo-viewer-title-v19');if(title)title.textContent=p.filename||tr('Foto progresso');
+  const meta=document.getElementById('photo-viewer-meta-v19');if(meta)meta.textContent=`${p.date} · ${p.view} · ${p.part}`;
+  const fav=document.getElementById('photo-viewer-fav-v19');
+  if(fav){fav.innerHTML=p.favorite?'<i class="fa-solid fa-star mr-1"></i>Preferito':'<i class="fa-regular fa-star mr-1"></i>Preferito';fav.onclick=()=>togglePhotoFavoriteV19(id)}
+  const share=document.getElementById('photo-viewer-share-v19');if(share)share.onclick=()=>sharePhotoV19(id);
+  const save=document.getElementById('photo-viewer-save-v19');if(save)save.onclick=()=>savePhotoToDeviceV19(id);
+  forceShowModalV20('photo-viewer-modal-v19');
+}
+function closePhotoViewerV20(){
+  forceHideModalV20('photo-viewer-modal-v19');
+  unlockAppScrollV20();
+  openPhotoManagerV19();
+}
+
+/* After a successful photo save, return to the gallery. */
+const _handlePhotoUploadV20Base=handlePhotoUploadV19;
+handlePhotoUploadV19=async function(event){
+  await _handlePhotoUploadV20Base(event);
+  forceHideModalV20('add-photo-modal-v19');
+  unlockAppScrollV20();
+  setTimeout(()=>openPhotoManagerV19(),30);
+};
+handlePhotoUpload=handlePhotoUploadV19;
+
+/* Preserve V19 metadata in the dedicated Drive photo index. */
+const _databasePayloadsV20Base=databasePayloads;
+databasePayloads=function(){
+  const out=_databasePayloadsV20Base();
+  out['foto_index.json']=Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{
+    id:p.driveFileId,
+    name:p.driveName||p.filename||'',
+    filename:p.filename||p.driveName||'',
+    date:p.date,
+    view:p.view||'Fronte',
+    part:p.part||'Full',
+    favorite:!!p.favorite,
+    updatedAt:p.updatedAt||null
+  }]));
+  return out;
+};
+
+/* Rebuild photos from Drive while applying metadata from foto_index.json when present. */
+loadPhotosFromDriveFolder=async function(){
+  if(!getAccessToken()||!driveFolders?.appFolderId)return 0;
+  const folder=await findDriveFolder('foto',driveFolders.appFolderId);if(!folder)return 0;driveFolders.photoFolderId=folder.id;
+  const q=`'${folder.id}' in parents and trashed=false and mimeType contains 'image/'`;
+  const resp=await gapi.client.drive.files.list({q,fields:'files(id,name,mimeType,createdTime,modifiedTime)',orderBy:'createdTime desc',pageSize:100});
+  const files=resp.result.files||[];
+  const idx=JSON.parse(localStorage.getItem('photo_index')||'{}');
+  const byDrive=new Map((appState.photos||[]).filter(x=>x.driveFileId).map(x=>[x.driveFileId,x]));
+  let added=0;
+  for(const f of files){
+    const meta=idx[f.id]||{};
+    if(byDrive.has(f.id)){
+      Object.assign(byDrive.get(f.id),normalizePhotoV19({...meta,driveFileId:f.id,driveName:f.name}));
+      continue;
+    }
+    try{
+      const rr=await fetch(`https://www.googleapis.com/drive/v3/files/${f.id}?alt=media`,{headers:{Authorization:`Bearer ${getAccessToken()}`}});
+      if(!rr.ok)continue;
+      const blob=await rr.blob(),base64=await blobToDataURL(blob);
+      const parsed=String(f.name||'').replace(/\.[^.]+$/,'').split('_');
+      const fallback={date:parsed[0]||String(f.createdTime||f.modifiedTime||'').slice(0,10),view:parsed[1]||'Fronte',part:parsed.slice(2).join('_')||'Full'};
+      appState.photos=Array.isArray(appState.photos)?appState.photos:[];
+      appState.photos.push(normalizePhotoV19({id:'drive_'+f.id,driveFileId:f.id,driveName:f.name,filename:f.name,base64,updatedAt:f.modifiedTime||f.createdTime,...fallback,...meta}));
+      added++;
+    }catch(e){console.warn('photo restore V20',f.name,e)}
+  }
+  updatePhotoCounterV19?.();
+  return added;
+};
+
+/* Consult saved response close: immediately restore scroll on the same tab. */
+function closeConsultViewerV20(ev){
+  ev?.preventDefault?.();ev?.stopPropagation?.();
+  forceHideModalV20('consult-snapshot-modal');
+  unlockAppScrollV20();
+  requestAnimationFrame(unlockAppScrollV20);
+  setTimeout(unlockAppScrollV20,40);
+}
+closeConsultViewerV9=closeConsultViewerV20;
+const _closeModalV20Base=closeModal;
+closeModal=function(id){
+  if(id==='consult-snapshot-modal'){closeConsultViewerV20();return}
+  const out=_closeModalV20Base(id);
+  requestAnimationFrame(()=>{
+    const any=[...document.querySelectorAll('[id$="-modal"].thalys-modal-open')].some(m=>!m.classList.contains('hidden'));
+    if(!any)unlockAppScrollV20();
+  });
+  return out;
+};
+
+/* Swipe fix: V19 excluded every target inside main because main itself is overflow-y-auto.
+   Only truly interactive/horizontal regions are excluded now. */
+swipeExcludedV19=function(target){
+  return !!target?.closest?.('[id$="-modal"],input,textarea,select,button,a,canvas,[contenteditable="true"],.overflow-x-auto');
+};
+
+/* Additional iOS-safe swipe recognizer. The old V19 handler now also works because
+   swipeExcludedV19 was fixed; this layer guards against WebKit dropping touchend. */
+let swipe20={active:false,x:0,y:0,lastX:0,lastY:0,t:0};
+function installSwipeV20(){
+  const main=document.querySelector('#app-shell > main');if(!main||main.dataset.swipeV20)return;main.dataset.swipeV20='1';
+  main.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1||swipeExcludedV19(e.target)){swipe20.active=false;return}
+    const p=e.touches[0];swipe20={active:true,x:p.clientX,y:p.clientY,lastX:p.clientX,lastY:p.clientY,t:Date.now()};
+  },{passive:true});
+  main.addEventListener('touchmove',e=>{
+    if(!swipe20.active||e.touches.length!==1)return;const p=e.touches[0];swipe20.lastX=p.clientX;swipe20.lastY=p.clientY;
+  },{passive:true});
+  main.addEventListener('touchend',e=>{
+    if(!swipe20.active)return;
+    const dx=swipe20.lastX-swipe20.x,dy=swipe20.lastY-swipe20.y,dt=Date.now()-swipe20.t;swipe20.active=false;
+    if(dt>1000||Math.abs(dx)<55||Math.abs(dx)<Math.abs(dy)*1.15)return;
+    const current=currentMainTabV19(),i=THALYS_SWIPE_TABS_V19.indexOf(current),next=dx>0?i+1:i-1;
+    if(next>=0&&next<THALYS_SWIPE_TABS_V19.length)switchTab(THALYS_SWIPE_TABS_V19[next]);
+  },{passive:true});
+}
+
+/* Bicipite only as the default body-measure chart selection. */
+function enforceBodyChartDefaultV20(){
+  const boxes=[...document.querySelectorAll('.body-chart-metric')];
+  if(!boxes.length)return;
+  boxes.forEach(b=>b.checked=b.value==='biceps');
+  updateBodyMeasurementsChart?.();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  installSwipeV20();
+  setTimeout(()=>{
+    enforceBodyChartDefaultV20();
+    unlockAppScrollV20();
+  },260);
+});
+window.addEventListener('pageshow',()=>setTimeout(unlockAppScrollV20,40),{passive:true});
 
 </script>
 <style>

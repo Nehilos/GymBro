@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -902,7 +902,7 @@
     "help.body.avatar": "Body avatar",
     "help.body.avatar.body": "Thalys loads male.svg or female.svg directly from the repository. Update data performs a forced cache-busted refresh, saves the selected gender again and redraws Body and Home.",
     "help.body.photos": "Foto progressi",
-    "help.body.photos.body": "Body shows only the photo counter. Open it to add photos with Date, View and Body Part, filter or favorite them, view them full screen and Share/Save them. Filenames use Date_View_Part.",
+    "help.body.photos.body": "Progress Photos opens a full page. Add photos with Date, View and Part; filter, favorite, open, share and save them. Metadata is also kept in the Drive photo index.",
     "help.analytics.title": "Charts",
     "help.analytics.filter": "Filters",
     "help.analytics.filter.body": "The global filter changes the same time range for all charts. The workout selector limits strength/volume data without changing saved history.",
@@ -1076,6 +1076,8 @@
     "help.settings.ios_navigation.body": "From V15 tab switching uses one synchronous path and always restores pointer-events, touch-action and background locks before opening the next section, preventing the iPhone lock after Consult.",
     "help.settings.profile_photo": "Foto profilo",
     "help.settings.profile_photo.body": "By default Thalys shows your Google account photo. If you upload a photo in Thalys, it becomes an app-specific override stored in foto_profilo.json on Drive and reused on your other devices. Use Google removes the override.",
-    "help.nutrition.barcode.body": "The camera opens directly from the user gesture, then Thalys uses BarcodeDetector when available or ZXing as a fallback. Permission errors no longer lock the app."
+    "help.nutrition.barcode.body": "The camera opens directly from the user gesture, then Thalys uses BarcodeDetector when available or ZXing as a fallback. Permission errors no longer lock the app.",
+    "help.navigation.swipe": "Swipe tra sezioni",
+    "help.navigation.swipe.body": "Swipe horizontally on the main content: right goes to the next section, left to the previous one. Swipe is ignored inside dialogs, controls and horizontal scrollers."
   }
 }

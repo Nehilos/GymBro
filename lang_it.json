@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -559,7 +559,7 @@
     "help.body.avatar": "Avatar corporeo",
     "help.body.avatar.body": "Thalys carica male.svg o female.svg direttamente dal repository. Aggiorna dati esegue un refresh forzato con cache-busting, risalva il sesso selezionato e ridisegna Corpo e Home; è utile se il browser non aggiorna subito l’SVG.",
     "help.body.photos": "Foto progressi",
-    "help.body.photos.body": "La pagina Corpo mostra solo il contatore foto. Aprendolo puoi aggiungere foto con Data, Vista e Parte, filtrarle, segnarle come preferite, aprirle a tutto schermo e usare Condividi/Salva. Il nome usa Data_Vista_Parte.",
+    "help.body.photos.body": "Foto progressi apre una pagina completa. Aggiungi foto con Data, Vista e Parte; puoi filtrare, preferire, aprire, condividere e salvare. I metadati vengono conservati anche nell'indice foto di Drive.",
     "help.analytics.title": "Grafici",
     "help.analytics.filter": "Filtri",
     "help.analytics.filter.body": "Il filtro globale modifica lo stesso intervallo temporale per tutti i grafici. Il selettore allenamento limita i dati di forza/volume senza modificare lo storico salvato.",
@@ -733,6 +733,8 @@
     "help.settings.ios_navigation.body": "Da V15 il cambio scheda usa un unico percorso sincrono e ripristina sempre pointer-events, touch-action e lock dello sfondo prima di aprire la nuova sezione. Questo evita il blocco che su iPhone poteva comparire dopo l'ingresso in Consulto.",
     "help.settings.profile_photo": "Foto profilo",
     "help.settings.profile_photo.body": "Per impostazione predefinita Thalys mostra la foto del tuo account Google. Se carichi una foto dentro Thalys, quella foto diventa un override dell'app e viene salvata in foto_profilo.json su Drive, così viene riutilizzata sugli altri dispositivi. Usa Google rimuove l'override.",
-    "help.nutrition.barcode.body": "La fotocamera viene aperta subito dal gesto dell'utente, poi Thalys usa BarcodeDetector quando disponibile oppure ZXing come fallback. Se il permesso viene negato, la finestra resta utilizzabile e mostra il motivo senza bloccare l'app."
+    "help.nutrition.barcode.body": "La fotocamera viene aperta subito dal gesto dell'utente, poi Thalys usa BarcodeDetector quando disponibile oppure ZXing come fallback. Se il permesso viene negato, la finestra resta utilizzabile e mostra il motivo senza bloccare l'app.",
+    "help.navigation.swipe": "Swipe tra sezioni",
+    "help.navigation.swipe.body": "Scorri orizzontalmente sul contenuto principale: verso destra vai alla sezione successiva, verso sinistra alla precedente. Lo swipe non parte dentro modali, pulsanti, campi o aree orizzontali."
   }
 }
