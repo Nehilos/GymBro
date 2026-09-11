@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 11,
   "locale": "ro-RO",
   "phrases": {
     "Lingua": "Limbă",
@@ -578,7 +578,7 @@
     "Richiesta specifica": "Cerere specifică",
     "Scheda generata": "Plan de antrenament generat",
     "Risposta IA esportata in formato testo": "Răspuns IA exportat ca text",
-    "Risposta IA esportata in PDF": "Răspuns IA exportat în PDF",
+    "Risposta IA esportata in PDF": "Răspuns AI exportat în PDF",
     "Dati esportati dal consulto IA salvato": "Date exportate din consultul IA salvat",
     "Esporta PDF": "Exportă PDF",
     "Esporta TXT": "Exportă TXT",
@@ -990,6 +990,10 @@
     "help.analytics.strength": "Forță contextualizată",
     "help.analytics.strength.body": "Graficul afișează doar progresia greutății ridicate pentru un exercițiu. Numele sunt comparate fără diferențiere între litere mari și mici.",
     "help.settings.drive_creation": "Crearea în Drive",
-    "help.settings.drive_creation.body": "La primul acces Thalys întreabă o singură dată pentru a crea structura și toate bazele. Apoi verifică automat fișierele lipsă, le recreează și afișează o singură notificare."
+    "help.settings.drive_creation.body": "La primul acces Thalys întreabă o singură dată pentru a crea structura și toate bazele. Apoi verifică automat fișierele lipsă, le recreează și afișează o singură notificare.",
+    "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
+    "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
+    "help.settings.pdf_export": "Esportazione PDF",
+    "help.settings.pdf_export.body": "Din V11, PDF-urile sunt generate ca documente A4 native, nu capturi de ecran, evitând tăierea orizontală pe iOS/WebKit."
   }
 }

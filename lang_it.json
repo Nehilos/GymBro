@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 11,
   "locale": "it-IT",
   "phrases": {
     "Oggi riposo": "Oggi riposo",
@@ -695,6 +695,10 @@
     "help.analytics.strength": "Forza contestualizzata",
     "help.analytics.strength.body": "Il grafico mostra solo la progressione del peso sollevato per uno specifico esercizio. I nomi vengono confrontati senza distinguere maiuscole/minuscole: “leg press” e “Leg press” sono lo stesso esercizio.",
     "help.settings.drive_creation": "Creazione Drive",
-    "help.settings.drive_creation.body": "Al primo accesso Thalys chiede una sola autorizzazione per creare struttura e database. In seguito controlla automaticamente i file mancanti, li ricrea e mostra un solo avviso."
+    "help.settings.drive_creation.body": "Al primo accesso Thalys chiede una sola autorizzazione per creare struttura e database. In seguito controlla automaticamente i file mancanti, li ricrea e mostra un solo avviso.",
+    "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
+    "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
+    "help.settings.pdf_export": "Esportazione PDF",
+    "help.settings.pdf_export.body": "Da V11 i PDF di Consulto non sono più screenshot della pagina: vengono generati come documento A4 nativo, con testo impaginato e pagine automatiche. Questo evita il taglio orizzontale di iOS/WebKit."
   }
 }

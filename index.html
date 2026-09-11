@@ -1890,6 +1890,8 @@
 
   <meta name="theme-color" content="#090d16">
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="text-slate-100 flex flex-col min-h-screen select-none bg-slate-950 overflow-x-hidden">
 
@@ -4926,7 +4928,7 @@
     const APP_LOCALES={it:'it-IT',en:'en-US',es:'es-ES',pt:'pt-BR',ro:'ro-RO'};
     const LANG_FILES={it:'lang_it.json',en:'lang_en.json',es:'lang_es.json',pt:'lang_pt.json',ro:'lang_ro.json'};
     let appLanguage=localStorage.getItem('thalys_language')||'it';
-    let languagePack={version:10,locale:'it-IT',phrases:{},words:[],keys:{}};
+    let languagePack={version:11,locale:'it-IT',phrases:{},words:[],keys:{}};
     const languageCache={};
     const thalysOriginalText=new WeakMap(),thalysOriginalAttrs=new WeakMap();
     let languageMutationLock=false;
@@ -4948,7 +4950,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=10`,{cache:'no-store'});
+      const r=await fetch(`./${LANG_FILES[lang]}?v=11`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
@@ -4959,7 +4961,7 @@
     async function loadLanguagePack(lang){
       lang=APP_LOCALES[lang]?lang:'it';
       if(languageCache[lang])return languageCache[lang];
-      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v10`);
+      const cached=localStorage.getItem(`thalys_lang_pack_${lang}_v11`);
       let pack=null;
       if(getAccessToken()&&driveFolders?.databaseFolderId)pack=await fetchDriveLanguagePack(lang);
       if(!pack){try{pack=await fetchLocalLanguagePack(lang);}catch(e){console.warn('Local language pack',lang,e)}}
@@ -4968,7 +4970,7 @@
       pack.locale=pack.locale||APP_LOCALES[lang];
       pack.phrases=pack.phrases||{};pack.words=pack.words||[];pack.keys=pack.keys||{};
       languageCache[lang]=pack;
-      try{localStorage.setItem(`thalys_lang_pack_${lang}_v10`,JSON.stringify(pack))}catch(_){}
+      try{localStorage.setItem(`thalys_lang_pack_${lang}_v11`,JSON.stringify(pack))}catch(_){}
       return pack;
     }
 
@@ -4979,7 +4981,7 @@
         if(remote&&typeof remote==='object'){
           remote.locale=remote.locale||APP_LOCALES[appLanguage];remote.phrases=remote.phrases||{};remote.words=remote.words||[];remote.keys=remote.keys||{};
           languageCache[appLanguage]=remote;languagePack=remote;
-          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v10`,JSON.stringify(remote))}catch(_){}
+          try{localStorage.setItem(`thalys_lang_pack_${appLanguage}_v11`,JSON.stringify(remote))}catch(_){}
           renderAllViews();renderHelpTree(activeHelpKey);translateElementTree(document.body);
         }
       }catch(e){console.warn('Refresh language pack from Drive',e)}
@@ -8880,7 +8882,7 @@ const _updateAnalyticsChartsV6=updateAnalyticsCharts;updateAnalyticsCharts=funct
 /* Drive database payload and single first-run consent */
 function databasePayloads(){const {consultations:_c,aiConsults:_a,workoutHistory:_wh,activeWorkoutPlanHistory:_ph,...core}=appState||{};return {'thalys_manifest.json':{app:'Thalys',schemaVersion:8,updatedAt:new Date().toISOString(),databaseVersion:6},'app_state.json':{...core,photos:[],profilePhoto:null},'workouts.json':appState.workouts||[],'workout_history.json':appState.workoutHistory||[],'meal_history.json':appState.nutrition||[],'active_plan_history.json':appState.activeWorkoutPlanHistory||[],'workout_plans.json':{plans:(appState.workoutPlans||[]).map(normalizeWorkoutPlanV7),activePlanId:appState.activeWorkoutPlanId||null,assignments:appState.workoutAssignments||{},completions:appState.workoutCompletions||{},activeHistory:appState.activeWorkoutPlanHistory||[]},'nutrition.json':appState.nutrition||[],'alim_database.json':appState.presets||[],'body_metrics.json':appState.bodyMetrics||[],'wellness_data.json':appState.wellness||[],'water.json':appState.water||{},'foto_index.json':Object.fromEntries((appState.photos||[]).filter(p=>p.driveFileId).map(p=>[p.driveFileId,{id:p.driveFileId,name:p.driveName||'',date:p.date,updatedAt:p.updatedAt||null}])),'foto_profilo.json':appState.profilePhoto||null,'messages.json':appState.messages||[],'meditation.json':appState.meditation||[],'consultations.json':appState.consultations||[],'ai_consults.json':appState.aiConsults||[]};}
 const THALYS_REQUIRED_DB_V7=['thalys_manifest.json','app_state.json','workouts.json','workout_history.json','meal_history.json','active_plan_history.json','workout_plans.json','nutrition.json','alim_database.json','body_metrics.json','wellness_data.json','water.json','foto_index.json','foto_profilo.json','messages.json','meditation.json','consultations.json','ai_consults.json','lang_it.json','lang_en.json','lang_es.json','lang_pt.json','lang_ro.json'];
-async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=10`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
+async function ensureAllDriveDatabasesV7(initial=false){if(!driveFolders?.databaseFolderId)return[];const files=await listDatabaseFiles(driveFolders.databaseFolderId),have=new Set(files.map(x=>x.name)),missing=THALYS_REQUIRED_DB_V7.filter(x=>!have.has(x));if(!missing.length)return[];const p=databasePayloads(),made=[];for(const name of missing){try{let data=p[name];if(name.startsWith('lang_'))data=await (await fetch(`./${name}?v=11`,{cache:'no-store'})).json();if(data===undefined)data=[];await uploadDriveFile(name,JSON.stringify(data),'application/json',driveFolders.databaseFolderId,true);made.push(name)}catch(e){console.warn(name,e)}}return made;}
 async function initializeDriveWorkspace(){if(!getAccessToken())return null;if(driveFolders?.databaseFolderId){const repaired=await ensureAllDriveDatabasesV7(false);if(repaired.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${repaired.length}`,'fa-database');return driveFolders;}let root=await findDriveFolder('Thalys App'),fresh=false;if(!root){if(!confirm(tr('Thalys può creare una sola volta la propria cartella, tutti i database e le cartelle di servizio nel tuo Google Drive personale. Vuoi procedere?')))return null;root=await createDriveFolder('Thalys App',null);fresh=true;}let db=await findDriveFolder('database',root.id);if(!db)db=await createDriveFolder('database',root.id);let photos=await findDriveFolder('foto',root.id);if(!photos)photos=await createDriveFolder('foto',root.id);let backups=await findDriveFolder('backups',root.id);if(!backups)backups=await createDriveFolder('backups',root.id);driveFolders={appFolderId:root.id,databaseFolderId:db.id,photoFolderId:photos.id,backupFolderId:backups.id};const made=await ensureAllDriveDatabasesV7(fresh);if(fresh)showToast(tr('Struttura Thalys creata nel Drive ✓'),'fa-cloud-check');else if(made.length)showToast(`${tr('Ho ricreato i database mancanti')}: ${made.length}`,'fa-database');return driveFolders;}
 
 function reorderSettingsV7(){const s=document.getElementById('tab-settings');if(!s)return;const cs=[...s.children],find=t=>cs.find(x=>x.textContent?.includes(t)),manual=find('Sincronizzazione manuale'),lang=find('Lingua'),focus=find('Modalità Focus'),help=find('Guida rapida');if(manual){let a=manual;[lang,focus,help].filter(Boolean).forEach(x=>{a.after(x);a=x})}}
@@ -9524,6 +9526,122 @@ document.addEventListener('DOMContentLoaded',()=>{
   normalizeModalStateV10();
   setTimeout(()=>ensureFreshVersionV10(),80);
 });
+
+
+/* ==========================================================
+   THALYS V11 — native jsPDF exporter (no screenshot/canvas)
+   Fixes iOS WebKit horizontal clipping.
+   ========================================================== */
+function pdfPlainTextV11(value,depth=0){
+  if(value===null||value===undefined)return '—';
+  if(typeof value==='string')return value;
+  if(typeof value==='number'||typeof value==='boolean')return String(value);
+  if(Array.isArray(value)){
+    return value.map((v,i)=>{
+      if(typeof v==='object'&&v!==null)return `${i+1}. ${pdfPlainTextV11(v,depth+1)}`;
+      return `• ${pdfPlainTextV11(v,depth+1)}`;
+    }).join('\n');
+  }
+  if(typeof value==='object'){
+    return Object.entries(value).map(([k,v])=>{
+      const label=tr(k);
+      if(typeof v==='object'&&v!==null)return `${label}:\n${pdfPlainTextV11(v,depth+1)}`;
+      return `${label}: ${pdfPlainTextV11(v,depth+1)}`;
+    }).join('\n');
+  }
+  return String(value);
+}
+function pdfSafeTextV11(value){
+  return pdfPlainTextV11(value).replace(/\r/g,'').replace(/\t/g,'  ');
+}
+function getJsPDFV11(){
+  return window.jspdf?.jsPDF || window.jsPDF;
+}
+function makeThalysPdfV11(title,metaLines=[]){
+  const JsPDF=getJsPDFV11();if(!JsPDF)throw new Error('JSPDF_NOT_LOADED');
+  const doc=new JsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+  const W=210,H=297,M=16,CW=W-M*2;
+  let y=18;
+  function pageBase(){
+    doc.setFillColor(9,13,22);doc.rect(0,0,W,H,'F');
+    doc.setDrawColor(22,78,99);doc.setLineWidth(.5);doc.line(M,27,W-M,27);
+    doc.setTextColor(103,232,249);doc.setFont('helvetica','bold');doc.setFontSize(15);doc.text('THALYS',M,18);
+    doc.setTextColor(148,163,184);doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.text('WELLNESS INTELLIGENCE',M,23);
+    y=35;
+  }
+  function newPage(){doc.addPage();pageBase();}
+  function ensure(h=10){if(y+h>H-16)newPage();}
+  function textBlock(text,{size=9,bold=false,color=[203,213,225],gap=4,indent=0}={}){
+    text=pdfSafeTextV11(text);
+    doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(size);doc.setTextColor(...color);
+    const lines=doc.splitTextToSize(text,Math.max(20,CW-indent));
+    const lh=size*.40+1.15;
+    for(const line of lines){ensure(lh+2);doc.text(String(line),M+indent,y);y+=lh;}
+    y+=gap;
+  }
+  function heading(text){
+    ensure(12);doc.setFillColor(15,23,42);doc.roundedRect(M,y-4,CW,9,2,2,'F');
+    doc.setTextColor(103,232,249);doc.setFont('helvetica','bold');doc.setFontSize(9);
+    doc.text(pdfSafeTextV11(text),M+3,y+1);y+=10;
+  }
+  function section(label,value){
+    heading(label);
+    textBlock(value,{size:8.5,color:[203,213,225],gap:5,indent:2});
+  }
+  pageBase();
+  textBlock(title,{size:17,bold:true,color:[255,255,255],gap:3});
+  metaLines.filter(Boolean).forEach(x=>textBlock(x,{size:8,color:[148,163,184],gap:2}));
+  y+=3;
+  return {doc,section,textBlock,heading,newPage,getY:()=>y};
+}
+async function ensureJsPdfV11(){
+  if(getJsPDFV11())return true;
+  // CDN may still be loading when the user taps immediately.
+  await new Promise(r=>setTimeout(r,350));
+  return !!getJsPDFV11();
+}
+async function exportAIConsultPDF(id){
+  const record=(appState.aiConsults||[]).find(x=>x.id===id);if(!record)return;
+  try{
+    if(!await ensureJsPdfV11())throw new Error('JSPDF_NOT_LOADED');
+    const type=tr({nutrition:'Alimentazione',workout:'Allenamenti',full:'Quadro completo',food:'Dati alimento'}[record.type]||record.type);
+    const pdf=makeThalysPdfV11(`${tr('Risposta IA')} · ${type}`,[
+      formatConsultDate(record.date),
+      `${tr('Obiettivo')}: ${record.goal||'—'}`
+    ]);
+    const response=record.response||{};
+    if(response && typeof response==='object' && !Array.isArray(response)){
+      Object.entries(response).forEach(([k,v])=>pdf.section(tr(k),pdfSafeTextV11(v)));
+    }else pdf.section(tr('Risposta IA'),pdfSafeTextV11(response));
+    if(record.generatedWorkoutPlan)pdf.section(tr('Scheda generata'),pdfSafeTextV11(record.generatedWorkoutPlan));
+    const pages=pdf.doc.getNumberOfPages();
+    for(let i=1;i<=pages;i++){
+      pdf.doc.setPage(i);pdf.doc.setTextColor(100,116,139);pdf.doc.setFontSize(7);
+      pdf.doc.text(`Thalys · ${i}/${pages}`,194,289,{align:'right'});
+    }
+    pdf.doc.save(`Thalys_AI_${record.type||'consulto'}_${record.date||currentLocalDateStr()}.pdf`);
+    showToast(tr('Risposta IA esportata in PDF'),'fa-file-pdf');
+  }catch(e){console.error('AI PDF V11',e);showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');}
+}
+async function exportConsultSnapshotPDF(id){
+  const record=(appState.consultations||[]).find(x=>x.id===id);if(!record)return;
+  try{
+    if(!await ensureJsPdfV11())throw new Error('JSPDF_NOT_LOADED');
+    const pdf=makeThalysPdfV11(`${tr('Quadro generale')} · ${consultTypeLabel(record.type)}`,[
+      formatConsultDate(record.date),
+      `${record.period?.from||'—'} → ${record.period?.to||'—'}`,
+      `${tr('Obiettivo')}: ${record.goal||'—'}`
+    ]);
+    Object.entries(record.snapshot||{}).forEach(([k,v])=>pdf.section(tr(k),pdfSafeTextV11(v)));
+    const pages=pdf.doc.getNumberOfPages();
+    for(let i=1;i<=pages;i++){
+      pdf.doc.setPage(i);pdf.doc.setTextColor(100,116,139);pdf.doc.setFontSize(7);
+      pdf.doc.text(`Thalys · ${i}/${pages}`,194,289,{align:'right'});
+    }
+    pdf.doc.save(consultExportSafeName(record,'pdf'));
+    showToast(tr('Consulto esportato in PDF'),'fa-file-pdf');
+  }catch(e){console.error('Snapshot PDF V11',e);showToast(tr('Esportazione PDF non riuscita'),'fa-triangle-exclamation');}
+}
 
 </script>
 <style>

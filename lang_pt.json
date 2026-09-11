@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 11,
   "locale": "pt-BR",
   "phrases": {
     "Lingua": "Idioma",
@@ -578,7 +578,7 @@
     "Richiesta specifica": "Pedido específico",
     "Scheda generata": "Plano de treino gerado",
     "Risposta IA esportata in formato testo": "Resposta da IA exportada em texto",
-    "Risposta IA esportata in PDF": "Resposta da IA exportada em PDF",
+    "Risposta IA esportata in PDF": "Resposta de IA exportada em PDF",
     "Dati esportati dal consulto IA salvato": "Dados exportados da consulta IA guardada",
     "Esporta PDF": "Exportar PDF",
     "Esporta TXT": "Exportar TXT",
@@ -990,6 +990,10 @@
     "help.analytics.strength": "Força contextualizada",
     "help.analytics.strength.body": "O gráfico mostra apenas a progressão do peso levantado por exercício. Os nomes são comparados sem distinguir maiúsculas de minúsculas.",
     "help.settings.drive_creation": "Criação no Drive",
-    "help.settings.drive_creation.body": "No primeiro acesso o Thalys pergunta uma só vez para criar a estrutura e todas as bases. Depois verifica automaticamente ficheiros em falta, recria-os e mostra apenas um aviso."
+    "help.settings.drive_creation.body": "No primeiro acesso o Thalys pergunta uma só vez para criar a estrutura e todas as bases. Depois verifica automaticamente ficheiros em falta, recria-os e mostra apenas um aviso.",
+    "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
+    "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
+    "help.settings.pdf_export": "Esportazione PDF",
+    "help.settings.pdf_export.body": "Desde a V11, os PDFs são documentos A4 nativos em vez de capturas, evitando o corte horizontal no iOS/WebKit."
   }
 }

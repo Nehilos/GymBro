@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 11,
   "locale": "en-US",
   "phrases": {
     "Lingua": "Language",
@@ -626,7 +626,7 @@
     "Richiesta specifica": "Specific request",
     "Scheda generata": "Generated workout plan",
     "Risposta IA esportata in formato testo": "AI response exported as a text file",
-    "Risposta IA esportata in PDF": "AI response exported as PDF",
+    "Risposta IA esportata in PDF": "AI response exported to PDF",
     "Dati esportati dal consulto IA salvato": "Data exported from the saved AI consultation",
     "Esporta PDF": "Export PDF",
     "Esporta TXT": "Export TXT",
@@ -1038,6 +1038,10 @@
     "help.analytics.strength": "Contextual strength",
     "help.analytics.strength.body": "The chart now shows only lifted-weight progression for a specific exercise. Exercise names are matched case-insensitively, so “leg press” and “Leg press” are treated as the same exercise.",
     "help.settings.drive_creation": "Drive creation",
-    "help.settings.drive_creation.body": "On first access Thalys asks once to create the structure and all databases. Later it automatically checks for missing files, recreates them and shows only one notice."
+    "help.settings.drive_creation.body": "On first access Thalys asks once to create the structure and all databases. Later it automatically checks for missing files, recreates them and shows only one notice.",
+    "help.settings.ios_compatibility": "Compatibilità iPhone / Chrome",
+    "help.settings.ios_compatibility.body": "Thalys V10 gestisce viewport dinamico iOS, overlay/modali, scroll touch e refresh versione. Se iOS mantiene una vecchia sessione, l'app esegue un solo reload cache-busted quando rileva una versione nuova.",
+    "help.settings.pdf_export": "Esportazione PDF",
+    "help.settings.pdf_export.body": "From V11, Consult PDFs are generated as native A4 documents instead of page screenshots, preventing iOS/WebKit horizontal clipping."
   }
 }
