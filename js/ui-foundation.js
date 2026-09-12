@@ -92,6 +92,14 @@
       }
 
       function enterApp() {
+        if (!navigator.onLine) {
+          unlockApp();
+          if (typeof updateAuthUI === 'function') updateAuthUI(null);
+          if (typeof setDriveStatus === 'function') setDriveStatus('error', 'Offline · dati locali');
+          showToast('Modalità offline: stai usando i dati salvati sul dispositivo', 'fa-cloud-arrow-down');
+          return;
+        }
+
         if (typeof loginHandler === 'function') {
           loginHandler();
           return;
@@ -114,6 +122,23 @@
 
         showToast('Google non pronto: riprova più tardi', 'error');
       }
+
+      function updateWelcomeConnectionUI() {
+        const offline = !navigator.onLine;
+        const label = document.getElementById('enter-app-label');
+        const icon = document.getElementById('enter-app-icon');
+        const note = document.getElementById('enter-app-note');
+        if (label) label.textContent = offline ? 'Continua offline' : 'Continua con Google';
+        if (icon) icon.className = offline ? 'fa-solid fa-cloud-arrow-down text-base' : 'fa-brands fa-google text-base';
+        if (note) note.textContent = offline
+          ? 'Userai i dati locali. Potrai riconnettere Google Drive quando torni online.'
+          : 'I tuoi dati restano nel tuo spazio Google Drive.';
+      }
+
+      window.addEventListener('online', updateWelcomeConnectionUI, { passive: true });
+      window.addEventListener('offline', updateWelcomeConnectionUI, { passive: true });
+      window.addEventListener('DOMContentLoaded', updateWelcomeConnectionUI, { once: true });
+      updateWelcomeConnectionUI();
 
       function triggerGoogleSignIn() {
         enterApp();

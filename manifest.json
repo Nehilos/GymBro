@@ -14,14 +14,14 @@
   "categories": ["health", "fitness", "lifestyle"],
   "icons": [
     {
-      "src": "./Thalys%20Logo%20Dark.png",
-      "sizes": "any",
+      "src": "./assets/icons/thalys-app-icon-black.png",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./Thalys%20Logo%20Dark.png",
-      "sizes": "any",
+      "src": "./assets/icons/thalys-app-icon-black.png",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "maskable"
     }
