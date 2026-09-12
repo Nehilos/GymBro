@@ -52,6 +52,39 @@
     });
   }
 
+  function getLocalFile(db, name) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const request = tx.objectStore(STORE_NAME).get(name);
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error || new Error(`Lettura di ${name} non riuscita`));
+    });
+  }
+
+  async function offlineStorageAlreadyExists() {
+    if (localStorage.getItem(READY_KEY) === '1') return true;
+    if (!window.indexedDB) return false;
+    try {
+      if (typeof indexedDB.databases === 'function') {
+        const databases = await indexedDB.databases();
+        if (!databases.some(database => database.name === DB_NAME)) return false;
+      }
+      const db = await openLocalDatabase();
+      try {
+        const manifest = await getLocalFile(db, 'thalys_manifest.json');
+        const appState = await getLocalFile(db, 'app_state.json');
+        const exists = !!(manifest?.data && appState?.data);
+        if (exists) localStorage.setItem(READY_KEY, '1');
+        return exists;
+      } finally {
+        db.close();
+      }
+    } catch (error) {
+      console.warn('Verifica archivio offline', error);
+      return false;
+    }
+  }
+
   const waitForPaint = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
   async function syncLocalDocuments(state, onProgress, paced = false) {
@@ -106,6 +139,11 @@
     const progressFile = document.getElementById('offline-progress-file');
     const result = document.getElementById('offline-setup-result');
     const closeButton = document.getElementById('offline-setup-close-btn');
+    if (await offlineStorageAlreadyExists()) {
+      closeOfflineSetupModal();
+      if (typeof showToast === 'function') showToast('Archivio offline già presente ✓', 'fa-database');
+      return;
+    }
     if (button) {
       button.disabled = true;
       button.textContent = 'Preparazione in corso…';
@@ -150,11 +188,8 @@
     if (typeof updateModalScrollLock === 'function') updateModalScrollLock();
   }
 
-  function maybeShowOfflineSetup() {
-    if (localStorage.getItem(READY_KEY) === '1') {
-      syncLocalDocuments(window.appState || {}).catch(error => console.warn('Offline mirror', error));
-      return;
-    }
+  async function maybeShowOfflineSetup() {
+    if (await offlineStorageAlreadyExists()) return;
     setTimeout(() => {
       const modal = document.getElementById('offline-setup-modal');
       if (modal) {

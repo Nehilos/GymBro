@@ -62,6 +62,10 @@
 
     .app-header {
       padding-top: calc(0.5rem + env(safe-area-inset-top));
+      display: flex !important;
+      flex: 0 0 auto;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
 
     .welcome-fade {
@@ -3280,8 +3284,10 @@
   }
 
   #app-shell {
-    height: calc((var(--app-vh, 1vh) * 100) - max(env(safe-area-inset-top, 0px), 47px)) !important;
-    min-height: calc((var(--app-vh, 1vh) * 100) - max(env(safe-area-inset-top, 0px), 47px)) !important;
+    top: max(env(safe-area-inset-top, 0px), 47px) !important;
+    bottom: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .app-header {
