@@ -1,4 +1,4 @@
-# Thalys — v0.14: sessione persistente e database offline
+# Thalys — v0.15: preparazione offline visibile
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -64,6 +64,10 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 - Foto, backup, esportazioni e consulti archiviati non vengono duplicati nel database offline.
 - Quando la rete ritorna compare `Rete disponibile`; il comando `Riconnetti e aggiorna` sincronizza Drive e ridisegna tutte le pagine.
 - Le notifiche nell'app installata sono posizionate sotto la safe area di iPhone e della Dynamic Island.
+- La preparazione offline usa ora il nome `Thalys App` per il database locale privato della PWA.
+- Una barra mostra percentuale, nome del file corrente e avanzamento della copia.
+- La finestra resta visibile al termine e conferma il numero di file copiati; si chiude soltanto premendo `Continua in Thalys`.
+- La copia aspetta che `appState` sia realmente disponibile, evitando di inizializzare l'archivio con dati vuoti.
 
 ## Test PWA dopo il deploy
 

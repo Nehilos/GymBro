@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no">
   <title>Thalys — Wellness, Allenamento & Nutrizione</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" sizes="1024x1024" href="./assets/icons/thalys-app-icon-black.png?v=014">
+  <link rel="apple-touch-icon" sizes="1024x1024" href="./assets/icons/thalys-app-icon-black.png?v=015">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="./js/tailwind-config.js?v=014"></script>
+  <script src="./js/tailwind-config.js?v=015"></script>
   
   <!-- Chart.js for interactive analytics -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,13 +25,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
   
 
-  <link rel="stylesheet" href="./css/thalys.css?v=014">
+  <link rel="stylesheet" href="./css/thalys.css?v=015">
 
   <meta name="theme-color" content="#090d16">
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./js/theme-bootstrap.js?v=014"></script>
+  <script src="./js/theme-bootstrap.js?v=015"></script>
 </head>
 <body class="text-slate-100 flex flex-col min-h-screen select-none bg-slate-950 overflow-x-hidden">
 
@@ -140,8 +140,14 @@
     <div class="w-full max-w-sm rounded-3xl border border-cyan-500/30 bg-slate-900 p-5 text-center shadow-2xl">
       <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/15 text-xl text-cyan-300"><i class="fa-solid fa-database"></i></div>
       <h3 class="mt-4 text-lg font-black text-white">Prepara modalità offline</h3>
-      <p class="mt-2 text-xs leading-5 text-slate-300">Thalys creerà nel suo spazio privato sul dispositivo i database necessari per allenamenti, dieta, corpo, benessere e meditazione. Foto, backup ed esportazioni restano negli archivi esterni.</p>
+      <p class="mt-2 text-xs leading-5 text-slate-300">Thalys creerà nel suo spazio privato sul dispositivo la cartella locale <strong class="text-cyan-200">“Thalys App”</strong>, con i database necessari per allenamenti, dieta, corpo, benessere e meditazione. Foto, backup ed esportazioni restano negli archivi esterni.</p>
+      <div id="offline-progress-box" class="mt-5 hidden rounded-2xl border border-cyan-500/20 bg-slate-950/70 p-3 text-left">
+        <div class="flex items-center justify-between gap-3 text-[10px] font-bold text-cyan-200"><span id="offline-progress-file" class="min-w-0 truncate">Preparazione…</span><span id="offline-progress-percent">0%</span></div>
+        <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-800"><div id="offline-progress-bar" class="h-full w-0 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-[width] duration-200"></div></div>
+      </div>
+      <p id="offline-setup-result" class="mt-4 hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-xs leading-5 text-emerald-200"></p>
       <button id="prepare-offline-btn" type="button" onclick="prepareOfflineStorage()" class="mt-5 w-full rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-black text-slate-950">Prepara modalità offline</button>
+      <button id="offline-setup-close-btn" type="button" onclick="closeOfflineSetupModal()" class="mt-4 hidden w-full rounded-2xl bg-emerald-400 px-4 py-3 text-sm font-black text-slate-950">Continua in Thalys</button>
     </div>
   </div>
 
@@ -158,8 +164,8 @@
   <!-- Main Scrollable Area -->
   <main class="flex-1 overflow-y-auto pb-24 p-4 max-w-lg mx-auto w-full">
     
-    <script src="./js/local-db.js?v=014"></script>
-    <script src="./js/ui-foundation.js?v=014"></script>
+    <script src="./js/local-db.js?v=015"></script>
+    <script src="./js/ui-foundation.js?v=015"></script>
 
     <!-- ========================================== -->
     <!-- TAB HOME: DAILY DASHBOARD                  -->
@@ -2417,10 +2423,10 @@
   </div>
 
   <!-- Google Drive Cloud Backend: one unified Google login, Drive as cloud source of truth -->
-  <script src="./js/google-auth.js?v=014"></script>
-  <script src="./js/drive.js?v=014"></script>
+  <script src="./js/google-auth.js?v=015"></script>
+  <script src="./js/drive.js?v=015"></script>
 
-  <script src="./js/app-core.js?v=014"></script>
+  <script src="./js/app-core.js?v=015"></script>
   <!-- Librerie Google per Auth e Drive -->
 <script src="https://accounts.google.com/gsi/client" async defer onload="window.gisLoaded && window.gisLoaded()"></script>
 <script src="https://apis.google.com/js/api.js" onload="window.gapiLoaded && window.gapiLoaded()"></script>
@@ -2442,12 +2448,12 @@
     </div>
   </div>
 
-  <script src="./js/oauth-ui.js?v=014"></script>
+  <script src="./js/oauth-ui.js?v=015"></script>
 
-<script src="./js/media-tools.js?v=014"></script>
+<script src="./js/media-tools.js?v=015"></script>
 <!-- Librerie Google per Auth e Drive -->
-<script src="./js/pwa-register.js?v=014"></script>
-<script src="./js/app-enhancements.js?v=014"></script>
+<script src="./js/pwa-register.js?v=015"></script>
+<script src="./js/app-enhancements.js?v=015"></script>
 
 </body>
 </html>
