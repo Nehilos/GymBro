@@ -14,7 +14,7 @@ async function handlePhotoUpload(event) {
         try{
           await initializeDriveWorkspace();
           const folder=driveFolders?.photoFolderId || (await ensureFolderAfterConsent('foto',driveFolders.appFolderId,'La cartella foto non esiste. Vuoi crearla in Thalys App?'))?.id;
-          if(folder){driveFolders.photoFolderId=folder;const name=`photo_${new Date().toISOString().replace(/[:.]/g,'')}_${file.name}`;const uploaded=await uploadDriveFile(name,file,file.type||'image/jpeg',folder,true);photo.driveFileId=uploaded.id;photo.driveName=name;photo.updatedAt=new Date().toISOString();localStorage.setItem('thalys_data',JSON.stringify(appState));driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');scheduleDriveSync(200);showToast('Foto salvata anche su Drive ✓','fa-cloud-arrow-up');}
+          if(folder){driveFolders.photoFolderId=folder;const name=`photo_${new Date().toISOString().replace(/[:.]/g,'')}_${file.name}`;const uploaded=await uploadDriveFile(name,file,file.type||'image/jpeg',folder,true);photo.driveFileId=uploaded.id;photo.driveName=name;photo.updatedAt=new Date().toISOString();saveStateToLocal();showToast('Foto salvata anche su Drive ✓','fa-cloud-arrow-up');}
         }catch(err){console.warn('Drive photo copy failed',err);showSyncError(classifyDriveError(err));}
       }
       event.target.value='';

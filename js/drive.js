@@ -69,7 +69,7 @@
         const load=async(name,key)=>{if(names.has(name))legacy[key]=await readDriveJSON(name,source.id);};
         await Promise.all([load('app_state.json','appState'),load('workouts.json','workouts'),load('workout_plans.json','plansPayload'),load('nutrition.json','nutrition'),load('alim_database.json','presets'),load('body_metrics.json','bodyMetrics'),load('wellness_data.json','wellness'),load('water.json','water'),load('meditation.json','meditation')]);
         if(legacy.appState&&typeof legacy.appState==='object')Object.assign(legacy,legacy.appState);if(legacy.plansPayload){legacy.workoutPlans=legacy.plansPayload.plans||[];legacy.workoutAssignments=legacy.plansPayload.assignments||{};legacy.workoutCompletions=legacy.plansPayload.completions||{};}
-        appState=mergeCloudIntoLocal(legacy);window.appState=appState;localStorage.setItem('thalys_data',JSON.stringify(appState));localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));localStorage.removeItem('thalys_pending_legacy_import');driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');showToast('Dati della vecchia app importati in Thalys ✓','fa-file-import');return true;
+        appState=mergeCloudIntoLocal(legacy);window.appState=appState;persistThalysStateLocally(appState);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));localStorage.removeItem('thalys_pending_legacy_import');driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');showToast('Dati della vecchia app importati in Thalys ✓','fa-file-import');return true;
       }catch(e){console.warn(e);return false;}
     }
     function blobToDataURL(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
@@ -177,7 +177,7 @@
       if(cloud.photoIndex&&typeof cloud.photoIndex==='object')localStorage.setItem('photo_index',JSON.stringify({...cloud.photoIndex,...JSON.parse(localStorage.getItem('photo_index')||'{}')}));
       appState=mergeCloudIntoLocal(cloud);window.appState=appState;
       try{await loadPhotosFromDriveFolder();}catch(e){console.warn('Drive photo load failed',e);}
-      localStorage.setItem('thalys_data',JSON.stringify(appState));localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));
+      persistThalysStateLocally(appState);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);
       renderAllViews();loadProfileUI();loadTargetsUI();renderPhotos();renderProfilePhotoUI();
       if(consolidate){driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');setDriveStatus('ok','Dati Drive caricati · consolidamento…');updateManualSyncUI();scheduleDriveSync(250);}else{setDriveStatus('ok','Dati Drive aggiornati');updateManualSyncUI();}return true;
     }
@@ -189,14 +189,14 @@
       await initializeDriveWorkspace();
       if(!driveFolders?.databaseFolderId) return false;
       const d=await readDriveJSON('alim_database.json',driveFolders.databaseFolderId);
-      if(Array.isArray(d)){appState.presets=d.map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));localStorage.setItem('thalys_data',JSON.stringify(appState));renderPresets();return true;}
+      if(Array.isArray(d)){appState.presets=d.map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));persistThalysStateLocally(appState);renderPresets();return true;}
       return false;
     }
     async function loadWorkoutPlansImmediate(){
       if(!getAccessToken())return false;await initializeDriveWorkspace();if(!driveFolders?.databaseFolderId)return false;
       const d=await readDriveJSON('workout_plans.json',driveFolders.databaseFolderId);if(!d)return false;
       appState.workoutPlans=mergeByKey(appState.workoutPlans,d.plans||[],x=>x.id||x.name);appState.activeWorkoutPlanId=appState.activeWorkoutPlanId||d.activePlanId||null;appState.workoutAssignments={...(d.assignments||{}),...(appState.workoutAssignments||{})};appState.workoutCompletions={...(d.completions||{}),...(appState.workoutCompletions||{})};
-      localStorage.setItem('thalys_data',JSON.stringify(appState));renderWorkoutPlans();renderWorkouts();renderHomeDashboard();return true;
+      persistThalysStateLocally(appState);renderWorkoutPlans();renderWorkouts();renderHomeDashboard();return true;
     }
     async function openWorkoutPlans(){
       const gm=appState.messages?.find(m=>m.id==='profile_workout'&&m.status!=='done');if(gm)setTimeout(()=>showToast('Crea una scheda e rendila attiva','fa-clipboard-list'),350);
@@ -315,7 +315,7 @@
 
     function openCloudBackupList(){if(!getAccessToken())return openModal('cloud-modal');caricaDaDrive();}
     async function caricaDaDrive(){try{await initializeDriveWorkspace();if(!driveFolders?.databaseFolderId)return;const files=await listDatabaseFiles(driveFolders.databaseFolderId);const list=document.getElementById('backup-list-items');if(!list)return;list.innerHTML='';const snapshots=files.filter(f=>/^Thalys_(Backup|Autosave)_/i.test(f.name));if(!snapshots.length){list.innerHTML='<li class="text-slate-400">Nessun backup manuale trovato.</li>';}else snapshots.sort((a,b)=>new Date(b.modifiedTime)-new Date(a.modifiedTime)).forEach(f=>{const li=document.createElement('li');li.className='flex items-center justify-between bg-slate-900/60 p-2 rounded-lg';li.innerHTML=`<div><div class="font-semibold">${f.name}</div><div class="text-xs text-slate-400">${new Date(f.modifiedTime).toLocaleString()}</div></div><button class="px-2 py-1 rounded bg-cyan-600 text-black text-xs">Ripristina</button>`;li.querySelector('button').onclick=()=>loadBackupFile(f.id);list.appendChild(li);});document.getElementById('backup-list')?.classList.remove('hidden');}catch(e){console.error(e);showToast('Errore recupero backup');}}
-    async function loadBackupFile(fileId){try{const r=await gapi.client.drive.files.get({fileId,alt:'media'});const d=typeof r.body==='string'?JSON.parse(r.body):r.body;if(d?.data){Object.assign(localStorage,d.data);appState=JSON.parse(localStorage.getItem('thalys_data')||JSON.stringify(DEFAULT_STATE));}else if(d?.workouts||d?.nutrition){appState={...DEFAULT_STATE,...d};}window.appState=appState;localStorage.setItem('thalys_data',JSON.stringify(appState));renderAllViews();showToast('Backup ripristinato','fa-rotate-left');}catch(e){console.error(e);showToast('Backup non valido');}}
+    async function loadBackupFile(fileId){try{const r=await gapi.client.drive.files.get({fileId,alt:'media'});const d=typeof r.body==='string'?JSON.parse(r.body):r.body;if(d?.data){Object.assign(localStorage,d.data);appState=JSON.parse(localStorage.getItem('thalys_data')||JSON.stringify(DEFAULT_STATE));}else if(d?.workouts||d?.nutrition){appState={...DEFAULT_STATE,...d};}window.appState=appState;persistThalysStateLocally(appState);renderAllViews();showToast('Backup ripristinato','fa-rotate-left');}catch(e){console.error(e);showToast('Backup non valido');}}
 
     async function createManualBackup(){if(!getAccessToken())return showToast('Accedi a Google prima del backup');await initializeDriveWorkspace();if(!driveFolders?.backupFolderId){const f=await ensureFolderAfterConsent('backups',driveFolders.appFolderId,'La cartella backups non esiste. Vuoi crearla?');driveFolders.backupFolderId=f?.id||null;}if(!driveFolders?.backupFolderId)return;const stamp=new Date().toISOString().replace(/[-:T.]/g,'').slice(0,14);const payload={version:3,createdAt:new Date().toISOString(),data:appState};await uploadDriveFile(`Thalys_Backup_${stamp}.json`,JSON.stringify(payload),'application/json',driveFolders.backupFolderId,true);showToast('Backup manuale salvato su Drive','fa-cloud-arrow-up');}
     async function createAutosaveSnapshot(){if(!getAccessToken())return;await initializeDriveWorkspace();if(!driveFolders?.backupFolderId){const f=await ensureFolderAfterConsent('backups',driveFolders.appFolderId,'Vuoi creare la cartella backups per mantenere le versioni di sicurezza?');driveFolders.backupFolderId=f?.id||null;}if(!driveFolders?.backupFolderId)return;const stamp=new Date().toISOString().replace(/[-:T.]/g,'').slice(0,14);const payload={version:3,createdAt:new Date().toISOString(),data:appState};const r=await uploadDriveFile(`Thalys_Autosave_${stamp}.json`,JSON.stringify(payload),'application/json',driveFolders.backupFolderId,true);await trimBackups();return r;}

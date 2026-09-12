@@ -53,10 +53,34 @@
     }
     window.appState = appState;
 
-    function persistFoodDatabase(){appState.presets=(appState.presets||[]).map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));localStorage.setItem('thalys_data',JSON.stringify(appState));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(250); }
+    function compactStateForLocalStorage(state) {
+      const source = state || {};
+      return {
+        ...source,
+        photos: (source.photos || []).map(({ base64, ...photo }) => photo),
+        profilePhoto: source.profilePhoto?.dataUrl ? { ...source.profilePhoto, dataUrl: '' } : (source.profilePhoto || null)
+      };
+    }
+
+    window.persistThalysStateLocally = function(state = appState) {
+      try {
+        localStorage.setItem('thalys_data', JSON.stringify(compactStateForLocalStorage(state)));
+        return true;
+      } catch (error) {
+        console.error('Salvataggio locale compatto', error);
+        if (error?.name === 'QuotaExceededError' || error?.code === 22) {
+          showToast('Spazio locale pieno: i dati pesanti restano nell’archivio offline', 'fa-database');
+          return false;
+        }
+        throw error;
+      }
+    };
+    persistThalysStateLocally(appState);
+
+    function persistFoodDatabase(){appState.presets=(appState.presets||[]).map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));persistThalysStateLocally(appState);if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(250); }
 
     // Save State locally and sync to cloud if available
-    window.saveStateToLocal = function(){localStorage.setItem('thalys_data',JSON.stringify(appState));localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
+    window.saveStateToLocal = function(){persistThalysStateLocally(appState);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
 
 
     const PROFILE_MESSAGES=[

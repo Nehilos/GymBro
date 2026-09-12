@@ -21,6 +21,8 @@
     const { consultations, aiConsults, photos, profilePhoto, ...appCore } = s;
     return {
       'app_state.json': appCore,
+      'photos.json': s.photos || [],
+      'profile_photo.json': s.profilePhoto || null,
       'nutrition_targets.json': s.targets || {},
       'workouts.json': s.workouts || [],
       'workout_history.json': s.workoutHistory || [],
@@ -87,6 +89,43 @@
 
   const waitForPaint = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
+  async function warmOfflineAppShell() {
+    if (!window.caches || !window.isSecureContext) return 0;
+    const urls = ['./', './index.html', './manifest.json', './css/thalys.css?v=016', './js/local-db.js?v=019', './js/ui-foundation.js?v=018', './js/google-auth.js?v=018', './js/drive.js?v=019', './js/app-core.js?v=019', './js/app-enhancements.js?v=019'];
+    const cache = await caches.open('thalys-manual-offline-v0.19');
+    let saved = 0;
+    for (const url of urls) {
+      try { await cache.add(url); saved += 1; } catch (_) {}
+    }
+    return saved;
+  }
+
+  async function hydrateLocalMedia() {
+    if (!(await offlineStorageAlreadyExists())) return false;
+    for (let attempt = 0; attempt < 40 && !window.appState; attempt += 1) await waitForPaint(100);
+    if (!window.appState) return false;
+    const db = await openLocalDatabase();
+    try {
+      const photosRecord = await getLocalFile(db, 'photos.json');
+      const profileRecord = await getLocalFile(db, 'profile_photo.json');
+      if (Array.isArray(photosRecord?.data)) {
+        const current = Array.isArray(window.appState.photos) ? window.appState.photos : [];
+        const merged = new Map(photosRecord.data.map(photo => [photo.id, photo]));
+        current.forEach(photo => {
+          const stored = merged.get(photo.id) || {};
+          merged.set(photo.id, { ...stored, ...photo, base64: photo.base64 || stored.base64 || '' });
+        });
+        window.appState.photos = [...merged.values()];
+      }
+      if (profileRecord?.data && !window.appState.profilePhoto?.dataUrl) window.appState.profilePhoto = profileRecord.data;
+      if (typeof renderPhotos === 'function') renderPhotos();
+      if (typeof renderProfilePhotoUI === 'function') renderProfilePhotoUI();
+      return true;
+    } finally {
+      db.close();
+    }
+  }
+
   async function syncLocalDocuments(state, onProgress, paced = false) {
     const db = await openLocalDatabase();
     const docs = localDocuments(state);
@@ -140,8 +179,9 @@
     const result = document.getElementById('offline-setup-result');
     const closeButton = document.getElementById('offline-setup-close-btn');
     if (await offlineStorageAlreadyExists()) {
+      await warmOfflineAppShell();
       closeOfflineSetupModal();
-      if (typeof showToast === 'function') showToast('Archivio offline già presente ✓', 'fa-database');
+      if (typeof showToast === 'function') showToast('Archivio e file offline già pronti ✓', 'fa-database');
       return;
     }
     if (button) {
@@ -160,13 +200,14 @@
         if (progressPercent) progressPercent.textContent = `${percent}%`;
         if (progressFile) progressFile.textContent = completed === total ? 'Verifica completata' : `Copia di ${name}`;
       }, true);
+      const cachedFiles = await warmOfflineAppShell();
       let persistent = false;
       if (navigator.storage && navigator.storage.persist) {
         try { persistent = await navigator.storage.persist(); } catch (_) {}
       }
       localStorage.setItem(READY_KEY, '1');
       if (result) {
-        result.textContent = `${summary.fileCount} file copiati correttamente nella cartella locale “${summary.folderName}”.${persistent ? ' Archiviazione persistente attiva.' : ''}`;
+        result.textContent = `${summary.fileCount} archivi locali preparati nella cartella “${summary.folderName}”${cachedFiles ? ` e ${cachedFiles} file dell’app salvati per l’uso offline` : ''}.${persistent ? ' Archiviazione persistente attiva.' : ''}`;
         result.classList.remove('hidden');
       }
       if (button) button.classList.add('hidden');
@@ -203,5 +244,7 @@
   window.prepareOfflineStorage = prepareOfflineStorage;
   window.closeOfflineSetupModal = closeOfflineSetupModal;
   window.maybeShowOfflineSetup = maybeShowOfflineSetup;
+  window.hydrateThalysLocalMedia = hydrateLocalMedia;
   restoreLocalStateIfNeeded().finally(() => localStorage.removeItem('thalys_local_restore_running'));
+  window.addEventListener('DOMContentLoaded', () => hydrateLocalMedia().catch(error => console.warn('Ripristino media offline', error)), { once: true });
 })();

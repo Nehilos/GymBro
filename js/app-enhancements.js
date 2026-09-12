@@ -176,7 +176,7 @@ function forceAvatarRefreshV8(){
   const select=document.getElementById('prof-input-gender');
   const g=normalizeProfileGenderValue(select?.value||appState.profile?.gender);
   appState.profile={...(appState.profile||{}),gender:g,updatedAt:new Date().toISOString()};
-  localStorage.setItem('thalys_data',JSON.stringify(appState));
+  persistThalysStateLocally(appState);
   avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});
   requestAnimationFrame(()=>{aggiornaAvatarDaUltimaMisura();renderHomeAvatar();avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});});
   setTimeout(()=>{avatarSetArtworkV8(g==='female'?'femmina':'maschio',{force:true});aggiornaAvatarDaUltimaMisura();renderHomeAvatar();},120);
@@ -2907,7 +2907,7 @@ loadDatabasesFromDrive=async function(consolidate=false){
         appState.targets={...appState.targets,...active.targets};
         if(active.targets.water)appState.settings={...(appState.settings||{}),waterTargetMl:Number(active.targets.water)};
       }
-      localStorage.setItem('thalys_data',JSON.stringify(appState));
+      persistThalysStateLocally(appState);
       renderTargetPlanLibraryV22();
       loadTargetsUI();renderNutrition();
     }
