@@ -1,0 +1,3258 @@
+
+    :root {
+      --app-vh: 1vh;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      background: #090d16;
+    }
+
+    /* Safe Area Insets for iOS devices like iPhone 15 Pro */
+    html, body {
+      height: 100%;
+      min-height: var(--app-vh, 1vh) * 100;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: none;
+    }
+
+    body {
+      min-height: var(--app-vh, 1vh) * 100;
+      height: auto;
+      padding-top: max(env(safe-area-inset-top), 0px);
+      padding-bottom: max(env(safe-area-inset-bottom), 0px);
+      padding-left: max(env(safe-area-inset-left), 0px);
+      padding-right: max(env(safe-area-inset-right), 0px);
+      background-color: #090d16;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      touch-action: manipulation;
+    }
+
+    html.modal-open,
+    body.modal-open {
+      overflow: hidden !important;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .fixed.inset-0.z-50 {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+    }
+
+    .fixed.inset-0.z-50 > div {
+      max-height: min(85vh, 720px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+    }
+
+    main {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .app-header {
+      padding-top: calc(0.5rem + env(safe-area-inset-top));
+    }
+
+    .welcome-fade {
+      animation: welcomeFade 0.7s ease-out both;
+    }
+
+    @keyframes welcomeFade {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .hero-glow {
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.28), 0 0 80px rgba(16, 185, 129, 0.18);
+    }
+    
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    
+    /* Pulse glow effect */
+    .glow-cyan {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-animate {
+      animation: fadeInUp 0.55s ease-out both;
+    }
+    
+    /* Hide spin buttons in number inputs */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
+    /* Thalys mobile shell: only the center content scrolls; header/nav stay fixed */
+    html, body { overflow: hidden !important; height: 100%; }
+    #app-shell.hidden { display: none !important; }
+    #app-shell {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    #app-shell > main {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)) !important;
+    }
+    #app-shell > nav {
+      position: fixed !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%);
+      bottom: 0 !important;
+      width: min(100%, 32rem);
+      padding-bottom: calc(.5rem + env(safe-area-inset-bottom));
+      overscroll-behavior: contain;
+      touch-action: pan-x;
+    }
+    #wellness-modal { padding: .5rem !important; }
+    #wellness-modal > div {
+      width: calc(100vw - 1rem) !important;
+      max-width: 24rem !important;
+      max-height: 90dvh !important;
+      overflow-y: auto !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    @media (max-width: 430px) {
+      #wellness-modal input, #wellness-modal select, #wellness-modal textarea { font-size: 16px !important; }
+      .body-history-card { min-height: 64px; }
+    }
+
+
+    /* ===== Thalys visual refinement: Apple-like readability + zen welcome ===== */
+    [class~="text-[9px]"]  { font-size: 10.5px !important; line-height: 1.35 !important; }
+    [class~="text-[10px]"] { font-size: 11.5px !important; line-height: 1.42 !important; }
+    [class~="text-[11px]"] { font-size: 12.5px !important; line-height: 1.45 !important; }
+    .text-xs { font-size: 13px !important; line-height: 1.35rem !important; }
+    .text-sm { font-size: 15px !important; line-height: 1.45rem !important; }
+    button, input, select, textarea { letter-spacing: -0.005em; }
+
+    #welcome-screen {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(34,211,238,.11), transparent 28%),
+        radial-gradient(circle at 18% 84%, rgba(16,185,129,.12), transparent 30%),
+        radial-gradient(circle at 86% 72%, rgba(14,116,144,.10), transparent 28%),
+        linear-gradient(180deg, #06101a 0%, #07131b 48%, #061018 100%) !important;
+    }
+    #welcome-screen::before,
+    #welcome-screen::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(54px);
+      pointer-events: none;
+      opacity: .55;
+    }
+    #welcome-screen::before {
+      width: 15rem; height: 15rem;
+      left: -7rem; top: 18%;
+      background: rgba(16,185,129,.13);
+      animation: thalysDriftA 12s ease-in-out infinite alternate;
+    }
+    #welcome-screen::after {
+      width: 18rem; height: 18rem;
+      right: -9rem; bottom: 5%;
+      background: rgba(6,182,212,.10);
+      animation: thalysDriftB 14s ease-in-out infinite alternate;
+    }
+    .thalys-welcome-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 28rem;
+      padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+    }
+    .thalys-logo-mark {
+      width: 7.25rem;
+      height: 7.25rem;
+      margin: 0 auto;
+      filter: drop-shadow(0 14px 32px rgba(16,185,129,.13));
+      animation: thalysLogoFloat 6s ease-in-out infinite;
+    }
+    .thalys-brand-name {
+      letter-spacing: .52em;
+      text-indent: .52em;
+      font-weight: 300;
+    }
+    .thalys-brand-tagline {
+      letter-spacing: .26em;
+      text-indent: .26em;
+    }
+    .thalys-breathe-wrap {
+      margin: 1.55rem auto 1.15rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .thalys-breathe-stage {
+      position: relative;
+      width: min(15.2rem, 68vw);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    .thalys-breathe-field {
+      position: absolute;
+      inset: 8%;
+      border-radius: 999px;
+      transform-origin: center;
+      animation: thalysBreathe 10s cubic-bezier(.42,0,.28,1) infinite;
+      filter: drop-shadow(0 0 18px rgba(167,243,208,.08));
+    }
+    .thalys-breathe-field::before,
+    .thalys-breathe-field::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .thalys-breathe-field::before {
+      inset: 0;
+      border: 1px solid rgba(209,250,229,.34);
+      background:
+        radial-gradient(circle at 50% 46%, rgba(167,243,208,.10) 0%, rgba(16,185,129,.045) 43%, rgba(15,23,42,.08) 68%, transparent 72%);
+      box-shadow:
+        inset 0 0 26px rgba(255,255,255,.025),
+        0 0 28px rgba(52,211,153,.07);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    .thalys-breathe-field::after {
+      inset: 15%;
+      border: 1px solid rgba(236,253,245,.27);
+      background: radial-gradient(circle, rgba(255,255,255,.025), rgba(16,185,129,.025) 58%, transparent 70%);
+      box-shadow: inset 0 0 18px rgba(167,243,208,.035);
+    }
+    .thalys-breathe-core {
+      position: absolute;
+      inset: 29%;
+      border-radius: 999px;
+      border: 1px solid rgba(209,250,229,.24);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.055), rgba(16,185,129,.025)),
+        rgba(15,23,42,.09);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        inset 0 -12px 28px rgba(2,6,23,.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+    }
+    .thalys-lotus {
+      width: 3.2rem;
+      height: 3.2rem;
+      opacity: .28;
+      filter: drop-shadow(0 0 12px rgba(167,243,208,.12));
+    }
+    .thalys-breath-arcs {
+      position: absolute;
+      inset: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      overflow: visible;
+      pointer-events: none;
+    }
+    .thalys-breath-arc-base {
+      fill: none;
+      stroke: rgba(209,250,229,.10);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+    }
+    .thalys-breath-arc-in,
+    .thalys-breath-arc-out {
+      fill: none;
+      stroke-linecap: round;
+      stroke-width: 5.4;
+      filter: drop-shadow(0 0 5px rgba(167,243,208,.34));
+    }
+    .thalys-breath-arc-in {
+      stroke: url(#breathArcIn);
+      animation: thalysInhaleGlow 10s ease-in-out infinite;
+    }
+    .thalys-breath-arc-out {
+      stroke: url(#breathArcOut);
+      animation: thalysExhaleGlow 10s ease-in-out infinite;
+    }
+    .thalys-breath-label {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .34em;
+      text-indent: .34em;
+      color: rgba(248,250,252,.82);
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,.28);
+      pointer-events: none;
+    }
+    .thalys-breath-label.inhale { top: 17%; animation: thalysInhaleLabel 10s ease-in-out infinite; }
+    .thalys-breath-label.exhale { bottom: 16%; animation: thalysExhaleLabel 10s ease-in-out infinite; }
+    .thalys-orbit-dot {
+      position: absolute;
+      inset: 8%;
+      border-radius: 999px;
+      z-index: 5;
+      animation: thalysOrbit 10s linear infinite;
+      pointer-events: none;
+    }
+    .thalys-orbit-dot::after {
+      content: "";
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      left: 50%;
+      top: -5.5px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: rgba(236,253,245,.98);
+      border: 1px solid rgba(255,255,255,.82);
+      box-shadow:
+        0 0 8px rgba(255,255,255,.68),
+        0 0 20px rgba(167,243,208,.72);
+    }
+    .thalys-quote {
+      margin-top: .2rem;
+      text-align: center;
+      text-wrap: balance;
+      text-shadow: 0 12px 34px rgba(0,0,0,.22);
+    }
+    .thalys-quote-lead {
+      display: block;
+      font-family: "Bodoni 72", "Bodoni 72 Smallcaps", "Didot", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.45rem, 10.2vw, 3.65rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      color: rgba(255,255,255,.97);
+      text-shadow: 0 12px 30px rgba(0,0,0,.24);
+    }
+    .thalys-quote-rest {
+      display: block;
+      margin-top: .56rem;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      font-size: clamp(1.18rem, 5.2vw, 1.5rem);
+      font-weight: 300;
+      line-height: 1.18;
+      letter-spacing: -.028em;
+      color: rgba(248,250,252,.94);
+    }
+    .thalys-quote-signature {
+      display: block;
+      margin-top: .72rem;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      font-size: .86rem;
+      font-weight: 300;
+      letter-spacing: .12em;
+      color: rgba(203,213,225,.68);
+    }
+    .thalys-wellness-row {
+      margin-top: 1.35rem;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .42rem;
+      width: 100%;
+    }
+    .thalys-wellness-item {
+      min-width: 0;
+      text-align: center;
+    }
+    .thalys-wellness-icon {
+      width: 2.85rem;
+      height: 2.85rem;
+      margin: 0 auto;
+      border-radius: .9rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(110,231,183,.24);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.035), rgba(16,185,129,.02)),
+        rgba(6,20,18,.25);
+      color: rgba(167,243,208,.88);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .thalys-wellness-label {
+      margin-top: .42rem;
+      font-size: .58rem;
+      line-height: 1.25;
+      letter-spacing: .12em;
+      color: rgba(226,232,240,.78);
+      text-transform: uppercase;
+    }
+
+    /* 10 s/ciclo: 4 s inspirazione + 6 s espirazione, circa 6 respiri/min. */
+    @keyframes thalysBreathe {
+      0%   { transform: scale(.82); opacity: .78; }
+      40%  { transform: scale(1.06); opacity: 1; }
+      100% { transform: scale(.82); opacity: .78; }
+    }
+    @keyframes thalysOrbit { to { transform: rotate(360deg); } }
+    @keyframes thalysInhaleGlow {
+      0%,100% { opacity: .28; stroke-width: 4.5; }
+      18% { opacity: .96; stroke-width: 6.3; }
+      40% { opacity: .68; stroke-width: 5.2; }
+      58% { opacity: .22; stroke-width: 4.3; }
+    }
+    @keyframes thalysExhaleGlow {
+      0%,28% { opacity: .18; stroke-width: 4.2; }
+      40% { opacity: .54; stroke-width: 5.1; }
+      68% { opacity: .95; stroke-width: 6.2; }
+      100% { opacity: .34; stroke-width: 4.5; }
+    }
+    @keyframes thalysInhaleLabel {
+      0%,100% { opacity: .48; }
+      15%,36% { opacity: 1; color: rgba(236,253,245,.98); }
+      58% { opacity: .38; }
+    }
+    @keyframes thalysExhaleLabel {
+      0%,30% { opacity: .34; }
+      48%,86% { opacity: 1; color: rgba(236,253,245,.98); }
+      100% { opacity: .46; }
+    }
+    .thalys-google-btn {
+      min-height: 3.35rem;
+      box-shadow: 0 12px 34px rgba(15,23,42,.28), 0 0 0 1px rgba(255,255,255,.03) inset;
+    }
+    .thalys-mini-pill {
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(15,23,42,.28);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .thalys-header-logo { width: 2rem; height: 2rem; flex: 0 0 auto; }
+
+    /* 10 s per ciclo ≈ 6 respiri/min: 4 s inspirazione + 6 s espirazione. */
+    @keyframes thalysBreathe {
+      0% { transform: scale(.80); opacity: .66; }
+      40% { transform: scale(1.10); opacity: 1; }
+      100% { transform: scale(.80); opacity: .66; }
+    }
+    @keyframes thalysBreatheInner {
+      0% { transform: scale(.88); opacity:.40; }
+      40% { transform: scale(1.10); opacity:.96; }
+      100% { transform: scale(.88); opacity:.40; }
+    }
+    @keyframes thalysOrbit { to { transform: rotate(360deg); } }
+    @keyframes thalysLogoFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes thalysDriftA { to { transform: translate(45px, 35px) scale(1.12); } }
+    @keyframes thalysDriftB { to { transform: translate(-40px, -28px) scale(.92); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .thalys-logo-mark, .thalys-breathe-field, .thalys-orbit-dot, .thalys-breath-arc-in, .thalys-breath-arc-out, .thalys-breath-label,
+      #welcome-screen::before, #welcome-screen::after { animation: none !important; }
+    }
+    @media (max-width: 430px) {
+      .thalys-welcome-card { padding-left: 1rem; padding-right: 1rem; }
+      .thalys-logo-mark { width: 6.6rem; height: 6.6rem; }
+      .thalys-brand-name { font-size: 2.35rem !important; }
+      .thalys-breathe-wrap { margin-top: 1.25rem; margin-bottom: 1.15rem; }
+      .thalys-breathe-stage { width: min(14rem, 70vw); }
+    }
+
+    /* ===== Mobile safe-layout + touch refinement ===== */
+    button, [role="button"], input, select, textarea, label[for] {
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #welcome-screen {
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+      min-height: 100svh !important;
+      height: 100dvh !important;
+      padding-top: max(.7rem, env(safe-area-inset-top)) !important;
+      padding-bottom: max(.85rem, env(safe-area-inset-bottom)) !important;
+    }
+    .thalys-welcome-card {
+      margin: 0 auto;
+      min-height: calc(100svh - max(.7rem, env(safe-area-inset-top)) - max(.85rem, env(safe-area-inset-bottom)));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: .55rem !important;
+      padding-bottom: .8rem !important;
+    }
+    @supports (height: 100dvh) {
+      .thalys-welcome-card {
+        min-height: calc(100dvh - max(.7rem, env(safe-area-inset-top)) - max(.85rem, env(safe-area-inset-bottom)));
+      }
+    }
+    @media (max-height: 820px) {
+      .thalys-welcome-card { justify-content: flex-start; padding-top: .2rem !important; }
+      .thalys-logo-mark { width: 5.3rem !important; height: 5.3rem !important; }
+      .thalys-brand-name { margin-top: .35rem !important; font-size: 1.95rem !important; }
+      .thalys-brand-tagline { margin-top: .15rem !important; font-size: 9px !important; }
+      .thalys-breathe-wrap { margin: .45rem auto .25rem !important; }
+      .thalys-breathe-stage { width: min(10.8rem, 47vw) !important; }
+      .thalys-quote-lead { font-size: clamp(2rem, 8.8vw, 2.8rem) !important; }
+      .thalys-quote-rest { margin-top: .3rem !important; font-size: 1.05rem !important; }
+      .thalys-quote-signature { margin-top: .35rem !important; font-size: .7rem !important; }
+      .thalys-wellness-row { margin-top: .65rem !important; }
+      .thalys-wellness-icon { width: 2.35rem !important; height: 2.35rem !important; border-radius: .72rem !important; }
+      .thalys-wellness-label { margin-top: .25rem !important; font-size: .47rem !important; }
+      #enter-app-btn { margin-top: .75rem !important; min-height: 2.9rem !important; padding-top: .65rem !important; padding-bottom: .65rem !important; }
+    }
+    @media (max-height: 700px) {
+      .thalys-logo-mark { width: 4.3rem !important; height: 4.3rem !important; }
+      .thalys-brand-name { font-size: 1.65rem !important; }
+      .thalys-breathe-stage { width: min(8.7rem, 42vw) !important; }
+      .thalys-breath-label { font-size: .5rem !important; }
+      .thalys-wellness-row { display: none !important; }
+      .thalys-quote-lead { font-size: 1.85rem !important; }
+      .thalys-quote-rest { font-size: .98rem !important; }
+    }
+
+    /* Food database: list-first, editor on demand */
+    #food-preset-form.hidden { display: none !important; }
+    #food-preset-modal > div { min-height: min(78dvh, 42rem); }
+    #food-preset-modal .food-db-toolbar { flex: 0 0 auto; }
+    #presets-list { min-height: 8rem; }
+    @media (max-width: 430px) {
+      #food-preset-modal > div { max-height: 92dvh !important; min-height: 72dvh; }
+    }
+
+    /* Mind tools */
+    .mind-tool-card { overflow: hidden; }
+    .mind-control {
+      min-height: 44px;
+      border-radius: 14px;
+      touch-action: manipulation;
+    }
+    .mind-breath-orb {
+      width: 8.7rem;
+      height: 8.7rem;
+      margin: 1rem auto .8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(103,232,249,.36);
+      background: radial-gradient(circle at 42% 38%, rgba(207,250,254,.18), rgba(6,182,212,.08) 45%, rgba(15,23,42,.14) 72%);
+      box-shadow: inset 0 0 28px rgba(255,255,255,.025), 0 0 30px rgba(34,211,238,.08);
+      transform: scale(.76);
+      transition: transform 4s ease-in-out, box-shadow 4s ease-in-out, opacity 4s ease-in-out;
+    }
+    .mind-breath-orb.inhale {
+      transform: scale(1.08);
+      box-shadow: inset 0 0 35px rgba(255,255,255,.04), 0 0 44px rgba(34,211,238,.2);
+      opacity: 1;
+    }
+    .mind-breath-orb.exhale { transform: scale(.76); opacity: .76; }
+    .mind-progress-ring {
+      --progress: 0deg;
+      width: 9.2rem;
+      height: 9.2rem;
+      margin: 1rem auto;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(rgb(167 139 250) var(--progress), rgba(51,65,85,.55) 0);
+      position: relative;
+    }
+    .mind-progress-ring::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: inherit;
+      background: #0f172a;
+      border: 1px solid rgba(139,92,246,.2);
+    }
+    .mind-progress-ring > * { position: relative; z-index: 1; }
+    .body-scan-zone { fill: rgba(16,185,129,.10); stroke: rgba(167,243,208,.28); stroke-width: 1.2; transition: fill .35s ease, filter .35s ease, opacity .35s ease; }
+    .body-scan-zone.active { fill: rgba(52,211,153,.72); filter: drop-shadow(0 0 9px rgba(52,211,153,.65)); }
+    .gratitude-memory { border-left: 2px solid rgba(251,191,36,.45); }
+
+    /* ===== Visual balance: welcome + workout controls ===== */
+    @media (min-height: 821px) and (max-width: 520px) {
+      .thalys-welcome-card {
+        justify-content: space-evenly !important;
+        padding-top: .25rem !important;
+        padding-bottom: .65rem !important;
+      }
+      .thalys-logo-mark { width: 6.35rem; height: 6.35rem; }
+      .thalys-breathe-wrap { margin: .7rem auto .45rem !important; }
+      .thalys-breathe-stage { width: min(12.7rem, 58vw) !important; }
+      .thalys-wellness-row { margin-top: .8rem !important; }
+      #enter-app-btn { margin-top: .85rem !important; }
+    }
+    #enter-app-btn {
+      width: min(100%, 19.5rem) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    @media (max-width: 430px) {
+      #tab-workout .workout-header-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem !important;
+        width: 100%;
+      }
+      #tab-workout .workout-header-actions button {
+        width: 100%;
+        min-height: 44px;
+        justify-content: center;
+        padding-left: .65rem !important;
+        padding-right: .65rem !important;
+        white-space: nowrap;
+      }
+      #tab-workout > .workout-top-row {
+        align-items: stretch !important;
+        flex-direction: column !important;
+        gap: .75rem;
+      }
+    }
+
+    /* ===== BMI / BMR info ===== */
+    .body-index-info-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(148,163,184,.18);
+      background: rgba(15,23,42,.55);
+      color: rgb(196 181 253);
+      touch-action: manipulation;
+    }
+
+    /* ===== Apple-like 3D avatar ===== */
+    #avatar-3d-stage {
+      position: relative;
+      width: 100%;
+      min-height: 27rem;
+      border-radius: 1.55rem;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,255,255,.07), transparent 30%),
+        radial-gradient(circle at 50% 78%, rgba(34,211,238,.05), transparent 37%),
+        linear-gradient(180deg, rgba(15,23,42,.98), rgba(2,6,23,.98));
+      border: 1px solid rgba(148,163,184,.13);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 18px 45px rgba(0,0,0,.18);
+    }
+    #avatar-3d-stage canvas {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 27rem;
+      display: block;
+      touch-action: none;
+    }
+    .avatar-measure-chip {
+      border: 1px solid rgba(148,163,184,.13);
+      background: rgba(15,23,42,.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .avatar-control-row input[type="range"] {
+      accent-color: rgb(34 211 238);
+      width: 100%;
+      min-height: 30px;
+    }
+    .avatar-palette-option {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.22);
+      box-shadow: 0 0 0 1px rgba(15,23,42,.7);
+    }
+    .avatar-palette-option.active {
+      border-color: white;
+      box-shadow: 0 0 0 2px rgb(34 211 238 / .55);
+    }
+    @media (max-width: 430px) {
+      #avatar-3d-stage, #avatar-3d-stage canvas { min-height: 23rem; }
+    }
+
+    /* ===== Welcome: vertical rhythm on iPhone / Android ===== */
+    #welcome-screen .thalys-welcome-card {
+      gap: 0 !important;
+      justify-content: flex-start !important;
+      padding-top: clamp(.35rem, 1.3dvh, .95rem) !important;
+      padding-bottom: clamp(.8rem, 2dvh, 1.35rem) !important;
+    }
+    #welcome-screen .thalys-logo-mark { flex: 0 0 auto; }
+    #welcome-screen .thalys-breathe-wrap { margin-top: clamp(.65rem, 1.8dvh, 1.25rem) !important; margin-bottom: clamp(.55rem, 1.5dvh, 1rem) !important; }
+    #welcome-screen .thalys-quote { margin-top: clamp(.2rem, .6dvh, .55rem) !important; }
+    #welcome-screen .thalys-wellness-row { margin-top: clamp(1.05rem, 2.8dvh, 1.85rem) !important; }
+    #welcome-screen #enter-app-btn { margin-top: clamp(1.2rem, 3.2dvh, 2rem) !important; }
+    #welcome-screen .thalys-google-note { margin-top: clamp(.7rem, 1.8dvh, 1.1rem) !important; }
+    @media (min-height: 820px) and (max-width:520px){
+      #welcome-screen .thalys-welcome-card { min-height: 100%; }
+      #welcome-screen .thalys-logo-mark { margin-top: .35rem; }
+      #welcome-screen .thalys-wellness-row { margin-top: 1.45rem !important; }
+      #welcome-screen #enter-app-btn { margin-top: 1.65rem !important; }
+    }
+    @media (max-height: 740px){
+      #welcome-screen .thalys-welcome-card { padding-top: .15rem !important; }
+      #welcome-screen .thalys-breathe-wrap { margin-top: .25rem !important; margin-bottom: .2rem !important; }
+      #welcome-screen .thalys-wellness-row { margin-top: .55rem !important; }
+      #welcome-screen #enter-app-btn { margin-top: .7rem !important; }
+    }
+
+    /* ===== Real GLB avatar viewer ===== */
+    #avatar-3d-stage {
+      min-height: 31rem;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,.08), transparent 28%),
+        radial-gradient(circle at 50% 75%, rgba(34,211,238,.055), transparent 38%),
+        linear-gradient(180deg, #111827 0%, #050a11 100%);
+    }
+    #avatar-3d-stage canvas { min-height: 31rem; }
+    .avatar-debug-pill { border:1px solid rgba(148,163,184,.14); background:rgba(15,23,42,.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+    .avatar-hair-btn.active { border-color:rgb(34 211 238); color:rgb(165 243 252); background:rgba(6,182,212,.12); }
+    .avatar-hair-btn[disabled] { opacity:.38; cursor:not-allowed; }
+    .avatar-model-alert { border:1px solid rgba(251,191,36,.28); background:rgba(245,158,11,.07); }
+    @media(max-width:430px){ #avatar-3d-stage,#avatar-3d-stage canvas{min-height:27rem;} }
+
+    /* ===== Emotional check-in ===== */
+    .emotion-chip { min-height:58px; border:1px solid rgba(148,163,184,.14); background:rgba(15,23,42,.58); transition:.18s ease; }
+    .emotion-chip.active { border-color:rgba(167,139,250,.8); background:rgba(139,92,246,.15); box-shadow:0 0 0 2px rgba(139,92,246,.09); }
+    .mind-tool-card.recommended { border-color:rgba(167,139,250,.78)!important; box-shadow:0 0 0 1px rgba(167,139,250,.2),0 18px 40px rgba(76,29,149,.12); }
+    .mind-recommended-badge { display:none; }
+    .mind-tool-card.recommended .mind-recommended-badge { display:inline-flex; }
+    .breath-tech-btn.active,.mind-duration-btn.active { background:rgba(34,211,238,.16); border-color:rgba(34,211,238,.58); color:rgb(165 243 252); }
+
+    /* ===== Suoni ambiente / white noise ===== */
+    .ambient-sound-card {
+      border: 1px solid rgba(56,189,248,.16);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(56,189,248,.08), transparent 35%),
+        linear-gradient(145deg, rgba(8,47,73,.34), rgba(2,6,23,.92));
+    }
+    .ambient-sound-btn {
+      min-height: 64px;
+      border: 1px solid rgba(71,85,105,.7);
+      background: rgba(15,23,42,.72);
+      color: rgb(203 213 225);
+      border-radius: 16px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ambient-sound-btn:active { transform: scale(.97); }
+    .ambient-sound-btn.active {
+      border-color: rgba(103,232,249,.62);
+      background: rgba(8,145,178,.18);
+      color: rgb(207 250 254);
+      box-shadow: 0 0 0 1px rgba(34,211,238,.12), 0 10px 30px rgba(6,182,212,.08);
+    }
+    .ambient-volume {
+      accent-color: rgb(34 211 238);
+      width: 100%;
+      min-height: 30px;
+    }
+
+    /* ===== Avatar corporeo 2D premium / parametrico ===== */
+    .avatar2d-card {
+      background:
+        radial-gradient(circle at 50% 12%, rgba(56,189,248,.07), transparent 30%),
+        linear-gradient(180deg, rgba(19,27,46,.98), rgba(7,12,24,.98));
+    }
+    .avatar2d-stage {
+      position: relative;
+      width: 100%;
+      min-height: 40rem;
+      border-radius: 1.65rem;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,.14);
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,.045), transparent 35%),
+        linear-gradient(180deg, rgba(15,23,42,.75), rgba(2,6,23,.96));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 18px 50px rgba(0,0,0,.18);
+    }
+    .avatar2d-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(148,163,184,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(to bottom, transparent, black 16%, black 84%, transparent);
+    }
+    #avatar2d-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 40rem;
+      max-height: 48rem;
+      touch-action: manipulation;
+    }
+    .avatar2d-skin {
+      transition: d .34s cubic-bezier(.2,.8,.2,1), fill .25s ease;
+      filter: drop-shadow(0 12px 15px rgba(0,0,0,.16));
+    }
+    .avatar2d-outline {
+      fill: none;
+      stroke: rgba(255,255,255,.12);
+      stroke-width: 1.15;
+      vector-effect: non-scaling-stroke;
+      pointer-events: none;
+    }
+    .avatar2d-softline {
+      fill: none;
+      stroke: rgba(71,85,105,.36);
+      stroke-width: 1.25;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .avatar2d-feature {
+      fill: none;
+      stroke: rgba(15,23,42,.68);
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: d .25s ease, opacity .25s ease;
+    }
+    .avatar2d-eye {
+      fill: rgba(15,23,42,.82);
+      transition: cy .2s ease, ry .2s ease;
+    }
+    .avatar2d-cheek {
+      fill: rgba(244,114,182,.18);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .avatar2d-tear {
+      fill: rgba(125,211,252,.85);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .avatar2d-hair {
+      fill: var(--avatar-hair, #201814);
+      stroke: rgba(255,255,255,.06);
+      stroke-width: .8;
+      transition: d .3s ease, fill .2s ease;
+    }
+    .avatar2d-measures {
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+    }
+    .avatar2d-measures.visible { opacity: 1; }
+    .avatar2d-measure-line {
+      stroke: rgba(103,232,249,.75);
+      stroke-width: 1.15;
+      stroke-dasharray: 4 4;
+      vector-effect: non-scaling-stroke;
+    }
+    .avatar2d-measure-arrow {
+      fill: rgba(103,232,249,.9);
+    }
+    .avatar2d-measure-label-bg {
+      fill: rgba(2,6,23,.86);
+      stroke: rgba(103,232,249,.22);
+      stroke-width: 1;
+    }
+    .avatar2d-measure-label {
+      fill: rgb(207 250 254);
+      font-size: 9px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      font-weight: 650;
+      letter-spacing: .01em;
+    }
+    .avatar2d-toggle {
+      min-height: 42px;
+      border-radius: 13px;
+      border: 1px solid rgba(71,85,105,.65);
+      background: rgba(15,23,42,.72);
+      color: rgb(203 213 225);
+      touch-action: manipulation;
+    }
+    .avatar2d-toggle.active {
+      color: rgb(207 250 254);
+      border-color: rgba(34,211,238,.52);
+      background: rgba(8,145,178,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .avatar2d-custom-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: .55rem;
+    }
+    .avatar2d-hair-btn {
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(71,85,105,.65);
+      background: rgba(15,23,42,.64);
+      color: rgb(203 213 225);
+    }
+    .avatar2d-hair-btn.active {
+      border-color: rgba(167,139,250,.55);
+      background: rgba(109,40,217,.14);
+      color: rgb(221 214 254);
+    }
+    @media (max-width:430px){
+      .avatar2d-stage { min-height: 35rem; }
+      #avatar2d-svg { min-height: 35rem; max-height: 43rem; }
+    }
+
+    /* Welcome mobile balance: intentionally separates breathing, quote and sign-in */
+    #welcome-screen .thalys-quote{
+      margin-top: clamp(1.35rem, 3.8dvh, 2.65rem) !important;
+    }
+    #welcome-screen .thalys-wellness-row{
+      margin-top: clamp(1.35rem, 3.2dvh, 2.15rem) !important;
+    }
+    #welcome-screen .thalys-google-btn{
+      margin-top: clamp(2rem, 5.2dvh, 3.6rem) !important;
+      width:min(88%,22rem) !important;
+      margin-left:auto !important;
+      margin-right:auto !important;
+    }
+    #welcome-screen .thalys-google-note{
+      margin-top:.85rem !important;
+      padding-bottom:max(.5rem,env(safe-area-inset-bottom)) !important;
+    }
+    @media (max-height:760px){
+      #welcome-screen .thalys-quote{margin-top:1rem !important}
+      #welcome-screen .thalys-wellness-row{margin-top:.85rem !important}
+      #welcome-screen .thalys-google-btn{margin-top:1.45rem !important}
+    }
+
+    .workout-header-actions{
+      display:grid !important;
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+      gap:.55rem !important;
+      width:min(100%,18.5rem) !important;
+      align-items:stretch !important;
+    }
+    .workout-header-actions > button{
+      width:100% !important;
+      min-width:0 !important;
+      min-height:42px !important;
+      height:42px !important;
+      padding:.55rem .7rem !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      line-height:1 !important;
+      white-space:nowrap !important;
+      margin:0 !important;
+      box-sizing:border-box !important;
+    }
+    @media(max-width:390px){
+      .workout-header-actions{width:100% !important}
+      .workout-header-actions > button{font-size:10px !important;padding:.5rem !important}
+    }
+
+    /* Semi-realistic editorial avatar rendering */
+    .avatar2d-stage{
+      background:
+        radial-gradient(ellipse at 50% 30%,rgba(255,255,255,.075),transparent 32%),
+        radial-gradient(ellipse at 50% 85%,rgba(34,211,238,.045),transparent 32%),
+        linear-gradient(180deg,#172033 0%,#0b1220 52%,#050914 100%) !important;
+    }
+    .avatar2d-skin{filter:drop-shadow(0 18px 18px rgba(0,0,0,.22))}
+    .avatar2d-muscle{
+      fill:none;stroke:rgba(71,43,31,.24);stroke-width:1.15;stroke-linecap:round;
+      vector-effect:non-scaling-stroke;opacity:.78
+    }
+    .avatar2d-highlight{
+      fill:none;stroke:rgba(255,255,255,.20);stroke-width:1.6;stroke-linecap:round;
+      vector-effect:non-scaling-stroke;opacity:.7
+    }
+    .avatar2d-shadow-shape{fill:rgba(70,38,27,.10);pointer-events:none}
+    .avatar2d-lip{fill:rgba(122,50,55,.58);stroke:rgba(68,31,32,.38);stroke-width:.7}
+    .avatar2d-iris{fill:#594637;stroke:#17120f;stroke-width:.75}
+    .avatar2d-sclera{fill:rgba(255,255,255,.78)}
+    .avatar2d-lash{fill:none;stroke:#241713;stroke-width:1.25;stroke-linecap:round}
+
+    /* ===== Palestra: allineamento esatto alle card sottostanti ===== */
+    #tab-workout .workout-top-row{
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:stretch !important;
+      gap:.85rem !important;
+      width:100% !important;
+    }
+    #tab-workout .workout-header-actions{
+      width:100% !important;
+      display:grid !important;
+      grid-template-columns:1fr 1fr !important;
+      gap:.65rem !important;
+      margin:0 !important;
+    }
+    #tab-workout .workout-header-actions > button{
+      width:100% !important;
+      min-width:0 !important;
+      height:44px !important;
+      min-height:44px !important;
+      margin:0 !important;
+      padding:.55rem .65rem !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      box-sizing:border-box !important;
+      white-space:nowrap !important;
+    }
+
+    /* ===== Avatar realistico da artwork SVG forniti ===== */
+    .avatar-art-card{
+      background:
+        radial-gradient(circle at 50% 13%,rgba(56,189,248,.06),transparent 30%),
+        linear-gradient(180deg,rgba(17,24,39,.98),rgba(4,8,18,.99));
+    }
+    .avatar-art-stage{
+      position:relative;
+      width:100%;
+      min-height:39rem;
+      border-radius:1.65rem;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.13);
+      background:
+        radial-gradient(ellipse at 50% 28%,rgba(255,255,255,.07),transparent 30%),
+        radial-gradient(ellipse at 50% 88%,rgba(34,211,238,.05),transparent 30%),
+        linear-gradient(180deg,#172033 0%,#0b1220 53%,#050914 100%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 18px 48px rgba(0,0,0,.2);
+    }
+    #avatar-art-svg{
+      display:block;
+      width:100%;
+      height:auto;
+      min-height:39rem;
+      max-height:48rem;
+    }
+    
+    .avatar-art-measures{
+      opacity:0;
+      transition:opacity .22s ease;
+      pointer-events:none;
+    }
+    .avatar-art-measures.visible{opacity:1}
+    .avatar-art-measure-line{
+      stroke:rgba(103,232,249,.88);
+      stroke-width:2.2;
+      stroke-dasharray:8 7;
+      vector-effect:non-scaling-stroke;
+      filter:drop-shadow(0 0 5px rgba(34,211,238,.25));
+    }
+    .avatar-art-label-bg{
+      fill:rgba(2,6,23,.9);
+      stroke:rgba(103,232,249,.28);
+      stroke-width:1.5;
+    }
+    .avatar-art-label{
+      fill:#cffafe;
+      font:600 20px -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+      letter-spacing:.01em;
+    }
+    .avatar-art-expression-line{
+      fill:none;
+      stroke:#4b2b25;
+      stroke-width:5.5;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .avatar-art-tear{
+      fill:rgba(125,211,252,.92);
+      stroke:rgba(224,242,254,.72);
+      stroke-width:1.5;
+      filter:drop-shadow(0 2px 3px rgba(56,189,248,.3));
+    }
+    .avatar-art-control{
+      min-height:42px;
+      border-radius:13px;
+      border:1px solid rgba(71,85,105,.65);
+      background:rgba(15,23,42,.72);
+      color:rgb(203 213 225);
+      touch-action:manipulation;
+    }
+    .avatar-art-control.active{
+      color:#cffafe;
+      border-color:rgba(34,211,238,.5);
+      background:rgba(8,145,178,.15);
+    }
+    .avatar-art-note{
+      border:1px solid rgba(34,211,238,.13);
+      background:rgba(8,145,178,.055);
+    }
+    @media(max-width:430px){
+      .avatar-art-stage{min-height:34rem}
+      #avatar-art-svg{min-height:34rem;max-height:43rem}
+    }
+
+    .mind-info-btn{
+      width:44px !important;
+      height:44px !important;
+      min-width:44px !important;
+      min-height:44px !important;
+      max-width:44px !important;
+      max-height:44px !important;
+      flex:0 0 44px !important;
+      padding:0 !important;
+      border-radius:9999px !important;
+      aspect-ratio:1/1 !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      line-height:1 !important;
+    }
+    .mind-info-btn i{line-height:1 !important}
+
+    #wellness-date{
+      width:calc(50% - .375rem) !important;
+      max-width:11rem !important;
+      min-width:0 !important;
+      box-sizing:border-box !important;
+    }
+
+    #avatar-gender-male,#avatar-gender-female{
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:.5rem !important;
+      line-height:1 !important;
+    }
+    #avatar-gender-male i,#avatar-gender-female i,
+    #avatar-gender-male span,#avatar-gender-female span{
+      display:inline-flex !important;
+      align-items:center !important;
+      line-height:1 !important;
+      transform:none !important;
+      vertical-align:middle !important;
+    }
+
+    .avatar-art-label{
+      font-size:18px !important;
+      font-weight:700 !important;
+    }
+    #avatar-mood-copy{
+      font-size:12.5px !important;
+      line-height:1.5 !important;
+    }
+
+    /* ===== Welcome final mobile polish ===== */
+    @media (max-width: 520px) {
+      #welcome-screen .thalys-quote-lead{
+        letter-spacing:.012em !important;
+        word-spacing:.035em !important;
+      }
+      #welcome-screen .thalys-quote-rest{
+        letter-spacing:.006em !important;
+      }
+      #welcome-screen .thalys-google-btn{
+        margin-top:clamp(2.8rem,6.4dvh,4.4rem) !important;
+      }
+    }
+    @media (max-height: 760px) and (max-width:520px){
+      #welcome-screen .thalys-google-btn{margin-top:2rem !important;}
+    }
+
+    /* ===== Info buttons: perfect circles on iOS/Android ===== */
+    .body-index-info-btn,
+    #tab-analytics button[title="Informazioni target e best practice"]{
+      width:40px !important;
+      height:40px !important;
+      min-width:40px !important;
+      min-height:40px !important;
+      max-width:40px !important;
+      max-height:40px !important;
+      flex:0 0 40px !important;
+      padding:0 !important;
+      margin:0 !important;
+      border-radius:9999px !important;
+      aspect-ratio:1 / 1 !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      line-height:1 !important;
+      box-sizing:border-box !important;
+    }
+    .body-index-info-btn i,
+    #tab-analytics button[title="Informazioni target e best practice"] i{
+      line-height:1 !important;
+    }
+
+    .header-timer-center{
+      width:38px !important;height:38px !important;min-width:38px !important;min-height:38px !important;
+      padding:0 !important;border:0 !important;background:transparent !important;
+      display:flex !important;align-items:center !important;justify-content:center !important;z-index:2;
+    }
+    .header-timer-center i{font-size:21px !important;line-height:1 !important;}
+    .header-profile-button{
+      width:34px;height:34px;min-width:34px;min-height:34px;padding:0;border-radius:9999px;overflow:hidden;
+      border:1px solid rgba(103,232,249,.34);background:rgba(15,23,42,.85);
+      display:flex;align-items:center;justify-content:center;color:#67e8f9;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .profile-photo-img{width:100%;height:100%;object-fit:cover;display:block;}
+    .profile-photo-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:14px;}
+    @media(max-width:390px){
+      .header-timer-center{width:34px !important;height:34px !important;min-width:34px !important;min-height:34px !important;}
+      .header-timer-center i{font-size:19px !important;}
+      .header-profile-button{width:31px;height:31px;min-width:31px;min-height:31px;}
+    }
+
+    #toast, .toast, .thalys-toast{
+      white-space:nowrap !important;
+    }
+
+    @media (max-width:520px){
+      #welcome-screen .thalys-quote{
+        margin-top:clamp(2.2rem,5.5dvh,3.6rem) !important;
+      }
+      #welcome-screen .thalys-wellness-row{
+        display:flex !important;
+        margin-top:clamp(1.6rem,4dvh,2.6rem) !important;
+      }
+      #welcome-screen .thalys-google-btn{
+        margin-top:clamp(3.4rem,7.5dvh,5.2rem) !important;
+      }
+      #welcome-screen .thalys-google-note{
+        margin-top:1rem !important;
+      }
+    }
+    @media (max-width:520px) and (max-height:740px){
+      #welcome-screen .thalys-quote{margin-top:1.55rem !important;}
+      #welcome-screen .thalys-wellness-row{margin-top:1rem !important;}
+      #welcome-screen .thalys-google-btn{margin-top:2rem !important;}
+    }
+
+    .app-header .header-profile-button{margin-left:auto;}
+
+    /* ===== Welcome: large central breathing guide ===== */
+    #welcome-screen .thalys-wellness-row{display:none !important;}
+
+    @media (max-width:520px){
+      #welcome-screen .thalys-welcome-card{
+        justify-content:flex-start !important;
+        padding-top:max(.35rem,env(safe-area-inset-top)) !important;
+      }
+
+      #welcome-screen .thalys-logo-mark{
+        width:5.25rem !important;
+        height:5.25rem !important;
+      }
+
+      #welcome-screen .thalys-brand-name{
+        margin-top:.35rem !important;
+        font-size:2rem !important;
+      }
+
+      #welcome-screen .thalys-brand-tagline{
+        margin-top:.15rem !important;
+      }
+
+      #welcome-screen .thalys-breathe-wrap{
+        margin:clamp(1.1rem,3dvh,1.9rem) auto 0 !important;
+        width:100% !important;
+        display:flex !important;
+        justify-content:center !important;
+        align-items:center !important;
+      }
+
+      #welcome-screen .thalys-breathe-stage{
+        width:min(22rem,88vw) !important;
+        height:min(22rem,88vw) !important;
+        max-width:none !important;
+        flex:0 0 auto !important;
+      }
+
+      #welcome-screen .thalys-breathe-field{
+        width:100% !important;
+        height:100% !important;
+      }
+
+      #welcome-screen .thalys-breath-arcs{
+        width:100% !important;
+        height:100% !important;
+      }
+
+      #welcome-screen .thalys-breathe-core{
+        width:55% !important;
+        height:55% !important;
+      }
+
+      #welcome-screen .thalys-lotus{
+        width:42% !important;
+        height:42% !important;
+      }
+
+      #welcome-screen .thalys-orbit-dot{
+        width:1rem !important;
+        height:1rem !important;
+      }
+
+      #welcome-screen .thalys-breath-label{
+        font-size:.8rem !important;
+        letter-spacing:.12em !important;
+      }
+
+      #welcome-screen .thalys-quote{
+        margin-top:clamp(1.6rem,4dvh,2.8rem) !important;
+      }
+
+      #welcome-screen .thalys-google-btn{
+        margin-top:clamp(2.4rem,5.8dvh,4rem) !important;
+      }
+    }
+
+    @media (max-width:520px) and (max-height:760px){
+      #welcome-screen .thalys-breathe-stage{
+        width:min(18.5rem,78vw) !important;
+        height:min(18.5rem,78vw) !important;
+      }
+      #welcome-screen .thalys-quote{
+        margin-top:1rem !important;
+      }
+      #welcome-screen .thalys-google-btn{
+        margin-top:1.7rem !important;
+      }
+    }
+
+    /* ===== Welcome breathing guide alignment fix ===== */
+    @media (max-width:520px){
+      #welcome-screen .thalys-breathe-stage{
+        width:min(22rem,88vw) !important;
+        height:auto !important;
+        aspect-ratio:1 / 1 !important;
+        position:relative !important;
+        display:grid !important;
+        place-items:center !important;
+      }
+
+      /* Keep every breathing layer on the same center.
+         Do not combine inset with explicit width/height. */
+      #welcome-screen .thalys-breathe-field{
+        position:absolute !important;
+        inset:8% !important;
+        width:auto !important;
+        height:auto !important;
+        aspect-ratio:auto !important;
+        transform-origin:50% 50% !important;
+      }
+
+      #welcome-screen .thalys-breath-arcs{
+        position:absolute !important;
+        inset:-1px !important;
+        width:calc(100% + 2px) !important;
+        height:calc(100% + 2px) !important;
+      }
+
+      #welcome-screen .thalys-breathe-core{
+        position:absolute !important;
+        inset:29% !important;
+        width:auto !important;
+        height:auto !important;
+        display:grid !important;
+        place-items:center !important;
+      }
+
+      #welcome-screen .thalys-lotus{
+        width:clamp(3.8rem,18vw,5.25rem) !important;
+        height:clamp(3.8rem,18vw,5.25rem) !important;
+      }
+
+      /* Orbit element must remain the full circular track;
+         only its ::after pseudo-element is the small moving dot. */
+      #welcome-screen .thalys-orbit-dot{
+        position:absolute !important;
+        inset:8% !important;
+        width:auto !important;
+        height:auto !important;
+        border-radius:9999px !important;
+        transform-origin:50% 50% !important;
+      }
+
+      #welcome-screen .thalys-orbit-dot::after{
+        width:14px !important;
+        height:14px !important;
+        top:-7px !important;
+      }
+
+      #welcome-screen .thalys-breath-label{
+        left:50% !important;
+        transform:translateX(-50%) !important;
+        width:max-content !important;
+        text-align:center !important;
+        z-index:6 !important;
+      }
+      #welcome-screen .thalys-breath-label.inhale{top:15% !important;}
+      #welcome-screen .thalys-breath-label.exhale{bottom:14% !important;}
+    }
+
+    @media (max-width:520px) and (max-height:760px){
+      #welcome-screen .thalys-breathe-stage{
+        width:min(18.5rem,78vw) !important;
+      }
+    }
+
+.header-message-button{width:34px;height:34px;min-width:34px;min-height:34px;padding:0;border:0;background:transparent;color:#cbd5e1;display:flex;align-items:center;justify-content:center;position:relative}
+.header-message-button i{font-size:17px}
+#header-message-badge{position:absolute;right:-3px;top:-3px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#ef4444;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #0f172a}
+.profile-connection-dot{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;border:2px solid #0f172a;background:#ef4444}
+.profile-connection-dot.online{background:#22c55e}.profile-connection-dot.offline{background:#ef4444}
+.guided-pulse{animation:guidedPulse 1.05s ease-in-out infinite!important;position:relative;z-index:6}
+@keyframes guidedPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.5)}50%{box-shadow:0 0 0 10px rgba(34,211,238,0)}}
+.message-row.done{opacity:.62}.message-row.done .message-title{text-decoration:line-through}
+.help-tree-tab.active{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.38);color:#cffafe}
+.help-demo-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.43rem .62rem;border-radius:.72rem;background:#1e293b;border:1px solid #334155;color:#e2e8f0;font-size:10px;font-weight:750}
+.home-avatar-art{transition:transform .22s ease}.home-avatar-art.avatar-bounce{animation:homeAvatarBounce .48s ease}
+@keyframes homeAvatarBounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}70%{transform:translateY(2px)}}
+.avatar-sparkle{animation:sparklePop .7s ease forwards}@keyframes sparklePop{0%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1.2) rotate(18deg)}100%{opacity:0;transform:scale(.7) rotate(35deg)}}
+.mind-breath-visual{position:relative;overflow:hidden}
+.mind-breath-visual:before,.mind-breath-visual:after{content:"";position:absolute;inset:10%;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.18),transparent 24%),conic-gradient(from 0deg,rgba(34,211,238,.06),rgba(167,139,250,.22),rgba(34,211,238,.06));animation:mysticSpin 12s linear infinite}
+.mind-breath-visual:after{inset:24%;animation-direction:reverse;animation-duration:8s;opacity:.7}@keyframes mysticSpin{to{transform:rotate(360deg)}}
+.med-date-mini{display:flex;align-items:center;gap:.2rem;border:1px solid rgba(139,92,246,.2);background:rgba(15,23,42,.48);border-radius:999px;padding:.18rem .3rem}
+.med-date-mini button{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;color:#c4b5fd}
+.med-date-mini input{width:104px;background:transparent;border:0;color:#e2e8f0;font-size:10px;text-align:center}
+
+    /* ===== Header/profile/message refinements ===== */
+    #header-message-badge.hidden{display:none !important;}
+    #header-message-badge:not(.hidden){display:flex !important;}
+    .header-profile-button{position:relative !important;overflow:visible !important;}
+    .header-profile-button .profile-photo-img,
+    .header-profile-button .profile-photo-fallback{
+      border-radius:9999px;
+      overflow:hidden;
+    }
+    #profile-connection-dot{
+      position:absolute !important;
+      right:-1px !important;
+      bottom:-1px !important;
+      left:auto !important;
+      top:auto !important;
+      z-index:8 !important;
+      width:11px !important;
+      height:11px !important;
+      border-radius:9999px !important;
+      border:2px solid #0f172a !important;
+    }
+
+    /* Perfect circular meal + buttons */
+    .meal-add-circle{
+      width:30px !important;height:30px !important;min-width:30px !important;min-height:30px !important;
+      max-width:30px !important;max-height:30px !important;padding:0 !important;flex:0 0 30px !important;
+      aspect-ratio:1/1 !important;border-radius:9999px !important;display:inline-flex !important;
+      align-items:center !important;justify-content:center !important;box-sizing:border-box !important;
+    }
+
+    /* Meditation header date */
+    .meditation-title-row{display:flex;align-items:center;justify-content:space-between;gap:.65rem}
+    .med-date-mini{
+      flex:0 0 auto !important;
+      padding:.1rem .22rem !important;
+      gap:.08rem !important;
+      transform:translateY(1px);
+    }
+    .med-date-mini button{width:22px !important;height:22px !important;min-width:22px !important;padding:0 !important}
+    .med-date-mini input{width:92px !important;font-size:9px !important;padding:0 !important;line-height:1 !important}
+
+    /* Mystical dynamic breath orb: effect lives on the actual orb */
+    .mind-breath-orb{
+      position:relative !important;
+      isolation:isolate;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 48% 45%,rgba(240,253,250,.23) 0 7%,rgba(103,232,249,.13) 18%,transparent 42%),
+        radial-gradient(circle at 25% 30%,rgba(196,181,253,.20),transparent 34%),
+        radial-gradient(circle at 73% 68%,rgba(45,212,191,.18),transparent 35%),
+        #07121f !important;
+      box-shadow:
+        inset 0 0 34px rgba(167,139,250,.13),
+        inset 0 0 64px rgba(34,211,238,.08),
+        0 0 34px rgba(34,211,238,.13),
+        0 0 70px rgba(139,92,246,.08) !important;
+    }
+    .mind-breath-orb::before{
+      content:"";
+      position:absolute;
+      inset:-28%;
+      border-radius:44%;
+      z-index:-1;
+      background:
+        conic-gradient(from 0deg,
+          transparent 0 8%,
+          rgba(103,232,249,.28) 15%,
+          transparent 24%,
+          rgba(167,139,250,.28) 38%,
+          transparent 50%,
+          rgba(52,211,153,.22) 64%,
+          transparent 76%,
+          rgba(56,189,248,.22) 88%,
+          transparent 100%);
+      filter:blur(7px);
+      animation:thalysMysticSwirl 9s linear infinite;
+    }
+    .mind-breath-orb::after{
+      content:"✦  ·  ✧  ·  ✦";
+      position:absolute;
+      inset:12%;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(207,250,254,.52);
+      font-size:15px;
+      letter-spacing:.42rem;
+      text-shadow:0 0 12px rgba(103,232,249,.8),0 0 22px rgba(167,139,250,.45);
+      animation:thalysMysticFloat 5.5s ease-in-out infinite alternate;
+    }
+    @keyframes thalysMysticSwirl{to{transform:rotate(360deg) scale(1.05)}}
+    @keyframes thalysMysticFloat{
+      0%{transform:rotate(-14deg) scale(.84);opacity:.35}
+      50%{opacity:.9}
+      100%{transform:rotate(18deg) scale(1.08);opacity:.55}
+    }
+
+    /* ===== Mind breathing orb · welcome-inspired mystical edition ===== */
+    .mind-breath-orb{
+      width:10.5rem !important;height:10.5rem !important;margin:1.1rem auto .8rem !important;
+      position:relative !important;overflow:visible !important;border:0 !important;background:transparent !important;
+      box-shadow:none !important;border-radius:50% !important;
+      transform:scale(.78);transition:transform 4s cubic-bezier(.4,0,.2,1),opacity 4s ease !important;
+    }
+    .mind-breath-orb.inhale{transform:scale(1.08) !important;opacity:1 !important}
+    .mind-breath-orb.exhale{transform:scale(.78) !important;opacity:.82 !important}
+    .mind-breath-ring{
+      position:absolute;inset:7%;border-radius:50%;
+      border:1px solid rgba(103,232,249,.45);
+      box-shadow:0 0 22px rgba(34,211,238,.12),inset 0 0 24px rgba(139,92,246,.08);
+      background:
+        radial-gradient(circle at 50% 50%,rgba(15,23,42,.2) 0 54%,transparent 55%),
+        conic-gradient(from 20deg,rgba(52,211,153,.08),rgba(103,232,249,.25),rgba(167,139,250,.22),rgba(52,211,153,.08));
+      animation:mindRingAurora 10s linear infinite;
+    }
+    .mind-breath-ring::before,.mind-breath-ring::after{
+      content:"";position:absolute;border-radius:50%;pointer-events:none;
+    }
+    .mind-breath-ring::before{
+      inset:12%;border:1px solid rgba(196,181,253,.2);
+      box-shadow:0 0 28px rgba(167,139,250,.12) inset;
+      animation:mindRingReverse 13s linear infinite;
+    }
+    .mind-breath-ring::after{
+      inset:31%;background:radial-gradient(circle,rgba(207,250,254,.14),rgba(34,211,238,.03) 55%,transparent 70%);
+      filter:blur(2px);animation:mindGlowPulse 3.4s ease-in-out infinite alternate;
+    }
+    .mind-breath-orbit{position:absolute;inset:1%;border-radius:50%;animation:mindOrbit 8s linear infinite}
+    .mind-breath-orbit span{
+      position:absolute;left:50%;top:-2px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;
+      background:#a7f3d0;box-shadow:0 0 8px #67e8f9,0 0 19px rgba(167,139,250,.8),0 0 32px rgba(52,211,153,.42);
+    }
+    .mind-breath-core{
+      position:absolute;inset:31%;border-radius:50%;display:grid;place-items:center;color:#d9f99d;
+      background:radial-gradient(circle at 40% 32%,rgba(236,254,255,.26),rgba(34,211,238,.12) 34%,rgba(76,29,149,.12) 68%,rgba(15,23,42,.7));
+      border:1px solid rgba(207,250,254,.22);
+      box-shadow:0 0 28px rgba(34,211,238,.13),inset 0 0 20px rgba(167,139,250,.14);
+    }
+    .mind-breath-core i{font-size:1.35rem;filter:drop-shadow(0 0 8px rgba(103,232,249,.6));animation:mindCoreFloat 3.8s ease-in-out infinite alternate}
+    @keyframes mindOrbit{to{transform:rotate(360deg)}}
+    @keyframes mindRingAurora{to{transform:rotate(360deg)}}
+    @keyframes mindRingReverse{to{transform:rotate(-360deg)}}
+    @keyframes mindGlowPulse{from{opacity:.38;transform:scale(.84)}to{opacity:.9;transform:scale(1.16)}}
+    @keyframes mindCoreFloat{from{transform:translateY(2px) scale(.94);opacity:.72}to{transform:translateY(-2px) scale(1.05);opacity:1}}
+
+    #tab-home.focus-mode .home-secondary{display:none !important;}
+    #home-focus-toggle.active{background:rgba(34,211,238,.22)!important;border-color:rgba(34,211,238,.48)!important;color:#ecfeff!important}
+    .home-avatar-card[data-progress="zero"]{box-shadow:inset 0 0 0 1px rgba(148,163,184,.05)}
+    .home-avatar-card[data-progress="low"]{box-shadow:0 0 24px rgba(34,211,238,.05)}
+    .home-avatar-card[data-progress="mid"]{box-shadow:0 0 28px rgba(34,211,238,.09)}
+    .home-avatar-card[data-progress="high"]{box-shadow:0 0 32px rgba(52,211,153,.11)}
+    .home-avatar-card[data-progress="full"]{box-shadow:0 0 38px rgba(52,211,153,.18),inset 0 0 0 1px rgba(52,211,153,.12)}
+
+    /* ===== Mind breathing · soft welcome-like blur ===== */
+    .mind-breath-orb{
+      filter:none !important;
+      box-shadow:none !important;
+    }
+    .mind-breath-ring{
+      overflow:visible !important;
+      border:1px solid rgba(103,232,249,.32) !important;
+      box-shadow:none !important;
+      background:rgba(15,23,42,.12) !important;
+      backdrop-filter:blur(1px);
+    }
+    .mind-breath-ring::before{
+      inset:8% !important;
+      border:0 !important;
+      background:
+        radial-gradient(circle at 35% 30%,rgba(103,232,249,.32),transparent 34%),
+        radial-gradient(circle at 70% 66%,rgba(167,139,250,.26),transparent 38%),
+        radial-gradient(circle at 52% 50%,rgba(52,211,153,.13),transparent 56%) !important;
+      filter:blur(16px) !important;
+      opacity:.72 !important;
+      box-shadow:none !important;
+      animation:mindSoftMist 7.5s ease-in-out infinite alternate !important;
+    }
+    .mind-breath-ring::after{
+      inset:26% !important;
+      border:0 !important;
+      background:radial-gradient(circle,rgba(207,250,254,.18),rgba(103,232,249,.07) 38%,transparent 72%) !important;
+      filter:blur(8px) !important;
+      opacity:.72 !important;
+      box-shadow:none !important;
+      animation:mindSoftCore 4.4s ease-in-out infinite alternate !important;
+    }
+    .mind-breath-core{
+      border:1px solid rgba(207,250,254,.18) !important;
+      background:radial-gradient(circle at 42% 36%,rgba(236,254,255,.19),rgba(34,211,238,.07) 40%,rgba(15,23,42,.52) 76%) !important;
+      box-shadow:none !important;
+      backdrop-filter:blur(5px);
+    }
+    .mind-breath-orbit span{
+      box-shadow:0 0 8px rgba(103,232,249,.72),0 0 14px rgba(167,139,250,.38) !important;
+    }
+    @keyframes mindSoftMist{
+      from{transform:rotate(-7deg) scale(.92);opacity:.48}
+      to{transform:rotate(9deg) scale(1.10);opacity:.82}
+    }
+    @keyframes mindSoftCore{
+      from{transform:scale(.86);opacity:.45}
+      to{transform:scale(1.12);opacity:.8}
+    }
+
+    /* ===== Options quick guide balanced layout ===== */
+    #help-tree-tabs{
+      align-self:start;
+      position:sticky;
+      top:.25rem;
+    }
+    #help-tree-content{
+      height:23rem;
+      max-height:23rem;
+      overflow-y:auto !important;
+      overscroll-behavior:contain;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(103,232,249,.42) rgba(15,23,42,.35);
+      padding-right:.55rem !important;
+    }
+    #help-tree-content::-webkit-scrollbar{width:5px}
+    #help-tree-content::-webkit-scrollbar-track{background:rgba(15,23,42,.35);border-radius:999px}
+    #help-tree-content::-webkit-scrollbar-thumb{background:rgba(103,232,249,.40);border-radius:999px}
+    @media(max-width:390px){
+      #help-tree-content{height:21rem;max-height:21rem}
+    }
+
+    .consult-choice{min-height:44px;border:1px solid rgba(71,85,105,.8);background:rgba(15,23,42,.72);border-radius:14px;padding:.65rem .7rem;display:flex;align-items:center;justify-content:flex-start;gap:.55rem;color:#cbd5e1;font-size:10px;font-weight:800;position:relative;z-index:2;touch-action:manipulation}
+    .consult-choice.active{border-color:rgba(103,232,249,.5);background:rgba(6,182,212,.12);color:#cffafe;box-shadow:inset 0 0 0 1px rgba(103,232,249,.08)}
+    .consult-filter-chip{min-height:34px;border:1px solid rgba(71,85,105,.75);background:rgba(15,23,42,.72);border-radius:999px;padding:.35rem .65rem;color:#94a3b8;font-size:9px;font-weight:800;touch-action:manipulation}
+    .consult-filter-chip.active{border-color:rgba(103,232,249,.45);background:rgba(6,182,212,.13);color:#a5f3fc}
+    #tab-consult select,#tab-consult input,#tab-consult textarea{position:relative;z-index:2}
+    .food-db-shell{height:min(92dvh,860px);max-height:92dvh!important;overflow:hidden!important}
+    .food-db-list{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto}
+    .food-ai-form{transition:max-height .22s ease,flex-basis .22s ease,opacity .18s ease}
+    .food-db-shell.food-form-open .food-ai-form:not(.hidden){flex:0 0 min(46dvh,440px);min-height:min(42dvh,390px);max-height:min(46dvh,440px)}
+    .food-db-shell.food-form-open .food-db-list{flex:1 1 auto;min-height:115px;max-height:min(28dvh,245px)}
+    @media(max-height:740px){
+      .food-db-shell.food-form-open .food-ai-form:not(.hidden){flex-basis:43dvh;min-height:39dvh;max-height:43dvh}
+      .food-db-shell.food-form-open .food-db-list{min-height:90px;max-height:24dvh}
+    }
+
+    .v7-day-btn{width:100%;min-height:40px;border:1px solid rgba(71,85,105,.75);border-radius:12px;background:rgba(15,23,42,.8);padding:.45rem;color:#94a3b8;font-size:9px;font-weight:800;text-align:left;touch-action:manipulation}
+    .v7-day-btn.active{border-color:rgba(34,211,238,.45);background:rgba(6,182,212,.12);color:#cffafe}
+    .v7-ex-card{border:1px solid rgba(51,65,85,.85);border-radius:14px;background:rgba(15,23,42,.8);padding:.7rem}
+    #consult-snapshot-modal > div{padding-top:max(1rem,env(safe-area-inset-top,0px))}
+    #meditation-date{font-size:12px!important;font-weight:800!important}
+    .v7-apple-donut canvas{filter:drop-shadow(0 12px 24px rgba(2,6,23,.4))}
+
+    /* ===== Thalys V8 desktop + workout builder ===== */
+    #workout-plans-modal > div{overscroll-behavior:contain}
+    #plan-builder-panel{overflow-y:auto!important;overscroll-behavior:contain;scrollbar-gutter:stable}
+    #workout-plan-form{min-height:0}
+    #plan-builder-exercises{overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin;max-height:calc(90dvh - 320px)}
+    #plan-builder-days{overflow:visible!important}
+    #plan-builder-days .v7-day-btn{
+      min-height:48px!important;padding:.45rem .15rem!important;text-align:center!important;
+      font-size:10px!important;line-height:1.05!important;border-radius:11px!important
+    }
+    #plan-builder-days .v7-day-btn .v8-day-count{font-size:8px!important;margin-top:.25rem;opacity:.62}
+    #plan-builder-exercises .v7-ex-card{padding:.8rem!important}
+    #plan-builder-exercises input,#plan-builder-exercises select{font-size:12px!important;min-height:38px!important}
+    #plan-builder-exercises label{font-size:10px!important;line-height:1.2!important}
+    #plan-builder-exercises .v8-ex-name{font-size:13px!important;font-weight:750!important;min-height:42px!important}
+    @media(min-width:768px){
+      #workout-plans-modal > div{height:min(88vh,760px)!important}
+      #plan-builder-exercises{max-height:430px!important}
+    }
+
+    /* ===== Thalys V9 modal/navigation reliability ===== */
+    .fixed.hidden,
+    #consult-snapshot-modal.hidden {
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    #consult-snapshot-modal:not(.hidden){
+      display:flex !important;
+      pointer-events:auto !important;
+      visibility:visible !important;
+    }
+    #consult-snapshot-modal{
+      isolation:isolate;
+    }
+    html.modal-open-v9,
+    body.modal-open-v9{
+      overflow:hidden !important;
+    }
+    /* V9 deliberately does NOT use position:fixed/inset on body while a modal is open:
+       the app has its own scroll container, and fixing the body could trap navigation. */
+
+    /* ===== Thalys V10 iOS / WebKit hardening ===== */
+    :root{
+      --thalys-vh: 1vh;
+      --thalys-safe-top: env(safe-area-inset-top, 0px);
+      --thalys-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    html,body{
+      min-height:100%;
+      -webkit-text-size-adjust:100%;
+      overscroll-behavior-y:none;
+    }
+    body{
+      min-height:calc(var(--thalys-vh,1vh) * 100);
+    }
+    #app-shell{
+      min-height:calc(var(--thalys-vh,1vh) * 100);
+    }
+    #app-shell > main{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      min-height:0;
+    }
+    .fixed.inset-0,
+    [id$="-modal"]{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+    }
+    .thalys-ios-scroll{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      touch-action:pan-y;
+    }
+    button,select,input,textarea{
+      touch-action:manipulation;
+    }
+    /* prevent invisible overlays from catching taps on iOS */
+    .hidden{
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    /* consult viewer: always stays between header and bottom nav on iPhone */
+    #consult-snapshot-modal:not(.hidden){
+      top:calc(var(--thalys-safe-top) + 4.15rem) !important;
+      bottom:calc(var(--thalys-safe-bottom) + 4.55rem) !important;
+      height:auto !important;
+      max-height:none !important;
+      align-items:stretch !important;
+    }
+    #consult-snapshot-modal > div{
+      height:100% !important;
+      max-height:100% !important;
+      min-height:0 !important;
+      overflow:hidden !important;
+    }
+    #consult-detail-body{
+      -webkit-overflow-scrolling:touch;
+      overflow-y:auto !important;
+      min-height:0 !important;
+      overscroll-behavior:contain;
+    }
+    @supports (-webkit-touch-callout:none){
+      /* iOS WebKit only */
+      #workout-plans-modal > div,
+      #workout-plan-viewer-modal > div,
+      #workout-history-modal > div,
+      #meal-history-modal > div{
+        max-height:calc(var(--thalys-vh,1vh) * 92) !important;
+      }
+      input[type="date"],select,input,textarea{
+        font-size:16px; /* avoids iOS focus zoom */
+      }
+      .text-\[9px\] input,.text-\[10px\] input,.text-\[11px\] input{
+        font-size:16px !important;
+      }
+    }
+
+    /* ===== Thalys V12 profile-photo desktop reliability ===== */
+    #profile-photo-modal.hidden{
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    #profile-photo-modal:not(.hidden){
+      display:flex !important;
+      pointer-events:auto !important;
+      visibility:visible !important;
+    }
+    #profile-photo-modal > div{
+      position:relative;
+      z-index:2;
+    }
+    #profile-photo-modal .profile-photo-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* ===== Thalys V13: external logos, Light mode, desktop-only spacious layout ===== */
+    .thalys-theme-logo{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    .thalys-logo-mark .thalys-theme-logo{object-fit:contain;border-radius:1.65rem}
+    .thalys-header-logo{width:2.4rem;height:2.4rem;flex:0 0 2.4rem}
+    .thalys-header-logo .thalys-theme-logo{object-fit:cover}
+
+    /* LIGHT MODE. Dark remains the untouched base theme. */
+    body[data-thalys-theme="light"]{
+      background:#f4fbfb !important;
+      color:#172033 !important;
+    }
+    body[data-thalys-theme="light"] #app-shell{
+      background:
+        radial-gradient(circle at 12% 4%,rgba(45,212,191,.09),transparent 28%),
+        radial-gradient(circle at 90% 14%,rgba(6,182,212,.08),transparent 30%),
+        #f4fbfb !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen{
+      background:
+        radial-gradient(circle at 50% 8%,rgba(20,184,166,.10),transparent 30%),
+        radial-gradient(circle at 18% 84%,rgba(16,185,129,.08),transparent 32%),
+        radial-gradient(circle at 86% 72%,rgba(6,182,212,.08),transparent 30%),
+        linear-gradient(180deg,#f9ffff 0%,#edfafa 48%,#f8ffff 100%) !important;
+    }
+    body[data-thalys-theme="light"] .thalys-brand-name{color:#12343a !important}
+    body[data-thalys-theme="light"] .thalys-brand-tagline{color:#0f766e !important}
+    body[data-thalys-theme="light"] .thalys-quote-lead,
+    body[data-thalys-theme="light"] .thalys-quote-rest{color:#17383d !important}
+    body[data-thalys-theme="light"] .thalys-quote-signature{color:#64748b !important}
+    body[data-thalys-theme="light"] .app-header{
+      background:rgba(255,255,255,.92) !important;
+      border-color:#d9ecec !important;
+      box-shadow:0 10px 32px rgba(15,118,110,.06);
+    }
+    body[data-thalys-theme="light"] nav{
+      background:rgba(255,255,255,.96) !important;
+      border-color:#d8e8e9 !important;
+      box-shadow:0 -12px 30px rgba(15,23,42,.05);
+    }
+    body[data-thalys-theme="light"] .bg-darkcard,
+    body[data-thalys-theme="light"] [class*="bg-darkcard"]{
+      background-color:#ffffff !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-950"]{
+      background-color:rgba(240,248,249,.93) !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-900"]{
+      background-color:rgba(232,243,244,.92) !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-800"]{
+      background-color:#dfecee !important;
+    }
+    body[data-thalys-theme="light"] [class*="from-slate-900"],
+    body[data-thalys-theme="light"] [class*="from-slate-950"],
+    body[data-thalys-theme="light"] [class*="from-cyan-950"]{
+      background-image:none !important;
+      background-color:#ffffff !important;
+    }
+    body[data-thalys-theme="light"] #tab-home > div:first-child{
+      background:
+        radial-gradient(circle at 88% 12%,rgba(45,212,191,.12),transparent 30%),
+        linear-gradient(135deg,#ffffff,#eafafa 58%,#f1f5ff) !important;
+      border-color:rgba(13,148,136,.18) !important;
+    }
+    body[data-thalys-theme="light"] .text-white,
+    body[data-thalys-theme="light"] .text-slate-100,
+    body[data-thalys-theme="light"] .text-slate-200{
+      color:#172033 !important;
+    }
+    body[data-thalys-theme="light"] .text-slate-300{color:#475569 !important}
+    body[data-thalys-theme="light"] .text-slate-400{color:#64748b !important}
+    body[data-thalys-theme="light"] .text-slate-500{color:#718096 !important}
+    body[data-thalys-theme="light"] [class*="border-slate-800"],
+    body[data-thalys-theme="light"] [class*="border-slate-700"],
+    body[data-thalys-theme="light"] [class*="border-darkborder"]{
+      border-color:#d7e6e8 !important;
+    }
+    body[data-thalys-theme="light"] input,
+    body[data-thalys-theme="light"] select,
+    body[data-thalys-theme="light"] textarea{
+      color:#172033 !important;
+      background-color:#f3f9fa !important;
+      border-color:#cbdfe2 !important;
+    }
+    body[data-thalys-theme="light"] input::placeholder,
+    body[data-thalys-theme="light"] textarea::placeholder{color:#94a3b8 !important}
+    body[data-thalys-theme="light"] .glass{
+      background:rgba(255,255,255,.68) !important;
+      border-color:rgba(148,163,184,.22) !important;
+    }
+    body[data-thalys-theme="light"] .avatar-art-card,
+    body[data-thalys-theme="light"] .avatar2d-card,
+    body[data-thalys-theme="light"] .avatar-art-stage,
+    body[data-thalys-theme="light"] #avatar-3d-stage{
+      background:#eef7f8 !important;
+      border-color:#d3e5e7 !important;
+    }
+    body[data-thalys-theme="light"] ::-webkit-scrollbar-track{background:#edf7f7}
+    body[data-thalys-theme="light"] ::-webkit-scrollbar-thumb{background:#b8d2d5}
+    body[data-thalys-theme="light"] #theme-light-btn{
+      background:#ffffff !important;color:#0f766e !important;box-shadow:0 2px 10px rgba(15,118,110,.10)
+    }
+    body[data-thalys-theme="light"] #theme-dark-btn{color:#64748b !important}
+    body[data-thalys-theme="dark"] #theme-dark-btn{
+      background:#0f172a !important;color:#67e8f9 !important;box-shadow:inset 0 0 0 1px rgba(103,232,249,.18)
+    }
+    body[data-thalys-theme="dark"] #theme-light-btn{color:#94a3b8 !important}
+
+    /* DESKTOP ONLY. Mobile/tablet sizing is intentionally untouched. */
+    @media (min-width:1024px){
+      #app-shell > main{
+        max-width:1480px !important;
+        padding:2rem 3rem 8rem !important;
+        width:100% !important;
+      }
+      #app-shell > nav{
+        width:min(1120px,calc(100vw - 5rem)) !important;
+        max-width:none !important;
+        border:1px solid rgba(71,85,105,.28);
+        border-bottom:0;
+        border-radius:1.5rem 1.5rem 0 0;
+        padding:.75rem 1.5rem !important;
+      }
+      #app-shell > nav > div{
+        min-width:0 !important;
+        width:100%;
+        justify-content:space-around !important;
+        gap:2.5rem !important;
+      }
+      #app-shell > nav button{
+        min-width:92px;
+        padding:.35rem .75rem;
+      }
+      .app-header{
+        padding-left:2.25rem !important;
+        padding-right:2.25rem !important;
+        min-height:66px;
+      }
+      .thalys-header-logo{width:3rem;height:3rem;flex-basis:3rem}
+      .app-header h1{font-size:1.25rem !important}
+      #app-shell > main > section,
+      #app-shell > main > [id^="tab-"]{
+        width:100%;
+      }
+      #tab-home,
+      #tab-workout,
+      #tab-meditation,
+      #tab-nutrition,
+      #tab-body,
+      #tab-analytics,
+      #tab-consult,
+      #tab-settings{
+        max-width:1320px;
+        margin-left:auto;
+        margin-right:auto;
+      }
+      #tab-home{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1.35rem !important}
+      #tab-home.hidden{display:none !important}
+      #tab-home > *{grid-column:span 6}
+      #tab-home > :first-child{grid-column:1/-1}
+      #tab-home > .grid{grid-column:1/-1}
+      #tab-home > .home-avatar-card{grid-column:span 5}
+      #tab-home > #home-coach-card{grid-column:span 7}
+      #tab-home > *{margin-top:0 !important}
+      #tab-settings{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:1.25rem !important;
+        align-items:start;
+      }
+      #tab-settings.hidden{display:none !important}
+      #tab-settings > :first-child{grid-column:1/-1}
+      #tab-settings > .mt-3{margin-top:0 !important}
+      #tab-settings > div{
+        min-width:0;
+      }
+      #tab-workout,
+      #tab-nutrition,
+      #tab-body,
+      #tab-analytics,
+      #tab-consult,
+      #tab-meditation{
+        padding:0 .5rem;
+      }
+      #tab-workout > *,
+      #tab-nutrition > *,
+      #tab-body > *,
+      #tab-analytics > *,
+      #tab-consult > *,
+      #tab-meditation > *{
+        margin-bottom:1.25rem;
+      }
+      .rounded-2xl{border-radius:1.15rem}
+      .rounded-3xl{border-radius:1.5rem}
+      main .p-4{padding:1.15rem}
+      main .p-5{padding:1.4rem}
+      main .gap-2{gap:.75rem}
+      main .gap-3{gap:1rem}
+      main .space-y-5 > :not([hidden]) ~ :not([hidden]){margin-top:1.35rem}
+      #workout-plan-library,
+      #plan-builder-panel,
+      #consult-detail-body,
+      #help-tree-content{
+        scrollbar-width:auto;
+      }
+      #welcome-screen .thalys-welcome-card{
+        max-width:34rem;
+      }
+      #welcome-screen .thalys-logo-mark{
+        width:8.25rem !important;height:8.25rem !important;
+      }
+    }
+
+    /* ===== Thalys V14 — systematic modal isolation ===== */
+    #app-shell > main.thalys-background-locked{
+      overflow:hidden !important;
+      overscroll-behavior:none !important;
+      touch-action:none !important;
+    }
+    body.thalys-modal-active,
+    html.thalys-modal-active{
+      overscroll-behavior:none !important;
+    }
+    [id$="-modal"].thalys-modal-open{
+      display:flex !important;
+      pointer-events:auto !important;
+      visibility:visible !important;
+      overscroll-behavior:contain !important;
+      touch-action:none !important;
+    }
+    [id$="-modal"].hidden{
+      display:none !important;
+      pointer-events:none !important;
+      visibility:hidden !important;
+    }
+    [id$="-modal"].thalys-modal-open > div{
+      position:relative;
+      z-index:1;
+      overscroll-behavior:contain !important;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y !important;
+    }
+    .food-db-shell,
+    #workout-plans-modal > div,
+    #workout-plan-viewer-modal > div,
+    #workout-history-modal > div,
+    #meal-history-modal > div,
+    #consult-snapshot-modal > div{
+      overscroll-behavior:contain !important;
+    }
+    .food-db-list,
+    .food-ai-form,
+    #plan-builder-panel,
+    #plan-builder-exercises,
+    #workout-plan-library,
+    #plan-view-content,
+    #workout-history-list,
+    #meal-history-list,
+    #consult-detail-body{
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain !important;
+    }
+    .food-ai-form:not(.hidden){overflow-y:auto !important}
+
+    /* ===== Brand palette: aqua-green from the logo ===== */
+    :root{
+      --thalys-aqua:#14b8a6;
+      --thalys-aqua-deep:#0f766e;
+      --thalys-aqua-dark:#115e59;
+      --thalys-aqua-soft:#5eead4;
+      --thalys-violet-deep:#6d4bb8;
+    }
+    #app-shell > nav button.text-cyan-400,
+    .header-timer-center,
+    .header-message-button:hover{
+      color:var(--thalys-aqua-soft) !important;
+    }
+    .consult-choice.active,
+    .consult-filter-chip.active,
+    .v7-day-btn.active,
+    .ambient-sound-btn.active,
+    .breath-tech-btn.active,
+    .mind-duration-btn.active{
+      border-color:rgba(45,212,191,.62) !important;
+      background:rgba(20,184,166,.15) !important;
+      color:#ccfbf1 !important;
+    }
+    .ambient-volume{accent-color:var(--thalys-aqua) !important}
+
+    /* Header logo: raw supplied image only, no frame/ring/card. */
+    .thalys-header-logo{
+      background:transparent !important;
+      border:0 !important;
+      box-shadow:none !important;
+      border-radius:0 !important;
+      padding:0 !important;
+    }
+    .thalys-header-logo .thalys-theme-logo{
+      border-radius:0 !important;
+      object-fit:contain !important;
+    }
+
+    /* Bigger Dark / Light choices */
+    .theme-choice-shell{min-width:196px}
+    #theme-dark-btn,#theme-light-btn{white-space:nowrap;overflow:hidden}
+
+    /* ===== Refined LIGHT MODE ===== */
+    body[data-thalys-theme="light"]{
+      background:#dfeeee !important;
+      color:#173337 !important;
+    }
+    body[data-thalys-theme="light"] #app-shell{
+      background:
+        radial-gradient(circle at 12% 4%,rgba(20,184,166,.10),transparent 26%),
+        radial-gradient(circle at 90% 14%,rgba(15,118,110,.08),transparent 30%),
+        #e3f0f0 !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen{
+      background:
+        radial-gradient(circle at 50% 8%,rgba(20,184,166,.12),transparent 30%),
+        radial-gradient(circle at 18% 84%,rgba(16,185,129,.09),transparent 32%),
+        linear-gradient(180deg,#eef8f7 0%,#dceeed 50%,#e8f4f3 100%) !important;
+    }
+    body[data-thalys-theme="light"] .app-header,
+    body[data-thalys-theme="light"] nav{
+      background:rgba(241,248,248,.97) !important;
+      border-color:#bfd5d6 !important;
+    }
+    body[data-thalys-theme="light"] .bg-darkcard,
+    body[data-thalys-theme="light"] [class*="bg-darkcard"]{
+      background-color:#edf5f5 !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-950"]{
+      background-color:#dce9ea !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-900"]{
+      background-color:#d4e3e5 !important;
+    }
+    body[data-thalys-theme="light"] [class*="bg-slate-800"]{
+      background-color:#c8dadd !important;
+    }
+    body[data-thalys-theme="light"] #tab-home > div:first-child{
+      background:
+        radial-gradient(circle at 88% 12%,rgba(20,184,166,.16),transparent 31%),
+        linear-gradient(135deg,#e9f5f4,#d6ebea 58%,#e1e7f2) !important;
+      border-color:rgba(15,118,110,.24) !important;
+    }
+    /* Higher text contrast */
+    body[data-thalys-theme="light"] .text-white,
+    body[data-thalys-theme="light"] .text-slate-100,
+    body[data-thalys-theme="light"] .text-slate-200{color:#16363a !important}
+    body[data-thalys-theme="light"] .text-slate-300{color:#38565b !important}
+    body[data-thalys-theme="light"] .text-slate-400{color:#536b70 !important}
+    body[data-thalys-theme="light"] .text-slate-500{color:#667d82 !important}
+    body[data-thalys-theme="light"] .text-cyan-100,
+    body[data-thalys-theme="light"] .text-cyan-200,
+    body[data-thalys-theme="light"] .text-cyan-300,
+    body[data-thalys-theme="light"] .text-cyan-400{color:#0f766e !important}
+    body[data-thalys-theme="light"] .text-emerald-200,
+    body[data-thalys-theme="light"] .text-emerald-300,
+    body[data-thalys-theme="light"] .text-emerald-400{color:#047857 !important}
+    body[data-thalys-theme="light"] .text-violet-200,
+    body[data-thalys-theme="light"] .text-violet-300,
+    body[data-thalys-theme="light"] .text-violet-400,
+    body[data-thalys-theme="light"] .text-purple-300,
+    body[data-thalys-theme="light"] .text-purple-400{color:#6446a3 !important}
+    body[data-thalys-theme="light"] [class*="border-cyan-"],
+    body[data-thalys-theme="light"] [class*="border-emerald-"]{border-color:rgba(15,118,110,.28) !important}
+
+    /* Bottom selected tab and central timer: logo-like aqua, not blue. */
+    body[data-thalys-theme="light"] #app-shell > nav button.text-cyan-400,
+    body[data-thalys-theme="light"] .header-timer-center{color:#0f766e !important}
+    body[data-thalys-theme="dark"] #app-shell > nav button.text-cyan-400,
+    body[data-thalys-theme="dark"] .header-timer-center{color:#2dd4bf !important}
+
+    /* Mind: cards explicitly redesigned for light mode */
+    body[data-thalys-theme="light"] #tab-meditation .mind-tool-card,
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-card,
+    body[data-thalys-theme="light"] #tab-meditation > .rounded-3xl{
+      background:#e7f1f1 !important;
+      border-color:#bfd7d8 !important;
+      box-shadow:0 10px 28px rgba(15,118,110,.06) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .mind-tool-card.recommended{
+      background:linear-gradient(145deg,#e1eeee,#ddd8eb) !important;
+      border-color:#8e75bd !important;
+      box-shadow:0 10px 28px rgba(78,55,130,.10) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .emotion-chip{
+      background:#d4e3e4 !important;
+      border-color:#b5cbcd !important;
+      color:#29494e !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .emotion-chip.active{
+      background:#c9e5df !important;
+      border-color:#0f766e !important;
+      box-shadow:0 0 0 2px rgba(15,118,110,.10) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-card{
+      background:
+        radial-gradient(circle at 90% 0%,rgba(20,184,166,.12),transparent 36%),
+        linear-gradient(145deg,#dceceb,#d4e5e6) !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-btn,
+    body[data-thalys-theme="light"] #tab-meditation .mind-control,
+    body[data-thalys-theme="light"] #tab-meditation .breath-tech-btn,
+    body[data-thalys-theme="light"] #tab-meditation .mind-duration-btn{
+      background:#d1e1e2 !important;
+      border-color:#afc7c9 !important;
+      color:#29474c !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .ambient-sound-btn.active,
+    body[data-thalys-theme="light"] #tab-meditation .breath-tech-btn.active,
+    body[data-thalys-theme="light"] #tab-meditation .mind-duration-btn.active{
+      background:#bfe0da !important;
+      border-color:#0f766e !important;
+      color:#0b5f58 !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation .mind-breath-orb{
+      background:radial-gradient(circle at 42% 38%,rgba(255,255,255,.7),rgba(20,184,166,.18) 48%,rgba(173,202,204,.28) 74%) !important;
+      border-color:rgba(15,118,110,.32) !important;
+    }
+
+    /* Body: latest-reading cells should belong to the light palette. */
+    body[data-thalys-theme="light"] #body-history-detail-list > div,
+    body[data-thalys-theme="light"] .body-history-card{
+      background:#e3eeee !important;
+      border-color:#bfd3d5 !important;
+    }
+    body[data-thalys-theme="light"] #body-history-detail-list .bg-slate-950\/60{
+      background:#d2e2e3 !important;
+    }
+
+    /* Consult: retain a premium dark hero, but make all blue accents readable. */
+    body[data-thalys-theme="light"] #tab-consult > div:first-child{
+      background:linear-gradient(135deg,#4d347f 0%,#392d55 58%,#174f51 100%) !important;
+      border-color:#7056a1 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult > div:first-child h2,
+    body[data-thalys-theme="light"] #tab-consult > div:first-child .text-white{
+      color:#ffffff !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult > div:first-child .text-slate-400{
+      color:#d8dce6 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-choice{
+      background:#d6e3e4 !important;
+      border-color:#b2c7c9 !important;
+      color:#28484d !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-choice.active,
+    body[data-thalys-theme="light"] #tab-consult .consult-filter-chip.active{
+      background:#bcded8 !important;
+      border-color:#0f766e !important;
+      color:#0b5e57 !important;
+    }
+
+    /* Purple accents: slightly deeper throughout Light mode */
+    body[data-thalys-theme="light"] [class*="bg-violet-500/10"],
+    body[data-thalys-theme="light"] [class*="bg-violet-500/15"],
+    body[data-thalys-theme="light"] [class*="bg-purple-500/10"]{
+      background-color:rgba(100,70,163,.15) !important;
+    }
+
+    /* ===== Thalys V15 — Light-mode contrast pass ===== */
+
+    /* Mente: header/calendar and date capsule */
+    body[data-thalys-theme="light"] #tab-meditation > div:first-child{
+      background:
+        radial-gradient(circle at 92% 8%,rgba(20,184,166,.13),transparent 31%),
+        linear-gradient(135deg,#dde9e9 0%,#d8dde8 52%,#d6e8e5 100%) !important;
+      border-color:#b8cdd0 !important;
+    }
+    body[data-thalys-theme="light"] #tab-meditation > div:first-child .text-violet-300{color:#60448f !important}
+    body[data-thalys-theme="light"] .med-date-mini{
+      background:#c8dadd !important;
+      border-color:#9fbabc !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+    }
+    body[data-thalys-theme="light"] .med-date-mini button{
+      color:#0f766e !important;
+      background:#dbe8e9 !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini input,
+    body[data-thalys-theme="light"] #meditation-date{
+      background:transparent !important;
+      color:#29494e !important;
+      border:0 !important;
+      box-shadow:none !important;
+      color-scheme:light !important;
+    }
+    body[data-thalys-theme="light"] #meditation-date::-webkit-calendar-picker-indicator{
+      opacity:.62;
+      filter:none;
+    }
+
+    /* Mindfulness timer ring: no black center in light mode. */
+    body[data-thalys-theme="light"] .mind-progress-ring{
+      background:conic-gradient(#6d4bb8 var(--progress),#b7c9cb 0) !important;
+      box-shadow:0 12px 28px rgba(71,51,110,.08);
+    }
+    body[data-thalys-theme="light"] .mind-progress-ring::after{
+      background:#dfeaea !important;
+      border-color:#b8a8d1 !important;
+    }
+    body[data-thalys-theme="light"] #mindfulness-time{color:#5d428f !important}
+    body[data-thalys-theme="light"] #mindfulness-prompt{
+      background:#d5e2e3 !important;
+      color:#29474c !important;
+    }
+
+    /* Diario / Gratitudine: warmer, darker amber for white/light surfaces. */
+    body[data-thalys-theme="light"] #mind-card-gratitude{
+      background:linear-gradient(145deg,#ebe5d5,#e3ecea) !important;
+      border-color:#c6ad78 !important;
+    }
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-200,
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-300,
+    body[data-thalys-theme="light"] #mind-card-gratitude .text-amber-400{
+      color:#925700 !important;
+    }
+    body[data-thalys-theme="light"] #mind-card-gratitude [class*="bg-amber-500/5"],
+    body[data-thalys-theme="light"] #mind-card-gratitude [class*="bg-amber-500/10"]{
+      background:#e9ddc4 !important;
+    }
+    body[data-thalys-theme="light"] .gratitude-memory{
+      border-left-color:#9a6700 !important;
+      background:#e7ece8 !important;
+    }
+
+    /* Global Light accent contrast: yellow/orange/teal/lime/indigo/fuchsia. */
+    body[data-thalys-theme="light"] .text-yellow-200,
+    body[data-thalys-theme="light"] .text-yellow-300,
+    body[data-thalys-theme="light"] .text-yellow-400{color:#8a5a00 !important}
+    body[data-thalys-theme="light"] .text-amber-100,
+    body[data-thalys-theme="light"] .text-amber-200,
+    body[data-thalys-theme="light"] .text-amber-300,
+    body[data-thalys-theme="light"] .text-amber-400{color:#955600 !important}
+    body[data-thalys-theme="light"] .text-orange-200,
+    body[data-thalys-theme="light"] .text-orange-300,
+    body[data-thalys-theme="light"] .text-orange-400{color:#a33f0b !important}
+    body[data-thalys-theme="light"] .text-teal-200,
+    body[data-thalys-theme="light"] .text-teal-300,
+    body[data-thalys-theme="light"] .text-teal-400{color:#0d675f !important}
+    body[data-thalys-theme="light"] .text-lime-200,
+    body[data-thalys-theme="light"] .text-lime-300,
+    body[data-thalys-theme="light"] .text-lime-400{color:#4d6f12 !important}
+    body[data-thalys-theme="light"] .text-indigo-200,
+    body[data-thalys-theme="light"] .text-indigo-300,
+    body[data-thalys-theme="light"] .text-indigo-400{color:#4f46a5 !important}
+    body[data-thalys-theme="light"] .text-fuchsia-200,
+    body[data-thalys-theme="light"] .text-fuchsia-300,
+    body[data-thalys-theme="light"] .text-fuchsia-400{color:#9b2f85 !important}
+
+    /* Dieta: water card becomes logo-teal rather than blue. */
+    body[data-thalys-theme="light"] .nutrition-water-card-v15{
+      background:#cfe5e1 !important;
+      border-color:#8fbbb4 !important;
+      box-shadow:0 12px 28px rgba(15,118,110,.07);
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-icon-v15{
+      background:#b8d9d2 !important;
+      border-color:#72a9a0 !important;
+      color:#0f766e !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-target-v15{
+      background:#b8d9d2 !important;
+      border-color:#72a9a0 !important;
+      color:#0b625b !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 #water-amount{color:#0f766e !important}
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 #water-progress-bar{background:#14b8a6 !important}
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-add-v15{
+      background:#0f8f82 !important;
+      color:white !important;
+    }
+    body[data-thalys-theme="light"] #tab-nutrition .v7-apple-donut{
+      background:#dbe8e9 !important;
+      border-color:#b8cecf !important;
+    }
+
+    /* Corpo: gender controls and latest readings. */
+    body[data-thalys-theme="light"] #avatar-gender-male,
+    body[data-thalys-theme="light"] #avatar-gender-female,
+    body[data-thalys-theme="light"] .avatar-art-control{
+      background:#d2e1e2 !important;
+      border-color:#a9c2c4 !important;
+      color:#315156 !important;
+    }
+    body[data-thalys-theme="light"] #avatar-gender-male.active,
+    body[data-thalys-theme="light"] #avatar-gender-female.active,
+    body[data-thalys-theme="light"] .avatar-art-control.active{
+      background:#b8dcd6 !important;
+      border-color:#0f766e !important;
+      color:#0a5c55 !important;
+      box-shadow:0 0 0 1px rgba(15,118,110,.10);
+    }
+    body[data-thalys-theme="light"] .body-history-card{
+      background:#f0f6f6 !important;
+      border-color:#c8d9db !important;
+    }
+    body[data-thalys-theme="light"] .body-history-card .text-slate-400{color:#4b6469 !important}
+    body[data-thalys-theme="light"] #body-history-detail-list > div{
+      background:#eef5f5 !important;
+      border-color:#c6d7d9 !important;
+    }
+    body[data-thalys-theme="light"] #body-history-detail-list [class*="bg-slate-950"]{
+      background:#f8fbfb !important;
+      border:1px solid #d2dfe0;
+    }
+
+    /* Consult: privacy notice must be dark enough on its light inset card. */
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v15{
+      background:#cfe2df !important;
+      border-color:#9dbeb9 !important;
+      color:#304f53 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v15 i{
+      color:#0f766e !important;
+    }
+
+    /* Options: amber/orange already darkened globally; keep cards readable. */
+    body[data-thalys-theme="light"] #tab-settings [class*="text-amber-"],
+    body[data-thalys-theme="light"] #tab-settings [class*="text-yellow-"]{color:#8a5200 !important}
+    body[data-thalys-theme="light"] #tab-settings [class*="text-orange-"]{color:#9a3f0d !important}
+
+    /* Welcome breathing visual: slightly deeper and more visible in Light mode. */
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-field::before{
+      border-color:rgba(15,118,110,.34) !important;
+      background:
+        radial-gradient(circle at 50% 46%,rgba(20,184,166,.20) 0%,rgba(15,118,110,.10) 44%,rgba(184,211,210,.18) 68%,transparent 73%) !important;
+      box-shadow:inset 0 0 28px rgba(15,118,110,.08),0 0 32px rgba(15,118,110,.10) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-field::after{
+      border-color:rgba(68,72,120,.18) !important;
+      background:radial-gradient(circle,rgba(255,255,255,.30),rgba(20,184,166,.10) 58%,transparent 72%) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breathe-core{
+      background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(20,184,166,.14)),rgba(190,214,213,.42) !important;
+      border-color:rgba(15,118,110,.26) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breath-arc-base{
+      stroke:rgba(15,118,110,.18) !important;
+    }
+    body[data-thalys-theme="light"] #welcome-screen .thalys-breath-label{
+      color:#31545a !important;
+    }
+
+    /* iPhone navigation: nav remains above app content, but below any real modal. */
+    #app-shell > nav{
+      z-index:90 !important;
+      pointer-events:auto !important;
+      touch-action:manipulation !important;
+    }
+    [id$="-modal"].thalys-modal-open{z-index:2000 !important}
+    #app-shell > main{position:relative;z-index:1}
+
+    /* ===== Thalys V16 — Loto breathing mark ===== */
+    .thalys-lotus-image{
+      width:3.35rem !important;
+      height:3.35rem !important;
+      object-fit:contain;
+      opacity:.72 !important;
+      filter:drop-shadow(0 0 13px rgba(94,234,212,.20)) !important;
+      user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+    body[data-thalys-theme="light"] .thalys-lotus-image{
+      opacity:.86 !important;
+      filter:drop-shadow(0 4px 9px rgba(15,118,110,.18)) !important;
+    }
+
+    /* Stronger inhale/exhale arcs in Light mode. */
+    body[data-thalys-theme="light"] .thalys-breath-arc-base{
+      stroke:rgba(15,118,110,.30) !important;
+      stroke-width:2.8 !important;
+    }
+    body[data-thalys-theme="light"] .thalys-breath-arc-in,
+    body[data-thalys-theme="light"] .thalys-breath-arc-out{
+      stroke-width:6.2 !important;
+      filter:drop-shadow(0 0 5px rgba(15,118,110,.25)) !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-1,
+    body[data-thalys-theme="light"] .breath-out-stop-1{
+      stop-color:#0f766e !important;stop-opacity:.46 !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-2,
+    body[data-thalys-theme="light"] .breath-out-stop-2{
+      stop-color:#14b8a6 !important;stop-opacity:.92 !important;
+    }
+    body[data-thalys-theme="light"] .breath-in-stop-3,
+    body[data-thalys-theme="light"] .breath-out-stop-3{
+      stop-color:#115e59 !important;stop-opacity:.62 !important;
+    }
+
+    /* Profile-photo copy: Google is the default source; a custom app photo is an override. */
+    .profile-photo-source-note-v16{
+      color:#64748b;
+      font-size:9px;
+      line-height:1.45;
+      text-align:center;
+      margin-top:.65rem;
+    }
+
+    /* ===== Thalys V17 visual polish ===== */
+    :root{
+      --thalys-aqua:#118f93;
+      --thalys-aqua-deep:#0d7377;
+      --thalys-aqua-dark:#0a5e62;
+      --thalys-aqua-soft:#3bb7b7;
+    }
+
+    /* Header / global selected aqua */
+    .header-timer-center,
+    #app-shell > nav button.text-cyan-400,
+    .header-message-button:hover{
+      color:var(--thalys-aqua-soft) !important;
+    }
+    body[data-thalys-theme="light"] .header-timer-center,
+    body[data-thalys-theme="light"] #app-shell > nav button.text-cyan-400{
+      color:var(--thalys-aqua-deep) !important;
+    }
+    .consult-choice.active,
+    .consult-filter-chip.active,
+    .v7-day-btn.active,
+    .ambient-sound-btn.active,
+    .breath-tech-btn.active,
+    .mind-duration-btn.active{
+      border-color:rgba(17,143,147,.58) !important;
+      background:rgba(17,143,147,.14) !important;
+    }
+
+    /* Home hero mini metrics: distinct premium surfaces instead of flat grey */
+    .home-metric-card-v17{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.10) !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 10px 24px rgba(0,0,0,.08);
+    }
+    .home-metric-readiness{background:linear-gradient(145deg,rgba(90,67,145,.22),rgba(15,23,42,.52)) !important}
+    .home-metric-water{background:linear-gradient(145deg,rgba(17,143,147,.20),rgba(15,23,42,.52)) !important}
+    .home-metric-kcal{background:linear-gradient(145deg,rgba(5,120,87,.20),rgba(15,23,42,.52)) !important}
+    .home-metric-workout{background:linear-gradient(145deg,rgba(14,116,144,.18),rgba(15,23,42,.52)) !important}
+    body[data-thalys-theme="light"] .home-metric-readiness{background:linear-gradient(145deg,#ded8e8,#d6e5e5) !important;border-color:#c4b8d3 !important}
+    body[data-thalys-theme="light"] .home-metric-water{background:linear-gradient(145deg,#c9e1df,#d7e9e7) !important;border-color:#9dc1bf !important}
+    body[data-thalys-theme="light"] .home-metric-kcal{background:linear-gradient(145deg,#d1e5d9,#dcebe7) !important;border-color:#aac9b5 !important}
+    body[data-thalys-theme="light"] .home-metric-workout{background:linear-gradient(145deg,#cfe1e2,#dce8ea) !important;border-color:#aac6c9 !important}
+
+    /* Apple-like nutrition donuts */
+    #tab-nutrition .v7-apple-donut{
+      border-radius:28px !important;
+      box-shadow:none !important;
+      border-width:1px !important;
+      backdrop-filter:none !important;
+    }
+    #macro-donut-legend-v7 button,
+    #micro-donut-legend-v7 button{
+      border:1px solid rgba(148,163,184,.12);
+      background:transparent !important;
+      border-radius:14px !important;
+      padding:.55rem .65rem !important;
+    }
+    #macro-donut-selection-v7,
+    #micro-donut-selection-v7{
+      border:1px solid rgba(148,163,184,.10);
+      background:rgba(15,23,42,.28) !important;
+    }
+    body[data-thalys-theme="light"] #macro-donut-selection-v7,
+    body[data-thalys-theme="light"] #micro-donut-selection-v7{
+      background:#e7efef !important;
+      border-color:#ccdada !important;
+    }
+
+    /* Body: Light mode controls */
+    body[data-thalys-theme="light"] #body-new-measure-btn,
+    body[data-thalys-theme="light"] #add-body-modal button[type="submit"]{
+      background:linear-gradient(135deg,#8d73c0,#7b63aa) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+    #add-body-modal #body-date{
+      width:min(72%,12rem) !important;
+      max-width:12rem !important;
+    }
+    body[data-thalys-theme="light"] #add-body-modal label.text-purple-200{color:#614595 !important}
+    body[data-thalys-theme="light"] #add-body-modal label.text-pink-200{color:#9d3d68 !important}
+    body[data-thalys-theme="light"] .body-index-info-btn{
+      background:#e7eeee !important;
+      border-color:#cbdadb !important;
+      color:#456166 !important;
+    }
+    body[data-thalys-theme="light"] .body-history-card,
+    body[data-thalys-theme="light"] #body-history-detail-list > div{
+      background:#f4f8f8 !important;
+      border-color:#d2dfe0 !important;
+    }
+
+    /* Analytics health button: lighter in Light, one line everywhere */
+    #analytics-health-btn{
+      white-space:nowrap !important;
+      min-width:max-content !important;
+    }
+    body[data-thalys-theme="light"] #analytics-health-btn{
+      background:linear-gradient(135deg,#9b84c7,#836cac) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+
+    /* Consult */
+    .consult-ai-label-v17{color:#fff !important}
+    body[data-thalys-theme="light"] .consult-privacy-note-v17{
+      color:#29494e !important;
+      background:#d5e5e2 !important;
+      border-color:#aac7c2 !important;
+    }
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 i{color:#0d7377 !important}
+
+    /* Quick Help selection */
+    .help-tree-tab.active{
+      background:rgba(17,143,147,.18) !important;
+      border-color:rgba(17,143,147,.55) !important;
+      color:#70d6d6 !important;
+    }
+    body[data-thalys-theme="light"] .help-tree-tab.active{
+      background:#c5dedd !important;
+      border-color:#0d7377 !important;
+      color:#0a5e62 !important;
+    }
+
+    /* Options account indicator: small meaningful dot instead of big square */
+    #tab-settings #cloud-status-icon{
+      width:12px !important;
+      height:12px !important;
+      min-width:12px !important;
+      border-radius:999px !important;
+      padding:0 !important;
+      font-size:0 !important;
+      border-width:2px !important;
+      background:#22c55e !important;
+      border-color:#d1fae5 !important;
+      box-shadow:0 0 0 2px rgba(34,197,94,.10);
+    }
+    #tab-settings #cloud-status-icon i{display:none !important}
+    body[data-thalys-theme="light"] #options-disconnect-btn{color:#9f2940 !important}
+    #options-disconnect-btn{color:#fb7185 !important}
+
+    /* Header title */
+    .thalys-header-title{font-size:17px !important}
+    @media(min-width:640px){.thalys-header-title{font-size:20px !important}}
+    @media(min-width:1024px){.thalys-header-title{font-size:22px !important}}
+
+    /* Meal history summary */
+    .meal-day-row-v17{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.75rem;
+      padding:.85rem .95rem;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,.12);
+      background:rgba(15,23,42,.44);
+      text-align:left;
+    }
+    body[data-thalys-theme="light"] .meal-day-row-v17{
+      background:#edf4f4;
+      border-color:#ccdada;
+    }
+
+    /* ===== Thalys V18 — Light mode finishing ===== */
+
+    /* Corpo: latest measurement chips much lighter in Light mode. */
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip{
+      background:#e7f0f1 !important;
+      border:1px solid #cfdddf !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.72) !important;
+    }
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip .text-slate-500{
+      color:#6b8589 !important;
+    }
+    body[data-thalys-theme="light"] #avatar-measurements .avatar-measure-chip .text-slate-200{
+      color:#285b60 !important;
+    }
+
+    /* Palestra: viewer weekdays should not look like dark-mode pills. */
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .v7-day-btn{
+      background:#e3eded !important;
+      border-color:#c8d9da !important;
+      color:#3f5d62 !important;
+      box-shadow:none !important;
+    }
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .v7-day-btn.active{
+      background:#c9dfdf !important;
+      border-color:#0d7377 !important;
+      color:#0a5e62 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-200,
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-300,
+    body[data-thalys-theme="light"] #workout-plan-viewer-modal .text-cyan-400{
+      color:#0d7377 !important;
+    }
+
+    /* Mente date capsule: arrows are part of the same capsule, no white end caps. */
+    body[data-thalys-theme="light"] .med-date-mini{
+      overflow:hidden !important;
+      background:#c8dadd !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini button,
+    body[data-thalys-theme="light"] .med-date-mini input,
+    body[data-thalys-theme="light"] #meditation-date{
+      background:#c8dadd !important;
+      border:0 !important;
+      box-shadow:none !important;
+    }
+    body[data-thalys-theme="light"] .med-date-mini button:hover,
+    body[data-thalys-theme="light"] .med-date-mini button:active{
+      background:#bcd0d2 !important;
+    }
+
+    /* Consult: privacy copy stronger + Analyze AI button softer. */
+    body[data-thalys-theme="light"] .consult-privacy-note-v17,
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 *{
+      color:#24484c !important;
+    }
+    body[data-thalys-theme="light"] .consult-privacy-note-v17 i{
+      color:#0a686c !important;
+    }
+    body[data-thalys-theme="light"] #consult-ai-run{
+      background:#8b73b8 !important;
+      color:#ffffff !important;
+      box-shadow:none !important;
+    }
+
+    /* Barcode modal: always above app content and touch-safe. */
+    #scan-product-modal.thalys-modal-open{
+      z-index:2400 !important;
+    }
+    #scan-product-modal > div{
+      touch-action:pan-y !important;
+    }
+    #barcode-video{
+      transform:translateZ(0);
+      -webkit-transform:translateZ(0);
+    }
+
+    /* ===== Thalys V19 ===== */
+
+    /* Consult Light: force dark readable copy inside the pale privacy note. */
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17,
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17:not(.x),
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17 span{
+      color:#183f43 !important;
+      -webkit-text-fill-color:#183f43 !important;
+    }
+    body[data-thalys-theme="light"] #tab-consult .consult-privacy-note-v17 i{
+      color:#0d7377 !important;
+      -webkit-text-fill-color:#0d7377 !important;
+    }
+
+    /* Health modal submit: softer/lighter violet in Light mode. */
+    body[data-thalys-theme="light"] #wellness-modal button[type="submit"]{
+      background:linear-gradient(135deg,#a58acb,#8871b4) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+
+    /* Workout plan creation: use almost the whole viewport and let the entire sheet scroll. */
+    #workout-plans-modal{
+      align-items:flex-start !important;
+      padding-top:max(.35rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(.35rem,env(safe-area-inset-bottom)) !important;
+    }
+    #workout-plans-modal > div{
+      height:calc(100dvh - max(.7rem,env(safe-area-inset-top) + env(safe-area-inset-bottom))) !important;
+      max-height:calc(100dvh - max(.7rem,env(safe-area-inset-top) + env(safe-area-inset-bottom))) !important;
+      overflow-y:auto !important;
+      overscroll-behavior:contain !important;
+      border-radius:1.35rem !important;
+    }
+    #workout-plans-modal #plan-builder-panel{
+      flex:none !important;
+      min-height:auto !important;
+      overflow:visible !important;
+    }
+    #workout-plans-modal #workout-plan-form{
+      height:auto !important;
+      min-height:0 !important;
+      overflow:visible !important;
+    }
+    #workout-plans-modal #plan-builder-exercises{
+      max-height:none !important;
+      overflow:visible !important;
+      padding-right:0 !important;
+    }
+    #workout-plans-modal #workout-plan-library{
+      overflow:visible !important;
+      flex:none !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-panel{
+      background:#e9f1f1 !important;
+      border-color:#c8dbdc !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-days .v7-day-btn{
+      background:#dbe7e8 !important;
+      border-color:#bfd2d4 !important;
+      color:#415f64 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-days .v7-day-btn.active{
+      background:#c1dcdb !important;
+      border-color:#0d7377 !important;
+      color:#095b5e !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises .v7-ex-card{
+      background:#f0f5f5 !important;
+      border-color:#ccdcdc !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises input,
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-exercises select,
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-day-rest{
+      background:#e1ebec !important;
+      color:#24464a !important;
+      border-color:#bfd0d2 !important;
+    }
+    body[data-thalys-theme="light"] #workout-plans-modal #plan-builder-add-btn{
+      background:#c9e0df !important;
+      border-color:#74aba9 !important;
+      color:#0a5f61 !important;
+    }
+
+    /* Photo summary + Light manager */
+    body[data-thalys-theme="light"] #body-photo-summary-card{
+      background:linear-gradient(135deg,#e5efef,#d8e8e6) !important;
+      border-color:#c5d8d8 !important;
+    }
+    body[data-thalys-theme="light"] #photo-manager-modal > div,
+    body[data-thalys-theme="light"] #add-photo-modal-v19 > div,
+    body[data-thalys-theme="light"] #photo-viewer-modal-v19 > div{
+      background:#eef5f5 !important;
+      border-color:#c5d8d8 !important;
+    }
+
+    /* ===== Thalys V20 ===== */
+
+    /* Welcome Light: Loto more saturated / alive. */
+    body[data-thalys-theme="light"] .thalys-lotus-image{
+      opacity:1 !important;
+      filter:saturate(1.42) contrast(1.08) brightness(.96) drop-shadow(0 4px 10px rgba(13,115,119,.24)) !important;
+    }
+
+    /* Consult Light: saved-snapshot filters use light surfaces. */
+    body[data-thalys-theme="light"] #consult-filter-type-buttons .consult-filter-chip{
+      background:#e5eeee !important;
+      border-color:#c6d7d8 !important;
+      color:#3a5d61 !important;
+    }
+    body[data-thalys-theme="light"] #consult-filter-type-buttons .consult-filter-chip.active{
+      background:#c7dddd !important;
+      border-color:#0d7377 !important;
+      color:#085c60 !important;
+    }
+    body[data-thalys-theme="light"] #consult-filter-month{
+      background:#edf4f4 !important;
+      border-color:#bfd1d3 !important;
+      color:#24484c !important;
+    }
+    body[data-thalys-theme="light"] #consult-snapshot-select-btn,
+    body[data-thalys-theme="light"] #tab-consult button[onclick="clearConsultFilters()"]{
+      background:#dde9e9 !important;
+      border:1px solid #bfd1d3 !important;
+      color:#36585d !important;
+    }
+
+    /* Food preset editor: clearly defined fields in Light mode. */
+    body[data-thalys-theme="light"] #food-preset-form{
+      background:#e5eeee !important;
+      border-color:#bfd1d3 !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form input,
+    body[data-thalys-theme="light"] #food-preset-form select,
+    body[data-thalys-theme="light"] #food-preset-form textarea{
+      background:#f7fbfb !important;
+      border:1px solid #aabfc2 !important;
+      color:#203f43 !important;
+      box-shadow:inset 0 1px 2px rgba(15,23,42,.04) !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form input:focus,
+    body[data-thalys-theme="light"] #food-preset-form select:focus,
+    body[data-thalys-theme="light"] #food-preset-form textarea:focus{
+      border-color:#0d7377 !important;
+      box-shadow:0 0 0 2px rgba(13,115,119,.10) !important;
+      outline:none !important;
+    }
+    body[data-thalys-theme="light"] #food-preset-form label{
+      color:#46666a !important;
+    }
+
+    /* Meal Database: real full-screen sheet. */
+    #meal-history-modal,
+    #meal-history-detail-modal{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #meal-history-modal > div,
+    #meal-history-detail-modal > div{
+      width:100% !important;
+      max-width:680px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      border-top:0 !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    #meal-history-detail-modal.thalys-modal-open{
+      z-index:2700 !important;
+    }
+    #meal-history-modal.thalys-modal-open{
+      z-index:2500 !important;
+    }
+    @media(min-width:768px){
+      #meal-history-modal,
+      #meal-history-detail-modal{padding:1rem !important;align-items:center !important}
+      #meal-history-modal > div,
+      #meal-history-detail-modal > div{
+        height:min(92dvh,820px) !important;
+        max-height:min(92dvh,820px) !important;
+        border-radius:1.5rem !important;
+        border:1px solid rgba(71,85,105,.35) !important;
+        padding-top:1rem !important;
+        padding-bottom:1rem !important;
+      }
+    }
+
+    /* Photo manager / add / viewer: full-height and deterministic stacking. */
+    #photo-manager-modal,
+    #add-photo-modal-v19,
+    #photo-viewer-modal-v19{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #photo-manager-modal > div,
+    #add-photo-modal-v19 > div,
+    #photo-viewer-modal-v19 > div{
+      width:100% !important;
+      max-width:680px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    #photo-manager-modal.thalys-modal-open{z-index:2500 !important}
+    #add-photo-modal-v19.thalys-modal-open{z-index:2700 !important;display:flex !important;visibility:visible !important;pointer-events:auto !important}
+    #photo-viewer-modal-v19.thalys-modal-open{z-index:2800 !important;display:flex !important;visibility:visible !important;pointer-events:auto !important}
+    @media(min-width:768px){
+      #photo-manager-modal,#add-photo-modal-v19,#photo-viewer-modal-v19{padding:1rem !important;align-items:center !important}
+      #photo-manager-modal > div,#add-photo-modal-v19 > div,#photo-viewer-modal-v19 > div{
+        height:min(92dvh,820px) !important;max-height:min(92dvh,820px) !important;border-radius:1.5rem !important;
+      }
+    }
+
+    /* Ensure the final consult viewer close never leaves scroll locked. */
+    #consult-snapshot-modal.hidden{
+      display:none !important;
+      pointer-events:none !important;
+    }
+
+    /* ===== Thalys V21 ===== */
+
+    /* Nutrition info scrolls as one document; header no longer remains pinned. */
+    #nutrition-info-modal > div{
+      overscroll-behavior:contain !important;
+    }
+    .nutrition-info-header-v21{
+      position:static !important;
+      top:auto !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+    }
+
+    /* Light nutrition guide contrast. */
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-fat-total-v21{
+      color:#355e8b !important;
+      -webkit-text-fill-color:#355e8b !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-fat-sat-v21{
+      color:#2d6f8d !important;
+      -webkit-text-fill-color:#2d6f8d !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-guide-water-v21{
+      background:#e4f0f4 !important;
+      border-color:#b6d0da !important;
+      color:#36545d !important;
+    }
+    body[data-thalys-theme="light"] #nutrition-info-modal .nutrition-guide-water-title-v21{
+      color:#245a82 !important;
+      -webkit-text-fill-color:#245a82 !important;
+    }
+
+    /* Main Diet water tracker: lighter Light-mode surface, darker blue label. */
+    body[data-thalys-theme="light"] .nutrition-water-card-v15{
+      background:#e3f0ef !important;
+      border-color:#b8d3d0 !important;
+      box-shadow:0 10px 24px rgba(15,118,110,.045) !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-icon-v15,
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .water-target-v15{
+      background:#d0e5e3 !important;
+      border-color:#9fc6c2 !important;
+    }
+    body[data-thalys-theme="light"] .nutrition-water-card-v15 .text-white{
+      color:#245a82 !important;
+      -webkit-text-fill-color:#245a82 !important;
+    }
+
+    /* Body information modal: purple/pink copy is darker in Light mode. */
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-200,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-300,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-purple-400{
+      color:#62408f !important;
+      -webkit-text-fill-color:#62408f !important;
+    }
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-200,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-300,
+    body[data-thalys-theme="light"] #body-index-info-modal .text-pink-400{
+      color:#9b3f6d !important;
+      -webkit-text-fill-color:#9b3f6d !important;
+    }
+
+    /* Progress photos: slightly lighter aqua controls in both themes. */
+    .photo-add-btn-v21,
+    .photo-upload-btn-v21{
+      background:#159da0 !important;
+      border:1px solid rgba(88,210,208,.22) !important;
+      box-shadow:0 8px 20px rgba(8,94,98,.14) !important;
+    }
+    .photo-add-btn-v21:hover,
+    .photo-upload-btn-v21:hover{
+      background:#1ba9aa !important;
+    }
+    body[data-thalys-theme="light"] .photo-add-btn-v21,
+    body[data-thalys-theme="light"] .photo-upload-btn-v21{
+      background:#3caeb0 !important;
+      color:#ffffff !important;
+      border-color:#258f92 !important;
+      box-shadow:0 7px 18px rgba(13,115,119,.10) !important;
+    }
+
+    /* Body measurement chart legend gets darker in Light mode. */
+    body[data-thalys-theme="light"] #bodyMeasurementsChart{
+      color:#314e53 !important;
+    }
+
+    /* ===== Thalys V22 ===== */
+
+    /* Light header icons: slightly darker and more defined. */
+    body[data-thalys-theme="light"] .app-header .header-message-button{
+      color:#3f5f64 !important;
+    }
+    body[data-thalys-theme="light"] .app-header .header-message-button i{
+      color:#31545a !important;
+      opacity:1 !important;
+      filter:drop-shadow(0 1px 0 rgba(255,255,255,.65));
+    }
+    body[data-thalys-theme="light"] .app-header .header-message-button:hover,
+    body[data-thalys-theme="light"] .app-header .header-message-button:active{
+      color:#0d7377 !important;
+      background:rgba(13,115,119,.07) !important;
+      border-radius:.75rem;
+    }
+
+    /* Target manager */
+    #target-modal{
+      align-items:flex-start !important;
+      padding:0 !important;
+    }
+    #target-modal > .target-manager-shell-v22{
+      width:100% !important;
+      max-width:760px !important;
+      height:100dvh !important;
+      max-height:100dvh !important;
+      border-radius:0 !important;
+      overflow-y:auto !important;
+      overscroll-behavior:contain !important;
+      padding-top:max(1rem,env(safe-area-inset-top)) !important;
+      padding-bottom:max(1rem,env(safe-area-inset-bottom)) !important;
+    }
+    @media(min-width:768px){
+      #target-modal{align-items:center !important;padding:1rem !important}
+      #target-modal > .target-manager-shell-v22{
+        height:min(94dvh,900px) !important;
+        max-height:min(94dvh,900px) !important;
+        border-radius:1.6rem !important;
+      }
+    }
+    .target-section-v22{
+      border:1px solid rgba(71,85,105,.42);
+      border-radius:1.2rem;
+      background:rgba(15,23,42,.42);
+      padding:.85rem;
+    }
+    .target-readonly-v22{
+      border:1px solid rgba(71,85,105,.58);
+      border-radius:.85rem;
+      background:rgba(15,23,42,.7);
+      padding:.55rem .65rem;
+      min-height:2.6rem;
+    }
+    .target-value-grid-v22 input,
+    .target-context-grid-v22 select,
+    .target-context-grid-v22 input,
+    .target-filter-grid-v22 select,
+    .target-filter-grid-v22 input{
+      border:1px solid #334155;
+      background:#0f172a;
+      color:#f8fafc;
+      border-radius:.8rem;
+    }
+    .target-plan-card-v22{
+      border:1px solid rgba(71,85,105,.42);
+      background:rgba(15,23,42,.58);
+      border-radius:1.1rem;
+      padding:.8rem;
+    }
+    .target-plan-card-v22.active{
+      border-color:rgba(45,212,191,.48);
+      box-shadow:inset 0 0 0 1px rgba(45,212,191,.09);
+    }
+
+    body[data-thalys-theme="light"] #target-modal > .target-manager-shell-v22,
+    body[data-thalys-theme="light"] #target-plan-viewer-modal-v22 > div,
+    body[data-thalys-theme="light"] #target-info-modal-v22 > div{
+      background:#edf4f4 !important;
+      border-color:#c5d7d8 !important;
+    }
+    body[data-thalys-theme="light"] .target-section-v22{
+      background:#e5eeee !important;
+      border-color:#c6d8d9 !important;
+    }
+    body[data-thalys-theme="light"] .target-readonly-v22{
+      background:#f5f9f9 !important;
+      border-color:#bfd2d4 !important;
+      color:#24464a !important;
+    }
+    body[data-thalys-theme="light"] .target-value-grid-v22 input,
+    body[data-thalys-theme="light"] .target-context-grid-v22 select,
+    body[data-thalys-theme="light"] .target-context-grid-v22 input,
+    body[data-thalys-theme="light"] .target-filter-grid-v22 select,
+    body[data-thalys-theme="light"] .target-filter-grid-v22 input{
+      background:#f7fbfb !important;
+      border-color:#adc4c6 !important;
+      color:#203f43 !important;
+    }
+    body[data-thalys-theme="light"] .target-plan-card-v22{
+      background:#f3f7f7 !important;
+      border-color:#cbdadb !important;
+    }
+    body[data-thalys-theme="light"] .target-plan-card-v22.active{
+      background:#dceceb !important;
+      border-color:#0d7377 !important;
+    }
+    body[data-thalys-theme="light"] .target-source-card-v22{
+      background:#e5eeee !important;
+      border-color:#bfd2d4 !important;
+      color:#34565b !important;
+    }
+    body[data-thalys-theme="light"] .target-source-card-v22 a{
+      color:#0d7377 !important;
+    }
+
+    /* One nutrient = one outlined slice. The missing part is drawn as stripes by canvas plugin. */
+    #macroNutrientDonutV7,
+    #microNutrientDonutV7{
+      filter:drop-shadow(0 8px 18px rgba(15,23,42,.08));
+    }
+
+  
+
+
+  /* Thalys mobile / iPhone polish */
+  button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  input, select, textarea { font-size: 16px !important; }
+  button { min-height: 42px; }
+  .safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  @media (max-width: 420px){ main{padding-left:.75rem!important;padding-right:.75rem!important;} .grid{gap:.55rem;} .rounded-3xl{border-radius:1.35rem;} }
