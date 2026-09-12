@@ -91,8 +91,8 @@
 
   async function warmOfflineAppShell() {
     if (!window.caches || !window.isSecureContext) return 0;
-    const urls = ['./', './index.html', './manifest.json', './css/thalys.css?v=016', './js/local-db.js?v=019', './js/ui-foundation.js?v=018', './js/google-auth.js?v=018', './js/drive.js?v=019', './js/app-core.js?v=019', './js/app-enhancements.js?v=019'];
-    const cache = await caches.open('thalys-manual-offline-v0.21');
+    const urls = ['./', './index.html', './manifest.json', './css/thalys.css?v=016', './js/local-db.js?v=022', './js/ui-foundation.js?v=022', './js/google-auth.js?v=022', './js/drive.js?v=022', './js/app-core.js?v=021', './js/app-enhancements.js?v=021'];
+    const cache = await caches.open('thalys-manual-offline-v0.22');
     let saved = 0;
     for (const url of urls) {
       try { await cache.add(url); saved += 1; } catch (_) {}

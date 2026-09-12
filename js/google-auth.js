@@ -70,7 +70,11 @@
           setDriveStatus('saving','Controllo Google Drive…');
           await initializeDriveWorkspace();
           await loadFoodDatabaseImmediate();
-          await refreshFromDrive(true,true);
+          if(window.thalysNeedsDriveReconnectSync && typeof syncAfterNetworkRestore==='function'){
+            await syncAfterNetworkRestore();
+          }else{
+            await refreshFromDrive(true,true);
+          }
           if(typeof renderAllViews==='function')renderAllViews();
           window.thalysRefreshAfterGoogleReconnect=false;
           resetAppDatesToToday(true);

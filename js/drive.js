@@ -107,7 +107,7 @@
         showSyncError(lastSyncError); return false;
       }
       if(driveSyncRunning){driveSyncQueued=true;return false;}
-      if(!navigator.onLine){lastSyncError={code:'OFFLINE',message:'Il dispositivo non è connesso a Internet.'};driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');setDriveStatus('error','Offline · dati locali protetti');showSyncError(lastSyncError);return false;}
+      if(!navigator.onLine){lastSyncError={code:'OFFLINE',message:'Il dispositivo non è connesso a Internet.'};driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');setDriveStatus('error','Offline · dati locali protetti');updateManualSyncUI();return false;}
       if(!driveFolders?.databaseFolderId){
         try{await initializeDriveWorkspace();}catch(e){lastSyncError=classifyDriveError(e);showSyncError(lastSyncError);return false;}
         if(!driveFolders?.databaseFolderId){lastSyncError={code:'FOLDER_MISSING',message:'La cartella Thalys App/database non è disponibile.'};showSyncError(lastSyncError);return false;}
@@ -124,7 +124,7 @@
         console.error('Drive save',e);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');lastSyncError=classifyDriveError(e);setDriveStatus('error',lastSyncError.short||'Sync non riuscito');updateManualSyncUI();showSyncError(lastSyncError);return false;
       }finally{driveSyncRunning=false;if(driveSyncQueued){driveSyncQueued=false;scheduleDriveSync(300);}}
     }
-    function scheduleDriveSync(delay=350){driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');if(!getAccessToken())return;if(driveSyncTimer)clearTimeout(driveSyncTimer);driveSyncTimer=setTimeout(()=>{if(driveSyncRunning){driveSyncQueued=true;return;}saveAllDatabasesToDrive(false);},delay);}
+    function scheduleDriveSync(delay=350){driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');if(!getAccessToken()||!navigator.onLine){updateManualSyncUI();return;}if(driveSyncTimer)clearTimeout(driveSyncTimer);driveSyncTimer=setTimeout(()=>{if(!navigator.onLine){updateManualSyncUI();return;}if(driveSyncRunning){driveSyncQueued=true;return;}saveAllDatabasesToDrive(false);},delay);}
 
     function isMeaningfulProfile(p){if(!p)return false;return Number(p.age)!==25||Number(p.height)!==175||Number(p.sleepHours)!==7||String(p.lifestyle||'moderato')!=='moderato'||String(p.gender||'male')!=='male';}
     function mergeByKey(localArr,cloudArr,keyFn){
@@ -339,7 +339,7 @@
     async function salvaSuDrive(){await createManualBackup();}
 
 
-    // v0.21: lightweight live water synchronization across open devices.
+    // v0.22: lightweight live water synchronization across open devices.
     // We poll only water.json metadata; the full database is not downloaded every few seconds.
     let lastSeenWaterDriveVersion=null, waterLiveRefreshRunning=false;
     async function refreshWaterFromDriveLive(){
@@ -365,8 +365,48 @@
     }
     window.refreshWaterFromDriveLive=refreshWaterFromDriveLive;
 
-    window.addEventListener('online',()=>{if(getAccessToken())refreshFromDrive(false);});
-    document.addEventListener('visibilitychange',()=>{if(!document.hidden&&getAccessToken())refreshFromDrive(false);});
+    // v0.22: network recovery uses a read/merge/write cycle. This is important
+    // when another device changed Drive while this device was offline: local pending
+    // changes are merged with the newest Drive databases before anything is uploaded.
+    let networkRecoveryRunning=false;
+    async function syncAfterNetworkRestore(){
+      if(networkRecoveryRunning||!navigator.onLine)return false;
+      if(!getAccessToken()){
+        window.thalysNeedsDriveReconnectSync=true;
+        setDriveStatus('error','Online · riconnessione Drive necessaria');
+        updateManualSyncUI();
+        return false;
+      }
+      networkRecoveryRunning=true;
+      try{
+        if(driveSyncTimer){clearTimeout(driveSyncTimer);driveSyncTimer=null;}
+        await waitForDriveSyncIdle();
+        setDriveStatus('saving','Connessione ripristinata · consolidamento…');
+        await initializeDriveWorkspace();
+        // Keep driveDirty as-is while reading: mergeCloudIntoLocal then preserves
+        // offline edits while also importing newer/new remote records.
+        await loadDatabasesFromDrive(false);
+        driveDirty=true;
+        localStorage.setItem('thalys_drive_dirty','1');
+        const ok=await saveAllDatabasesToDrive(true);
+        if(ok){
+          lastSeenWaterDriveVersion=null;
+          window.thalysNeedsDriveReconnectSync=false;
+          try{renderAllViews();}catch(_){}
+          window.dispatchEvent(new CustomEvent('thalys:network-resync-complete'));
+        }
+        return !!ok;
+      }catch(e){
+        console.warn('Network recovery sync',e);
+        driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');
+        lastSyncError=classifyDriveError(e);setDriveStatus('error',lastSyncError.short||'Sync non riuscito');updateManualSyncUI();
+        return false;
+      }finally{networkRecoveryRunning=false;}
+    }
+    window.syncAfterNetworkRestore=syncAfterNetworkRestore;
+
+    window.addEventListener('online',()=>{syncAfterNetworkRestore();});
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden&&getAccessToken()&&navigator.onLine){if(window.thalysNeedsDriveReconnectSync)syncAfterNetworkRestore();else refreshFromDrive(false);}});
     window.addEventListener('focus',()=>{if(getAccessToken())refreshFromDrive(false);});
     setInterval(()=>{if(!document.hidden&&getAccessToken())refreshFromDrive(false);},30000);
     setInterval(()=>{refreshWaterFromDriveLive();},5000);

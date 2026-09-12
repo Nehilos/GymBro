@@ -221,13 +221,27 @@
       window.closeNetworkRestoredModal = closeNetworkRestoredModal;
       window.reconnectAndRefreshAfterOnline = reconnectAndRefreshAfterOnline;
 
-      window.addEventListener('offline', () => { thalysWasOffline = true; }, { passive: true });
-      window.addEventListener('online', () => {
-        if (!thalysWasOffline) return;
-        thalysWasOffline = false;
-        if (typeof renderAllViews === 'function') renderAllViews();
-        showNetworkRestoredModal();
+      // v0.22: explicit network-mode notifications. Offline edits remain local and
+      // are reconciled with Drive by syncAfterNetworkRestore() when connectivity returns.
+      window.addEventListener('offline', () => {
+        thalysWasOffline = true;
+        window.thalysOfflineSessionActive = true;
+        if (typeof setDriveStatus === 'function') setDriveStatus('error', 'Offline · modifiche salvate sul dispositivo');
+        if (typeof updateSyncStatus === 'function') updateSyncStatus(false);
+        showToast('modalità offline attivata - assenza connessione');
       }, { passive: true });
+      window.addEventListener('online', () => {
+        if (!thalysWasOffline && !window.thalysOfflineSessionActive) return;
+        thalysWasOffline = false;
+        window.thalysOfflineSessionActive = false;
+        if (typeof renderAllViews === 'function') renderAllViews();
+        if (typeof updateSyncStatus === 'function') updateSyncStatus();
+        showToast('modalità online attivata');
+      }, { passive: true });
+      window.addEventListener('thalys:network-resync-complete', () => {
+        if (typeof updateSyncStatus === 'function') updateSyncStatus(true);
+        showToast('Sincronizzazione completata: modifiche offline aggiornate su Drive');
+      });
 
       async function autoSaveToCloud(payload) {
         const idToken = sessionStorage.getItem('google_id_token');
@@ -262,7 +276,7 @@
         const onlineDot = document.getElementById('online-indicator');
         const hasDriveToken = !!(window.gapi && window.gapi.client && window.gapi.client.getToken && window.gapi.client.getToken());
         const hasSavedGoogleToken = !!(localStorage.getItem('google_id_token') || sessionStorage.getItem('google_id_token'));
-        const connected = typeof isCloud === 'boolean' ? isCloud : (hasDriveToken || hasSavedGoogleToken);
+        const connected = navigator.onLine && (typeof isCloud === 'boolean' ? isCloud : (hasDriveToken || hasSavedGoogleToken));
 
         if (connected) {
           if (icon) icon.className = 'fa-solid fa-cloud-arrow-up text-cyan-400';
