@@ -155,8 +155,8 @@
     <div class="w-full max-w-sm rounded-3xl border border-emerald-500/30 bg-slate-900 p-5 text-center shadow-2xl">
       <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-xl text-emerald-300"><i class="fa-solid fa-wifi"></i></div>
       <h3 class="mt-4 text-lg font-black text-white">Rete disponibile</h3>
-      <p class="mt-2 text-xs leading-5 text-slate-300">Riconnetti Google Drive e aggiorna automaticamente tutte le pagine con i dati più recenti.</p>
-      <button type="button" onclick="reconnectAndRefreshAfterOnline()" class="mt-5 w-full rounded-2xl bg-emerald-400 px-4 py-3 text-sm font-black text-slate-950">Riconnetti e aggiorna</button>
+      <p class="mt-2 text-xs leading-5 text-slate-300">La connessione è tornata. Thalys tenta automaticamente di riconnettere Google Drive e sincronizzare le modifiche fatte offline.</p>
+      <button type="button" onclick="reconnectAndRefreshAfterOnline()" class="mt-5 w-full rounded-2xl bg-emerald-400 px-4 py-3 text-sm font-black text-slate-950">Riprova sincronizzazione</button>
       <button type="button" onclick="closeNetworkRestoredModal()" class="mt-2 w-full rounded-2xl px-4 py-2 text-xs font-bold text-slate-400">Più tardi</button>
     </div>
   </div>
@@ -164,8 +164,8 @@
   <!-- Main Scrollable Area -->
   <main class="flex-1 overflow-y-auto pb-24 p-4 max-w-lg mx-auto w-full">
     
-  <script src="./js/local-db.js?v=022"></script>
-  <script src="./js/ui-foundation.js?v=022"></script>
+  <script src="./js/local-db.js?v=023"></script>
+  <script src="./js/ui-foundation.js?v=023"></script>
 
     <!-- ========================================== -->
     <!-- TAB HOME: DAILY DASHBOARD                  -->
@@ -1249,7 +1249,7 @@
       </div>
 
       <div id="app-version-label" class="pb-2 pt-1 text-center text-[10px] font-semibold tracking-[0.14em] text-slate-500" aria-label="Versione software Thalys 0.21">
-        Thalys · Software v0.22
+        Thalys · Software v0.23
       </div>
 
     </section>
@@ -2427,8 +2427,8 @@
   </div>
 
   <!-- Google Drive Cloud Backend: one unified Google login, Drive as cloud source of truth -->
-  <script src="./js/google-auth.js?v=022"></script>
-  <script src="./js/drive.js?v=022"></script>
+  <script src="./js/google-auth.js?v=023"></script>
+  <script src="./js/drive.js?v=023"></script>
 
   <script src="./js/app-core.js?v=021"></script>
   <!-- Librerie Google per Auth e Drive -->

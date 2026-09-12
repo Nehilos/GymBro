@@ -197,7 +197,7 @@
     async function syncAllDatabasesFromDrive(){return refreshFromDrive(false);}
 
     async function loadFoodDatabaseImmediate(){
-      if(!getAccessToken()) return false;
+      if(!navigator.onLine||!getAccessToken()){if(typeof renderPresets==='function')renderPresets();return true;}
       await initializeDriveWorkspace();
       if(!driveFolders?.databaseFolderId) return false;
       const d=await readDriveJSON('alim_database.json',driveFolders.databaseFolderId);
@@ -205,7 +205,7 @@
       return false;
     }
     async function loadWorkoutPlansImmediate(){
-      if(!getAccessToken())return false;await initializeDriveWorkspace();if(!driveFolders?.databaseFolderId)return false;
+      if(!navigator.onLine||!getAccessToken()){if(typeof renderWorkoutPlans==='function')renderWorkoutPlans();if(typeof renderWorkouts==='function')renderWorkouts();return true;}await initializeDriveWorkspace();if(!driveFolders?.databaseFolderId)return false;
       const d=await readDriveJSON('workout_plans.json',driveFolders.databaseFolderId);if(!d)return false;
       appState.workoutPlans=mergeByKey(appState.workoutPlans,d.plans||[],x=>x.id||x.name);appState.activeWorkoutPlanId=appState.activeWorkoutPlanId||d.activePlanId||null;appState.workoutAssignments={...(d.assignments||{}),...(appState.workoutAssignments||{})};appState.workoutCompletions={...(d.completions||{}),...(appState.workoutCompletions||{})};
       persistThalysStateLocally(appState);renderWorkoutPlans();renderWorkouts();renderHomeDashboard();return true;

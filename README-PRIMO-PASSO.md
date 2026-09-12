@@ -1,3 +1,13 @@
+# Thalys v0.23
+
+Questa versione aggiunge:
+- ripristino automatico della connessione Google Drive dopo l'accesso/reapertura quando il token e ancora valido;
+- tentativo automatico di riconnessione e caricamento dei database quando torna la rete;
+- stato connessione distinto tra online, riconnessione in corso e offline;
+- uso completo dei database locali per le funzioni dell'app durante l'assenza di rete;
+- sincronizzazione delle modifiche locali con Drive al ritorno online;
+- cache PWA/offline aggiornata e pulizia delle vecchie cache manuali.
+
 # Thalys — v0.15: preparazione offline visibile
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.

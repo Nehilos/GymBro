@@ -231,12 +231,16 @@
         showToast('modalità offline attivata - assenza connessione');
       }, { passive: true });
       window.addEventListener('online', () => {
-        if (!thalysWasOffline && !window.thalysOfflineSessionActive) return;
+        const returningFromOffline=thalysWasOffline||window.thalysOfflineSessionActive;
         thalysWasOffline = false;
         window.thalysOfflineSessionActive = false;
         if (typeof renderAllViews === 'function') renderAllViews();
         if (typeof updateSyncStatus === 'function') updateSyncStatus();
-        showToast('modalità online attivata');
+        if(returningFromOffline)showToast('modalità online attivata');
+        setTimeout(()=>{
+          if(typeof getAccessToken==='function'&&getAccessToken()&&typeof syncAfterNetworkRestore==='function')syncAfterNetworkRestore();
+          else if(typeof requestGoogleAccessOnStartup==='function')requestGoogleAccessOnStartup();
+        },120);
       }, { passive: true });
       window.addEventListener('thalys:network-resync-complete', () => {
         if (typeof updateSyncStatus === 'function') updateSyncStatus(true);
@@ -275,8 +279,9 @@
         const text = document.getElementById('sync-text');
         const onlineDot = document.getElementById('online-indicator');
         const hasDriveToken = !!(window.gapi && window.gapi.client && window.gapi.client.getToken && window.gapi.client.getToken());
-        const hasSavedGoogleToken = !!(localStorage.getItem('google_id_token') || sessionStorage.getItem('google_id_token'));
-        const connected = navigator.onLine && (typeof isCloud === 'boolean' ? isCloud : (hasDriveToken || hasSavedGoogleToken));
+        const hasRememberedGoogle = !!(localStorage.getItem('thalys_google_profile') || localStorage.getItem('google_id_token') || sessionStorage.getItem('google_id_token'));
+        const connected = navigator.onLine && (typeof isCloud === 'boolean' ? isCloud : hasDriveToken);
+        const reconnecting = navigator.onLine && !connected && hasRememberedGoogle;
 
         if (connected) {
           if (icon) icon.className = 'fa-solid fa-cloud-arrow-up text-cyan-400';
@@ -295,6 +300,11 @@
             cloudStatusIcon.className = 'w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/40 text-emerald-400 text-lg flex items-center justify-center';
             cloudStatusIcon.innerHTML = '<i class="fa-solid fa-cloud-check"></i>';
           }
+        } else if (reconnecting) {
+          if (icon) icon.className = 'fa-solid fa-cloud-arrow-up text-amber-300';
+          if (text) text.textContent = 'Connessione…';
+          if (onlineDot) onlineDot.className = 'w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400 border border-slate-800';
+          const pd=document.getElementById('profile-connection-dot');if(pd)pd.className='profile-connection-dot reconnecting';
         } else {
           if (icon) icon.className = 'fa-solid fa-cloud text-slate-400';
           if (text) text.textContent = 'Locale';
