@@ -4,7 +4,7 @@
     const GYM_DISCOVERY_DOC_OAUTH2 = 'https://www.googleapis.com/discovery/v1/apis/oauth2/v2/rest';
     const GYM_SCOPES = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
     const AUTH_PROFILE_STORAGE_KEY = 'thalys_google_profile';
-    let tokenClient = null, gapiInited = false, gisInited = false;
+    let tokenClient = null, gapiInited = false, gisInited = false, startupAccessRequested = false;
     let driveSyncTimer = null, driveSyncRunning = false, driveSyncQueued = false, driveRefreshRunning = false;
     let driveFolders = null, lastDriveSyncAt = Number(localStorage.getItem('thalys_last_drive_sync') || 0) || null, driveDirty = localStorage.getItem('thalys_drive_dirty')==='1';
     let lastSyncError=null;
@@ -47,17 +47,24 @@
     }
 
     function gapiLoaded(){ if(window.gapi) gapi.load('client',initializeGapiClient); }
-    async function initializeGapiClient(){ try{await gapi.client.init({discoveryDocs:[GYM_DISCOVERY_DOC,GYM_DISCOVERY_DOC_OAUTH2]});gapiInited=true;maybeEnableButtons();}catch(e){console.error(e);showToast('Google non disponibile al momento','fa-triangle-exclamation');} }
-    function gisLoaded(){ if(!window.google?.accounts?.oauth2) return; tokenClient=google.accounts.oauth2.initTokenClient({client_id:GYM_CLIENT_ID,scope:GYM_SCOPES,callback:()=>{}});gisInited=true;maybeEnableButtons(); }
+    async function initializeGapiClient(){ try{await gapi.client.init({discoveryDocs:[GYM_DISCOVERY_DOC,GYM_DISCOVERY_DOC_OAUTH2]});gapiInited=true;maybeEnableButtons();requestGoogleAccessOnStartup();}catch(e){console.error(e);showToast('Google non disponibile al momento','fa-triangle-exclamation');} }
+    function gisLoaded(){ if(!window.google?.accounts?.oauth2) return; tokenClient=google.accounts.oauth2.initTokenClient({client_id:GYM_CLIENT_ID,scope:GYM_SCOPES,callback:()=>{}});gisInited=true;maybeEnableButtons();requestGoogleAccessOnStartup(); }
     function maybeEnableButtons(){const b=document.getElementById('google-login-btn');if(b)b.style.visibility=(gapiInited&&gisInited)?'visible':'visible';}
-    function requestGoogleAccessOnStartup(){ return; }
+    function requestGoogleAccessOnStartup(){
+      if(startupAccessRequested || !navigator.onLine || !gapiInited || !gisInited || getAccessToken())return;
+      const returningUser=localStorage.getItem('thalys_app_session_v1')==='1' || !!localStorage.getItem(AUTH_PROFILE_STORAGE_KEY);
+      if(!returningUser)return;
+      startupAccessRequested=true;
+      handleAuthClick(true);
+    }
     function loginHandler(){ if(gapiInited&&gisInited) return handleAuthClick(); showToast('Google si sta caricando, riprova tra un secondo'); }
 
     async function getGoogleProfile(){ try{const r=await gapi.client.oauth2.userinfo.get();return r.result||{};}catch(e){return{};} }
-    async function handleAuthClick(){
+    async function handleAuthClick(silentStartup=false){
+      const silent = silentStartup === true;
       if(!tokenClient||!gapiInited){showToast('Google non pronto: riprova tra poco');return;}
       tokenClient.callback=async resp=>{
-        if(resp?.error){console.error('OAuth error',resp);showOAuthBlockedInfo(resp);return;}
+        if(resp?.error){console.error('OAuth error',resp);if(!silent)showOAuthBlockedInfo(resp);return;}
         try{
           const profile=await getGoogleProfile(); sessionStorage.setItem('gymbro_google_profile',JSON.stringify(profile));localStorage.setItem(AUTH_PROFILE_STORAGE_KEY,JSON.stringify(profile)); updateAuthUI(profile); unlockApp();
           setDriveStatus('saving','Controllo Google Drive…');
@@ -71,7 +78,7 @@
           closeModal('cloud-modal');
         }catch(e){console.error(e);setDriveStatus('error','Sync non riuscito');showToast('Accesso riuscito, ma Drive non è stato sincronizzato','fa-triangle-exclamation');}
       };
-      try{tokenClient.requestAccessToken({prompt:getAccessToken()?'':'consent'});}catch(e){console.error(e);showToast('Errore accesso Google');}
+      try{tokenClient.requestAccessToken({prompt:silent?'':(getAccessToken()?'':'consent')});}catch(e){console.error(e);if(!silent)showToast('Errore accesso Google');}
     }
     function handleSignoutClick(){
       const t=getAccessToken(); if(t&&window.google?.accounts?.oauth2) try{google.accounts.oauth2.revoke(t,()=>{});}catch(e){}
@@ -79,3 +86,4 @@
     }
     function setCloudUserUI(profile){updateAuthUI(profile);}
     function logoutCloud(){handleSignoutClick();}
+    window.addEventListener('online',()=>{startupAccessRequested=false;requestGoogleAccessOnStartup();},{passive:true});
