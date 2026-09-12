@@ -151,7 +151,19 @@
       result.aiConsults=mergeByKey(local.aiConsults,c.aiConsults,x=>x.id);result.workoutHistory=mergeByKey(local.workoutHistory,c.workoutHistory,x=>x.id||`${x.date}|${x.planId}`);result.activeWorkoutPlanHistory=mergeByKey(local.activeWorkoutPlanHistory,c.activeWorkoutPlanHistory,x=>x.id||`${x.planId}|${x.activatedAt}`);
       result.workoutAssignments={...(c.workoutAssignments||{}),...(local.workoutAssignments||{})};
       result.workoutCompletions={...(c.workoutCompletions||{}),...(local.workoutCompletions||{})};
-      result.water={...(c.water||{}),...(local.water||{})};
+      // Water is shared across devices. Prefer the newest per-day value when
+      // timestamps are available. For data created by older versions (no timestamp),
+      // Drive wins whenever this device has no unsaved local changes.
+      const lw=local.water||{}, cw=c.water||{};
+      const lm=local.waterUpdatedAt||{}, cm=c.waterUpdatedAt||{};
+      result.water={}; result.waterUpdatedAt={};
+      const waterDates=new Set([...Object.keys(cw),...Object.keys(lw)]);
+      waterDates.forEach(date=>{
+        const lt=Date.parse(lm[date]||0)||0, ct=Date.parse(cm[date]||0)||0;
+        const chooseLocal=lt&&ct ? lt>=ct : lt&&!ct ? true : !lt&&ct ? false : driveDirty;
+        result.water[date]=chooseLocal ? lw[date] : (Object.prototype.hasOwnProperty.call(cw,date)?cw[date]:lw[date]);
+        const stamp=chooseLocal?lm[date]:cm[date]; if(stamp)result.waterUpdatedAt[date]=stamp;
+      });
       return result;
     }
     async function loadDatabasesFromDrive(consolidate=false){
@@ -326,10 +338,38 @@
     async function moveFileToTrash(id){return gapi.client.drive.files.update({fileId:id,resource:{trashed:true}});}
     async function salvaSuDrive(){await createManualBackup();}
 
+
+    // v0.21: lightweight live water synchronization across open devices.
+    // We poll only water.json metadata; the full database is not downloaded every few seconds.
+    let lastSeenWaterDriveVersion=null, waterLiveRefreshRunning=false;
+    async function refreshWaterFromDriveLive(){
+      if(document.hidden||!navigator.onLine||!getAccessToken()||driveSyncRunning||driveRefreshRunning||driveDirty||waterLiveRefreshRunning)return false;
+      try{
+        if(!driveFolders?.databaseFolderId)await initializeDriveWorkspace();
+        if(!driveFolders?.databaseFolderId)return false;
+        waterLiveRefreshRunning=true;
+        const f=await findDriveFile('water.json',driveFolders.databaseFolderId);if(!f)return false;
+        const marker=String(f.version||f.modifiedTime||'');
+        if(lastSeenWaterDriveVersion===null){lastSeenWaterDriveVersion=marker;return false;}
+        if(marker===lastSeenWaterDriveVersion)return false;
+        const remote=await readDriveJSON('water.json',driveFolders.databaseFolderId);
+        lastSeenWaterDriveVersion=marker;
+        if(!remote||typeof remote!=='object'||Array.isArray(remote))return false;
+        appState.water={...remote};window.appState=appState;
+        persistThalysStateLocally(appState);
+        if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);
+        try{renderNutrition();}catch(_){} try{renderHomeDashboard();}catch(_){} try{renderTodayDashboard();}catch(_){} try{updateAnalyticsCharts();}catch(_){}
+        setDriveStatus('ok','Aggiornato da Drive');updateManualSyncUI();
+        return true;
+      }catch(e){console.warn('Live water sync',e);return false;}finally{waterLiveRefreshRunning=false;}
+    }
+    window.refreshWaterFromDriveLive=refreshWaterFromDriveLive;
+
     window.addEventListener('online',()=>{if(getAccessToken())refreshFromDrive(false);});
     document.addEventListener('visibilitychange',()=>{if(!document.hidden&&getAccessToken())refreshFromDrive(false);});
     window.addEventListener('focus',()=>{if(getAccessToken())refreshFromDrive(false);});
     setInterval(()=>{if(!document.hidden&&getAccessToken())refreshFromDrive(false);},30000);
+    setInterval(()=>{refreshWaterFromDriveLive();},5000);
 
     window.addEventListener('load',()=>{setTimeout(()=>{if(window.google?.accounts?.oauth2&&!gisInited)gisLoaded();if(window.gapi&&!gapiInited)gapiLoaded();},150);setTimeout(()=>{try{const p=JSON.parse(sessionStorage.getItem('gymbro_google_profile')||'null');if(getAccessToken())updateAuthUI(p);}catch(e){}},1200);});
   

@@ -1575,6 +1575,8 @@ if(c)c.innerHTML='';
       const current = appState.water[date] || 0;
       const updated = Math.max(0, current + amountMs);
       appState.water[date] = updated;
+      appState.waterUpdatedAt = appState.waterUpdatedAt || {};
+      appState.waterUpdatedAt[date] = new Date().toISOString();
       saveStateToLocal();
       renderNutrition();
       renderHomeDashboard();
