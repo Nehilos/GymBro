@@ -1,4 +1,4 @@
-# Thalys — ottavo passo: motore lingue separato
+# Thalys — correzione v0.9.1: cambio lingua ripristinato
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -38,11 +38,10 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
   - `lang/lang_ro.json`.
 - È stato aggiornato soltanto il percorso di caricamento dei dizionari distribuiti con il sito.
 - I nomi dei dizionari sincronizzati nel database di Google Drive restano invariati, così i dati già presenti continuano a essere riconosciuti.
-- Il precedente `app-core.js` è stato diviso, nello stesso ordine, in tre parti:
-  - `app-state.js`: stato iniziale, preferenze, salvataggio locale, messaggi e aiuto contestuale;
-  - `i18n.js`: caricamento dei dizionari, traduzione dell'interfaccia, cambio lingua e sincronizzazione dei language pack con Drive;
-  - `app-core.js`: il resto delle funzioni applicative, ora più piccolo.
-- La concatenazione dei tre file ricostruisce esattamente il codice della versione precedente.
+- La divisione interna sperimentale tra `app-state.js`, `i18n.js` e `app-core.js` è stata annullata dopo aver rilevato una regressione nel cambio lingua.
+- Il motore delle lingue è nuovamente dentro `app-core.js`, nella stessa configurazione funzionante della versione precedente.
+- I dizionari restano correttamente organizzati nella cartella `lang`.
+- Al collegamento di `app-core.js` è stato aggiunto un identificatore di versione per evitare che il browser riutilizzi una copia precedente dalla cache.
 - I nuovi file vengono caricati nello stesso punto e nello stesso ordine dei blocchi originali.
 - Non sono stati rinominati o spostati logo, avatar, file MP3 o file lingua, perché tali asset non erano inclusi nello ZIP ricevuto.
 - I blocchi più grandi relativi allo stato dell'app e alle singole sezioni non sono ancora stati spostati: verranno affrontati gradualmente dopo il test di questa versione.
