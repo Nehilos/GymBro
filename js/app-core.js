@@ -245,7 +245,7 @@
       return s;
     }
     async function fetchLocalLanguagePack(lang){
-      const r=await fetch(`./${LANG_FILES[lang]}?v=22`,{cache:'no-store'});
+      const r=await fetch(`./lang/${LANG_FILES[lang]}?v=22`,{cache:'no-store'});
       if(!r.ok)throw new Error(`LANG_HTTP_${r.status}`);
       return await r.json();
     }
