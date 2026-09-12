@@ -1,1 +1,8 @@
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(e=>console.warn('PWA SW',e)));}
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/sw.js', { updateViaCache: 'none' })
+      .then(registration => registration.update())
+      .catch(error => console.warn('PWA SW', error));
+  });
+}

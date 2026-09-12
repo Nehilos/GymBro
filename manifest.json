@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "Thalys — Wellness, Allenamento & Nutrizione",
+  "short_name": "Thalys",
+  "description": "Allenamento, nutrizione, corpo, benessere e meditazione in un'unica app.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "./Thalys%20Logo%20Dark.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Thalys%20Logo%20Dark.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

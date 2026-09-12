@@ -1,4 +1,4 @@
-# Thalys — correzione v0.10.1: caricamento database ripristinato
+# Thalys — v0.11: PWA e funzionamento offline di base
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -46,6 +46,21 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 - `app-core.js` è stato ripristinato byte per byte dalla versione `v0.9.1`, che caricava correttamente database e lingue.
 - Tutti gli asset CSS e JavaScript usano il nuovo identificatore `v=0101` per impedire il riutilizzo della versione problematica dalla cache.
 - I file `app-base.js` e `workout.js` non devono più essere presenti nel repository.
+- Il nuovo `manifest.json` definisce nome, colori, avvio standalone e icona installabile di Thalys.
+- Il nuovo `sw.js` memorizza l'involucro essenziale dell'app e i dizionari per consentire l'apertura senza connessione.
+- Il service worker usa la rete come prima scelta: quando sei online scarica la versione aggiornata e aggiorna la cache; la copia locale viene usata soltanto se la rete non è disponibile.
+- Le richieste verso `/api/` non vengono mai memorizzate, quindi risposte AI e operazioni server non vengono confuse con contenuti offline.
+- La registrazione del service worker verifica immediatamente la presenza di aggiornamenti e non usa la cache HTTP per controllare `sw.js`.
+- Il logo `Thalys Logo Dark.png`, già presente nel repository, viene usato come icona dell'app installata.
+
+## Test PWA dopo il deploy
+
+1. Apri Thalys online e attendi qualche secondo.
+2. Ricarica la pagina una volta per permettere al nuovo service worker di assumere il controllo.
+3. Usa `Aggiungi alla schermata Home` su iPhone oppure `Installa app` su Chrome/Android.
+4. Avvia Thalys dall'icona e verifica che si apra senza barra del browser.
+5. Dopo un primo avvio online, disattiva temporaneamente la connessione e verifica che l'involucro dell'app e i dizionari si aprano.
+6. Riattiva la connessione prima di provare login, sincronizzazione Drive, AI o ricerche alimentari online.
 - I nuovi file vengono caricati nello stesso punto e nello stesso ordine dei blocchi originali.
 - Non sono stati rinominati o spostati logo, avatar, file MP3 o file lingua, perché tali asset non erano inclusi nello ZIP ricevuto.
 - I blocchi più grandi relativi allo stato dell'app e alle singole sezioni non sono ancora stati spostati: verranno affrontati gradualmente dopo il test di questa versione.
