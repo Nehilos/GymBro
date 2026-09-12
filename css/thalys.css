@@ -3288,6 +3288,10 @@
     padding-top: .5rem !important;
   }
 
+  #toast {
+    top: calc(max(env(safe-area-inset-top, 0px), 47px) + 12px) !important;
+  }
+
   #welcome-screen {
     box-sizing: border-box;
     padding-top: max(env(safe-area-inset-top, 0px), 47px) !important;

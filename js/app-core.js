@@ -53,10 +53,10 @@
     }
     window.appState = appState;
 
-    function persistFoodDatabase(){appState.presets=(appState.presets||[]).map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));localStorage.setItem('thalys_data',JSON.stringify(appState));driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(250); }
+    function persistFoodDatabase(){appState.presets=(appState.presets||[]).map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));localStorage.setItem('thalys_data',JSON.stringify(appState));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(250); }
 
     // Save State locally and sync to cloud if available
-    window.saveStateToLocal = function(){localStorage.setItem('thalys_data',JSON.stringify(appState));localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
+    window.saveStateToLocal = function(){localStorage.setItem('thalys_data',JSON.stringify(appState));localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
 
 
     const PROFILE_MESSAGES=[
@@ -944,7 +944,7 @@
     }
 
     function updateModalScrollLock() {
-      const activeModal = document.querySelector('.fixed.inset-0.z-50:not(.hidden)');
+      const activeModal = document.querySelector('.fixed.inset-0.z-50:not(.hidden), #offline-setup-modal:not(.hidden), #network-restored-modal:not(.hidden)');
       const isOpen = !!activeModal;
       document.body.classList.toggle('modal-open', isOpen);
       document.documentElement.classList.toggle('modal-open', isOpen);

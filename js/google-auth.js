@@ -3,6 +3,7 @@
     const GYM_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
     const GYM_DISCOVERY_DOC_OAUTH2 = 'https://www.googleapis.com/discovery/v1/apis/oauth2/v2/rest';
     const GYM_SCOPES = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+    const AUTH_PROFILE_STORAGE_KEY = 'thalys_google_profile';
     let tokenClient = null, gapiInited = false, gisInited = false;
     let driveSyncTimer = null, driveSyncRunning = false, driveSyncQueued = false, driveRefreshRunning = false;
     let driveFolders = null, lastDriveSyncAt = Number(localStorage.getItem('thalys_last_drive_sync') || 0) || null, driveDirty = localStorage.getItem('thalys_drive_dirty')==='1';
@@ -58,11 +59,13 @@
       tokenClient.callback=async resp=>{
         if(resp?.error){console.error('OAuth error',resp);showOAuthBlockedInfo(resp);return;}
         try{
-          const profile=await getGoogleProfile(); sessionStorage.setItem('gymbro_google_profile',JSON.stringify(profile)); updateAuthUI(profile); unlockApp();
+          const profile=await getGoogleProfile(); sessionStorage.setItem('gymbro_google_profile',JSON.stringify(profile));localStorage.setItem(AUTH_PROFILE_STORAGE_KEY,JSON.stringify(profile)); updateAuthUI(profile); unlockApp();
           setDriveStatus('saving','Controllo Google Drive…');
           await initializeDriveWorkspace();
           await loadFoodDatabaseImmediate();
           await refreshFromDrive(true,true);
+          if(typeof renderAllViews==='function')renderAllViews();
+          window.thalysRefreshAfterGoogleReconnect=false;
           resetAppDatesToToday(true);
           showToast('Google Drive sincronizzato','fa-cloud-check');
           closeModal('cloud-modal');
@@ -72,8 +75,7 @@
     }
     function handleSignoutClick(){
       const t=getAccessToken(); if(t&&window.google?.accounts?.oauth2) try{google.accounts.oauth2.revoke(t,()=>{});}catch(e){}
-      if(window.gapi?.client) gapi.client.setToken(''); sessionStorage.removeItem('gymbro_google_profile'); driveFolders=null; driveDirty=false; updateAuthUI(null); showToast('Disconnesso da Google Drive');
+      if(window.gapi?.client) gapi.client.setToken(''); sessionStorage.removeItem('gymbro_google_profile');localStorage.removeItem(AUTH_PROFILE_STORAGE_KEY);localStorage.removeItem('google_id_token');sessionStorage.removeItem('google_id_token'); driveFolders=null; driveDirty=false; updateAuthUI(null);if(typeof lockApp==='function')lockApp(); showToast('Disconnesso da Google Drive');
     }
     function setCloudUserUI(profile){updateAuthUI(profile);}
     function logoutCloud(){handleSignoutClick();}
-

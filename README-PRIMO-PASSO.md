@@ -1,4 +1,4 @@
-# Thalys — v0.13: icona nera e accesso locale offline
+# Thalys — v0.14: sessione persistente e database offline
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -57,6 +57,13 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 - Il colore di sfondo dichiarato per installazione e schermata di avvio è nero.
 - Quando non c'è connessione, il pulsante iniziale diventa `Continua offline` e apre l'app con i dati già salvati nel dispositivo.
 - Google Login, Google Drive, AI e le ricerche online richiedono comunque Internet; al ritorno della connessione puoi riconnettere Drive dalle impostazioni cloud.
+- Dopo un accesso riuscito, aggiornare la pagina non riporta più alla schermata iniziale: la sessione locale resta attiva fino a `Disconnetti`.
+- Dopo un aggiornamento Thalys resta aperta con i dati locali; il token Drive non viene conservato come password permanente e, quando necessario, l'app richiede soltanto di riconnettere Drive.
+- `Disconnetti` revoca Google, cancella la sessione locale e riporta alla schermata iniziale.
+- Al primo ingresso compare `Prepara modalità offline`: crea un database IndexedDB privato con i file operativi di allenamenti, nutrizione, corpo, acqua, benessere, meditazione, messaggi e impostazioni.
+- Foto, backup, esportazioni e consulti archiviati non vengono duplicati nel database offline.
+- Quando la rete ritorna compare `Rete disponibile`; il comando `Riconnetti e aggiorna` sincronizza Drive e ridisegna tutte le pagine.
+- Le notifiche nell'app installata sono posizionate sotto la safe area di iPhone e della Dynamic Island.
 
 ## Test PWA dopo il deploy
 

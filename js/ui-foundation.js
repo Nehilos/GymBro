@@ -10,12 +10,26 @@
 
       // Set your Google OAuth Client ID here
       const GOOGLE_CLIENT_ID = '530515970912-7mlo4stsbcbcajrov07f911se4upv8t2.apps.googleusercontent.com';
+      const THALYS_APP_SESSION_KEY = 'thalys_app_session_v1';
+      const THALYS_PROFILE_KEY = 'thalys_google_profile';
+      let thalysWasOffline = !navigator.onLine;
 
-      function unlockApp() {
+      function unlockApp(rememberSession = true) {
         const welcomeScreen = document.getElementById('welcome-screen');
         const appShell = document.getElementById('app-shell');
         if (welcomeScreen) welcomeScreen.classList.add('hidden');
         if (appShell) appShell.classList.remove('hidden');
+        if (rememberSession) localStorage.setItem(THALYS_APP_SESSION_KEY, '1');
+        if (typeof maybeShowOfflineSetup === 'function') maybeShowOfflineSetup();
+      }
+
+      function lockApp() {
+        localStorage.removeItem(THALYS_APP_SESSION_KEY);
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const appShell = document.getElementById('app-shell');
+        if (appShell) appShell.classList.add('hidden');
+        if (welcomeScreen) welcomeScreen.classList.remove('hidden');
+        updateWelcomeConnectionUI();
       }
 
       function onGoogleLoggedIn(response) {
@@ -24,7 +38,7 @@
         if (remember) localStorage.setItem('google_id_token', idToken);
         else sessionStorage.setItem('google_id_token', idToken);
         const payload = parseJwt(idToken);
-        if(payload)try{sessionStorage.setItem('gymbro_google_profile',JSON.stringify(payload));}catch(_){}
+        if(payload)try{sessionStorage.setItem('gymbro_google_profile',JSON.stringify(payload));localStorage.setItem(THALYS_PROFILE_KEY,JSON.stringify(payload));}catch(_){}
         unlockApp();
         setCloudUserUI(payload);
         updateAuthUI({ displayName: payload && (payload.name || payload.given_name || payload.email), email: payload && payload.email });
@@ -147,19 +161,22 @@
       function refreshAuthUIFromStorage() {
         const saved = localStorage.getItem('google_id_token') || sessionStorage.getItem('google_id_token');
         if (!saved) {
-          updateAuthUI(null);
+          if (typeof updateAuthUI === 'function') updateAuthUI(null);
+          if (localStorage.getItem(THALYS_APP_SESSION_KEY) === '1') unlockApp(false);
           return;
         }
 
         const p = parseJwt(saved);
         if (p) {
           setCloudUserUI(p);
-          updateAuthUI({ displayName: p.name || p.given_name || p.email, email: p.email });
+          if (typeof updateAuthUI === 'function') updateAuthUI({ displayName: p.name || p.given_name || p.email, email: p.email });
           updateSyncStatus(true);
+          localStorage.setItem(THALYS_PROFILE_KEY, JSON.stringify(p));
+          unlockApp(false);
           return;
         }
 
-        updateAuthUI(null);
+        if (typeof updateAuthUI === 'function') updateAuthUI(null);
       }
 
       (function initGoogle() {
@@ -168,6 +185,45 @@
       })();
 
       window.addEventListener('DOMContentLoaded', refreshAuthUIFromStorage, { once: true });
+
+      function closeNetworkRestoredModal() {
+        document.getElementById('network-restored-modal')?.classList.add('hidden');
+        if (typeof updateModalScrollLock === 'function') updateModalScrollLock();
+      }
+
+      function showNetworkRestoredModal() {
+        const modal = document.getElementById('network-restored-modal');
+        if (!modal || localStorage.getItem(THALYS_APP_SESSION_KEY) !== '1') return;
+        modal.classList.remove('hidden');
+        if (typeof updateModalScrollLock === 'function') updateModalScrollLock();
+      }
+
+      async function reconnectAndRefreshAfterOnline() {
+        closeNetworkRestoredModal();
+        if (!navigator.onLine) {
+          showToast('La rete non è ancora disponibile', 'fa-wifi');
+          return;
+        }
+        if (typeof getAccessToken === 'function' && getAccessToken()) {
+          if (typeof refreshFromDrive === 'function') await refreshFromDrive(true, true);
+          if (typeof renderAllViews === 'function') renderAllViews();
+          showToast('Rete presente · pagine aggiornate ✓', 'fa-wifi');
+          return;
+        }
+        window.thalysRefreshAfterGoogleReconnect = true;
+        if (typeof loginHandler === 'function') loginHandler();
+      }
+
+      window.closeNetworkRestoredModal = closeNetworkRestoredModal;
+      window.reconnectAndRefreshAfterOnline = reconnectAndRefreshAfterOnline;
+
+      window.addEventListener('offline', () => { thalysWasOffline = true; }, { passive: true });
+      window.addEventListener('online', () => {
+        if (!thalysWasOffline) return;
+        thalysWasOffline = false;
+        if (typeof renderAllViews === 'function') renderAllViews();
+        showNetworkRestoredModal();
+      }, { passive: true });
 
       async function autoSaveToCloud(payload) {
         const idToken = sessionStorage.getItem('google_id_token');
