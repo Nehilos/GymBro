@@ -1,4 +1,4 @@
-# Thalys — v0.10: modulo allenamenti separato
+# Thalys — correzione v0.10.1: caricamento database ripristinato
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -42,12 +42,10 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 - Il motore delle lingue è nuovamente dentro `app-core.js`, nella stessa configurazione funzionante della versione precedente.
 - I dizionari restano correttamente organizzati nella cartella `lang`.
 - Al collegamento di `app-core.js` è stato aggiunto un identificatore di versione per evitare che il browser riutilizzi una copia precedente dalla cache.
-- Il nucleo applicativo è ora caricato in tre segmenti consecutivi:
-  - `app-base.js`: stato, salvataggio locale, lingue, consulti e funzioni UI condivise;
-  - `workout.js`: allenamenti, schede, esercizi, serie, storico e timer di recupero;
-  - `app-core.js`: nutrizione, corpo, foto e backup rimanenti.
-- I tre segmenti ricostruiscono esattamente e nello stesso ordine il file funzionante della `v0.9.1`.
-- Tutti gli asset CSS e JavaScript usano il nuovo identificatore `v=010` per evitare combinazioni con file precedenti memorizzati nella cache.
+- La divisione sperimentale tra `app-base.js`, `workout.js` e `app-core.js` è stata annullata dopo la regressione nel caricamento dei database.
+- `app-core.js` è stato ripristinato byte per byte dalla versione `v0.9.1`, che caricava correttamente database e lingue.
+- Tutti gli asset CSS e JavaScript usano il nuovo identificatore `v=0101` per impedire il riutilizzo della versione problematica dalla cache.
+- I file `app-base.js` e `workout.js` non devono più essere presenti nel repository.
 - I nuovi file vengono caricati nello stesso punto e nello stesso ordine dei blocchi originali.
 - Non sono stati rinominati o spostati logo, avatar, file MP3 o file lingua, perché tali asset non erano inclusi nello ZIP ricevuto.
 - I blocchi più grandi relativi allo stato dell'app e alle singole sezioni non sono ancora stati spostati: verranno affrontati gradualmente dopo il test di questa versione.
