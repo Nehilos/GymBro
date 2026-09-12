@@ -3256,3 +3256,41 @@
   button { min-height: 42px; }
   .safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
   @media (max-width: 420px){ main{padding-left:.75rem!important;padding-right:.75rem!important;} .grid{gap:.55rem;} .rounded-3xl{border-radius:1.35rem;} }
+
+/* Installed iOS PWA: reserve a stable status-bar/Dynamic Island area. */
+@media (display-mode: standalone) and (max-width: 520px) {
+  html {
+    background: #131b2e;
+  }
+
+  body {
+    box-sizing: border-box;
+    padding-top: max(env(safe-area-inset-top, 0px), 47px) !important;
+    background: #090d16;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: max(env(safe-area-inset-top, 0px), 47px);
+    background: #131b2e;
+    z-index: 29;
+    pointer-events: none;
+  }
+
+  #app-shell {
+    height: calc((var(--app-vh, 1vh) * 100) - max(env(safe-area-inset-top, 0px), 47px)) !important;
+    min-height: calc((var(--app-vh, 1vh) * 100) - max(env(safe-area-inset-top, 0px), 47px)) !important;
+  }
+
+  .app-header {
+    padding-top: .5rem !important;
+  }
+
+  #welcome-screen {
+    box-sizing: border-box;
+    padding-top: max(env(safe-area-inset-top, 0px), 47px) !important;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px) !important;
+  }
+}

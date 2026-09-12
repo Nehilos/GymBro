@@ -1,20 +1,20 @@
-const CACHE_NAME = 'thalys-shell-v0.11';
+const CACHE_NAME = 'thalys-shell-v0.12';
 
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
-  './css/thalys.css?v=011',
-  './js/tailwind-config.js?v=011',
-  './js/theme-bootstrap.js?v=011',
-  './js/ui-foundation.js?v=011',
-  './js/google-auth.js?v=011',
-  './js/drive.js?v=011',
-  './js/app-core.js?v=011',
-  './js/oauth-ui.js?v=011',
-  './js/media-tools.js?v=011',
-  './js/pwa-register.js?v=011',
-  './js/app-enhancements.js?v=011',
+  './css/thalys.css?v=012',
+  './js/tailwind-config.js?v=012',
+  './js/theme-bootstrap.js?v=012',
+  './js/ui-foundation.js?v=012',
+  './js/google-auth.js?v=012',
+  './js/drive.js?v=012',
+  './js/app-core.js?v=012',
+  './js/oauth-ui.js?v=012',
+  './js/media-tools.js?v=012',
+  './js/pwa-register.js?v=012',
+  './js/app-enhancements.js?v=012',
   './lang/lang_it.json?v=22',
   './lang/lang_en.json?v=22',
   './lang/lang_es.json?v=22',
@@ -22,10 +22,26 @@ const APP_SHELL = [
   './lang/lang_ro.json?v=22'
 ];
 
+const EXTERNAL_ASSETS = [
+  'https://cdn.tailwindcss.com/',
+  'https://cdn.jsdelivr.net/npm/chart.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js',
+  'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
+];
+
+const CACHEABLE_EXTERNAL_ORIGINS = new Set([
+  'https://cdn.tailwindcss.com',
+  'https://cdn.jsdelivr.net',
+  'https://cdnjs.cloudflare.com'
+]);
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => Promise.allSettled(APP_SHELL.map(url => cache.add(url))))
+      .then(cache => Promise.allSettled([...APP_SHELL, ...EXTERNAL_ASSETS].map(url => cache.add(url))))
       .then(() => self.skipWaiting())
   );
 });
@@ -47,12 +63,14 @@ self.addEventListener('fetch', event => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) return;
+  const isLocal = url.origin === self.location.origin;
+  const isCacheableExternal = CACHEABLE_EXTERNAL_ORIGINS.has(url.origin);
+  if ((!isLocal && !isCacheableExternal) || (isLocal && url.pathname.startsWith('/api/'))) return;
 
   event.respondWith(
     fetch(request)
       .then(response => {
-        if (response.ok && response.type === 'basic') {
+        if (response.ok || response.type === 'opaque') {
           const copy = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
         }

@@ -1,4 +1,4 @@
-# Thalys — v0.11: PWA e funzionamento offline di base
+# Thalys — v0.12: safe area iPhone e layout offline
 
 Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello stesso ordine della versione verificata dopo la separazione del CSS.
 
@@ -52,6 +52,10 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 - Le richieste verso `/api/` non vengono mai memorizzate, quindi risposte AI e operazioni server non vengono confuse con contenuti offline.
 - La registrazione del service worker verifica immediatamente la presenza di aggiornamenti e non usa la cache HTTP per controllare `sw.js`.
 - Il logo `Thalys Logo Dark.png`, già presente nel repository, viene usato come icona dell'app installata.
+- In modalità installata su iPhone viene riservata una fascia superiore di almeno 47 px per orologio, Dynamic Island, Wi-Fi e batteria; la fascia usa il colore dell'header e i contenuti iniziano sotto di essa.
+- La cache offline include ora Tailwind CSS e le altre librerie grafiche esterne necessarie: senza Tailwind l'HTML perdeva allineamenti, griglie e spaziature.
+- Il colore di sfondo dichiarato per installazione e schermata di avvio è nero.
+- Per ottenere un'icona iOS realmente opaca con sfondo nero serve generare un PNG dedicato partendo dal file originale `Thalys Logo Dark.png`.
 
 ## Test PWA dopo il deploy
 
@@ -61,6 +65,7 @@ Questa versione mantiene struttura HTML, login, Google Drive e funzioni nello st
 4. Avvia Thalys dall'icona e verifica che si apra senza barra del browser.
 5. Dopo un primo avvio online, disattiva temporaneamente la connessione e verifica che l'involucro dell'app e i dizionari si aprano.
 6. Riattiva la connessione prima di provare login, sincronizzazione Drive, AI o ricerche alimentari online.
+7. Su iPhone, dopo l'aggiornamento elimina la vecchia icona dalla Home e aggiungi nuovamente Thalys: iOS tende a conservare a lungo l'icona precedente.
 - I nuovi file vengono caricati nello stesso punto e nello stesso ordine dei blocchi originali.
 - Non sono stati rinominati o spostati logo, avatar, file MP3 o file lingua, perché tali asset non erano inclusi nello ZIP ricevuto.
 - I blocchi più grandi relativi allo stato dell'app e alle singole sezioni non sono ancora stati spostati: verranno affrontati gradualmente dopo il test di questa versione.
