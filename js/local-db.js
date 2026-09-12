@@ -92,7 +92,7 @@
   async function warmOfflineAppShell() {
     if (!window.caches || !window.isSecureContext) return 0;
     const urls = ['./', './index.html', './manifest.json', './css/thalys.css?v=016', './js/local-db.js?v=019', './js/ui-foundation.js?v=018', './js/google-auth.js?v=018', './js/drive.js?v=019', './js/app-core.js?v=019', './js/app-enhancements.js?v=019'];
-    const cache = await caches.open('thalys-manual-offline-v0.19');
+    const cache = await caches.open('thalys-manual-offline-v0.20');
     let saved = 0;
     for (const url of urls) {
       try { await cache.add(url); saved += 1; } catch (_) {}
@@ -230,14 +230,9 @@
   }
 
   async function maybeShowOfflineSetup() {
-    if (await offlineStorageAlreadyExists()) return;
-    setTimeout(() => {
-      const modal = document.getElementById('offline-setup-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        if (typeof updateModalScrollLock === 'function') updateModalScrollLock();
-      }
-    }, 350);
+    // v0.20: preparation is optional and must never block app startup.
+    // The IndexedDB mirror is maintained automatically by saveStateToLocal.
+    return offlineStorageAlreadyExists();
   }
 
   window.syncThalysLocalDocuments = state => syncLocalDocuments(state).catch(error => console.warn('Offline mirror', error));

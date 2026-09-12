@@ -163,8 +163,8 @@
         if (!saved) {
           if (typeof updateAuthUI === 'function') updateAuthUI(null);
           if (localStorage.getItem(THALYS_APP_SESSION_KEY) === '1') {
-            if (!navigator.onLine) unlockApp(false);
-            else if (typeof requestGoogleAccessOnStartup === 'function') requestGoogleAccessOnStartup();
+            unlockApp(false);
+            if (navigator.onLine && typeof requestGoogleAccessOnStartup === 'function') requestGoogleAccessOnStartup();
           }
           return;
         }
@@ -175,8 +175,8 @@
           if (typeof updateAuthUI === 'function') updateAuthUI({ displayName: p.name || p.given_name || p.email, email: p.email });
           updateSyncStatus(true);
           localStorage.setItem(THALYS_PROFILE_KEY, JSON.stringify(p));
-          if (!navigator.onLine) unlockApp(false);
-          else if (typeof requestGoogleAccessOnStartup === 'function') requestGoogleAccessOnStartup();
+          unlockApp(false);
+          if (navigator.onLine && typeof requestGoogleAccessOnStartup === 'function') requestGoogleAccessOnStartup();
           return;
         }
 

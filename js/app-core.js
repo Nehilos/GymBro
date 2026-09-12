@@ -58,7 +58,11 @@
       return {
         ...source,
         photos: (source.photos || []).map(({ base64, ...photo }) => photo),
-        profilePhoto: source.profilePhoto?.dataUrl ? { ...source.profilePhoto, dataUrl: '' } : (source.profilePhoto || null)
+        profilePhoto: source.profilePhoto?.dataUrl ? { ...source.profilePhoto, dataUrl: '' } : (source.profilePhoto || null),
+        // Full consultation/AI histories are mirrored in IndexedDB and Drive. Keeping
+        // only compact metadata here prevents WebKit QuotaExceededError (code 22).
+        consultations: (source.consultations || []).slice(0, 40).map(x => ({id:x.id,type:x.type,date:x.date,createdAt:x.createdAt,updatedAt:x.updatedAt,goal:x.goal||''})),
+        aiConsults: (source.aiConsults || []).slice(0, 30).map(x => ({id:x.id,date:x.date,createdAt:x.createdAt,updatedAt:x.updatedAt,type:x.type,status:x.status,title:x.title||''}))
       };
     }
 
@@ -80,7 +84,7 @@
     function persistFoodDatabase(){appState.presets=(appState.presets||[]).map(normalizeFoodPreset).filter(x=>x.name);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets));persistThalysStateLocally(appState);if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(250); }
 
     // Save State locally and sync to cloud if available
-    window.saveStateToLocal = function(){persistThalysStateLocally(appState);localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
+    window.saveStateToLocal = function(){persistThalysStateLocally(appState);try{localStorage.setItem('thalys_foods',JSON.stringify(appState.presets||[]));}catch(e){console.warn('Food cache quota',e);localStorage.removeItem('thalys_foods');}if(typeof syncThalysLocalDocuments==='function')syncThalysLocalDocuments(appState);driveDirty=true;localStorage.setItem('thalys_drive_dirty','1');updateManualSyncUI();scheduleDriveSync(350);};
 
 
     const PROFILE_MESSAGES=[
